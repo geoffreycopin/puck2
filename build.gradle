@@ -1,0 +1,68 @@
+plugins {
+    id 'java'
+    id 'org.jastadd' version '1.12.0'
+}
+
+defaultTasks 'jar'
+
+if (!file('extendj/jastadd_modules').exists()) {
+    throw new GradleException('ExtendJ seems to be missing. Please run "git submodule init", then "git submodule update".')
+}
+
+jastadd {
+    configureModuleBuild()
+
+    modules {
+        include("extendj/jastadd_modules") // Includes the core ExtendJ modules.
+
+        module "extension-base", {
+            imports "java8 frontend" // This module depends on "java8 frontend" from ExtendJ.
+
+            java {
+                basedir "src/java/"
+                include "**/*.java"
+            }
+
+            jastadd {
+                basedir "src/jastadd/"
+                include "**/*.ast"
+                include "**/*.jadd"
+                include "**/*.jrag"
+            }
+
+            //scanner {
+            // TODO List your scanner specification additions here.
+            //}
+
+            //parser {
+            // TODO List your parser specification additions here.
+            //}
+        }
+    }
+
+    // Target module to build:
+    module = 'extension-base'
+
+    astPackage = 'org.extendj.ast'
+    genDir = 'src/gen/java'
+    buildInfoDir = 'src/gen-res'
+    parser.name = 'JavaParser'
+    parser.genDir = 'src/gen/java/org/extendj/parser'
+    scanner.name = 'OriginalScanner'
+    scanner.genDir = 'src/gen/java/org/extendj/scanner'
+}
+
+sourceSets.main {
+    java {
+        srcDir "extendj/src/frontend-main"
+        srcDir "src/java"
+    }
+}
+
+jar.manifest.attributes 'Main-Class': 'app.Puck2Main'
+jar.destinationDir = projectDir
+
+task run(type: JavaExec) {
+    classpath sourceSets.main.runtimeClasspath
+    main = "app.Puck2Main"
+}
