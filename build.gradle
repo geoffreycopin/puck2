@@ -66,3 +66,7 @@ task run(type: JavaExec) {
     classpath sourceSets.main.runtimeClasspath
     main = "app.Puck2Main"
 }
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
