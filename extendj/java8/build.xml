@@ -2,11 +2,11 @@
 	<property name="jj.root" location="${basedir}/../"/>
 	<property file="${jj.root}/build.properties"/>
 
-	<!-- Define scanner generator task. -->
+	<!-- Define scanner idGenerator task. -->
 	<taskdef name="jflex" classname="jflex.anttask.JFlexTask"
 		classpath="${jflex.jar}"/>
 
-	<!-- Parser generator task. -->
+	<!-- Parser idGenerator task. -->
 	<taskdef name="beaver" classname="beaver.comp.run.AntTask"
 		classpath="${tools.dir}/beaver-ant.jar"/>
 
@@ -274,7 +274,7 @@
 				<file name="Postamble.flex"/>
 			</filelist>
 		</concat>
-		<!-- Invoke scanner generator. -->
+		<!-- Invoke scanner idGenerator. -->
 		<mkdir dir="${gen.dir}/org/extendj/scanner"/>
 		<jflex file="${tmp.dir}/scanner/OriginalScanner.flex"
 			outdir="${gen.dir}/org/extendj/scanner" nobak="yes"/>
@@ -309,7 +309,7 @@
 			<arg value="${tmp.dir}/parser/JavaParser.all"/>
 			<arg value="${tmp.dir}/parser/JavaParser.beaver"/>
 		</java>
-		<!-- Invoke parser generator. -->
+		<!-- Invoke parser idGenerator. -->
 		<mkdir dir="${gen.dir}/org/extendj/parser"/>
 		<beaver file="${tmp.dir}/parser/JavaParser.beaver"
 			destdir="${gen.dir}/org/extendj/parser"

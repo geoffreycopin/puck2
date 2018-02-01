@@ -1,16 +1,20 @@
-package graph.nodes;
+package graph;
 
 import org.extendj.ast.Access;
 
 public class Node {
     private Integer id;
     private String fullName;
+    private Type type;
     private Access extendjNode;
 
-    public Node(Integer id, String fullName, Access extendjNode) {
+    public enum Type { Package, Class }
+
+    public Node(Integer id, String fullName, Type type, Access extendjNode) {
         this.id = id;
         this.fullName = fullName;
         this.extendjNode = extendjNode;
+        this.type = type;
     }
 
     public Integer getId() {
@@ -25,7 +29,12 @@ public class Node {
         return extendjNode;
     }
 
+    public Type getType() {
+        return type;
+    }
+
     public String toString() {
-        return String.format("<Node id=%d name=%s>", id, fullName);
+        String formatStr = "<Node id=%d name=%s type=%s/>";
+        return String.format(formatStr, id, fullName, type.toString().toLowerCase());
     }
 }
