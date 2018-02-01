@@ -1231,7 +1231,7 @@ aspect CreateBCode {
    * Generate a conditional branch statement. The branch should be taken if the
    * expression evaluates to true. May in some cases not result in an actual
    * branch statement if the branch would never be taken.
-   * @param gen code generator
+   * @param gen code idGenerator
    * @param target target label to jump to if the condition was true
    */
   public void Expr.branchTrue(CodeGeneration gen, int target) {
@@ -1342,7 +1342,7 @@ aspect CreateBCode {
    * Generate a conditional branch statement. The branch should be taken if the
    * expression evaluates to false. May in some cases not result in an actual
    * branch statement if the branch would never be taken.
-   * @param gen code generator
+   * @param gen code idGenerator
    * @param target target label to jump to if the condition was false
    */
   public void Expr.branchFalse(CodeGeneration gen, int target) {

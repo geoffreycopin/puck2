@@ -1,5 +1,7 @@
 package test;
 
+class SuperTest extends Test { }
+
 public class Test implements Foo{
   void f() {
   }
