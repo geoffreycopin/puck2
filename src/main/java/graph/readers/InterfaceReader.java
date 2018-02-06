@@ -48,8 +48,19 @@ public class InterfaceReader extends AbstractReader {
     private void addSuperInterfacesDependency(Map<String, Node> nodes, List<Edge> edges) {
         for (Access sup: interfaceDecl.getSuperInterfaceList()) {
             InterfaceDecl superInterface = (InterfaceDecl) sup.type();
-            InterfaceReader r = new InterfaceReader(superInterface, idGenerator);
-            r.readInto(nodes, edges);
+            
+            if (! nodes.containsKey(superInterface.fullName())) {
+                Node InterfaceNode = new Node(idGenerator.generate(), superInterface.fullName(), Node.Type.Interface, null);
+                nodes.put(superInterface.fullName(), InterfaceNode);
+            }
+            Integer interfaceId = nodes.get(superInterface.fullName()).getId();
+            Edge dependency = new Edge(interfaceNode.getId(), interfaceId, Edge.Type.IsA);
+            edges.add(dependency);
+            
+			InterfaceReader r = new InterfaceReader(superInterface, idGenerator);
+			r.readInto(nodes, edges);
+            
+            
         }
     }
 }

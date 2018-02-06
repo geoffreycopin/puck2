@@ -8,7 +8,7 @@ public class Node {
     private Type type;
     private Access extendjNode;
 
-    public enum Type { Package, Class, Interface }
+    public enum Type { Package, Class, Interface, Attribute, Method }
 
     public Node(Integer id, String fullName, Type type, Access extendjNode) {
         this.id = id;
