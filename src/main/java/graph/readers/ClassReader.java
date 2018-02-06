@@ -9,16 +9,12 @@ import org.extendj.ast.TypeDecl;
 import java.util.List;
 import java.util.Map;
 
-public class ClassReader {
+public class ClassReader extends AbstractReader {
     private ClassDecl classDeclaration;
-    private UniqueIdGenerator idGenerator;
     private Node classNode;
 
-    public ClassReader(ClassDecl classDeclaration) {
-        this(classDeclaration, new UniqueIdGenerator());
-    }
-
     public ClassReader(ClassDecl classDeclaration, UniqueIdGenerator idGenerator) {
+        super(idGenerator);
         this.classDeclaration = classDeclaration;
         this.idGenerator = idGenerator;
     }

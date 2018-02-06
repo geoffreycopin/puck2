@@ -8,8 +8,7 @@ import org.extendj.ast.*;
 import java.util.List;
 import java.util.Map;
 
-public class ProgramReader {
-    private UniqueIdGenerator idGenerator;
+public class ProgramReader extends AbstractReader {
     private Program program;
 
     public ProgramReader(Program p) {
@@ -17,10 +16,11 @@ public class ProgramReader {
     }
 
     public ProgramReader(Program p, UniqueIdGenerator idGenerator) {
+        super(idGenerator);
         this.program = p;
-        this.idGenerator = idGenerator;
     }
 
+    @Override
     public void readInto(Map<String, Node> nodes, List<Edge> edges) {
         readCompilationUnits(nodes, edges);
     }
