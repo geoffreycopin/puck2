@@ -10,19 +10,12 @@ public class Test implements Foo{
   int m(int x) {
     return x * x;
   }
+  int m(double x){
+	  return (int) x;
+  }
 }
 
-class X {
-	Test pp;
-}
 
 interface Foo {
-
-}
-
-interface Too extends Foo {
-
-} 
-interface Boo extends Too {
-
+void t();
 }
