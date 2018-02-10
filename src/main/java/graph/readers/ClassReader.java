@@ -119,8 +119,9 @@ public class ClassReader extends AbstractReader {
 
 		if (m.getNumParameter() > 0) {
 			for (ParameterDeclaration p : m.getParameterList()) {
-				ParamNode = new Node(idGenerator.generate(), p.name(), Node.Type.Attribute, p.getTypeAccess());
-				nodes.put(p.name(), ParamNode);
+				String name = m.signature()+"."+p.name();
+				ParamNode = new Node(idGenerator.generate(), name, Node.Type.Attribute, p.getTypeAccess());
+				nodes.put(name, ParamNode);
 			}
 		}
 	}

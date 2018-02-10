@@ -39,7 +39,6 @@ public class InterfaceReader extends AbstractReader {
 			for (BodyDecl decl : interfaceDecl.getBodyDeclList()) {
 				 /*Add Methods*/
 				if(decl instanceof MethodDecl){
-					System.out.println("in");
 					MethodDecl m = (MethodDecl)decl;
 					MethodNode = new Node(idGenerator.generate(),  m.fullSignature(), Node.Type.Method, m.getTypeAccess());
 			        nodes.put(m.fullSignature(), MethodNode );
