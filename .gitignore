@@ -10,3 +10,5 @@ gradle-app.setting
 \.idea/
 
 \.DS_Store
+
+puck2\.jar

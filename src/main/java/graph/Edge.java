@@ -20,4 +20,16 @@ public class Edge {
         return String.format("<Edge from=%d to=%d type=%s/>",
                 sourceId, targetId, type.toString().toLowerCase());
     }
+
+    public Integer getSourceId() {
+        return sourceId;
+    }
+
+    public Integer getTargetId() {
+        return targetId;
+    }
+
+    public Type getType() {
+        return type;
+    }
 }

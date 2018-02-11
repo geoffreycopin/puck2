@@ -28,27 +28,4 @@ public class ProgramLoader {
         return program.getCompilationUnitList();
     }
 
-    public Iterable<TypeDecl> getTypeDecls() {
-        List<TypeDecl> declarations = new ArrayList<>();
-
-        for (CompilationUnit cu: getCompilationUnits()) {
-            for (TypeDecl t: cu.getTypeDeclList()) {
-                declarations.add(t);
-            }
-        }
-
-        return declarations;
-    }
-
-    public Iterable<ClassDecl> getClassDeclarations() {
-        List<ClassDecl> declarations = new ArrayList<>();
-
-        for (TypeDecl t: getTypeDecls()) {
-            if (t instanceof ClassDecl) {
-                declarations.add((ClassDecl) t);
-            }
-        }
-
-        return declarations;
-    }
 }

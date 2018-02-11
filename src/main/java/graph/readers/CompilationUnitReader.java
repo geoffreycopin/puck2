@@ -17,7 +17,6 @@ public class CompilationUnitReader extends AbstractReader{
     public CompilationUnitReader(CompilationUnit unit, UniqueIdGenerator generator) {
         super(generator);
         this.compilationUnit = unit;
-        this.idGenerator = generator;
     }
 
     public void readInto(Map<String, Node> nodes, List<Edge> edges) {
@@ -39,21 +38,7 @@ public class CompilationUnitReader extends AbstractReader{
 
     private void readTypeDecalarations(Map<String, Node> nodes, List<Edge> edges) {
         for (TypeDecl t: compilationUnit.getTypeDeclList()) {
-            if (t instanceof ClassDecl) {
-                readClassDeclaration((ClassDecl) t, nodes, edges);
-            } else if (t instanceof InterfaceDecl) {
-                readInterfaceDeclaration((InterfaceDecl) t, nodes, edges);
-            }
+            new TypeDeclReader(t, idGenerator).readInto(nodes, edges);
         }
-    }
-
-    private void readClassDeclaration(ClassDecl decl, Map<String, Node> nodes, List<Edge> edges) {
-        ClassReader reader = new ClassReader(decl, idGenerator);
-        reader.readInto(nodes, edges);
-    }
-
-    private void readInterfaceDeclaration(InterfaceDecl decl, Map<String, Node> nodes, List<Edge> edges) {
-        InterfaceReader reader = new InterfaceReader(decl, idGenerator);
-        reader.readInto(nodes, edges);
     }
 }

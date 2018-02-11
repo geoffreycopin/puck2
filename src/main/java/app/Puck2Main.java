@@ -5,22 +5,23 @@ import graph.Node;
 import graph.readers.ProgramReader;
 import org.extendj.ast.Program;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Puck2Main {
     public static void main(String args[]) {
-        Program p = loadProgram("testfiles/Test.java");
-
+        Program p = loadProgram(args[0]);
         ProgramReader r = new ProgramReader(p);
         Map<String, Node> nodes = new HashMap<>();
         List<Edge> edges = new ArrayList<>();
 
         r.readInto(nodes, edges);
 
-        for (Node n: nodes.values()) {
+        List<Node> sorted_nodes = nodes.values().stream()
+                .sorted(Comparator.comparingInt(Node::getId))
+                .collect(Collectors.toList());
+
+        for (Node n: sorted_nodes) {
             System.out.println(n);
         }
 
