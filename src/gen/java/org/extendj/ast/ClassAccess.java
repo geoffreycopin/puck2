@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:112
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\Java.ast:112
  * @astdecl ClassAccess : Access;
  * @production ClassAccess : {@link Access};
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ClassAccess extends Access implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:144
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrint.jadd:144
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("class");
@@ -166,17 +166,17 @@ public class ClassAccess extends Access implements Cloneable {
   }
   /**
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:437
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:437
    */
   private TypeDecl refined_TypeAnalysis_ClassAccess_type()
 { return lookupType("java.lang", "Class"); }
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:76
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:76
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:76")
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:76")
   public boolean isClassAccess() {
     boolean isClassAccess_value = true;
     return isClassAccess_value;
@@ -186,10 +186,10 @@ public class ClassAccess extends Access implements Cloneable {
    * expression.
    * @attribute syn
    * @aspect SyntacticClassification
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:60
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:60
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SyntacticClassification", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:60")
+  @ASTNodeAnnotation.Source(aspect="SyntacticClassification", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:60")
   public NameType predNameType() {
     NameType predNameType_value = NameType.TYPE_NAME;
     return predNameType_value;
@@ -208,10 +208,10 @@ public class ClassAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -253,7 +253,7 @@ public class ClassAccess extends Access implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:273
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:273
     if (isQualified() && !qualifier().isTypeAccess()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/grammar/ConstructorReference.ast:4
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\grammar\\ConstructorReference.ast:4
  * @astdecl ArrayReference : ConstructorReference;
  * @production ArrayReference : {@link ConstructorReference};
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ArrayReference extends ConstructorReference implements Cloneable {
   /**
    * @aspect Java8PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PrettyPrint.jadd:35
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\PrettyPrint.jadd:35
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getTypeAccess());
@@ -217,10 +217,10 @@ public class ArrayReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:72
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:72
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:72")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:72")
   public boolean congruentTo(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -278,10 +278,10 @@ public class ArrayReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:153
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:153
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:153")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:153")
   public boolean isExact() {
     ASTState state = state();
     if (isExact_computed == ASTState.NON_CYCLE || isExact_computed == state().cycle()) {
@@ -309,10 +309,10 @@ public class ArrayReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:511
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:511
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:511")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:511")
   public boolean potentiallyCompatible(TypeDecl type, BodyDecl candidateDecl) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(type);
@@ -355,10 +355,10 @@ public class ArrayReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect Java8NameCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:534
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\NameCheck.jrag:534
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:534")
+  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\NameCheck.jrag:534")
   public Collection<Problem> nameProblems() {
     {
         Access typeAccess = getTypeAccess();
@@ -381,7 +381,7 @@ public class ArrayReference extends ConstructorReference implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:532
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\NameCheck.jrag:532
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/Generics.ast:79
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\grammar\\Generics.ast:79
  * @astdecl GenericMethodDeclErased : GenericMethodDecl ::= <Original:GenericMethodDecl>;
  * @production GenericMethodDeclErased : {@link GenericMethodDecl} ::= <span class="component">&lt;Original:GenericMethodDecl&gt;</span>;
 
@@ -689,10 +689,10 @@ public class GenericMethodDeclErased extends GenericMethodDecl implements Clonea
    * @return a specific parameterization of this generic method.
    * @attribute syn
    * @aspect GenericMethods
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:66
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:66
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:66")
+  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:66")
   public ParMethodDecl lookupParMethodDecl(Collection<TypeDecl> typeArguments) {
     Object _parameters = typeArguments;
     if (lookupParMethodDecl_Collection_TypeDecl__values == null) lookupParMethodDecl_Collection_TypeDecl__values = new java.util.HashMap(4);

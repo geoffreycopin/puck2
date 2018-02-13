@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/Enums.ast:5
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\grammar\\Enums.ast:5
  * @astdecl EnumInstanceExpr : ClassInstanceExpr ::= Access Arg:Expr* [TypeDecl];
  * @production EnumInstanceExpr : {@link ClassInstanceExpr} ::= <span class="component">{@link Access}</span> <span class="component">Arg:{@link Expr}*</span> <span class="component">[{@link TypeDecl}]</span>;
 
@@ -389,10 +389,10 @@ public class EnumInstanceExpr extends ClassInstanceExpr implements Cloneable {
   /**
    * @attribute syn nta
    * @aspect Enums
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Enums.jrag:292
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Enums.jrag:292
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Enums.jrag:292")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Enums.jrag:292")
   public Access getAccess() {
     ASTState state = state();
     if (getAccess_computed) {
@@ -425,10 +425,10 @@ public class EnumInstanceExpr extends ClassInstanceExpr implements Cloneable {
   /**
    * @attribute syn nta
    * @aspect Enums
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Enums.jrag:296
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Enums.jrag:296
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Enums.jrag:296")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Enums.jrag:296")
   public List<Expr> getArgList() {
     ASTState state = state();
     if (getArgList_computed) {

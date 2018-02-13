@@ -19,10 +19,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -36,7 +36,7 @@ import java.io.DataInputStream;
 public class Opt<T extends ASTNode> extends ASTNode<T> implements Cloneable {
   /** Pretty-print Opt nodes only if they are not empty. 
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:163
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:163
    */
   public void prettyPrint(PrettyPrinter out) {
     if (getNumChild() > 0) {

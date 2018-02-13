@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/grammar/MethodReference.ast:1
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\grammar\\MethodReference.ast:1
  * @astdecl MethodReference : Expr ::= TypeArgument:Access* <ID:String>;
  * @production MethodReference : {@link Expr} ::= <span class="component">TypeArgument:{@link Access}*</span> <span class="component">&lt;ID:String&gt;</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public abstract class MethodReference extends Expr implements Cloneable {
   /**
    * @aspect PrettyPrintUtil8
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PrettyPrintUtil.jadd:98
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\PrettyPrintUtil.jadd:98
    */
   @Override public String toString() {
     StringBuilder params = new StringBuilder();
@@ -107,16 +107,16 @@ public abstract class MethodReference extends Expr implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    isPolyExpression_reset();
-    assignConversionTo_TypeDecl_reset();
     isExact_reset();
     compatibleStrictContext_TypeDecl_reset();
     compatibleLooseContext_TypeDecl_reset();
     pertinentToApplicability_Expr_BodyDecl_int_reset();
     moreSpecificThan_TypeDecl_TypeDecl_reset();
     potentiallyCompatible_TypeDecl_BodyDecl_reset();
-    type_reset();
+    isPolyExpression_reset();
+    assignConversionTo_TypeDecl_reset();
     targetInterface_reset();
+    type_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:52
@@ -309,105 +309,27 @@ public abstract class MethodReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:239
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:239
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:239")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:239")
   public abstract boolean congruentTo(FunctionDescriptor fd);
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:292
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:292
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:292")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:292")
   public abstract java.util.List<MethodDecl> potentiallyApplicableMethods(FunctionDescriptor fd);
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:360
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:360
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:360")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:360")
   public abstract MethodDecl exactCompileTimeDeclaration();
-  /** @apilevel internal */
-  private void isPolyExpression_reset() {
-    isPolyExpression_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle isPolyExpression_computed = null;
-
-  /** @apilevel internal */
-  protected boolean isPolyExpression_value;
-
-  /**
-   * @attribute syn
-   * @aspect PolyExpressions
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:86
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:86")
-  public boolean isPolyExpression() {
-    ASTState state = state();
-    if (isPolyExpression_computed == ASTState.NON_CYCLE || isPolyExpression_computed == state().cycle()) {
-      return isPolyExpression_value;
-    }
-    isPolyExpression_value = true;
-    if (state().inCircle()) {
-      isPolyExpression_computed = state().cycle();
-    
-    } else {
-      isPolyExpression_computed = ASTState.NON_CYCLE;
-    
-    }
-    return isPolyExpression_value;
-  }
-  /** @apilevel internal */
-  private void assignConversionTo_TypeDecl_reset() {
-    assignConversionTo_TypeDecl_computed = null;
-    assignConversionTo_TypeDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map assignConversionTo_TypeDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map assignConversionTo_TypeDecl_computed;
-  /**
-   * @attribute syn
-   * @aspect PolyExpressions
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:149
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:149")
-  public boolean assignConversionTo(TypeDecl type) {
-    Object _parameters = type;
-    if (assignConversionTo_TypeDecl_computed == null) assignConversionTo_TypeDecl_computed = new java.util.HashMap(4);
-    if (assignConversionTo_TypeDecl_values == null) assignConversionTo_TypeDecl_values = new java.util.HashMap(4);
-    ASTState state = state();
-    if (assignConversionTo_TypeDecl_values.containsKey(_parameters)
-        && assignConversionTo_TypeDecl_computed.containsKey(_parameters)
-        && (assignConversionTo_TypeDecl_computed.get(_parameters) == ASTState.NON_CYCLE || assignConversionTo_TypeDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) assignConversionTo_TypeDecl_values.get(_parameters);
-    }
-    boolean assignConversionTo_TypeDecl_value = assignConversionTo_compute(type);
-    if (state().inCircle()) {
-      assignConversionTo_TypeDecl_values.put(_parameters, assignConversionTo_TypeDecl_value);
-      assignConversionTo_TypeDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      assignConversionTo_TypeDecl_values.put(_parameters, assignConversionTo_TypeDecl_value);
-      assignConversionTo_TypeDecl_computed.put(_parameters, ASTState.NON_CYCLE);
-    
-    }
-    return assignConversionTo_TypeDecl_value;
-  }
-  /** @apilevel internal */
-  private boolean assignConversionTo_compute(TypeDecl type) {
-      if (!type.isFunctionalInterface()) {
-        return false;
-      }
-      FunctionDescriptor f = ((InterfaceDecl) type).functionDescriptor();
-      return congruentTo(f);
-    }
   /** @apilevel internal */
   private void isExact_reset() {
     isExact_computed = null;
@@ -421,10 +343,10 @@ public abstract class MethodReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:359
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:359
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:359")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:359")
   public boolean isExact() {
     ASTState state = state();
     if (isExact_computed == ASTState.NON_CYCLE || isExact_computed == state().cycle()) {
@@ -452,10 +374,10 @@ public abstract class MethodReference extends Expr implements Cloneable {
   /** Used to compute compatibility during phase 1 of overload resolution. 
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:58
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:58
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:58")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:58")
   public boolean compatibleStrictContext(TypeDecl type) {
     Object _parameters = type;
     if (compatibleStrictContext_TypeDecl_computed == null) compatibleStrictContext_TypeDecl_computed = new java.util.HashMap(4);
@@ -498,10 +420,10 @@ public abstract class MethodReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:102
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:102
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:102")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:102")
   public boolean compatibleLooseContext(TypeDecl type) {
     Object _parameters = type;
     if (compatibleLooseContext_TypeDecl_computed == null) compatibleLooseContext_TypeDecl_computed = new java.util.HashMap(4);
@@ -536,10 +458,10 @@ public abstract class MethodReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:130
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:130
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:130")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:130")
   public boolean pertinentToApplicability(Expr access, BodyDecl decl, int argIndex) {
     java.util.List _parameters = new java.util.ArrayList(3);
     _parameters.add(access);
@@ -613,10 +535,10 @@ public abstract class MethodReference extends Expr implements Cloneable {
    * @return {@code true} if type1 is more specific than type2, {@code false} otherwise
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:256
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:256
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:256")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:256")
   public boolean moreSpecificThan(TypeDecl type1, TypeDecl type2) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(type1);
@@ -713,10 +635,10 @@ public abstract class MethodReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:511
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:511
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:511")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:511")
   public boolean potentiallyCompatible(TypeDecl type, BodyDecl candidateDecl) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(type);
@@ -764,6 +686,156 @@ public abstract class MethodReference extends Expr implements Cloneable {
       }
       return true;
     }
+  /**
+   * @attribute syn
+   * @aspect Java8NameCheck
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\NameCheck.jrag:505
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\NameCheck.jrag:505")
+  public Collection<Problem> nameProblems() {
+    {
+        for (int i = 0; i < getNumTypeArgument(); i++) {
+          if (getTypeArgument(i) instanceof AbstractWildcard) {
+            return Collections.singletonList(
+                error("Wildcard not allowed in method reference type argument lists"));
+          }
+        }
+        return Collections.emptyList();
+      }
+  }
+  /** @apilevel internal */
+  private void isPolyExpression_reset() {
+    isPolyExpression_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle isPolyExpression_computed = null;
+
+  /** @apilevel internal */
+  protected boolean isPolyExpression_value;
+
+  /**
+   * @attribute syn
+   * @aspect PolyExpressions
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\PolyExpressions.jrag:86
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\PolyExpressions.jrag:86")
+  public boolean isPolyExpression() {
+    ASTState state = state();
+    if (isPolyExpression_computed == ASTState.NON_CYCLE || isPolyExpression_computed == state().cycle()) {
+      return isPolyExpression_value;
+    }
+    isPolyExpression_value = true;
+    if (state().inCircle()) {
+      isPolyExpression_computed = state().cycle();
+    
+    } else {
+      isPolyExpression_computed = ASTState.NON_CYCLE;
+    
+    }
+    return isPolyExpression_value;
+  }
+  /** @apilevel internal */
+  private void assignConversionTo_TypeDecl_reset() {
+    assignConversionTo_TypeDecl_computed = null;
+    assignConversionTo_TypeDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map assignConversionTo_TypeDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map assignConversionTo_TypeDecl_computed;
+  /**
+   * @attribute syn
+   * @aspect PolyExpressions
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\PolyExpressions.jrag:149
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\PolyExpressions.jrag:149")
+  public boolean assignConversionTo(TypeDecl type) {
+    Object _parameters = type;
+    if (assignConversionTo_TypeDecl_computed == null) assignConversionTo_TypeDecl_computed = new java.util.HashMap(4);
+    if (assignConversionTo_TypeDecl_values == null) assignConversionTo_TypeDecl_values = new java.util.HashMap(4);
+    ASTState state = state();
+    if (assignConversionTo_TypeDecl_values.containsKey(_parameters)
+        && assignConversionTo_TypeDecl_computed.containsKey(_parameters)
+        && (assignConversionTo_TypeDecl_computed.get(_parameters) == ASTState.NON_CYCLE || assignConversionTo_TypeDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) assignConversionTo_TypeDecl_values.get(_parameters);
+    }
+    boolean assignConversionTo_TypeDecl_value = assignConversionTo_compute(type);
+    if (state().inCircle()) {
+      assignConversionTo_TypeDecl_values.put(_parameters, assignConversionTo_TypeDecl_value);
+      assignConversionTo_TypeDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      assignConversionTo_TypeDecl_values.put(_parameters, assignConversionTo_TypeDecl_value);
+      assignConversionTo_TypeDecl_computed.put(_parameters, ASTState.NON_CYCLE);
+    
+    }
+    return assignConversionTo_TypeDecl_value;
+  }
+  /** @apilevel internal */
+  private boolean assignConversionTo_compute(TypeDecl type) {
+      if (!type.isFunctionalInterface()) {
+        return false;
+      }
+      FunctionDescriptor f = ((InterfaceDecl) type).functionDescriptor();
+      return congruentTo(f);
+    }
+  /**
+   * @attribute syn
+   * @aspect Names
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\QualifiedNames.jrag:30
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\QualifiedNames.jrag:30")
+  public String name() {
+    String name_value = getID();
+    return name_value;
+  }
+  /** @apilevel internal */
+  private void targetInterface_reset() {
+    targetInterface_computed = null;
+    targetInterface_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle targetInterface_computed = null;
+
+  /** @apilevel internal */
+  protected InterfaceDecl targetInterface_value;
+
+  /**
+   * @attribute syn
+   * @aspect TargetType
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:158
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:158")
+  public InterfaceDecl targetInterface() {
+    ASTState state = state();
+    if (targetInterface_computed == ASTState.NON_CYCLE || targetInterface_computed == state().cycle()) {
+      return targetInterface_value;
+    }
+    targetInterface_value = targetInterface_compute();
+    if (state().inCircle()) {
+      targetInterface_computed = state().cycle();
+    
+    } else {
+      targetInterface_computed = ASTState.NON_CYCLE;
+    
+    }
+    return targetInterface_value;
+  }
+  /** @apilevel internal */
+  private InterfaceDecl targetInterface_compute() {
+      if (targetType().isNull()) {
+        return null;
+      } else if (!(targetType() instanceof InterfaceDecl)) {
+        return null;
+      } else {
+        return (InterfaceDecl) targetType();
+      }
+    }
 /** @apilevel internal */
 protected ASTState.Cycle type_cycle = null;
   /** @apilevel internal */
@@ -781,7 +853,7 @@ protected ASTState.Cycle type_cycle = null;
   /** @apilevel internal */
   protected boolean type_initialized = false;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:81")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:81")
   public TypeDecl type() {
     if (type_computed) {
       return type_value;
@@ -839,10 +911,10 @@ protected ASTState.Cycle type_cycle = null;
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:246
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:246
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:246")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:246")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -985,95 +1057,23 @@ protected ASTState.Cycle type_cycle = null;
       }
   }
   /**
-   * @attribute syn
-   * @aspect Java8NameCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:505
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:505")
-  public Collection<Problem> nameProblems() {
-    {
-        for (int i = 0; i < getNumTypeArgument(); i++) {
-          if (getTypeArgument(i) instanceof AbstractWildcard) {
-            return Collections.singletonList(
-                error("Wildcard not allowed in method reference type argument lists"));
-          }
-        }
-        return Collections.emptyList();
-      }
-  }
-  /** @apilevel internal */
-  private void targetInterface_reset() {
-    targetInterface_computed = null;
-    targetInterface_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle targetInterface_computed = null;
-
-  /** @apilevel internal */
-  protected InterfaceDecl targetInterface_value;
-
-  /**
-   * @attribute syn
-   * @aspect TargetType
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:158
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:158")
-  public InterfaceDecl targetInterface() {
-    ASTState state = state();
-    if (targetInterface_computed == ASTState.NON_CYCLE || targetInterface_computed == state().cycle()) {
-      return targetInterface_value;
-    }
-    targetInterface_value = targetInterface_compute();
-    if (state().inCircle()) {
-      targetInterface_computed = state().cycle();
-    
-    } else {
-      targetInterface_computed = ASTState.NON_CYCLE;
-    
-    }
-    return targetInterface_value;
-  }
-  /** @apilevel internal */
-  private InterfaceDecl targetInterface_compute() {
-      if (targetType().isNull()) {
-        return null;
-      } else if (!(targetType() instanceof InterfaceDecl)) {
-        return null;
-      } else {
-        return (InterfaceDecl) targetType();
-      }
-    }
-  /**
-   * @attribute syn
-   * @aspect Names
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/QualifiedNames.jrag:30
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/QualifiedNames.jrag:30")
-  public String name() {
-    String name_value = getID();
-    return name_value;
-  }
-  /**
    * @attribute inh
    * @aspect MethodReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:31
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:31
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:31")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:31")
   public MethodDecl unknownMethod() {
     MethodDecl unknownMethod_value = getParent().Define_unknownMethod(this, null);
     return unknownMethod_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:215
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:215
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
@@ -1082,7 +1082,7 @@ protected ASTState.Cycle type_cycle = null;
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -1099,7 +1099,7 @@ protected ASTState.Cycle type_cycle = null;
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:244
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\NameCheck.jrag:503
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -1108,7 +1108,7 @@ protected ASTState.Cycle type_cycle = null;
       }
       contributors.add(this);
     }
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:503
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:244
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -1122,10 +1122,10 @@ protected ASTState.Cycle type_cycle = null;
   /** @apilevel internal */
   protected void contributeTo_CompilationUnit_problems(LinkedList<Problem> collection) {
     super.contributeTo_CompilationUnit_problems(collection);
-    for (Problem value : typeProblems()) {
+    for (Problem value : nameProblems()) {
       collection.add(value);
     }
-    for (Problem value : nameProblems()) {
+    for (Problem value : typeProblems()) {
       collection.add(value);
     }
   }

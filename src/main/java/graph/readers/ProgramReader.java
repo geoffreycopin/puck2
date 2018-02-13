@@ -24,11 +24,12 @@ public class ProgramReader extends AbstractReader {
     public void readInto(Map<String, Node> nodes, List<Edge> edges) {
         readCompilationUnits(nodes, edges);
     }
-
+  
     private void readCompilationUnits(Map<String, Node> nodes, List<Edge> edges) {
         for (CompilationUnit cu: program.getCompilationUnitList()) {
             CompilationUnitReader reader = new CompilationUnitReader(cu, idGenerator);
             reader.readInto(nodes, edges);
+            
         }
     }
 }

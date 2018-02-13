@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:279
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\Java.ast:279
  * @astdecl Modifiers : ASTNode ::= Modifier*;
  * @production Modifiers : {@link ASTNode} ::= <span class="component">{@link Modifier}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:511
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrint.jadd:511
    */
   public void prettyPrint(PrettyPrinter out) {
     if (hasModifier()) {
@@ -308,7 +308,7 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:366
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:366
    */
   private Collection<Problem> refined_Modifiers_Modifiers_modifierProblems()
 {
@@ -375,10 +375,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:366
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:366
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:366")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:366")
   public Collection<Problem> modifierProblems() {
     {
         Collection<Problem> problems = refined_Modifiers_Modifiers_modifierProblems();
@@ -401,10 +401,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:442
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:442
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:442")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:442")
   public boolean isPublic() {
     ASTState state = state();
     if (isPublic_computed == ASTState.NON_CYCLE || isPublic_computed == state().cycle()) {
@@ -433,10 +433,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:443
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:443
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:443")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:443")
   public boolean isPrivate() {
     ASTState state = state();
     if (isPrivate_computed == ASTState.NON_CYCLE || isPrivate_computed == state().cycle()) {
@@ -465,10 +465,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:444
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:444
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:444")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:444")
   public boolean isProtected() {
     ASTState state = state();
     if (isProtected_computed == ASTState.NON_CYCLE || isProtected_computed == state().cycle()) {
@@ -497,10 +497,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:445
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:445
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:445")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:445")
   public boolean isStatic() {
     ASTState state = state();
     if (isStatic_computed == ASTState.NON_CYCLE || isStatic_computed == state().cycle()) {
@@ -529,10 +529,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:446
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:446
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:446")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:446")
   public boolean isFinal() {
     ASTState state = state();
     if (isFinal_computed == ASTState.NON_CYCLE || isFinal_computed == state().cycle()) {
@@ -561,10 +561,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:447
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:447
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:447")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:447")
   public boolean isAbstract() {
     ASTState state = state();
     if (isAbstract_computed == ASTState.NON_CYCLE || isAbstract_computed == state().cycle()) {
@@ -593,10 +593,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:448
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:448
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:448")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:448")
   public boolean isVolatile() {
     ASTState state = state();
     if (isVolatile_computed == ASTState.NON_CYCLE || isVolatile_computed == state().cycle()) {
@@ -625,10 +625,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:449
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:449
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:449")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:449")
   public boolean isTransient() {
     ASTState state = state();
     if (isTransient_computed == ASTState.NON_CYCLE || isTransient_computed == state().cycle()) {
@@ -657,10 +657,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:450
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:450
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:450")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:450")
   public boolean isStrictfp() {
     ASTState state = state();
     if (isStrictfp_computed == ASTState.NON_CYCLE || isStrictfp_computed == state().cycle()) {
@@ -689,10 +689,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:451
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:451
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:451")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:451")
   public boolean isSynchronized() {
     ASTState state = state();
     if (isSynchronized_computed == ASTState.NON_CYCLE || isSynchronized_computed == state().cycle()) {
@@ -721,10 +721,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:452
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:452
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:452")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:452")
   public boolean isNative() {
     ASTState state = state();
     if (isNative_computed == ASTState.NON_CYCLE || isNative_computed == state().cycle()) {
@@ -753,10 +753,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:454
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:454
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:454")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:454")
   public boolean isSynthetic() {
     ASTState state = state();
     if (isSynthetic_computed == ASTState.NON_CYCLE || isSynthetic_computed == state().cycle()) {
@@ -775,10 +775,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:456
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:456
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:456")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:456")
   public int numProtectionModifiers() {
     int numProtectionModifiers_value = numModifier("public") + numModifier("protected") + numModifier("private");
     return numProtectionModifiers_value;
@@ -786,10 +786,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:459
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:459
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:459")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:459")
   public int numCompletenessModifiers() {
     int numCompletenessModifiers_value = numModifier("abstract") + numModifier("final") + numModifier("volatile");
     return numCompletenessModifiers_value;
@@ -797,10 +797,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:462
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:462
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:462")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:462")
   public int numModifier(String name) {
     {
         int n = 0;
@@ -815,10 +815,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:472
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:472
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:472")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:472")
   public boolean hasModifier(String name) {
     {
         for (Modifier modifier : getModifierList()) {
@@ -832,10 +832,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:321
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:321
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:321")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:321")
   public Annotation annotation(TypeDecl typeDecl) {
     {
         for (int i = 0; i < getNumModifier(); i++) {
@@ -852,10 +852,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:333
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:333
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:333")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:333")
   public boolean hasAnnotation(String packageName, String name) {
     {
         for (int i = 0; i < getNumModifier(); i++) {
@@ -869,10 +869,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:439
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:439
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:439")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:439")
   public boolean hasAnnotationSuppressWarnings(String annot) {
     {
         Annotation a = annotation(lookupType("java.lang", "SuppressWarnings"));
@@ -886,10 +886,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:476
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:476
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:476")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:476")
   public boolean hasDeprecatedAnnotation() {
     boolean hasDeprecatedAnnotation_value = hasAnnotation("java.lang", "Deprecated");
     return hasDeprecatedAnnotation_value;
@@ -898,10 +898,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
    * @return true if the modifier list includes the SafeVarargs annotation
    * @attribute syn
    * @aspect SafeVarargs
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SafeVarargs.jrag:66
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\SafeVarargs.jrag:66
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SafeVarargs", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SafeVarargs.jrag:66")
+  @ASTNodeAnnotation.Source(aspect="SafeVarargs", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\SafeVarargs.jrag:66")
   public boolean hasAnnotationSafeVarargs() {
     boolean hasAnnotationSafeVarargs_value = hasAnnotation("java.lang", "SafeVarargs");
     return hasAnnotationSafeVarargs_value;
@@ -909,10 +909,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/Annotations.jrag:46
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\Annotations.jrag:46
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/Annotations.jrag:46")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\Annotations.jrag:46")
   public boolean hasAnnotationFunctionalInterface() {
     boolean hasAnnotationFunctionalInterface_value = hasAnnotation("java.lang", "FunctionalInterface");
     return hasAnnotationFunctionalInterface_value;
@@ -920,10 +920,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/Modifiers.jrag:29
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\Modifiers.jrag:29
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/Modifiers.jrag:29")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\Modifiers.jrag:29")
   public boolean isDefault() {
     boolean isDefault_value = hasModifier("default");
     return isDefault_value;
@@ -931,10 +931,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:428
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:428
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:428")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:428")
   public TypeDecl hostType() {
     TypeDecl hostType_value = getParent().Define_hostType(this, null);
     return hostType_value;
@@ -942,10 +942,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:430
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:430
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:430")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:430")
   public boolean mayBePublic() {
     boolean mayBePublic_value = getParent().Define_mayBePublic(this, null);
     return mayBePublic_value;
@@ -953,10 +953,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:431
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:431
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:431")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:431")
   public boolean mayBePrivate() {
     boolean mayBePrivate_value = getParent().Define_mayBePrivate(this, null);
     return mayBePrivate_value;
@@ -964,10 +964,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:432
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:432
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:432")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:432")
   public boolean mayBeProtected() {
     boolean mayBeProtected_value = getParent().Define_mayBeProtected(this, null);
     return mayBeProtected_value;
@@ -975,10 +975,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:433
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:433
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:433")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:433")
   public boolean mayBeStatic() {
     boolean mayBeStatic_value = getParent().Define_mayBeStatic(this, null);
     return mayBeStatic_value;
@@ -986,10 +986,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:434
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:434
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:434")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:434")
   public boolean mayBeFinal() {
     boolean mayBeFinal_value = getParent().Define_mayBeFinal(this, null);
     return mayBeFinal_value;
@@ -997,10 +997,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:435
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:435
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:435")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:435")
   public boolean mayBeAbstract() {
     boolean mayBeAbstract_value = getParent().Define_mayBeAbstract(this, null);
     return mayBeAbstract_value;
@@ -1008,10 +1008,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:436
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:436
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:436")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:436")
   public boolean mayBeVolatile() {
     boolean mayBeVolatile_value = getParent().Define_mayBeVolatile(this, null);
     return mayBeVolatile_value;
@@ -1019,10 +1019,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:437
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:437
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:437")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:437")
   public boolean mayBeTransient() {
     boolean mayBeTransient_value = getParent().Define_mayBeTransient(this, null);
     return mayBeTransient_value;
@@ -1030,10 +1030,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:438
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:438
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:438")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:438")
   public boolean mayBeStrictfp() {
     boolean mayBeStrictfp_value = getParent().Define_mayBeStrictfp(this, null);
     return mayBeStrictfp_value;
@@ -1041,10 +1041,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:439
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:439
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:439")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:439")
   public boolean mayBeSynchronized() {
     boolean mayBeSynchronized_value = getParent().Define_mayBeSynchronized(this, null);
     return mayBeSynchronized_value;
@@ -1052,10 +1052,10 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:440
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:440
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:440")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:440")
   public boolean mayBeNative() {
     boolean mayBeNative_value = getParent().Define_mayBeNative(this, null);
     return mayBeNative_value;
@@ -1063,21 +1063,21 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:109
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:109
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:109")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:109")
   public TypeDecl lookupType(String packageName, String typeName) {
     TypeDecl lookupType_String_String_value = getParent().Define_lookupType(this, null, packageName, typeName);
     return lookupType_String_String_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:604
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:604
    * @apilevel internal
    */
   public Annotation Define_lookupAnnotation(ASTNode _callerNode, ASTNode _childNode, TypeDecl typeDecl) {
     if (_callerNode == getModifierListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:606
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:606
       int index = _callerNode.getIndexOfChild(_childNode);
       {
           return annotation(typeDecl);
@@ -1088,7 +1088,7 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:604
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:604
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupAnnotation
    */
@@ -1105,7 +1105,7 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:364
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:364
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

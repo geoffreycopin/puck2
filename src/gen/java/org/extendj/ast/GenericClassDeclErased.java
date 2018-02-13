@@ -19,10 +19,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * An erased class declaration. All parameterized type accesses are erased.
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/Generics.ast:112
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\grammar\\Generics.ast:112
  * @astdecl GenericClassDeclErased : GenericClassDeclSubstituted;
  * @production GenericClassDeclErased : {@link GenericClassDeclSubstituted};
 
@@ -715,10 +715,10 @@ public class GenericClassDeclErased extends GenericClassDeclSubstituted implemen
   /**
    * @attribute syn nta
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1675
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1675
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1675")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1675")
   public List<BodyDecl> getBodyDeclList() {
     ASTState state = state();
     if (getBodyDeclList_computed) {

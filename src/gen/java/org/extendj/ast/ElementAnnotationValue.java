@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/Annotations.ast:12
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\grammar\\Annotations.ast:12
  * @astdecl ElementAnnotationValue : ElementValue ::= Annotation;
  * @production ElementAnnotationValue : {@link ElementValue} ::= <span class="component">{@link Annotation}</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ElementAnnotationValue extends ElementValue implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/PrettyPrint.jadd:86
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\PrettyPrint.jadd:86
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getAnnotation());
@@ -204,10 +204,10 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:675
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:675
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:675")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:675")
   public boolean commensurateWithTypeDecl(TypeDecl type) {
     {
         return type() == type;
@@ -216,10 +216,10 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:731
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:731
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:731")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:731")
   public TypeDecl type() {
     TypeDecl type_value = getAnnotation().type();
     return type_value;
@@ -227,21 +227,21 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
   /**
    * @attribute inh
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:604
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:604
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:604")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:604")
   public Annotation lookupAnnotation(TypeDecl typeDecl) {
     Annotation lookupAnnotation_TypeDecl_value = getParent().Define_lookupAnnotation(this, null, typeDecl);
     return lookupAnnotation_TypeDecl_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:131
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:131
    * @apilevel internal
    */
   public boolean Define_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getAnnotationNoTransform() != null && _callerNode == getAnnotation()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:167
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:167
       return true;
     }
     else {
@@ -249,7 +249,7 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:131
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:131
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayUseAnnotationTarget
    */
@@ -257,12 +257,12 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:604
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:604
    * @apilevel internal
    */
   public Annotation Define_lookupAnnotation(ASTNode _callerNode, ASTNode _childNode, TypeDecl typeDecl) {
     if (getAnnotationNoTransform() != null && _callerNode == getAnnotation()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:610
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:610
       return getAnnotation().type() == typeDecl ? getAnnotation() : lookupAnnotation(typeDecl);
     }
     else {
@@ -270,7 +270,7 @@ public class ElementAnnotationValue extends ElementValue implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:604
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:604
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupAnnotation
    */

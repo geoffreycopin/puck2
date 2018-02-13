@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:167
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\Java.ast:167
  * @astdecl FieldDecl : MemberDecl ::= Modifiers TypeAccess:Access Declarator:FieldDeclarator*;
  * @production FieldDecl : {@link MemberDecl} ::= <span class="component">{@link Modifiers}</span> <span class="component">TypeAccess:{@link Access}</span> <span class="component">Declarator:{@link FieldDeclarator}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:363
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrint.jadd:363
    */
   public void prettyPrint(PrettyPrinter out) {
     if (!isSynthetic()) {
@@ -61,7 +61,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   }
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1471
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1471
    */
   public BodyDecl signatureCopy() {
     List<FieldDeclarator> decls = new List<FieldDeclarator>();
@@ -76,7 +76,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   }
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1568
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1568
    */
   public BodyDecl erasedCopy() {
     List<FieldDeclarator> decls = new List<FieldDeclarator>();
@@ -390,13 +390,52 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   public List<FieldDeclarator> getDeclaratorsNoTransform() {
     return getDeclaratorListNoTransform();
   }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ConstantExpression.jrag:358
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ConstantExpression.jrag:358")
+  public boolean isConstant() {
+    {
+        if (!isFinal()) {
+          return false;
+        }
+        for (FieldDeclarator decl : getDeclaratorList()) {
+          TypeDecl type = decl.type();
+          if (!decl.hasInit() || !decl.getInit().isConstant()
+              || !(decl.type() instanceof PrimitiveType || decl.type().isString())) {
+            return false;
+          }
+        }
+        return true;
+      }
+  }
+  /** @return {@code true} if the field declaration is inside this node. 
+   * @attribute syn
+   * @aspect DeclareBeforeUse
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:46
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="DeclareBeforeUse", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:46")
+  public boolean declaredIn(Variable decl) {
+    {
+        for (FieldDeclarator field : getDeclaratorList()) {
+          if (field == decl) {
+            return true;
+          }
+        }
+        return declaredBefore(decl);
+      }
+  }
   /** @apilevel internal */
   private void assignedAfter_Variable_reset() {
     assignedAfter_Variable_values = null;
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:272")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:272")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -447,7 +486,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:911")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:911")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -494,33 +533,11 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:358
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:358")
-  public boolean isConstant() {
-    {
-        if (!isFinal()) {
-          return false;
-        }
-        for (FieldDeclarator decl : getDeclaratorList()) {
-          TypeDecl type = decl.type();
-          if (!decl.hasInit() || !decl.getInit().isConstant()
-              || !(decl.type() instanceof PrimitiveType || decl.type().isString())) {
-            return false;
-          }
-        }
-        return true;
-      }
-  }
-  /**
-   * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:128
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:128
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:128")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:128")
   public Collection<Problem> modifierProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -544,10 +561,10 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:247
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:247
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:247")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:247")
   public boolean isSynthetic() {
     boolean isSynthetic_value = getModifiers().isSynthetic();
     return isSynthetic_value;
@@ -555,10 +572,10 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:282
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:282
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:282")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:282")
   public boolean isPublic() {
     boolean isPublic_value = getModifiers().isPublic() || hostType().isInterfaceDecl();
     return isPublic_value;
@@ -566,10 +583,10 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:284
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:284
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:284")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:284")
   public boolean isPrivate() {
     boolean isPrivate_value = getModifiers().isPrivate();
     return isPrivate_value;
@@ -577,10 +594,10 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:285
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:285
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:285")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:285")
   public boolean isProtected() {
     boolean isProtected_value = getModifiers().isProtected();
     return isProtected_value;
@@ -588,10 +605,10 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:286
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:286
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:286")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:286")
   public boolean isStatic() {
     boolean isStatic_value = getModifiers().isStatic() || hostType().isInterfaceDecl();
     return isStatic_value;
@@ -599,10 +616,10 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:288
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:288
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:288")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:288")
   public boolean isFinal() {
     boolean isFinal_value = getModifiers().isFinal() || hostType().isInterfaceDecl();
     return isFinal_value;
@@ -610,10 +627,10 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:289
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:289
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:289")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:289")
   public boolean isTransient() {
     boolean isTransient_value = getModifiers().isTransient();
     return isTransient_value;
@@ -621,38 +638,21 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:290
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:290
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:290")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:290")
   public boolean isVolatile() {
     boolean isVolatile_value = getModifiers().isVolatile();
     return isVolatile_value;
   }
-  /** @return {@code true} if the field declaration is inside this node. 
-   * @attribute syn
-   * @aspect DeclareBeforeUse
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:46
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DeclareBeforeUse", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:46")
-  public boolean declaredIn(Variable decl) {
-    {
-        for (FieldDeclarator field : getDeclaratorList()) {
-          if (field == decl) {
-            return true;
-          }
-        }
-        return declaredBefore(decl);
-      }
-  }
   /**
    * @attribute syn
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:320
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:320
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:320")
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:320")
   public boolean hasModifiers() {
     boolean hasModifiers_value = getModifiers().getNumModifier() > 0;
     return hasModifiers_value;
@@ -660,32 +660,21 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:268
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:268
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:268")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:268")
   public TypeDecl type() {
     TypeDecl type_value = getTypeAccess().type();
     return type_value;
   }
   /**
    * @attribute syn
-   * @aspect GenericsParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsParTypeDecl.jrag:100
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsParTypeDecl.jrag:100")
-  public boolean visibleTypeParameters() {
-    boolean visibleTypeParameters_value = !isStatic();
-    return visibleTypeParameters_value;
-  }
-  /**
-   * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:425
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:425
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:425")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:425")
   public boolean hasAnnotationSuppressWarnings(String annot) {
     boolean hasAnnotationSuppressWarnings_String_value = getModifiers().hasAnnotationSuppressWarnings(annot);
     return hasAnnotationSuppressWarnings_String_value;
@@ -703,10 +692,10 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1315
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1315
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1315")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1315")
   public boolean usesTypeVariable() {
     ASTState state = state();
     if (usesTypeVariable_computed == ASTState.NON_CYCLE || usesTypeVariable_computed == state().cycle()) {
@@ -725,22 +714,33 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1714
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1714
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1714")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1714")
   public boolean isSubstitutable() {
     boolean isSubstitutable_value = !isStatic();
     return isSubstitutable_value;
   }
   /**
+   * @attribute syn
+   * @aspect GenericsParTypeDecl
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericsParTypeDecl.jrag:100
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericsParTypeDecl.jrag:100")
+  public boolean visibleTypeParameters() {
+    boolean visibleTypeParameters_value = !isStatic();
+    return visibleTypeParameters_value;
+  }
+  /**
    * @return true if the modifier list includes the SafeVarargs annotation
    * @attribute syn
    * @aspect SafeVarargs
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SafeVarargs.jrag:41
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\SafeVarargs.jrag:41
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SafeVarargs", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SafeVarargs.jrag:41")
+  @ASTNodeAnnotation.Source(aspect="SafeVarargs", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\SafeVarargs.jrag:41")
   public boolean hasAnnotationSafeVarargs() {
     boolean hasAnnotationSafeVarargs_value = getModifiers().hasAnnotationSafeVarargs();
     return hasAnnotationSafeVarargs_value;
@@ -748,60 +748,111 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect SuppressWarnings
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SuppressWarnings.jrag:43
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\SuppressWarnings.jrag:43
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SuppressWarnings", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SuppressWarnings.jrag:43")
+  @ASTNodeAnnotation.Source(aspect="SuppressWarnings", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\SuppressWarnings.jrag:43")
   public boolean suppressWarnings(String type) {
     boolean suppressWarnings_String_value = hasAnnotationSuppressWarnings(type) || withinSuppressWarnings(type);
     return suppressWarnings_String_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:133
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:58
    * @apilevel internal
    */
-  public Modifiers Define_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:137
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:62
       int index = _callerNode.getIndexOfChild(_childNode);
-      return getModifiers();
+      {
+          for (int i = index - 1; i >= 0; --i) {
+            if (getDeclarator(i) == decl) {
+              return true;
+            }
+          }
+          return declaredBefore(decl);
+        }
     }
     else {
-      return getParent().Define_declarationModifiers(this, _callerNode);
+      return getParent().Define_declaredBefore(this, _callerNode, decl);
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:133
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:58
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute declarationModifiers
+   * @return {@code true} if this node has an equation for the inherited attribute declaredBefore
    */
-  protected boolean canDefine_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:144
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:66
    * @apilevel internal
    */
-  public Access Define_declarationType(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:148
-      int index = _callerNode.getIndexOfChild(_childNode);
-      return getTypeAccess();
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:71
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return false;
     }
     else {
-      return getParent().Define_declarationType(this, _callerNode);
+      return getParent().Define_isIncOrDec(this, _callerNode);
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:144
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:66
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute declarationType
+   * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
    */
-  protected boolean canDefine_declarationType(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:112
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:256
+   * @apilevel internal
+   */
+  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    if (_callerNode == getDeclaratorListNoTransform()) {
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:563
+      int index = _callerNode.getIndexOfChild(_childNode);
+      return index == 0 ? assignedBefore(v) : getDeclarator(index - 1).assignedAfter(v);
+    }
+    else {
+      return super.Define_assignedBefore(_callerNode, _childNode, v);
+    }
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:256
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
+   */
+  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:887
+   * @apilevel internal
+   */
+  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    if (_callerNode == getDeclaratorListNoTransform()) {
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:1170
+      int index = _callerNode.getIndexOfChild(_childNode);
+      return index == 0 ? unassignedBefore(v) : getDeclarator(index - 1).unassignedAfter(v);
+    }
+    else {
+      return super.Define_unassignedBefore(_callerNode, _childNode, v);
+    }
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:887
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
+   */
+  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\TryWithResources.jrag:112
    * @apilevel internal
    */
   public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
@@ -819,7 +870,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
       }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:112
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\TryWithResources.jrag:112
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute handlesException
    */
@@ -827,94 +878,12 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
-   * @apilevel internal
-   */
-  public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:71
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return false;
-    }
-    else {
-      return getParent().Define_isIncOrDec(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
-   */
-  protected boolean canDefine_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
-   * @apilevel internal
-   */
-  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:563
-      int index = _callerNode.getIndexOfChild(_childNode);
-      return index == 0 ? assignedBefore(v) : getDeclarator(index - 1).assignedAfter(v);
-    }
-    else {
-      return super.Define_assignedBefore(_callerNode, _childNode, v);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
-   */
-  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
-   * @apilevel internal
-   */
-  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1170
-      int index = _callerNode.getIndexOfChild(_childNode);
-      return index == 0 ? unassignedBefore(v) : getDeclarator(index - 1).unassignedAfter(v);
-    }
-    else {
-      return super.Define_unassignedBefore(_callerNode, _childNode, v);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
-   */
-  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:207
-   * @apilevel internal
-   */
-  public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return isStatic();
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:207
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute inStaticContext
-   */
-  protected boolean canDefine_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:430
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:430
    * @apilevel internal
    */
   public boolean Define_mayBePublic(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:312
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:312
       return true;
     }
     else {
@@ -922,7 +891,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:430
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:430
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBePublic
    */
@@ -930,12 +899,12 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:432
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:432
    * @apilevel internal
    */
   public boolean Define_mayBeProtected(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:313
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:313
       return true;
     }
     else {
@@ -943,7 +912,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:432
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:432
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeProtected
    */
@@ -951,12 +920,12 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:431
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:431
    * @apilevel internal
    */
   public boolean Define_mayBePrivate(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:314
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:314
       return true;
     }
     else {
@@ -964,7 +933,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:431
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:431
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBePrivate
    */
@@ -972,12 +941,12 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:433
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:433
    * @apilevel internal
    */
   public boolean Define_mayBeStatic(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:315
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:315
       return true;
     }
     else {
@@ -985,7 +954,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:433
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:433
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeStatic
    */
@@ -993,12 +962,12 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:434
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:434
    * @apilevel internal
    */
   public boolean Define_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:316
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:316
       return true;
     }
     else {
@@ -1006,7 +975,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:434
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:434
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeFinal
    */
@@ -1014,12 +983,12 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:437
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:437
    * @apilevel internal
    */
   public boolean Define_mayBeTransient(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:317
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:317
       return true;
     }
     else {
@@ -1027,7 +996,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:437
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:437
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeTransient
    */
@@ -1035,12 +1004,12 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:436
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:436
    * @apilevel internal
    */
   public boolean Define_mayBeVolatile(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:318
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:318
       return true;
     }
     else {
@@ -1048,7 +1017,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:436
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:436
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeVolatile
    */
@@ -1056,41 +1025,12 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:58
-   * @apilevel internal
-   */
-  public boolean Define_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
-    if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:62
-      int index = _callerNode.getIndexOfChild(_childNode);
-      {
-          for (int i = index - 1; i >= 0; --i) {
-            if (getDeclarator(i) == decl) {
-              return true;
-            }
-          }
-          return declaredBefore(decl);
-        }
-    }
-    else {
-      return getParent().Define_declaredBefore(this, _callerNode, decl);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:58
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute declaredBefore
-   */
-  protected boolean canDefine_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:101
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:101
       return NameType.TYPE_NAME;
     }
     else {
@@ -1098,7 +1038,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -1106,12 +1046,12 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:723
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:723
    * @apilevel internal
    */
   public TypeDecl Define_declType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:278
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:278
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return null;
     }
@@ -1120,7 +1060,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:723
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:723
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declType
    */
@@ -1128,12 +1068,72 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:131
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:207
+   * @apilevel internal
+   */
+  public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return isStatic();
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:207
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute inStaticContext
+   */
+  protected boolean canDefine_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:133
+   * @apilevel internal
+   */
+  public Modifiers Define_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getDeclaratorListNoTransform()) {
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:137
+      int index = _callerNode.getIndexOfChild(_childNode);
+      return getModifiers();
+    }
+    else {
+      return getParent().Define_declarationModifiers(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:133
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute declarationModifiers
+   */
+  protected boolean canDefine_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:144
+   * @apilevel internal
+   */
+  public Access Define_declarationType(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getDeclaratorListNoTransform()) {
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:148
+      int index = _callerNode.getIndexOfChild(_childNode);
+      return getTypeAccess();
+    }
+    else {
+      return getParent().Define_declarationType(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:144
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute declarationType
+   */
+  protected boolean canDefine_declarationType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:131
    * @apilevel internal
    */
   public boolean Define_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:145
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:145
       return name.equals("FIELD");
     }
     else {
@@ -1141,7 +1141,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:131
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:131
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayUseAnnotationTarget
    */
@@ -1149,12 +1149,28 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1384
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Enums.jrag:563
+   * @apilevel internal
+   */
+  public boolean Define_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return !isStatic() && hostType().isEnumDecl();
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Enums.jrag:563
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute inEnumInitializer
+   */
+  protected boolean canDefine_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1384
    * @apilevel internal
    */
   public FieldDecl Define_fieldDecl(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1386
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1386
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return this;
     }
@@ -1163,7 +1179,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1384
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1384
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute fieldDecl
    */
@@ -1171,12 +1187,12 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1643
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1643
    * @apilevel internal
    */
   public FieldDeclarator Define_erasedField(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1645
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1645
       int index = _callerNode.getIndexOfChild(_childNode);
       return getDeclarator(index);
     }
@@ -1185,7 +1201,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1643
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1643
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute erasedField
    */
@@ -1193,28 +1209,12 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Enums.jrag:563
-   * @apilevel internal
-   */
-  public boolean Define_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return !isStatic() && hostType().isEnumDecl();
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Enums.jrag:563
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute inEnumInitializer
-   */
-  protected boolean canDefine_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:30
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:30
    * @apilevel internal
    */
   public boolean Define_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:58
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:58
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -1223,7 +1223,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:30
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inhModifiedInScope
    */
@@ -1240,7 +1240,7 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:126
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:126
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

@@ -19,10 +19,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -32,7 +32,7 @@ import java.io.DataInputStream;
  * This subclass is added as a convenient method of making resource
  * declarations implicitly final.
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/grammar/TryWithResources.ast:16
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\grammar\\TryWithResources.ast:16
  * @astdecl ResourceModifiers : Modifiers;
  * @production ResourceModifiers : {@link Modifiers};
 
@@ -296,10 +296,10 @@ public class ResourceModifiers extends Modifiers implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:446
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:446
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:446")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:446")
   public boolean isFinal() {
     ASTState state = state();
     if (isFinal_computed == ASTState.NON_CYCLE || isFinal_computed == state().cycle()) {

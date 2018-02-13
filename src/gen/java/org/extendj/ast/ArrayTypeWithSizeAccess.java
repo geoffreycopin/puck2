@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:95
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\Java.ast:95
  * @astdecl ArrayTypeWithSizeAccess : ArrayTypeAccess ::= Expr;
  * @production ArrayTypeWithSizeAccess : {@link ArrayTypeAccess} ::= <span class="component">{@link Expr}</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:62
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrint.jadd:62
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getAccess());
@@ -47,7 +47,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
   }
   /**
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:87
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:87
    */
   @Override public String toString() {
     return String.format("%s[%s]",
@@ -262,10 +262,10 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:268
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:268")
   public boolean assignedAfter(Variable v) {
     boolean assignedAfter_Variable_value = getExpr().assignedAfter(v);
     return assignedAfter_Variable_value;
@@ -276,7 +276,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:899")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:899")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -322,12 +322,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:34
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:34
    * @apilevel internal
    */
   public boolean Define_isDest(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:55
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:55
       return false;
     }
     else {
@@ -335,7 +335,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:34
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:34
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isDest
    */
@@ -343,12 +343,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:44
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:44
    * @apilevel internal
    */
   public boolean Define_isSource(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:56
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:56
       return true;
     }
     else {
@@ -356,7 +356,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:44
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:44
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isSource
    */
@@ -364,12 +364,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:410
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:410
       return getAccess().assignedAfter(v);
     }
     else {
@@ -377,7 +377,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:256
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
    */
@@ -385,12 +385,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:887
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1098
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:1098
       return getAccess().unassignedAfter(v);
     }
     else {
@@ -398,7 +398,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:887
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
    */
@@ -406,96 +406,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:113
-   * @apilevel internal
-   */
-  public boolean Define_hasPackage(ASTNode _callerNode, ASTNode _childNode, String packageName) {
-    if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:122
-      return unqualifiedScope().hasPackage(packageName);
-    }
-    else {
-      return getParent().Define_hasPackage(this, _callerNode, packageName);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:113
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute hasPackage
-   */
-  protected boolean canDefine_hasPackage(ASTNode _callerNode, ASTNode _childNode, String packageName) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
-   * @apilevel internal
-   */
-  public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
-    if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:391
-      return unqualifiedScope().lookupType(name);
-    }
-    else {
-      return getParent().Define_lookupType(this, _callerNode, name);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupType
-   */
-  protected boolean canDefine_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LookupVariable.jrag:30
-   * @apilevel internal
-   */
-  public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
-    if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:251
-      return unqualifiedScope().lookupVariable(name);
-    }
-    else {
-      return getParent().Define_lookupVariable(this, _callerNode, name);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LookupVariable.jrag:30
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
-   */
-  protected boolean canDefine_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
-   * @apilevel internal
-   */
-  public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
-    if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:142
-      return NameType.EXPRESSION_NAME;
-    }
-    else {
-      return getParent().Define_nameType(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute nameType
-   */
-  protected boolean canDefine_nameType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:116
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupMethod.jrag:116
    * @apilevel internal
    */
   public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:134
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupMethod.jrag:134
       return unqualifiedScope().lookupMethod(name);
     }
     else {
@@ -503,7 +419,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:116
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupMethod.jrag:116
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupMethod
    */
@@ -511,12 +427,96 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:113
+   * @apilevel internal
+   */
+  public boolean Define_hasPackage(ASTNode _callerNode, ASTNode _childNode, String packageName) {
+    if (getExprNoTransform() != null && _callerNode == getExpr()) {
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:122
+      return unqualifiedScope().hasPackage(packageName);
+    }
+    else {
+      return getParent().Define_hasPackage(this, _callerNode, packageName);
+    }
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:113
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute hasPackage
+   */
+  protected boolean canDefine_hasPackage(ASTNode _callerNode, ASTNode _childNode, String packageName) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:231
+   * @apilevel internal
+   */
+  public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
+    if (getExprNoTransform() != null && _callerNode == getExpr()) {
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:391
+      return unqualifiedScope().lookupType(name);
+    }
+    else {
+      return getParent().Define_lookupType(this, _callerNode, name);
+    }
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:231
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupType
+   */
+  protected boolean canDefine_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LookupVariable.jrag:30
+   * @apilevel internal
+   */
+  public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+    if (getExprNoTransform() != null && _callerNode == getExpr()) {
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupVariable.jrag:251
+      return unqualifiedScope().lookupVariable(name);
+    }
+    else {
+      return getParent().Define_lookupVariable(this, _callerNode, name);
+    }
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LookupVariable.jrag:30
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
+   */
+  protected boolean canDefine_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
+   * @apilevel internal
+   */
+  public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
+    if (getExprNoTransform() != null && _callerNode == getExpr()) {
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:142
+      return NameType.EXPRESSION_NAME;
+    }
+    else {
+      return getParent().Define_nameType(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute nameType
+   */
+  protected boolean canDefine_nameType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:235
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:380
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:380
       return false;
     }
     else {
@@ -524,7 +524,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:235
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
    */
@@ -532,12 +532,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:236
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:381
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:381
       return false;
     }
     else {
@@ -545,7 +545,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:236
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute invocationContext
    */
@@ -553,12 +553,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:237
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:382
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:382
       return false;
     }
     else {
@@ -566,7 +566,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:237
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute castContext
    */
@@ -574,12 +574,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:238
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:383
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:383
       return false;
     }
     else {
@@ -587,7 +587,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:238
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute stringContext
    */
@@ -595,12 +595,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:239
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:384
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:384
       return false;
     }
     else {
@@ -608,7 +608,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:239
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute numericContext
    */
@@ -625,7 +625,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:732
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:732
     if (!getExpr().type().unaryNumericPromotion().isInt()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

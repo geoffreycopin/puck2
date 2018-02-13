@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:243
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\Java.ast:243
  * @astdecl MultiplicativeExpr : ArithmeticExpr;
  * @production MultiplicativeExpr : {@link ArithmeticExpr};
 
@@ -175,25 +175,6 @@ public abstract class MultiplicativeExpr extends ArithmeticExpr implements Clone
   public Expr getRightOperandNoTransform() {
     return (Expr) getChildNoTransform(1);
   }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:207
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:207")
-  public Collection<Problem> typeProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        if (!getLeftOperand().type().isNumericType()) {
-          problems.add(errorf("%s is not numeric", getLeftOperand().type().typeName()));
-        }
-        if (!getRightOperand().type().isNumericType()) {
-          problems.add(errorf("%s is not numeric", getRightOperand().type().typeName()));
-        }
-        return problems;
-      }
-  }
   /** @apilevel internal */
   private void type_reset() {
     type_computed = null;
@@ -208,10 +189,10 @@ public abstract class MultiplicativeExpr extends ArithmeticExpr implements Clone
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -227,6 +208,25 @@ public abstract class MultiplicativeExpr extends ArithmeticExpr implements Clone
     }
     return type_value;
   }
+  /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:207
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:207")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        if (!getLeftOperand().type().isNumericType()) {
+          problems.add(errorf("%s is not numeric", getLeftOperand().type().typeName()));
+        }
+        if (!getRightOperand().type().isNumericType()) {
+          problems.add(errorf("%s is not numeric", getRightOperand().type().typeName()));
+        }
+        return problems;
+      }
+  }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
     return super.rewriteTo();
@@ -237,7 +237,7 @@ public abstract class MultiplicativeExpr extends ArithmeticExpr implements Clone
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:204
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:204
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

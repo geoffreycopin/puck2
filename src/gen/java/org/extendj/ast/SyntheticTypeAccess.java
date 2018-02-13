@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/grammar/MethodReference.ast:9
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\grammar\\MethodReference.ast:9
  * @astdecl SyntheticTypeAccess : Access;
  * @production SyntheticTypeAccess : {@link Access};
 
@@ -37,12 +37,12 @@ import java.io.DataInputStream;
 public class SyntheticTypeAccess extends Access implements Cloneable {
   /**
    * @aspect Synthetics
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:426
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:426
    */
   private TypeDecl type;
   /**
    * @aspect Synthetics
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:427
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:427
    */
   public SyntheticTypeAccess(TypeDecl type) {
     this.type = type;
@@ -183,10 +183,10 @@ public class SyntheticTypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect Synthetics
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:430
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:430
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Synthetics", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:430")
+  @ASTNodeAnnotation.Source(aspect="Synthetics", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:430")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {

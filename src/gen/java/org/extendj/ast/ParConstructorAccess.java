@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/GenericMethods.ast:20
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\grammar\\GenericMethods.ast:20
  * @astdecl ParConstructorAccess : ConstructorAccess ::= TypeArgument:Access*;
  * @production ParConstructorAccess : {@link ConstructorAccess} ::= <span class="component">TypeArgument:{@link Access}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ParConstructorAccess extends ConstructorAccess implements Cloneable {
   /**
    * @aspect GenericMethodsPrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:264
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:264
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("<");
@@ -458,10 +458,10 @@ public class ParConstructorAccess extends ConstructorAccess implements Cloneable
    * Infers type arguments for a generic method invocation.
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:545
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\MethodSignature.jrag:545
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:545")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\MethodSignature.jrag:545")
   public ArrayList<TypeDecl> inferTypeArguments(TypeDecl resultType, List<ParameterDeclaration> params, List<Expr> args, List<TypeVariable> typeParams) {
     java.util.List _parameters = new java.util.ArrayList(4);
     _parameters.add(resultType);
@@ -497,12 +497,12 @@ public class ParConstructorAccess extends ConstructorAccess implements Cloneable
       return typeArguments;
     }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:223
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:223
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
@@ -511,7 +511,7 @@ public class ParConstructorAccess extends ConstructorAccess implements Cloneable
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -519,12 +519,12 @@ public class ParConstructorAccess extends ConstructorAccess implements Cloneable
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:224
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:224
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return unqualifiedScope().lookupType(name);
     }
@@ -533,7 +533,7 @@ public class ParConstructorAccess extends ConstructorAccess implements Cloneable
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:231
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupType
    */

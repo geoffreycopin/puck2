@@ -1,9 +1,10 @@
 package statement;
 
+
 import java.util.List;
 
 class Statement {
-  static class X {
+  class X {
     void doThing() {
     }
   }

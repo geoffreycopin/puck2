@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/grammar/MethodReference.ast:5
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\grammar\\MethodReference.ast:5
  * @astdecl AmbiguousMethodReference : MethodReference ::= AmbiguousName:Access;
  * @production AmbiguousMethodReference : {@link MethodReference} ::= <span class="component">AmbiguousName:{@link Access}</span>;
 
@@ -360,10 +360,10 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:239
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:239
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:239")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:239")
   public boolean congruentTo(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -398,10 +398,10 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:292
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:292
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:292")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:292")
   public java.util.List<MethodDecl> potentiallyApplicableMethods(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (potentiallyApplicableMethods_FunctionDescriptor_computed == null) potentiallyApplicableMethods_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -438,10 +438,10 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:360
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:360
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:360")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:360")
   public MethodDecl exactCompileTimeDeclaration() {
     ASTState state = state();
     if (exactCompileTimeDeclaration_computed == ASTState.NON_CYCLE || exactCompileTimeDeclaration_computed == state().cycle()) {
@@ -458,12 +458,12 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
     return exactCompileTimeDeclaration_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getAmbiguousNameNoTransform() != null && _callerNode == getAmbiguousName()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:217
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:217
       return NameType.AMBIGUOUS_NAME;
     }
     else {
@@ -471,7 +471,7 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -480,18 +480,18 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
   }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
-    // Declared at /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:220
+    // Declared at C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:220
     if (!getAmbiguousName().isTypeAccess()) {
       return rewriteRule0();
     }
-    // Declared at /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:230
+    // Declared at C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:230
     if (getAmbiguousName().isTypeAccess()) {
       return rewriteRule1();
     }
     return super.rewriteTo();
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:220
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:220
    * @apilevel internal
    */
   private ExprMethodReference rewriteRule0() {
@@ -502,7 +502,7 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
             (Access) getAmbiguousName().treeCopy());
       }  }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:230
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:230
    * @apilevel internal
    */
   private TypeMethodReference rewriteRule1() {
@@ -514,11 +514,11 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
       }  }
   /** @apilevel internal */
   public boolean canRewrite() {
-    // Declared at /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:220
+    // Declared at C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:220
     if (!getAmbiguousName().isTypeAccess()) {
       return true;
     }
-    // Declared at /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:230
+    // Declared at C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:230
     if (getAmbiguousName().isTypeAccess()) {
       return true;
     }

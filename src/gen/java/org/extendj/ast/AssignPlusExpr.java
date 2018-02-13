@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:206
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\Java.ast:206
  * @astdecl AssignPlusExpr : AssignAdditiveExpr;
  * @production AssignPlusExpr : {@link AssignAdditiveExpr};
 
@@ -221,13 +221,24 @@ public class AssignPlusExpr extends AssignAdditiveExpr implements Cloneable {
   public Expr getSourceNoTransform() {
     return (Expr) getChildNoTransform(1);
   }
+  /** The operator string used for pretty printing this expression. 
+   * @attribute syn
+   * @aspect PrettyPrintUtil
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:367
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:367")
+  public String printOp() {
+    String printOp_value = "+=";
+    return printOp_value;
+  }
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:77
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:77
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:77")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:77")
   public Collection<Problem> typeProblems() {
     {
         if (!getDest().isVariable()) {
@@ -245,17 +256,6 @@ public class AssignPlusExpr extends AssignAdditiveExpr implements Cloneable {
               getDest().prettyPrint(), getDest().type().typeName(), getSource().type().typeName()));
         }
       }
-  }
-  /** The operator string used for pretty printing this expression. 
-   * @attribute syn
-   * @aspect PrettyPrintUtil
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:367
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:367")
-  public String printOp() {
-    String printOp_value = "+=";
-    return printOp_value;
   }
   /** @apilevel internal */
   public ASTNode rewriteTo() {

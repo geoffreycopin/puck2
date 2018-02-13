@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/GenericMethods.ast:17
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\grammar\\GenericMethods.ast:17
  * @astdecl ParMethodAccess : MethodAccess ::= TypeArgument:Access*;
  * @production ParMethodAccess : {@link MethodAccess} ::= <span class="component">TypeArgument:{@link Access}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ParMethodAccess extends MethodAccess implements Cloneable {
   /**
    * @aspect GenericMethodsPrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:252
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:252
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("<");
@@ -52,7 +52,7 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
   }
   /**
    * @aspect PrettyPrintUtil5
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/PrettyPrintUtil.jrag:114
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\PrettyPrintUtil.jrag:114
    */
   @Override public String toString() {
     StringBuilder params = new StringBuilder();
@@ -463,10 +463,10 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericMethods
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:35
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:35
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:35")
+  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:35")
   public Collection<Problem> typeProblems() {
     {
         if (!decl().hostType().isUnknown()) {
@@ -495,10 +495,10 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
    * Infers type arguments for a generic method invocation.
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:545
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\MethodSignature.jrag:545
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:545")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\MethodSignature.jrag:545")
   public ArrayList<TypeDecl> inferTypeArguments(TypeDecl resultType, List<ParameterDeclaration> params, List<Expr> args, List<TypeVariable> typeParams) {
     java.util.List _parameters = new java.util.ArrayList(4);
     _parameters.add(resultType);
@@ -546,10 +546,10 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:86
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\PolyExpressions.jrag:86
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:86")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\PolyExpressions.jrag:86")
   public boolean isPolyExpression() {
     ASTState state = state();
     if (isPolyExpression_computed == ASTState.NON_CYCLE || isPolyExpression_computed == state().cycle()) {
@@ -566,12 +566,12 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
     return isPolyExpression_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:101
    * @apilevel internal
    */
   public boolean Define_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:33
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:33
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -580,7 +580,7 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:101
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isRightChildOfDot
    */
@@ -588,12 +588,12 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:204
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:204
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
@@ -602,7 +602,7 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -610,12 +610,12 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:205
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:205
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return unqualifiedScope().lookupType(name);
     }
@@ -624,7 +624,7 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:231
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupType
    */

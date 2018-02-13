@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/Annotations.ast:8
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\grammar\\Annotations.ast:8
  * @astdecl ElementValuePair : ASTNode ::= <Name:String> ElementValue;
  * @production ElementValuePair : {@link ASTNode} ::= <span class="component">&lt;Name:String&gt;</span> <span class="component">{@link ElementValue}</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ElementValuePair extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/PrettyPrint.jadd:102
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\PrettyPrint.jadd:102
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getName());
@@ -253,13 +253,13 @@ public class ElementValuePair extends ASTNode<ASTNode> implements Cloneable {
   /**
    * The return type of this method defines the element type of the element-value
    * pair. An ElementValueArrayInitializer is similar to a normal array initializer
-   * (\ufffd10.6), except that annotations are permitted in place of expressions.
+   * (\u00a710.6), except that annotations are permitted in place of expressions.
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:634
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:634
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:634")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:634")
   public TypeDecl type() {
     {
         SimpleSet<MethodDecl> set = enclosingAnnotationDecl()
@@ -274,10 +274,10 @@ public class ElementValuePair extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:644
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:644
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:644")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:644")
   public TypeDecl unknownType() {
     TypeDecl unknownType_value = getParent().Define_unknownType(this, null);
     return unknownType_value;
@@ -285,16 +285,16 @@ public class ElementValuePair extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:646
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:646
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:646")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:646")
   public TypeDecl enclosingAnnotationDecl() {
     TypeDecl enclosingAnnotationDecl_value = getParent().Define_enclosingAnnotationDecl(this, null);
     return enclosingAnnotationDecl_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:723
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:723
    * @apilevel internal
    */
   public TypeDecl Define_declType(ASTNode _callerNode, ASTNode _childNode) {
@@ -302,7 +302,7 @@ public class ElementValuePair extends ASTNode<ASTNode> implements Cloneable {
     return type();
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:723
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:723
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declType
    */
@@ -311,14 +311,14 @@ public class ElementValuePair extends ASTNode<ASTNode> implements Cloneable {
   }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
-    // Declared at /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:751
+    // Declared at C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:751
     if (type().isArrayDecl() && getElementValue() instanceof ElementConstantValue) {
       return rewriteRule0();
     }
     return super.rewriteTo();
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:751
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:751
    * @apilevel internal
    */
   private ElementValuePair rewriteRule0() {
@@ -328,7 +328,7 @@ public class ElementValuePair extends ASTNode<ASTNode> implements Cloneable {
     }  }
   /** @apilevel internal */
   public boolean canRewrite() {
-    // Declared at /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:751
+    // Declared at C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:751
     if (type().isArrayDecl() && getElementValue() instanceof ElementConstantValue) {
       return true;
     }
@@ -336,7 +336,7 @@ public class ElementValuePair extends ASTNode<ASTNode> implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:716
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:716
     if (!type().commensurateWith(getElementValue())) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

@@ -19,46 +19,46 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/grammar/Lambda.ast:12
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\grammar\\Lambda.ast:12
  * @astdecl BlockLambdaBody : LambdaBody ::= Block;
  * @production BlockLambdaBody : {@link LambdaBody} ::= <span class="component">{@link Block}</span>;
 
  */
 public class BlockLambdaBody extends LambdaBody implements Cloneable {
   /**
-   * @aspect PrettyPrintUtil8
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PrettyPrintUtil.jadd:79
-   */
-  @Override public String toString() {
-    return "{ ... }";
-  }
-  /**
    * @aspect Java8PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PrettyPrint.jadd:39
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\PrettyPrint.jadd:39
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getBlock());
   }
   /**
+   * @aspect PrettyPrintUtil8
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\PrettyPrintUtil.jadd:79
+   */
+  @Override public String toString() {
+    return "{ ... }";
+  }
+  /**
    * @aspect LambdaToClass
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaAnonymousDecl.jrag:88
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaAnonymousDecl.jrag:88
    */
   protected Block toBlock() {
     return getBlock().treeCopyNoTransform();
   }
   /**
    * @aspect ReturnCompatible
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:57
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:57
    */
   public boolean noReturnsHasResult() {
     ArrayList<ReturnStmt> returnList = lambdaReturns();
@@ -71,7 +71,7 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
   }
   /**
    * @aspect ReturnCompatible
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:67
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:67
    */
   public boolean allReturnsHasResult() {
     ArrayList<ReturnStmt> returnList = lambdaReturns();
@@ -127,11 +127,11 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    congruentTo_FunctionDescriptor_reset();
     isBlockBody_reset();
     isExprBody_reset();
     voidCompatible_reset();
     valueCompatible_reset();
+    congruentTo_FunctionDescriptor_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:41
@@ -248,6 +248,145 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
   public Block getBlockNoTransform() {
     return (Block) getChildNoTransform(0);
   }
+  /**
+   * @attribute syn
+   * @aspect PreciseRethrow
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:43
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:43")
+  public boolean modifiedInScope(Variable var) {
+    boolean modifiedInScope_Variable_value = getBlock().modifiedInScope(var);
+    return modifiedInScope_Variable_value;
+  }
+  /** @apilevel internal */
+  private void isBlockBody_reset() {
+    isBlockBody_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle isBlockBody_computed = null;
+
+  /** @apilevel internal */
+  protected boolean isBlockBody_value;
+
+  /**
+   * @attribute syn
+   * @aspect LambdaBody
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:29
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:29")
+  public boolean isBlockBody() {
+    ASTState state = state();
+    if (isBlockBody_computed == ASTState.NON_CYCLE || isBlockBody_computed == state().cycle()) {
+      return isBlockBody_value;
+    }
+    isBlockBody_value = true;
+    if (state().inCircle()) {
+      isBlockBody_computed = state().cycle();
+    
+    } else {
+      isBlockBody_computed = ASTState.NON_CYCLE;
+    
+    }
+    return isBlockBody_value;
+  }
+  /** @apilevel internal */
+  private void isExprBody_reset() {
+    isExprBody_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle isExprBody_computed = null;
+
+  /** @apilevel internal */
+  protected boolean isExprBody_value;
+
+  /**
+   * @attribute syn
+   * @aspect LambdaBody
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:30
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:30")
+  public boolean isExprBody() {
+    ASTState state = state();
+    if (isExprBody_computed == ASTState.NON_CYCLE || isExprBody_computed == state().cycle()) {
+      return isExprBody_value;
+    }
+    isExprBody_value = false;
+    if (state().inCircle()) {
+      isExprBody_computed = state().cycle();
+    
+    } else {
+      isExprBody_computed = ASTState.NON_CYCLE;
+    
+    }
+    return isExprBody_value;
+  }
+  /** @apilevel internal */
+  private void voidCompatible_reset() {
+    voidCompatible_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle voidCompatible_computed = null;
+
+  /** @apilevel internal */
+  protected boolean voidCompatible_value;
+
+  /**
+   * @attribute syn
+   * @aspect ReturnCompatible
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:40
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ReturnCompatible", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:40")
+  public boolean voidCompatible() {
+    ASTState state = state();
+    if (voidCompatible_computed == ASTState.NON_CYCLE || voidCompatible_computed == state().cycle()) {
+      return voidCompatible_value;
+    }
+    voidCompatible_value = noReturnsHasResult();
+    if (state().inCircle()) {
+      voidCompatible_computed = state().cycle();
+    
+    } else {
+      voidCompatible_computed = ASTState.NON_CYCLE;
+    
+    }
+    return voidCompatible_value;
+  }
+  /** @apilevel internal */
+  private void valueCompatible_reset() {
+    valueCompatible_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle valueCompatible_computed = null;
+
+  /** @apilevel internal */
+  protected boolean valueCompatible_value;
+
+  /**
+   * @attribute syn
+   * @aspect ReturnCompatible
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:41
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ReturnCompatible", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:41")
+  public boolean valueCompatible() {
+    ASTState state = state();
+    if (valueCompatible_computed == ASTState.NON_CYCLE || valueCompatible_computed == state().cycle()) {
+      return valueCompatible_value;
+    }
+    valueCompatible_value = allReturnsHasResult() && !getBlock().canCompleteNormally();
+    if (state().inCircle()) {
+      valueCompatible_computed = state().cycle();
+    
+    } else {
+      valueCompatible_computed = ASTState.NON_CYCLE;
+    
+    }
+    return valueCompatible_value;
+  }
   /** @apilevel internal */
   private void congruentTo_FunctionDescriptor_reset() {
     congruentTo_FunctionDescriptor_computed = null;
@@ -260,10 +399,10 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @attribute syn
    * @aspect LambdaExpr
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaExpr.jrag:89
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaExpr.jrag:89
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaExpr.jrag:89")
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaExpr.jrag:89")
   public boolean congruentTo(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -307,173 +446,118 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
         return false;
       }
     }
-  /** @apilevel internal */
-  private void isBlockBody_reset() {
-    isBlockBody_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle isBlockBody_computed = null;
-
-  /** @apilevel internal */
-  protected boolean isBlockBody_value;
-
   /**
-   * @attribute syn
-   * @aspect LambdaBody
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:29
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:29")
-  public boolean isBlockBody() {
-    ASTState state = state();
-    if (isBlockBody_computed == ASTState.NON_CYCLE || isBlockBody_computed == state().cycle()) {
-      return isBlockBody_value;
-    }
-    isBlockBody_value = true;
-    if (state().inCircle()) {
-      isBlockBody_computed = state().cycle();
-    
-    } else {
-      isBlockBody_computed = ASTState.NON_CYCLE;
-    
-    }
-    return isBlockBody_value;
-  }
-  /** @apilevel internal */
-  private void isExprBody_reset() {
-    isExprBody_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle isExprBody_computed = null;
-
-  /** @apilevel internal */
-  protected boolean isExprBody_value;
-
-  /**
-   * @attribute syn
-   * @aspect LambdaBody
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:30
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:30")
-  public boolean isExprBody() {
-    ASTState state = state();
-    if (isExprBody_computed == ASTState.NON_CYCLE || isExprBody_computed == state().cycle()) {
-      return isExprBody_value;
-    }
-    isExprBody_value = false;
-    if (state().inCircle()) {
-      isExprBody_computed = state().cycle();
-    
-    } else {
-      isExprBody_computed = ASTState.NON_CYCLE;
-    
-    }
-    return isExprBody_value;
-  }
-  /** @apilevel internal */
-  private void voidCompatible_reset() {
-    voidCompatible_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle voidCompatible_computed = null;
-
-  /** @apilevel internal */
-  protected boolean voidCompatible_value;
-
-  /**
-   * @attribute syn
-   * @aspect ReturnCompatible
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:40
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReturnCompatible", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:40")
-  public boolean voidCompatible() {
-    ASTState state = state();
-    if (voidCompatible_computed == ASTState.NON_CYCLE || voidCompatible_computed == state().cycle()) {
-      return voidCompatible_value;
-    }
-    voidCompatible_value = noReturnsHasResult();
-    if (state().inCircle()) {
-      voidCompatible_computed = state().cycle();
-    
-    } else {
-      voidCompatible_computed = ASTState.NON_CYCLE;
-    
-    }
-    return voidCompatible_value;
-  }
-  /** @apilevel internal */
-  private void valueCompatible_reset() {
-    valueCompatible_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle valueCompatible_computed = null;
-
-  /** @apilevel internal */
-  protected boolean valueCompatible_value;
-
-  /**
-   * @attribute syn
-   * @aspect ReturnCompatible
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:41
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReturnCompatible", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:41")
-  public boolean valueCompatible() {
-    ASTState state = state();
-    if (valueCompatible_computed == ASTState.NON_CYCLE || valueCompatible_computed == state().cycle()) {
-      return valueCompatible_value;
-    }
-    valueCompatible_value = allReturnsHasResult() && !getBlock().canCompleteNormally();
-    if (state().inCircle()) {
-      valueCompatible_computed = state().cycle();
-    
-    } else {
-      valueCompatible_computed = ASTState.NON_CYCLE;
-    
-    }
-    return valueCompatible_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect PreciseRethrow
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:43
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:43")
-  public boolean modifiedInScope(Variable var) {
-    boolean modifiedInScope_Variable_value = getBlock().modifiedInScope(var);
-    return modifiedInScope_Variable_value;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:235
    * @apilevel internal
    */
-  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/UnreachableStatements.jrag:29
-      return true;
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:253
+      return false;
     }
     else {
-      return getParent().Define_reachable(this, _callerNode);
+      return getParent().Define_assignmentContext(this, _callerNode);
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:235
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute reachable
+   * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
    */
-  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:534
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:236
+   * @apilevel internal
+   */
+  public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
+    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:254
+      return false;
+    }
+    else {
+      return getParent().Define_invocationContext(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:236
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute invocationContext
+   */
+  protected boolean canDefine_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:237
+   * @apilevel internal
+   */
+  public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
+    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:255
+      return false;
+    }
+    else {
+      return getParent().Define_castContext(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:237
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute castContext
+   */
+  protected boolean canDefine_castContext(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:238
+   * @apilevel internal
+   */
+  public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
+    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:256
+      return false;
+    }
+    else {
+      return getParent().Define_stringContext(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:238
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute stringContext
+   */
+  protected boolean canDefine_stringContext(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:239
+   * @apilevel internal
+   */
+  public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
+    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:257
+      return false;
+    }
+    else {
+      return getParent().Define_numericContext(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:239
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute numericContext
+   */
+  protected boolean canDefine_numericContext(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:534
    * @apilevel internal
    */
   public TypeDecl Define_returnType(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:39
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:39
       {
           TypeDecl decl = enclosingLambda().targetType();
           if (decl == null) {
@@ -500,7 +584,7 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:534
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:534
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute returnType
    */
@@ -508,108 +592,24 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\UnreachableStatements.jrag:49
    * @apilevel internal
    */
-  public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:253
-      return false;
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\UnreachableStatements.jrag:29
+      return true;
     }
     else {
-      return getParent().Define_assignmentContext(this, _callerNode);
+      return getParent().Define_reachable(this, _callerNode);
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\UnreachableStatements.jrag:49
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
+   * @return {@code true} if this node has an equation for the inherited attribute reachable
    */
-  protected boolean canDefine_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:236
-   * @apilevel internal
-   */
-  public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
-    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:254
-      return false;
-    }
-    else {
-      return getParent().Define_invocationContext(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:236
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute invocationContext
-   */
-  protected boolean canDefine_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:237
-   * @apilevel internal
-   */
-  public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
-    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:255
-      return false;
-    }
-    else {
-      return getParent().Define_castContext(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:237
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute castContext
-   */
-  protected boolean canDefine_castContext(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:238
-   * @apilevel internal
-   */
-  public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
-    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:256
-      return false;
-    }
-    else {
-      return getParent().Define_stringContext(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:238
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute stringContext
-   */
-  protected boolean canDefine_stringContext(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:239
-   * @apilevel internal
-   */
-  public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
-    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:257
-      return false;
-    }
-    else {
-      return getParent().Define_numericContext(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:239
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute numericContext
-   */
-  protected boolean canDefine_numericContext(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /** @apilevel internal */
@@ -623,10 +623,10 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @attribute coll
    * @aspect ReturnCompatible
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:47
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:47
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.COLL)
-  @ASTNodeAnnotation.Source(aspect="ReturnCompatible", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:47")
+  @ASTNodeAnnotation.Source(aspect="ReturnCompatible", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:47")
   public ArrayList<ReturnStmt> lambdaReturns() {
     ASTState state = state();
     if (BlockLambdaBody_lambdaReturns_computed == ASTState.NON_CYCLE || BlockLambdaBody_lambdaReturns_computed == state().cycle()) {
@@ -666,7 +666,7 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
 
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:207
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:207
     if (!voidCompatible() && !valueCompatible()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

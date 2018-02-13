@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/Generics.ast:121
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\grammar\\Generics.ast:121
  * @astdecl GLBType : ReferenceType ::= Modifiers <ID:String> BodyDecl* TypeBound:Access*;
  * @production GLBType : {@link ReferenceType} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">{@link BodyDecl}*</span> <span class="component">TypeBound:{@link Access}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class GLBType extends ReferenceType implements Cloneable {
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1851
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1851
    */
   public Collection<InterfaceDecl> implementedInterfaces() {
     Collection<InterfaceDecl> ret = new HashSet<InterfaceDecl>();
@@ -473,10 +473,10 @@ public class GLBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1839
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1839
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1839")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1839")
   public String typeName() {
     {
         if (getNumTypeBound() == 0) {
@@ -493,10 +493,10 @@ public class GLBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:402
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericsSubtype.jrag:402
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:402")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericsSubtype.jrag:402")
   public boolean supertypeLUBType(LUBType type) {
     {
         // TODO(joqvist): changed from Access to TypeDecl, is this correct?
@@ -513,7 +513,7 @@ public class GLBType extends ReferenceType implements Cloneable {
   }
   protected java.util.Map subtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:492")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericsSubtype.jrag:492")
   public boolean subtype(TypeDecl type) {
     Object _parameters = type;
     if (subtype_TypeDecl_values == null) subtype_TypeDecl_values = new java.util.HashMap(4);
@@ -561,10 +561,10 @@ public class GLBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:426
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericsSubtype.jrag:426
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:426")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericsSubtype.jrag:426")
   public boolean supertypeGLBType(GLBType type) {
     boolean supertypeGLBType_GLBType_value = this == type;
     return supertypeGLBType_GLBType_value;
@@ -572,10 +572,10 @@ public class GLBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:321
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\GenericsSubtype.jrag:321
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:321")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\GenericsSubtype.jrag:321")
   public boolean strictSupertypeLUBType(LUBType type) {
     {
         // TODO(joqvist): changed from Access to TypeDecl, is this correct?
@@ -592,7 +592,7 @@ public class GLBType extends ReferenceType implements Cloneable {
   }
   protected java.util.Map strictSubtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:363")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\GenericsSubtype.jrag:363")
   public boolean strictSubtype(TypeDecl type) {
     Object _parameters = type;
     if (strictSubtype_TypeDecl_values == null) strictSubtype_TypeDecl_values = new java.util.HashMap(4);
@@ -640,10 +640,10 @@ public class GLBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:342
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\GenericsSubtype.jrag:342
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:342")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\GenericsSubtype.jrag:342")
   public boolean strictSupertypeGLBType(GLBType type) {
     boolean strictSupertypeGLBType_GLBType_value = this == type;
     return strictSupertypeGLBType_GLBType_value;

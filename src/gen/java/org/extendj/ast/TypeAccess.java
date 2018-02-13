@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:92
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\Java.ast:92
  * @astdecl TypeAccess : Access ::= <Package:String> <ID:String>;
  * @production TypeAccess : {@link Access} ::= <span class="component">&lt;Package:String&gt;</span> <span class="component">&lt;ID:String&gt;</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class TypeAccess extends Access implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:608
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrint.jadd:608
    */
   public void prettyPrint(PrettyPrinter out) {
     if (hasPackage()) {
@@ -48,7 +48,7 @@ public class TypeAccess extends Access implements Cloneable {
   }
   /**
    * @aspect NodeConstructors
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NodeConstructors.jrag:46
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NodeConstructors.jrag:46
    */
   public TypeAccess(String name, int start, int end) {
     this(name);
@@ -57,14 +57,14 @@ public class TypeAccess extends Access implements Cloneable {
   }
   /**
    * @aspect NodeConstructors
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NodeConstructors.jrag:58
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NodeConstructors.jrag:58
    */
   public TypeAccess(String typeName) {
     this("", typeName);
   }
   /**
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:67
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:67
    */
   @Override public String toString() {
     if (getPackage().isEmpty()) {
@@ -75,7 +75,7 @@ public class TypeAccess extends Access implements Cloneable {
   }
   /** This method assumes that the bound type is generic. 
    * @aspect GenericsTypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:417
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:417
    */
   public boolean isRaw() {
     ASTNode parent = getParent();
@@ -92,7 +92,7 @@ public class TypeAccess extends Access implements Cloneable {
   }
   /**
    * @aspect Diamond
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:268
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Diamond.jrag:268
    */
   @Override
   public Access substituted(Collection<TypeVariable> original,
@@ -109,7 +109,7 @@ public class TypeAccess extends Access implements Cloneable {
   }
   /**
    * @aspect FunctionalInterface
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/FunctionalInterface.jrag:186
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\FunctionalInterface.jrag:186
    */
   public boolean sameType(TypeAccess t) {
     // First, two type variables that are to be compared are checked to see if
@@ -373,7 +373,7 @@ public class TypeAccess extends Access implements Cloneable {
   }
   /**
    * @aspect TypeScopePropagation
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:361
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:361
    */
   private TypeDecl refined_TypeScopePropagation_TypeAccess_decl()
 {
@@ -385,35 +385,11 @@ public class TypeAccess extends Access implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:35
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:35")
-  public boolean isTypeAccess() {
-    boolean isTypeAccess_value = true;
-    return isTypeAccess_value;
-  }
-  /**
-   * Tests if this is a qualified type access expression for
-   * the given type.
-   * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:43
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:43")
-  public boolean isTypeAccess(String packageName, String type) {
-    boolean isTypeAccess_String_String_value = getID().equals(type) && getPackage().equals(packageName());
-    return isTypeAccess_String_String_value;
-  }
-  /**
-   * @attribute syn
    * @aspect AccessControl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AccessControl.jrag:158
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\AccessControl.jrag:158
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AccessControl.jrag:158")
+  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\AccessControl.jrag:158")
   public Collection<Problem> accessControlProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -430,22 +406,11 @@ public class TypeAccess extends Access implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect TypeHierarchyCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:224
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:224")
-  public boolean staticContextQualifier() {
-    boolean staticContextQualifier_value = true;
-    return staticContextQualifier_value;
-  }
-  /**
-   * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:332
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:332
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:332")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:332")
   public SimpleSet<TypeDecl> decls() {
     SimpleSet<TypeDecl> decls_value = packageName().equals("")
           ? lookupType(name())
@@ -455,10 +420,10 @@ public class TypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:361
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:361
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:361")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:361")
   public TypeDecl decl() {
     {
         TypeDecl decl = refined_TypeScopePropagation_TypeAccess_decl();
@@ -471,10 +436,10 @@ public class TypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect VariableScope
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:264
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupVariable.jrag:264
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupVariable.jrag:264")
   public SimpleSet<Variable> qualifiedLookupVariable(String name) {
     {
         if (type().accessibleFrom(hostType())) {
@@ -491,10 +456,10 @@ public class TypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:234
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:234
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:234")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:234")
   public Collection<Problem> nameProblems() {
     {
         if (isQualified() && !qualifier().isTypeAccess() && !qualifier().isPackageAccess()) {
@@ -528,25 +493,24 @@ public class TypeAccess extends Access implements Cloneable {
       }
   }
   /**
-   * Defines the expected kind of name for the left hand side in a qualified
-   * expression.
+   * Has package name (not @primitive)
    * @attribute syn
-   * @aspect SyntacticClassification
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:60
+   * @aspect PrettyPrintUtil
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:284
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SyntacticClassification", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:60")
-  public NameType predNameType() {
-    NameType predNameType_value = NameType.PACKAGE_OR_TYPE_NAME;
-    return predNameType_value;
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:284")
+  public boolean hasPackage() {
+    boolean hasPackage_value = !getPackage().isEmpty() && decl().isReferenceType();
+    return hasPackage_value;
   }
   /**
    * @attribute syn
    * @aspect Names
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:39
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\QualifiedNames.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:39")
+  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\QualifiedNames.jrag:39")
   public String name() {
     String name_value = getID();
     return name_value;
@@ -554,10 +518,10 @@ public class TypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect Names
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:43
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\QualifiedNames.jrag:43
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:43")
+  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\QualifiedNames.jrag:43")
   public String packageName() {
     String packageName_value = getPackage();
     return packageName_value;
@@ -565,10 +529,10 @@ public class TypeAccess extends Access implements Cloneable {
   /** @return the qualified type name including the package name. 
    * @attribute syn
    * @aspect Names
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:57
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\QualifiedNames.jrag:57
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:57")
+  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\QualifiedNames.jrag:57")
   public String nameWithPackage() {
     String nameWithPackage_value = getPackage().equals("") ? name() : (getPackage() + "." + name());
     return nameWithPackage_value;
@@ -576,44 +540,80 @@ public class TypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect Names
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:73
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\QualifiedNames.jrag:73
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:73")
+  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\QualifiedNames.jrag:73")
   public String typeName() {
     String typeName_value = isQualified() ? (qualifier().typeName() + "." + name()) : nameWithPackage();
     return typeName_value;
   }
   /**
-   * Has package name (not @primitive)
    * @attribute syn
-   * @aspect PrettyPrintUtil
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:284
+   * @aspect AccessTypes
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:35
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:284")
-  public boolean hasPackage() {
-    boolean hasPackage_value = !getPackage().isEmpty() && decl().isReferenceType();
-    return hasPackage_value;
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:35")
+  public boolean isTypeAccess() {
+    boolean isTypeAccess_value = true;
+    return isTypeAccess_value;
+  }
+  /**
+   * Tests if this is a qualified type access expression for
+   * the given type.
+   * @attribute syn
+   * @aspect AccessTypes
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:43
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:43")
+  public boolean isTypeAccess(String packageName, String type) {
+    boolean isTypeAccess_String_String_value = getID().equals(type) && getPackage().equals(packageName());
+    return isTypeAccess_String_String_value;
+  }
+  /**
+   * Defines the expected kind of name for the left hand side in a qualified
+   * expression.
+   * @attribute syn
+   * @aspect SyntacticClassification
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:60
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="SyntacticClassification", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:60")
+  public NameType predNameType() {
+    NameType predNameType_value = NameType.PACKAGE_OR_TYPE_NAME;
+    return predNameType_value;
   }
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:298
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:298
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:298")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:298")
   public TypeDecl type() {
     TypeDecl type_value = decl();
     return type_value;
   }
   /**
    * @attribute syn
-   * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1302
+   * @aspect TypeHierarchyCheck
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:224
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1302")
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:224")
+  public boolean staticContextQualifier() {
+    boolean staticContextQualifier_value = true;
+    return staticContextQualifier_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect LookupParTypeDecl
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1302
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1302")
   public boolean usesTypeVariable() {
     boolean usesTypeVariable_value = decl().usesTypeVariable() || super.usesTypeVariable();
     return usesTypeVariable_value;
@@ -621,10 +621,10 @@ public class TypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect LambdaParametersInference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:620
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:620
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:620")
+  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:620")
   public boolean mentionsTypeVariable(TypeVariable var) {
     boolean mentionsTypeVariable_TypeVariable_value = getPackage().isEmpty() && getID().equals(var.getID());
     return mentionsTypeVariable_TypeVariable_value;
@@ -639,7 +639,7 @@ public class TypeAccess extends Access implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AccessControl.jrag:156
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\AccessControl.jrag:156
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -648,7 +648,7 @@ public class TypeAccess extends Access implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:232
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:232
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -657,7 +657,7 @@ public class TypeAccess extends Access implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:488
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:488
     if (decl().isDeprecated()
               && !withinDeprecatedAnnotation()
               && (hostType() == null || hostType().topLevelType() != decl().topLevelType())
@@ -671,7 +671,7 @@ public class TypeAccess extends Access implements Cloneable {
         contributors.add(this);
       }
     }
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:679
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:679
     if (type().isRawType() && type().isNestedType()
               && type().enclosingType().isParameterizedType()
               && !type().enclosingType().isRawType()) {

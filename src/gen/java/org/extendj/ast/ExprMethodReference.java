@@ -19,32 +19,25 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/grammar/MethodReference.ast:3
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\grammar\\MethodReference.ast:3
  * @astdecl ExprMethodReference : MethodReference ::= Expr;
  * @production ExprMethodReference : {@link MethodReference} ::= <span class="component">{@link Expr}</span>;
 
  */
 public class ExprMethodReference extends MethodReference implements Cloneable {
   /**
-   * @aspect PrettyPrintUtil8
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PrettyPrintUtil.jadd:113
-   */
-  @Override public String toString() {
-    return getExprNoTransform().toString() + super.toString();
-  }
-  /**
    * @aspect Java8PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PrettyPrint.jadd:70
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\PrettyPrint.jadd:70
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getExpr());
@@ -60,6 +53,13 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
       out.print(">");
     }
     out.print(name());
+  }
+  /**
+   * @aspect PrettyPrintUtil8
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\PrettyPrintUtil.jadd:113
+   */
+  @Override public String toString() {
+    return getExprNoTransform().toString() + super.toString();
   }
   /**
    * @declaredat ASTNode:1
@@ -389,10 +389,10 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:33
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:33
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:33")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:33")
   public MethodDecl targetMethod(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (targetMethod_FunctionDescriptor_computed == null) targetMethod_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -432,10 +432,10 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:37
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:37
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:37")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:37")
   public Access syntheticAccess(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (syntheticAccess_FunctionDescriptor_values == null) syntheticAccess_FunctionDescriptor_values = new java.util.HashMap(4);
@@ -492,10 +492,10 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:57
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:57
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:57")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:57")
   public MethodAccess syntheticMethodAccess(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (syntheticMethodAccess_FunctionDescriptor_computed == null) syntheticMethodAccess_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -535,10 +535,10 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:239
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:239
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:239")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:239")
   public boolean congruentTo(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -593,10 +593,10 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:292
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:292
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:292")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:292")
   public java.util.List<MethodDecl> potentiallyApplicableMethods(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (potentiallyApplicableMethods_FunctionDescriptor_computed == null) potentiallyApplicableMethods_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -663,10 +663,10 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:360
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:360
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:360")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:360")
   public MethodDecl exactCompileTimeDeclaration() {
     ASTState state = state();
     if (exactCompileTimeDeclaration_computed == ASTState.NON_CYCLE || exactCompileTimeDeclaration_computed == state().cycle()) {
@@ -722,10 +722,10 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:511
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:511
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:511")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:511")
   public boolean potentiallyCompatible(TypeDecl type, BodyDecl candidateDecl) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(type);
@@ -773,12 +773,12 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
       return foundMethod;
     }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:235
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:392
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:392
       return false;
     }
     else {
@@ -786,7 +786,7 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:235
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
    */
@@ -794,12 +794,12 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:236
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:393
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:393
       return false;
     }
     else {
@@ -807,7 +807,7 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:236
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute invocationContext
    */
@@ -815,12 +815,12 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:237
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:394
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:394
       return false;
     }
     else {
@@ -828,7 +828,7 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:237
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute castContext
    */
@@ -836,12 +836,12 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:238
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:395
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:395
       return false;
     }
     else {
@@ -849,7 +849,7 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:238
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute stringContext
    */
@@ -857,12 +857,12 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:239
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:396
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:396
       return false;
     }
     else {
@@ -870,7 +870,7 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:239
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute numericContext
    */
@@ -887,7 +887,7 @@ public class ExprMethodReference extends MethodReference implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:515
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\NameCheck.jrag:515
     if (!getExpr().isSuperAccess() && !getExpr().type().isReferenceType()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

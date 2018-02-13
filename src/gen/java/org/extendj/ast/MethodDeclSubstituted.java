@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/Generics.ast:77
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\grammar\\Generics.ast:77
  * @astdecl MethodDeclSubstituted : MethodDecl ::= <Original:MethodDecl>;
  * @production MethodDeclSubstituted : {@link MethodDecl} ::= <span class="component">&lt;Original:MethodDecl&gt;</span>;
 
@@ -565,10 +565,10 @@ public class MethodDeclSubstituted extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1658
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1658
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1658")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1658")
   public MethodDecl erasedMethod() {
     MethodDecl erasedMethod_value = getOriginal().erasedMethod();
     return erasedMethod_value;
@@ -587,10 +587,10 @@ public class MethodDeclSubstituted extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect SourceDeclarations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1886
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1886
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1886")
+  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1886")
   public MethodDecl sourceMethodDecl() {
     ASTState state = state();
     if (sourceMethodDecl_computed == ASTState.NON_CYCLE || sourceMethodDecl_computed == state().cycle()) {
@@ -612,10 +612,10 @@ public class MethodDeclSubstituted extends MethodDecl implements Cloneable {
    * @return type parameters for this declaration.
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:448
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\MethodSignature.jrag:448
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:448")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\MethodSignature.jrag:448")
   public List<TypeVariable> typeParameters() {
     List<TypeVariable> typeParameters_value = sourceMethodDecl().typeParameters();
     return typeParameters_value;
@@ -626,10 +626,10 @@ public class MethodDeclSubstituted extends MethodDecl implements Cloneable {
    * Otherwise, an unknown method is returned.
    * @attribute syn
    * @aspect LambdaParametersInference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:532
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:532
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:532")
+  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:532")
   public Option<MethodDecl> nonWildcardParameterization() {
     {
         TypeDecl host = hostType();
@@ -659,10 +659,10 @@ public class MethodDeclSubstituted extends MethodDecl implements Cloneable {
    * the source declaration being identical to the given method.
    * @attribute syn
    * @aspect LambdaParametersInference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:561
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:561
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:561")
+  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:561")
   public boolean isSubstitutionOf(MethodDecl method) {
     boolean isSubstitutionOf_MethodDecl_value = sourceMethodDecl() == method;
     return isSubstitutionOf_MethodDecl_value;

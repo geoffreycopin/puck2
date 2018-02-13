@@ -19,10 +19,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * A catch clause that can catch a multiple exception types.
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/grammar/MultiCatch.ast:14
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\grammar\\MultiCatch.ast:14
  * @astdecl MultiCatch : CatchClause ::= Parameter:CatchParameterDeclaration Block;
  * @production MultiCatch : {@link CatchClause} ::= <span class="component">Parameter:{@link CatchParameterDeclaration}</span> <span class="component">{@link Block}</span>;
 
@@ -38,7 +38,7 @@ import java.io.DataInputStream;
 public class MultiCatch extends CatchClause implements Cloneable {
   /**
    * @aspect Java7PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PrettyPrint.jadd:50
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PrettyPrint.jadd:50
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("catch (");
@@ -245,10 +245,10 @@ public class MultiCatch extends CatchClause implements Cloneable {
   /**
    * @attribute syn
    * @aspect VariableScope
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:192
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupVariable.jrag:192
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:192")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupVariable.jrag:192")
   public SimpleSet<Variable> parameterDeclaration(String name) {
     Object _parameters = name;
     if (parameterDeclaration_String_computed == null) parameterDeclaration_String_computed = new java.util.HashMap(4);
@@ -274,10 +274,10 @@ public class MultiCatch extends CatchClause implements Cloneable {
   /**
    * @attribute syn
    * @aspect ExceptionHandling
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:279
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ExceptionHandling.jrag:279
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:279")
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ExceptionHandling.jrag:279")
   public boolean handles(TypeDecl exceptionType) {
     {
         CatchParameterDeclaration param = getParameter();
@@ -293,10 +293,10 @@ public class MultiCatch extends CatchClause implements Cloneable {
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:197
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:197
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:197")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:197")
   public Collection<Problem> reachabilityProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -312,12 +312,12 @@ public class MultiCatch extends CatchClause implements Cloneable {
       }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:44
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:44
    * @apilevel internal
    */
   public boolean Define_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
     if (getParameterNoTransform() != null && _callerNode == getParameter()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:54
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:54
       return false;
     }
     else {
@@ -325,7 +325,7 @@ public class MultiCatch extends CatchClause implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:44
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:44
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isMethodParameter
    */
@@ -333,12 +333,12 @@ public class MultiCatch extends CatchClause implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:45
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:45
    * @apilevel internal
    */
   public boolean Define_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
     if (getParameterNoTransform() != null && _callerNode == getParameter()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:55
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:55
       return false;
     }
     else {
@@ -346,7 +346,7 @@ public class MultiCatch extends CatchClause implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:45
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:45
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isConstructorParameter
    */
@@ -354,12 +354,12 @@ public class MultiCatch extends CatchClause implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:46
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:46
    * @apilevel internal
    */
   public boolean Define_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
     if (getParameterNoTransform() != null && _callerNode == getParameter()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:56
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:56
       return true;
     }
     else {
@@ -367,7 +367,7 @@ public class MultiCatch extends CatchClause implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:46
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:46
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isExceptionHandlerParameter
    */
@@ -375,12 +375,12 @@ public class MultiCatch extends CatchClause implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LookupVariable.jrag:30
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LookupVariable.jrag:30
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getParameterNoTransform() != null && _callerNode == getParameter()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:127
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:127
       return parameterDeclaration(name);
     }
     else {
@@ -388,7 +388,7 @@ public class MultiCatch extends CatchClause implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LookupVariable.jrag:30
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LookupVariable.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
    */
@@ -396,12 +396,12 @@ public class MultiCatch extends CatchClause implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\UnreachableStatements.jrag:49
    * @apilevel internal
    */
   public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:180
+      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:180
       {
           boolean anyReachable = false;
           CatchParameterDeclaration param = getParameter();
@@ -422,7 +422,7 @@ public class MultiCatch extends CatchClause implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\UnreachableStatements.jrag:49
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute reachable
    */
@@ -439,7 +439,7 @@ public class MultiCatch extends CatchClause implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:195
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:195
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -448,7 +448,7 @@ public class MultiCatch extends CatchClause implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:289
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:289
     if (!getBlock().reachable() && reportUnreachable()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

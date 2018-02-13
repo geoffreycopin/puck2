@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/Generics.ast:80
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\grammar\\Generics.ast:80
  * @astdecl ConstructorDeclSubstituted : ConstructorDecl ::= <Original:ConstructorDecl>;
  * @production ConstructorDeclSubstituted : {@link ConstructorDecl} ::= <span class="component">&lt;Original:ConstructorDecl&gt;</span>;
 
@@ -603,10 +603,10 @@ public class ConstructorDeclSubstituted extends ConstructorDecl implements Clone
   /**
    * @attribute syn
    * @aspect SourceDeclarations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1890
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1890
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1890")
+  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1890")
   public ConstructorDecl sourceConstructorDecl() {
     ASTState state = state();
     if (sourceConstructorDecl_computed == ASTState.NON_CYCLE || sourceConstructorDecl_computed == state().cycle()) {
@@ -628,10 +628,10 @@ public class ConstructorDeclSubstituted extends ConstructorDecl implements Clone
    * @return type parameters for this declaration.
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:448
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\MethodSignature.jrag:448
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:448")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\MethodSignature.jrag:448")
   public List<TypeVariable> typeParameters() {
     List<TypeVariable> typeParameters_value = sourceConstructorDecl().typeParameters();
     return typeParameters_value;

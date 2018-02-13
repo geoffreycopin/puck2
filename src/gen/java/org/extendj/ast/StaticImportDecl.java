@@ -19,10 +19,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * 7.5 Import Declarations
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/StaticImports.ast:4
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\grammar\\StaticImports.ast:4
  * @astdecl StaticImportDecl : ImportDecl;
  * @production StaticImportDecl : {@link ImportDecl};
 
@@ -154,10 +154,10 @@ public abstract class StaticImportDecl extends ImportDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect StaticImports
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/StaticImports.jrag:106
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\StaticImports.jrag:106
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/StaticImports.jrag:106")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\StaticImports.jrag:106")
   public abstract TypeDecl type();
   /** @apilevel internal */
   private void importedTypes_String_reset() {
@@ -165,7 +165,7 @@ public abstract class StaticImportDecl extends ImportDecl implements Cloneable {
   }
   protected java.util.Map importedTypes_String_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/StaticImports.jrag:42")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\StaticImports.jrag:42")
   public SimpleSet<TypeDecl> importedTypes(String name) {
     Object _parameters = name;
     if (importedTypes_String_values == null) importedTypes_String_values = new java.util.HashMap(4);
@@ -226,7 +226,7 @@ public abstract class StaticImportDecl extends ImportDecl implements Cloneable {
   }
   protected java.util.Map importedFields_String_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/StaticImports.jrag:63")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\StaticImports.jrag:63")
   public SimpleSet<Variable> importedFields(String name) {
     Object _parameters = name;
     if (importedFields_String_values == null) importedFields_String_values = new java.util.HashMap(4);
@@ -294,10 +294,10 @@ public abstract class StaticImportDecl extends ImportDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect StaticImports
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/StaticImports.jrag:84
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\StaticImports.jrag:84
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/StaticImports.jrag:84")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\StaticImports.jrag:84")
   public Collection<MethodDecl> importedMethods(String name) {
     Object _parameters = name;
     if (importedMethods_String_computed == null) importedMethods_String_computed = new java.util.HashMap(4);

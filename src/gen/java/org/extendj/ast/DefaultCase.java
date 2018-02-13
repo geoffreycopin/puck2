@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:299
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\Java.ast:299
  * @astdecl DefaultCase : Case;
  * @production DefaultCase : {@link Case};
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class DefaultCase extends Case implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:322
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrint.jadd:322
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("default:");
@@ -168,10 +168,10 @@ public class DefaultCase extends Case implements Cloneable {
    * the argument case label.
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:665
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:665
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:665")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:665")
   public boolean constValue(Case c) {
     boolean constValue_Case_value = c instanceof DefaultCase;
     return constValue_Case_value;
@@ -179,10 +179,10 @@ public class DefaultCase extends Case implements Cloneable {
   /**
    * @attribute syn
    * @aspect StringsInSwitch
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/StringsInSwitch.jrag:61
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\StringsInSwitch.jrag:61
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/StringsInSwitch.jrag:61")
+  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\StringsInSwitch.jrag:61")
   public boolean isDefaultCase() {
     boolean isDefaultCase_value = true;
     return isDefaultCase_value;
@@ -197,7 +197,7 @@ public class DefaultCase extends Case implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:583
+    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:583
     if (previousCase(this) != this) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/GenericMethods.ast:10
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\grammar\\GenericMethods.ast:10
  * @astdecl ParConstructorDecl : ConstructorDecl ::= TypeArgument:Access* <GenericConstructorDecl:GenericConstructorDecl> TypeParameter:TypeVariable* <Parameterization:Parameterization>;
  * @production ParConstructorDecl : {@link ConstructorDecl} ::= <span class="component">TypeArgument:{@link Access}*</span> <span class="component">&lt;GenericConstructorDecl:GenericConstructorDecl&gt;</span> <span class="component">TypeParameter:{@link TypeVariable}*</span> <span class="component">&lt;Parameterization:Parameterization&gt;</span>;
 
@@ -37,21 +37,21 @@ import java.io.DataInputStream;
 public class ParConstructorDecl extends ConstructorDecl implements Cloneable {
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1262
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1262
    */
   public boolean isRawType() {
     return false;
   }
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1278
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1278
    */
   public int numTypeParameter() {
     return genericConstructorDecl().original().getNumTypeParameter();
   }
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1286
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1286
    */
   public TypeVariable typeParameter(int index) {
     return genericConstructorDecl().original().getTypeParameter(index);
@@ -873,10 +873,10 @@ public class ParConstructorDecl extends ConstructorDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericMethods
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:54
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:54
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:54")
+  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:54")
   public GenericConstructorDecl genericConstructorDecl() {
     ASTState state = state();
     if (genericConstructorDecl_computed == ASTState.NON_CYCLE || genericConstructorDecl_computed == state().cycle()) {
@@ -906,10 +906,10 @@ public class ParConstructorDecl extends ConstructorDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect SourceDeclarations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1890
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1890
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1890")
+  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1890")
   public ConstructorDecl sourceConstructorDecl() {
     ASTState state = state();
     if (sourceConstructorDecl_computed == ASTState.NON_CYCLE || sourceConstructorDecl_computed == state().cycle()) {
@@ -926,7 +926,7 @@ public class ParConstructorDecl extends ConstructorDecl implements Cloneable {
     return sourceConstructorDecl_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
@@ -940,7 +940,7 @@ public class ParConstructorDecl extends ConstructorDecl implements Cloneable {
       }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:231
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupType
    */

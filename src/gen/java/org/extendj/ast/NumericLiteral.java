@@ -19,10 +19,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast interface
  * @aspect Java7Literals
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:311
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:311
  */
  interface NumericLiteral {
 
@@ -39,25 +39,25 @@ import java.io.DataInputStream;
   /**
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:317
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:317
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:317")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:317")
   public boolean isHex();
   /**
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:319
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:319
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:319")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:319")
   public boolean isOctal();
   /**
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:321
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:321
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:321")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:321")
   public boolean isDecimal();
 }

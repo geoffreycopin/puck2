@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:146
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\Java.ast:146
  * @astdecl IntType : IntegralType;
  * @production IntType : {@link IntegralType};
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class IntType extends IntegralType implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:399
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrint.jadd:399
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("int");
@@ -409,10 +409,10 @@ public class IntType extends IntegralType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:204
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:204
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:204")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:204")
   public boolean isInt() {
     boolean isInt_value = true;
     return isInt_value;
@@ -431,10 +431,10 @@ public class IntType extends IntegralType implements Cloneable {
   /** Mapping between Primitive type and corresponding boxed Reference type. 
    * @attribute syn
    * @aspect AutoBoxing
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/AutoBoxing.jrag:53
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\AutoBoxing.jrag:53
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/AutoBoxing.jrag:53")
+  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\AutoBoxing.jrag:53")
   public TypeDecl boxed() {
     ASTState state = state();
     if (boxed_computed == ASTState.NON_CYCLE || boxed_computed == state().cycle()) {

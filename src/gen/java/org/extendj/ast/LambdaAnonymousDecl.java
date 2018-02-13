@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/grammar/LambdaAnonymousDecl.ast:1
+ * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\grammar\\LambdaAnonymousDecl.ast:1
  * @astdecl LambdaAnonymousDecl : AnonymousDecl ::= Modifiers <ID:String> [SuperClass:Access] Implements:Access* BodyDecl*;
  * @production LambdaAnonymousDecl : {@link AnonymousDecl} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">[SuperClass:{@link Access}]</span> <span class="component">Implements:{@link Access}*</span> <span class="component">{@link BodyDecl}*</span>;
 
@@ -578,10 +578,10 @@ public class LambdaAnonymousDecl extends AnonymousDecl implements Cloneable {
    * type.
    * @attribute syn
    * @aspect LookupMethod
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:145
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupMethod.jrag:145
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:145")
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupMethod.jrag:145")
   public Collection<MethodDecl> unqualifiedLookupMethod(String name) {
     Object _parameters = name;
     if (unqualifiedLookupMethod_String_computed == null) unqualifiedLookupMethod_String_computed = new java.util.HashMap(4);
@@ -617,10 +617,10 @@ public class LambdaAnonymousDecl extends AnonymousDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect EnclosingLambda
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EnclosingLambda.jrag:37
+   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\EnclosingLambda.jrag:37
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EnclosingLambda.jrag:37")
+  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\EnclosingLambda.jrag:37")
   public LambdaExpr enclosingLambda() {
     ASTState state = state();
     if (enclosingLambda_computed == ASTState.NON_CYCLE || enclosingLambda_computed == state().cycle()) {
