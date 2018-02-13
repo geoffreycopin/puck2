@@ -41,7 +41,7 @@ public class MethodReader extends AbstractReader{
 		 if(methodDecl.getNumParameter() >0){
 			 for (ParameterDeclaration p : methodDecl.getParameterList()) {
 				 preader= new ParameterReader(idGenerator,p,methodDecl,methodNode);
-				 preader.readInto(nodes, edges);
+			//	 preader.readInto(nodes, edges);
 
 			 }
 		 }
@@ -56,6 +56,13 @@ public class MethodReader extends AbstractReader{
 	 public void addMethodClassDependency(Map<String, Node> nodes, List<Edge> edges,Node method){
 		 Edge e;
 		 e = new Edge(nodes.get(c.fullName()).getId(), method.getId(), Edge.Type.Contains);
+		 edges.add(e);
+
+	 }
+	 public void addClassFieldDependency(Map<String, Node> nodes, List<Edge> edges,Node method,String name){
+		 Edge e;
+		
+		 e = new Edge(method.getId(),nodes.get(name).getId(), Edge.Type.IsA);
 		 edges.add(e);
 
 	 }

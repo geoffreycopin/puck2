@@ -7,10 +7,10 @@ public class Test implements Foo,Boo{
   void f() {
   }
 
-  int m(int x) {
+  int m(int x, Foo r) {
     return x * x;
   }
-  int m(SuperTest x){
+  int m(SuperTest x,SuperTest y){
 	  return (int) x;
   }
 }

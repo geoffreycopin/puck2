@@ -33,6 +33,7 @@ public class CompilationUnitReader extends AbstractReader{
          d.addPackageDependancy();
          d.addClassDependancy();
          d.addSuperInterfaceDependancy();
+         d.addmethodSignatureDependancy();
     }
     private void readCurrentPackage(Map<String, Node> nodes) {
         String currentPackage = compilationUnit.getPackageDecl();

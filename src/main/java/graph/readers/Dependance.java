@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.extendj.ast.Access;
+import org.extendj.ast.BodyDecl;
 import org.extendj.ast.ClassDecl;
 import org.extendj.ast.InterfaceDecl;
+import org.extendj.ast.MethodDecl;
+import org.extendj.ast.ParameterDeclaration;
 import org.extendj.ast.TypeDecl;
 
 import graph.Edge;
@@ -75,5 +78,30 @@ public class Dependance {
 		}
 	}
 
+	public void addmethodSignatureDependancy(){
+		for ( TypeDecl t : typedec){	
+			if (t.getBodyDeclList() != null){
+				for (BodyDecl decl : t.getBodyDeclList()) {
+					if (decl instanceof MethodDecl) {
+						MethodDecl methodDecl = (MethodDecl)decl;
+						if(methodDecl.getNumParameter() >0){
+							for (ParameterDeclaration p : methodDecl.getParameterList()) {
+								
+								if(nodes.containsKey(p.type().fullName())){	
+									String name = t.fullName()+"."+methodDecl.fullSignature();
+									Edge e = new Edge(nodes.get(name).getId(),nodes.get(p.type().fullName()).getId(), Edge.Type.IsA);
+									if(!e.containsEdge(edges)) edges.add(e);
 
+								}
+							}
+						}
+					}
+
+
+
+				}
+
+			}
+		}
+	}
 }
