@@ -19,10 +19,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -31,7 +31,7 @@ import java.io.DataInputStream;
  * Used in code generation to represent the implicit monitor exit
  * call at the end of a synchronized block.
  * @ast node
- * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\Java.ast:317
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:317
  * @astdecl MonitorExit : Block;
  * @production MonitorExit : {@link Block};
 
@@ -39,12 +39,12 @@ import java.io.DataInputStream;
 public class MonitorExit extends Block implements Cloneable {
   /**
    * @aspect MonitorExit
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\MonitorExit.jrag:34
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/MonitorExit.jrag:34
    */
   protected SynchronizedStmt monitor = null;
   /**
    * @aspect MonitorExit
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\MonitorExit.jrag:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/MonitorExit.jrag:36
    */
   public MonitorExit(SynchronizedStmt sync) {
     monitor = sync;

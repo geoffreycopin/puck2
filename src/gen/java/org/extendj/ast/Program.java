@@ -19,10 +19,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -33,47 +33,47 @@ import java.io.DataInputStream;
  * <p>Consists of multiple compilation units that represent the
  * source files of the program.
  * @ast node
- * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\Java.ast:37
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:37
  * @astdecl Program : ASTNode ::= CompilationUnit*;
  * @production Program : {@link ASTNode} ::= <span class="component">{@link CompilationUnit}*</span>;
 
  */
 public class Program extends ASTNode<ASTNode> implements Cloneable {
   /**
-   * Returns a robust iterator that can be iterated while the colleciton is updated.
-   * @aspect LibraryCompilationUnits
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LibCompilationUnits.jadd:35
-   */
-  public Iterator<CompilationUnit> libraryCompilationUnitIterator() {
-    return libraryCompilationUnitSet.iterator();
-  }
-  /**
    * @aspect AddOptionsToProgram
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Options.jadd:34
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Options.jadd:34
    */
   public Options options = new Options();
   /**
    * @aspect AddOptionsToProgram
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Options.jadd:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Options.jadd:36
    */
   public Options options() {
     return options;
   }
   /**
+   * Returns a robust iterator that can be iterated while the colleciton is updated.
+   * @aspect LibraryCompilationUnits
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LibCompilationUnits.jadd:35
+   */
+  public Iterator<CompilationUnit> libraryCompilationUnitIterator() {
+    return libraryCompilationUnitSet.iterator();
+  }
+  /**
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:61
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:61
    */
   protected BytecodeReader bytecodeReader = defaultBytecodeReader();
   /**
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:63
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:63
    */
   public void initBytecodeReader(BytecodeReader r) {
     bytecodeReader = r;
   }
   /**
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:67
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:67
    */
   public static BytecodeReader defaultBytecodeReader() {
     return new BytecodeReader() {
@@ -86,19 +86,19 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:77
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:77
    */
   protected JavaParser javaParser = defaultJavaParser();
   /**
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:79
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:79
    */
   public void initJavaParser(JavaParser p) {
     javaParser = p;
   }
   /**
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:83
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:83
    */
   public static JavaParser defaultJavaParser() {
     return new JavaParser() {
@@ -120,7 +120,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * @return The CompilationUnit representing the source file,
    * or <code>null</code> if the source file could not be parsed
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:127
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:127
    */
   public CompilationUnit addSourceFile(String fileName) throws IOException {
     SourceFilePath pathPart = new SourceFilePath(fileName);
@@ -139,7 +139,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
   /**
    * Creates an iterator to iterate over compilation units parsed from source files.
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:145
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:145
    */
   public Iterator<CompilationUnit> compilationUnitIterator() {
     return new Iterator<CompilationUnit>() {
@@ -169,14 +169,14 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * name. This is used by the bytecode reader to load nested types.
    * @param name The canonical name of the compilation unit.
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:174
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:174
    */
   public InputStream getInputStream(String name) {
     return classPath.getInputStream(name);
   }
   /**
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:178
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:178
    */
   private final ClassPath classPath = new ClassPath(this);
   /**
@@ -184,7 +184,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * 
    * <p>Should only be accessed via Program.getCompilationUnit(String).
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:481
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:481
    */
   private ConcurrentMap<String, ParseSynchronizer> parseLocks =
       new ConcurrentSkipListMap<String, ParseSynchronizer>();
@@ -192,7 +192,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * @return <code>true</code> if there is a package with the given name on
    * the classpath
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:522
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:522
    */
   public boolean isPackage(String packageName) {
     return classPath.isPackage(packageName);
@@ -200,7 +200,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
   /**
    * Add a path part to the library class path.
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:545
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:545
    */
   public void addClassPath(PathPart pathPart) {
     classPath.addClassPath(pathPart);
@@ -208,69 +208,14 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
   /**
    * Add a path part to the user class path.
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:552
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:552
    */
   public void addSourcePath(PathPart pathPart) {
     classPath.addSourcePath(pathPart);
   }
   /**
-   * @aspect FrontendMain
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\FrontendMain.jrag:37
-   */
-  public long javaParseTime;
-  /**
-   * @aspect FrontendMain
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\FrontendMain.jrag:38
-   */
-  public long bytecodeParseTime;
-  /**
-   * @aspect FrontendMain
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\FrontendMain.jrag:39
-   */
-  public long codeGenTime;
-  /**
-   * @aspect FrontendMain
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\FrontendMain.jrag:40
-   */
-  public long errorCheckTime;
-  /**
-   * @aspect FrontendMain
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\FrontendMain.jrag:41
-   */
-  public int numJavaFiles;
-  /**
-   * @aspect FrontendMain
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\FrontendMain.jrag:42
-   */
-  public int numClassFiles;
-  /**
-   * Reset the profile statistics.
-   * @aspect FrontendMain
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\FrontendMain.jrag:47
-   */
-  public void resetStatistics() {
-    javaParseTime = 0;
-    bytecodeParseTime = 0;
-    codeGenTime = 0;
-    errorCheckTime = 0;
-    numJavaFiles = 0;
-    numClassFiles = 0;
-  }
-  /**
-   * @aspect FrontendMain
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\FrontendMain.jrag:56
-   */
-  public void printStatistics(PrintStream out) {
-    out.println("javaParseTime: " + javaParseTime);
-    out.println("numJavaFiles: " + numJavaFiles);
-    out.println("bytecodeParseTime: " + bytecodeParseTime);
-    out.println("numClassFiles: " + numClassFiles);
-    out.println("errorCheckTime: " + errorCheckTime);
-    out.println("codeGenTime: " + codeGenTime);
-  }
-  /**
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:133
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:133
    */
   public int classFileReadTime;
   /**
@@ -286,7 +231,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * must become visible after the type lookup for the type with the same name as the
    * compilation unit. This map ensures that additional types become visible.
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:170
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:170
    */
   private final Map<String, TypeDecl> sourceTypeMap = new HashMap<String, TypeDecl>();
   /**
@@ -294,7 +239,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * 
    * <p>Should only be accessed via Program.lookupSourceType(String,String)!
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:177
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:177
    */
   private boolean sourceTypeMapInitialized = false;
   /**
@@ -313,7 +258,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * <p>This method is synchronized to ensure that concurrent type lookups
    * run sequentially.
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:195
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:195
    */
   protected synchronized TypeDecl lookupSourceType(String packageName, String typeName) {
     String fullName = packageName.equals("") ? typeName : packageName + "." + typeName;
@@ -336,7 +281,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * Initialize source types in the source type map.  This puts all the types provided by
    * Program.addSourceFile() in a map for lookup by Program.lookupSourceType.
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:217
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:217
    */
   private void initializeSourceTypeMap() {
     // Initialize source type map with the compilation units supplied by Program.addSourceFile.
@@ -358,12 +303,12 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * Note that this only affects library types loaded from source (unfortunately easy
    * to confuse with sourceTypeMap).
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:238
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:238
    */
   private final Map<String, TypeDecl> libraryTypeMap = new HashMap<String, TypeDecl>();
   /**
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:240
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:240
    */
   private final Set<CompilationUnit> libraryCompilationUnitSet =
       new RobustSet<CompilationUnit>(new HashSet<CompilationUnit>());
@@ -372,7 +317,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * 
    * <p>Should only be accessed via Program.lookupLibraryType(String,String)!
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:248
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:248
    */
   private boolean libraryTypeMapInitialized = false;
   /**
@@ -391,7 +336,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * <p>This method is synchronized to ensure that concurrent type lookups
    * run sequentially.
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:266
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:266
    */
   protected synchronized TypeDecl lookupLibraryType(String packageName, String typeName) {
     String fullName = packageName.isEmpty() ? typeName : packageName + "." + typeName;
@@ -430,7 +375,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
   }
   /** Initialize primitive types in the library type map.  
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:303
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:303
    */
   private void initializeLibraryTypeMap() {
     PrimitiveCompilationUnit unit = getPrimitiveCompilationUnit();
@@ -447,8 +392,63 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     libraryTypeMap.put(PRIMITIVE_PACKAGE_NAME + ".Unknown", unit.unknownType());
   }
   /**
+   * @aspect FrontendMain
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/FrontendMain.jrag:37
+   */
+  public long javaParseTime;
+  /**
+   * @aspect FrontendMain
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/FrontendMain.jrag:38
+   */
+  public long bytecodeParseTime;
+  /**
+   * @aspect FrontendMain
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/FrontendMain.jrag:39
+   */
+  public long codeGenTime;
+  /**
+   * @aspect FrontendMain
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/FrontendMain.jrag:40
+   */
+  public long errorCheckTime;
+  /**
+   * @aspect FrontendMain
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/FrontendMain.jrag:41
+   */
+  public int numJavaFiles;
+  /**
+   * @aspect FrontendMain
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/FrontendMain.jrag:42
+   */
+  public int numClassFiles;
+  /**
+   * Reset the profile statistics.
+   * @aspect FrontendMain
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/FrontendMain.jrag:47
+   */
+  public void resetStatistics() {
+    javaParseTime = 0;
+    bytecodeParseTime = 0;
+    codeGenTime = 0;
+    errorCheckTime = 0;
+    numJavaFiles = 0;
+    numClassFiles = 0;
+  }
+  /**
+   * @aspect FrontendMain
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/FrontendMain.jrag:56
+   */
+  public void printStatistics(PrintStream out) {
+    out.println("javaParseTime: " + javaParseTime);
+    out.println("numJavaFiles: " + numJavaFiles);
+    out.println("bytecodeParseTime: " + bytecodeParseTime);
+    out.println("numClassFiles: " + numClassFiles);
+    out.println("errorCheckTime: " + errorCheckTime);
+    out.println("codeGenTime: " + codeGenTime);
+  }
+  /**
    * @aspect PrettyPrintUtil
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:176
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:176
    */
   public void prettyPrint(PrettyPrinter out) {
     for (Iterator iter = compilationUnitIterator(); iter.hasNext(); ) {
@@ -728,7 +728,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @aspect <NoAspect>
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:47
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:47
    */
   /** @apilevel internal */
 protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLambdaBody_lambdaReturns = null;
@@ -762,10 +762,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
    * compilation unit was found.
    * @attribute syn
    * @aspect ClassPath
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:495
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:495
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ClassPath", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:495")
+  @ASTNodeAnnotation.Source(aspect="ClassPath", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:495")
   public CompilationUnit getCompilationUnit(String typeName) {
     Object _parameters = typeName;
     if (getCompilationUnit_String_computed == null) getCompilationUnit_String_computed = new java.util.HashMap(4);
@@ -825,10 +825,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:41
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:41
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:41")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:41")
   public TypeDecl typeObject() {
     ASTState state = state();
     if (typeObject_computed == ASTState.NON_CYCLE || typeObject_computed == state().cycle()) {
@@ -858,10 +858,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:42
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:42
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:42")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:42")
   public TypeDecl typeCloneable() {
     ASTState state = state();
     if (typeCloneable_computed == ASTState.NON_CYCLE || typeCloneable_computed == state().cycle()) {
@@ -891,10 +891,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:43
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:43
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:43")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:43")
   public TypeDecl typeSerializable() {
     ASTState state = state();
     if (typeSerializable_computed == ASTState.NON_CYCLE || typeSerializable_computed == state().cycle()) {
@@ -924,10 +924,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:49
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:49
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:49")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:49")
   public TypeDecl typeBoolean() {
     ASTState state = state();
     if (typeBoolean_computed == ASTState.NON_CYCLE || typeBoolean_computed == state().cycle()) {
@@ -957,10 +957,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:50
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:50")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:50")
   public TypeDecl typeByte() {
     ASTState state = state();
     if (typeByte_computed == ASTState.NON_CYCLE || typeByte_computed == state().cycle()) {
@@ -990,10 +990,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:51
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:51
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:51")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:51")
   public TypeDecl typeShort() {
     ASTState state = state();
     if (typeShort_computed == ASTState.NON_CYCLE || typeShort_computed == state().cycle()) {
@@ -1023,10 +1023,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:52
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:52
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:52")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:52")
   public TypeDecl typeChar() {
     ASTState state = state();
     if (typeChar_computed == ASTState.NON_CYCLE || typeChar_computed == state().cycle()) {
@@ -1056,10 +1056,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:53
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:53
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:53")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:53")
   public TypeDecl typeInt() {
     ASTState state = state();
     if (typeInt_computed == ASTState.NON_CYCLE || typeInt_computed == state().cycle()) {
@@ -1089,10 +1089,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:54
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:54
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:54")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:54")
   public TypeDecl typeLong() {
     ASTState state = state();
     if (typeLong_computed == ASTState.NON_CYCLE || typeLong_computed == state().cycle()) {
@@ -1122,10 +1122,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:55
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:55
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:55")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:55")
   public TypeDecl typeFloat() {
     ASTState state = state();
     if (typeFloat_computed == ASTState.NON_CYCLE || typeFloat_computed == state().cycle()) {
@@ -1155,10 +1155,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:56
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:56
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:56")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:56")
   public TypeDecl typeDouble() {
     ASTState state = state();
     if (typeDouble_computed == ASTState.NON_CYCLE || typeDouble_computed == state().cycle()) {
@@ -1188,10 +1188,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:57
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:57
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:57")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:57")
   public TypeDecl typeString() {
     ASTState state = state();
     if (typeString_computed == ASTState.NON_CYCLE || typeString_computed == state().cycle()) {
@@ -1221,10 +1221,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:69
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:69
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:69")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:69")
   public TypeDecl typeVoid() {
     ASTState state = state();
     if (typeVoid_computed == ASTState.NON_CYCLE || typeVoid_computed == state().cycle()) {
@@ -1254,10 +1254,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:72
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:72
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:72")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:72")
   public TypeDecl typeNull() {
     ASTState state = state();
     if (typeNull_computed == ASTState.NON_CYCLE || typeNull_computed == state().cycle()) {
@@ -1287,10 +1287,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:75
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:75
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:75")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:75")
   public TypeDecl unknownType() {
     ASTState state = state();
     if (unknownType_computed == ASTState.NON_CYCLE || unknownType_computed == state().cycle()) {
@@ -1318,10 +1318,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:105
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:105
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:105")
+  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:105")
   public boolean hasPackage(String packageName) {
     Object _parameters = packageName;
     if (hasPackage_String_computed == null) hasPackage_String_computed = new java.util.HashMap(4);
@@ -1359,10 +1359,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
    * will be searched.
    * @attribute syn
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:146
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:146
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:146")
+  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:146")
   public TypeDecl lookupType(String packageName, String typeName) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(packageName);
@@ -1413,10 +1413,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
    * a parameterized NTA.
    * @attribute syn
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:322
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:322
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:322")
+  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:322")
   public CompilationUnit getLibCompilationUnit(String typeName) {
     Object _parameters = typeName;
     if (getLibCompilationUnit_String_values == null) getLibCompilationUnit_String_values = new java.util.HashMap(4);
@@ -1456,10 +1456,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:325
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:325
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:325")
+  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:325")
   public CompilationUnit emptyCompilationUnit() {
     ASTState state = state();
     if (emptyCompilationUnit_computed) {
@@ -1487,10 +1487,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /** Creates a compilation unit with primitive types. 
    * @attribute syn
    * @aspect PrimitiveTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrimitiveTypes.jrag:155
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrimitiveTypes.jrag:155
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrimitiveTypes.jrag:155")
+  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrimitiveTypes.jrag:155")
   public PrimitiveCompilationUnit getPrimitiveCompilationUnit() {
     ASTState state = state();
     if (getPrimitiveCompilationUnit_computed) {
@@ -1523,10 +1523,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:263
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:263
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:263")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:263")
   public ConstructorDecl unknownConstructor() {
     ASTState state = state();
     if (unknownConstructor_computed == ASTState.NON_CYCLE || unknownConstructor_computed == state().cycle()) {
@@ -1557,10 +1557,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1720
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1720
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1720")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1720")
   public WildcardsCompilationUnit wildcards() {
     ASTState state = state();
     if (wildcards_computed) {
@@ -1577,7 +1577,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return wildcards_value;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Options.jadd:40
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Options.jadd:40
    * @apilevel internal
    */
   public Program Define_program(ASTNode _callerNode, ASTNode _childNode) {
@@ -1585,7 +1585,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return this;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Options.jadd:40
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Options.jadd:40
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute program
    */
@@ -1593,199 +1593,87 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\AnonymousClasses.jrag:33
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:44
    * @apilevel internal
    */
-  public TypeDecl Define_superType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return null;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\AnonymousClasses.jrag:33
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute superType
-   */
-  protected boolean canDefine_superType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\AnonymousClasses.jrag:39
-   * @apilevel internal
-   */
-  public ConstructorDecl Define_constructorDecl(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return unknownConstructor();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\AnonymousClasses.jrag:39
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute constructorDecl
-   */
-  protected boolean canDefine_constructorDecl(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Arrays.jrag:56
-   * @apilevel internal
-   */
-  public TypeDecl Define_componentType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return unknownType();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Arrays.jrag:56
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute componentType
-   */
-  protected boolean canDefine_componentType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:255
-   * @apilevel internal
-   */
-  public LabeledStmt Define_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return null;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:255
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupLabel
-   */
-  protected boolean canDefine_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:110
-   * @apilevel internal
-   */
-  public CompilationUnit Define_compilationUnit(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return null;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ClassPath.jrag:110
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute compilationUnit
-   */
-  protected boolean canDefine_compilationUnit(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:35
-   * @apilevel internal
-   */
-  public int Define_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return -1;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:35
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute blockIndex
-   */
-  protected boolean canDefine_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:58
-   * @apilevel internal
-   */
-  public boolean Define_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
+  public boolean Define_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
     return false;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:58
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:44
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute declaredBefore
+   * @return {@code true} if this node has an equation for the inherited attribute isMethodParameter
    */
-  protected boolean canDefine_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
+  protected boolean canDefine_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:34
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:45
    * @apilevel internal
    */
-  public boolean Define_isDest(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
     return false;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:34
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:45
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isDest
+   * @return {@code true} if this node has an equation for the inherited attribute isConstructorParameter
    */
-  protected boolean canDefine_isDest(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:44
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:46
    * @apilevel internal
    */
-  public boolean Define_isSource(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:44
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isSource
-   */
-  protected boolean canDefine_isSource(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:66
-   * @apilevel internal
-   */
-  public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
     return false;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:66
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:46
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
+   * @return {@code true} if this node has an equation for the inherited attribute isExceptionHandlerParameter
    */
-  protected boolean canDefine_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:256
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupConstructor.jrag:35
    * @apilevel internal
    */
-  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+  public Collection<ConstructorDecl> Define_lookupConstructor(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
+    return Collections.emptyList();
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:256
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupConstructor.jrag:35
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
+   * @return {@code true} if this node has an equation for the inherited attribute lookupConstructor
    */
-  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+  protected boolean canDefine_lookupConstructor(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:887
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupConstructor.jrag:43
    * @apilevel internal
    */
-  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+  public Collection<ConstructorDecl> Define_lookupSuperConstructor(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
-    return true;
+    return Collections.emptyList();
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:887
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupConstructor.jrag:43
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
+   * @return {@code true} if this node has an equation for the inherited attribute lookupSuperConstructor
    */
-  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+  protected boolean canDefine_lookupSuperConstructor(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ExceptionHandling.jrag:47
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:47
    * @apilevel internal
    */
   public TypeDecl Define_typeException(ASTNode _callerNode, ASTNode _childNode) {
@@ -1793,7 +1681,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return lookupType("java.lang", "Exception");
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ExceptionHandling.jrag:47
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:47
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeException
    */
@@ -1801,7 +1689,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\TryWithResources.jrag:122
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:122
    * @apilevel internal
    */
   public TypeDecl Define_typeRuntimeException(ASTNode _callerNode, ASTNode _childNode) {
@@ -1809,7 +1697,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return lookupType("java.lang", "RuntimeException");
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\TryWithResources.jrag:122
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:122
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeRuntimeException
    */
@@ -1817,7 +1705,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\TryWithResources.jrag:120
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:120
    * @apilevel internal
    */
   public TypeDecl Define_typeError(ASTNode _callerNode, ASTNode _childNode) {
@@ -1825,7 +1713,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return lookupType("java.lang", "Error");
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\TryWithResources.jrag:120
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:120
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeError
    */
@@ -1833,7 +1721,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ExceptionHandling.jrag:56
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:56
    * @apilevel internal
    */
   public TypeDecl Define_typeNullPointerException(ASTNode _callerNode, ASTNode _childNode) {
@@ -1841,7 +1729,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return lookupType("java.lang", "NullPointerException");
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ExceptionHandling.jrag:56
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:56
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeNullPointerException
    */
@@ -1849,7 +1737,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:97
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:97
    * @apilevel internal
    */
   public TypeDecl Define_typeThrowable(ASTNode _callerNode, ASTNode _childNode) {
@@ -1857,7 +1745,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return lookupType("java.lang", "Throwable");
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:97
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:97
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeThrowable
    */
@@ -1865,7 +1753,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\TryWithResources.jrag:112
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:112
    * @apilevel internal
    */
   public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
@@ -1875,7 +1763,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
       }
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\TryWithResources.jrag:112
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:112
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute handlesException
    */
@@ -1883,39 +1771,861 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupConstructor.jrag:35
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
    * @apilevel internal
    */
-  public Collection<ConstructorDecl> Define_lookupConstructor(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
-    return Collections.emptyList();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupConstructor.jrag:35
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupConstructor
-   */
-  protected boolean canDefine_lookupConstructor(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupConstructor.jrag:43
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
    * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute reportUnreachable
    */
-  public Collection<ConstructorDecl> Define_lookupSuperConstructor(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return Collections.emptyList();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupConstructor.jrag:43
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupSuperConstructor
-   */
-  protected boolean canDefine_lookupSuperConstructor(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupMethod.jrag:98
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:110
+   * @apilevel internal
+   */
+  public CompilationUnit Define_compilationUnit(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return null;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ClassPath.jrag:110
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute compilationUnit
+   */
+  protected boolean canDefine_compilationUnit(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:34
+   * @apilevel internal
+   */
+  public boolean Define_isDest(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:34
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute isDest
+   */
+  protected boolean canDefine_isDest(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:44
+   * @apilevel internal
+   */
+  public boolean Define_isSource(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:44
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute isSource
+   */
+  protected boolean canDefine_isSource(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
+   * @apilevel internal
+   */
+  public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
+   */
+  protected boolean canDefine_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @apilevel internal
+   */
+  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
+   */
+  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @apilevel internal
+   */
+  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
+   */
+  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:33
+   * @apilevel internal
+   */
+  public String Define_methodHost(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    {
+        throw new Error("Needs extra equation for methodHost()");
+      }
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:33
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute methodHost
+   */
+  protected boolean canDefine_methodHost(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:188
+   * @apilevel internal
+   */
+  public boolean Define_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:188
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute inExplicitConstructorInvocation
+   */
+  protected boolean canDefine_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:196
+   * @apilevel internal
+   */
+  public TypeDecl Define_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return null;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:196
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute enclosingExplicitConstructorHostType
+   */
+  protected boolean canDefine_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:207
+   * @apilevel internal
+   */
+  public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:207
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute inStaticContext
+   */
+  protected boolean canDefine_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1290
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeObject(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeObject();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1290
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeObject
+   */
+  protected boolean canDefine_typeObject(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:151
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeCloneable(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeCloneable();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:151
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeCloneable
+   */
+  protected boolean canDefine_typeCloneable(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:150
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeSerializable(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeSerializable();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:150
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeSerializable
+   */
+  protected boolean canDefine_typeSerializable(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:78
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeBoolean(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeBoolean();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:78
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeBoolean
+   */
+  protected boolean canDefine_typeBoolean(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:79
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeByte(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeByte();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:79
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeByte
+   */
+  protected boolean canDefine_typeByte(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:80
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeShort(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeShort();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:80
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeShort
+   */
+  protected boolean canDefine_typeShort(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:81
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeChar(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeChar();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:81
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeChar
+   */
+  protected boolean canDefine_typeChar(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:90
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeInt(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeInt();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:90
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeInt
+   */
+  protected boolean canDefine_typeInt(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:92
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeLong(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeLong();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:92
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeLong
+   */
+  protected boolean canDefine_typeLong(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:84
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeFloat(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeFloat();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:84
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeFloat
+   */
+  protected boolean canDefine_typeFloat(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:85
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeDouble(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeDouble();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:85
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeDouble
+   */
+  protected boolean canDefine_typeDouble(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Enums.jrag:538
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeString(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeString();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Enums.jrag:538
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeString
+   */
+  protected boolean canDefine_typeString(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:87
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeVoid(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeVoid();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:87
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeVoid
+   */
+  protected boolean canDefine_typeVoid(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1300
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeNull(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeNull();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1300
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeNull
+   */
+  protected boolean canDefine_typeNull(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:32
+   * @apilevel internal
+   */
+  public TypeDecl Define_unknownType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return unknownType();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:32
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute unknownType
+   */
+  protected boolean canDefine_unknownType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:113
+   * @apilevel internal
+   */
+  public boolean Define_hasPackage(ASTNode _callerNode, ASTNode _childNode, String packageName) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return hasPackage(packageName);
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:113
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute hasPackage
+   */
+  protected boolean canDefine_hasPackage(ASTNode _callerNode, ASTNode _childNode, String packageName) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:40
+   * @apilevel internal
+   */
+  public TypeDecl Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String packageName, String typeName) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return lookupType(packageName, typeName);
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:40
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupType
+   */
+  protected boolean canDefine_lookupType(ASTNode _callerNode, ASTNode _childNode, String packageName, String typeName) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @apilevel internal
+   */
+  public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return emptySet();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupType
+   */
+  protected boolean canDefine_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:482
+   * @apilevel internal
+   */
+  public TypeDecl Define_switchType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return unknownType();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:482
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute switchType
+   */
+  protected boolean canDefine_switchType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:534
+   * @apilevel internal
+   */
+  public TypeDecl Define_returnType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeVoid();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:534
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute returnType
+   */
+  protected boolean canDefine_returnType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:667
+   * @apilevel internal
+   */
+  public TypeDecl Define_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return null;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:667
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute enclosingInstance
+   */
+  protected boolean canDefine_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:430
+   * @apilevel internal
+   */
+  public boolean Define_mayBePublic(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:430
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute mayBePublic
+   */
+  protected boolean canDefine_mayBePublic(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:432
+   * @apilevel internal
+   */
+  public boolean Define_mayBeProtected(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:432
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute mayBeProtected
+   */
+  protected boolean canDefine_mayBeProtected(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:431
+   * @apilevel internal
+   */
+  public boolean Define_mayBePrivate(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:431
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute mayBePrivate
+   */
+  protected boolean canDefine_mayBePrivate(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:433
+   * @apilevel internal
+   */
+  public boolean Define_mayBeStatic(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:433
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute mayBeStatic
+   */
+  protected boolean canDefine_mayBeStatic(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:434
+   * @apilevel internal
+   */
+  public boolean Define_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:434
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute mayBeFinal
+   */
+  protected boolean canDefine_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:435
+   * @apilevel internal
+   */
+  public boolean Define_mayBeAbstract(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:435
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute mayBeAbstract
+   */
+  protected boolean canDefine_mayBeAbstract(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:436
+   * @apilevel internal
+   */
+  public boolean Define_mayBeVolatile(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:436
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute mayBeVolatile
+   */
+  protected boolean canDefine_mayBeVolatile(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:437
+   * @apilevel internal
+   */
+  public boolean Define_mayBeTransient(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:437
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute mayBeTransient
+   */
+  protected boolean canDefine_mayBeTransient(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:438
+   * @apilevel internal
+   */
+  public boolean Define_mayBeStrictfp(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:438
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute mayBeStrictfp
+   */
+  protected boolean canDefine_mayBeStrictfp(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:439
+   * @apilevel internal
+   */
+  public boolean Define_mayBeSynchronized(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:439
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute mayBeSynchronized
+   */
+  protected boolean canDefine_mayBeSynchronized(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:440
+   * @apilevel internal
+   */
+  public boolean Define_mayBeNative(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:440
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute mayBeNative
+   */
+  protected boolean canDefine_mayBeNative(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LookupVariable.jrag:30
+   * @apilevel internal
+   */
+  public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return emptySet();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LookupVariable.jrag:30
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
+   */
+  protected boolean canDefine_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:376
+   * @apilevel internal
+   */
+  public BodyDecl Define_enclosingMemberDecl(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return null;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:376
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute enclosingMemberDecl
+   */
+  protected boolean canDefine_enclosingMemberDecl(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:31
+   * @apilevel internal
+   */
+  public VariableScope Define_outerScope(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    {
+        throw new UnsupportedOperationException("outerScope() not defined");
+      }
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:31
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute outerScope
+   */
+  protected boolean canDefine_outerScope(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:523
+   * @apilevel internal
+   */
+  public boolean Define_insideLoop(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:523
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute insideLoop
+   */
+  protected boolean canDefine_insideLoop(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:531
+   * @apilevel internal
+   */
+  public boolean Define_insideSwitch(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:531
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute insideSwitch
+   */
+  protected boolean canDefine_insideSwitch(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:592
+   * @apilevel internal
+   */
+  public Case Define_previousCase(ASTNode _callerNode, ASTNode _childNode, Case c) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    {
+        throw new Error("Missing enclosing switch for case label.");
+      }
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:592
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute previousCase
+   */
+  protected boolean canDefine_previousCase(ASTNode _callerNode, ASTNode _childNode, Case c) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Arrays.jrag:56
+   * @apilevel internal
+   */
+  public TypeDecl Define_componentType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return unknownType();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Arrays.jrag:56
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute componentType
+   */
+  protected boolean canDefine_componentType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:35
+   * @apilevel internal
+   */
+  public int Define_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return -1;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:35
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute blockIndex
+   */
+  protected boolean canDefine_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:58
+   * @apilevel internal
+   */
+  public boolean Define_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:58
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute declaredBefore
+   */
+  protected boolean canDefine_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @apilevel internal
+   */
+  public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return NameType.NOT_CLASSIFIED;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute nameType
+   */
+  protected boolean canDefine_nameType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:98
    * @apilevel internal
    */
   public Expr Define_nestedScope(ASTNode _callerNode, ASTNode _childNode) {
@@ -1926,7 +2636,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
       }
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupMethod.jrag:98
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:98
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nestedScope
    */
@@ -1934,7 +2644,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupMethod.jrag:116
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:116
    * @apilevel internal
    */
   public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
@@ -1942,7 +2652,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return Collections.EMPTY_LIST;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupMethod.jrag:116
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:116
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupMethod
    */
@@ -1950,587 +2660,55 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1290
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:255
    * @apilevel internal
    */
-  public TypeDecl Define_typeObject(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeObject();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1290
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeObject
-   */
-  protected boolean canDefine_typeObject(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:151
-   * @apilevel internal
-   */
-  public TypeDecl Define_typeCloneable(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeCloneable();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:151
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeCloneable
-   */
-  protected boolean canDefine_typeCloneable(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:150
-   * @apilevel internal
-   */
-  public TypeDecl Define_typeSerializable(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeSerializable();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:150
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeSerializable
-   */
-  protected boolean canDefine_typeSerializable(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:78
-   * @apilevel internal
-   */
-  public TypeDecl Define_typeBoolean(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeBoolean();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:78
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeBoolean
-   */
-  protected boolean canDefine_typeBoolean(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:79
-   * @apilevel internal
-   */
-  public TypeDecl Define_typeByte(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeByte();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:79
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeByte
-   */
-  protected boolean canDefine_typeByte(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:80
-   * @apilevel internal
-   */
-  public TypeDecl Define_typeShort(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeShort();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:80
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeShort
-   */
-  protected boolean canDefine_typeShort(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:81
-   * @apilevel internal
-   */
-  public TypeDecl Define_typeChar(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeChar();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:81
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeChar
-   */
-  protected boolean canDefine_typeChar(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:90
-   * @apilevel internal
-   */
-  public TypeDecl Define_typeInt(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeInt();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:90
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeInt
-   */
-  protected boolean canDefine_typeInt(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:92
-   * @apilevel internal
-   */
-  public TypeDecl Define_typeLong(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeLong();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:92
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeLong
-   */
-  protected boolean canDefine_typeLong(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:84
-   * @apilevel internal
-   */
-  public TypeDecl Define_typeFloat(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeFloat();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:84
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeFloat
-   */
-  protected boolean canDefine_typeFloat(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:85
-   * @apilevel internal
-   */
-  public TypeDecl Define_typeDouble(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeDouble();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:85
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeDouble
-   */
-  protected boolean canDefine_typeDouble(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Enums.jrag:538
-   * @apilevel internal
-   */
-  public TypeDecl Define_typeString(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeString();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Enums.jrag:538
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeString
-   */
-  protected boolean canDefine_typeString(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:87
-   * @apilevel internal
-   */
-  public TypeDecl Define_typeVoid(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeVoid();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:87
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeVoid
-   */
-  protected boolean canDefine_typeVoid(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1300
-   * @apilevel internal
-   */
-  public TypeDecl Define_typeNull(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeNull();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1300
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeNull
-   */
-  protected boolean canDefine_typeNull(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:32
-   * @apilevel internal
-   */
-  public TypeDecl Define_unknownType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return unknownType();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:32
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute unknownType
-   */
-  protected boolean canDefine_unknownType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:113
-   * @apilevel internal
-   */
-  public boolean Define_hasPackage(ASTNode _callerNode, ASTNode _childNode, String packageName) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return hasPackage(packageName);
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:113
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute hasPackage
-   */
-  protected boolean canDefine_hasPackage(ASTNode _callerNode, ASTNode _childNode, String packageName) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\TryWithResources.jrag:40
-   * @apilevel internal
-   */
-  public TypeDecl Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String packageName, String typeName) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return lookupType(packageName, typeName);
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\TryWithResources.jrag:40
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupType
-   */
-  protected boolean canDefine_lookupType(ASTNode _callerNode, ASTNode _childNode, String packageName, String typeName) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:231
-   * @apilevel internal
-   */
-  public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return emptySet();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethods.jrag:231
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupType
-   */
-  protected boolean canDefine_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LookupVariable.jrag:30
-   * @apilevel internal
-   */
-  public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return emptySet();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LookupVariable.jrag:30
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
-   */
-  protected boolean canDefine_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:430
-   * @apilevel internal
-   */
-  public boolean Define_mayBePublic(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:430
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayBePublic
-   */
-  protected boolean canDefine_mayBePublic(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:432
-   * @apilevel internal
-   */
-  public boolean Define_mayBeProtected(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:432
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayBeProtected
-   */
-  protected boolean canDefine_mayBeProtected(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:431
-   * @apilevel internal
-   */
-  public boolean Define_mayBePrivate(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:431
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayBePrivate
-   */
-  protected boolean canDefine_mayBePrivate(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:433
-   * @apilevel internal
-   */
-  public boolean Define_mayBeStatic(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:433
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayBeStatic
-   */
-  protected boolean canDefine_mayBeStatic(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:434
-   * @apilevel internal
-   */
-  public boolean Define_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:434
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayBeFinal
-   */
-  protected boolean canDefine_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:435
-   * @apilevel internal
-   */
-  public boolean Define_mayBeAbstract(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:435
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayBeAbstract
-   */
-  protected boolean canDefine_mayBeAbstract(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:436
-   * @apilevel internal
-   */
-  public boolean Define_mayBeVolatile(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:436
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayBeVolatile
-   */
-  protected boolean canDefine_mayBeVolatile(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:437
-   * @apilevel internal
-   */
-  public boolean Define_mayBeTransient(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:437
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayBeTransient
-   */
-  protected boolean canDefine_mayBeTransient(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:438
-   * @apilevel internal
-   */
-  public boolean Define_mayBeStrictfp(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:438
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayBeStrictfp
-   */
-  protected boolean canDefine_mayBeStrictfp(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:439
-   * @apilevel internal
-   */
-  public boolean Define_mayBeSynchronized(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:439
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayBeSynchronized
-   */
-  protected boolean canDefine_mayBeSynchronized(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:440
-   * @apilevel internal
-   */
-  public boolean Define_mayBeNative(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:440
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayBeNative
-   */
-  protected boolean canDefine_mayBeNative(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:376
-   * @apilevel internal
-   */
-  public BodyDecl Define_enclosingMemberDecl(ASTNode _callerNode, ASTNode _childNode) {
+  public LabeledStmt Define_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
     int childIndex = this.getIndexOfChild(_callerNode);
     return null;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:376
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:255
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute enclosingMemberDecl
+   * @return {@code true} if this node has an equation for the inherited attribute lookupLabel
    */
-  protected boolean canDefine_enclosingMemberDecl(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\NameCheck.jrag:31
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:33
    * @apilevel internal
    */
-  public VariableScope Define_outerScope(ASTNode _callerNode, ASTNode _childNode) {
+  public TypeDecl Define_superType(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
-    {
-        throw new UnsupportedOperationException("outerScope() not defined");
-      }
+    return null;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\NameCheck.jrag:31
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:33
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute outerScope
+   * @return {@code true} if this node has an equation for the inherited attribute superType
    */
-  protected boolean canDefine_outerScope(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_superType(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:523
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:39
    * @apilevel internal
    */
-  public boolean Define_insideLoop(ASTNode _callerNode, ASTNode _childNode) {
+  public ConstructorDecl Define_constructorDecl(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
+    return unknownConstructor();
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:523
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:39
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute insideLoop
+   * @return {@code true} if this node has an equation for the inherited attribute constructorDecl
    */
-  protected boolean canDefine_insideLoop(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_constructorDecl(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:531
-   * @apilevel internal
-   */
-  public boolean Define_insideSwitch(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:531
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute insideSwitch
-   */
-  protected boolean canDefine_insideSwitch(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:592
-   * @apilevel internal
-   */
-  public Case Define_previousCase(ASTNode _callerNode, ASTNode _childNode, Case c) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    {
-        throw new Error("Missing enclosing switch for case label.");
-      }
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:592
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute previousCase
-   */
-  protected boolean canDefine_previousCase(ASTNode _callerNode, ASTNode _childNode, Case c) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
-   * @apilevel internal
-   */
-  public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return NameType.NOT_CLASSIFIED;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute nameType
-   */
-  protected boolean canDefine_nameType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:231
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:231
    * @apilevel internal
    */
   public boolean Define_isAnonymous(ASTNode _callerNode, ASTNode _childNode) {
@@ -2538,7 +2716,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return false;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:231
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:231
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isAnonymous
    */
@@ -2546,7 +2724,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupVariable.jrag:355
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:355
    * @apilevel internal
    */
   public Variable Define_unknownField(ASTNode _callerNode, ASTNode _childNode) {
@@ -2554,7 +2732,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return unknownType().findSingleVariable("unknown");
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupVariable.jrag:355
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:355
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unknownField
    */
@@ -2562,7 +2740,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:31
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:31
    * @apilevel internal
    */
   public MethodDecl Define_unknownMethod(ASTNode _callerNode, ASTNode _childNode) {
@@ -2575,7 +2753,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
       }
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:31
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:31
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unknownMethod
    */
@@ -2583,7 +2761,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:30
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:30
    * @apilevel internal
    */
   public ConstructorDecl Define_unknownConstructor(ASTNode _callerNode, ASTNode _childNode) {
@@ -2591,7 +2769,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return unknownConstructor();
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:30
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unknownConstructor
    */
@@ -2599,7 +2777,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:723
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:723
    * @apilevel internal
    */
   public TypeDecl Define_declType(ASTNode _callerNode, ASTNode _childNode) {
@@ -2607,7 +2785,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return null;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:723
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:723
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declType
    */
@@ -2615,7 +2793,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\NameCheck.jrag:30
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:30
    * @apilevel internal
    */
   public BodyDecl Define_enclosingBodyDecl(ASTNode _callerNode, ASTNode _childNode) {
@@ -2623,7 +2801,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return null;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\NameCheck.jrag:30
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingBodyDecl
    */
@@ -2631,7 +2809,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:584
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:584
    * @apilevel internal
    */
   public boolean Define_isMemberType(ASTNode _callerNode, ASTNode _childNode) {
@@ -2639,7 +2817,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return false;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:584
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:584
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isMemberType
    */
@@ -2647,7 +2825,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:76
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:76
    * @apilevel internal
    */
   public TypeDecl Define_hostType(ASTNode _callerNode, ASTNode _childNode) {
@@ -2655,7 +2833,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return null;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:76
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:76
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute hostType
    */
@@ -2663,409 +2841,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:482
-   * @apilevel internal
-   */
-  public TypeDecl Define_switchType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return unknownType();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:482
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute switchType
-   */
-  protected boolean canDefine_switchType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:534
-   * @apilevel internal
-   */
-  public TypeDecl Define_returnType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeVoid();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:534
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute returnType
-   */
-  protected boolean canDefine_returnType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:667
-   * @apilevel internal
-   */
-  public TypeDecl Define_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return null;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:667
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute enclosingInstance
-   */
-  protected boolean canDefine_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:33
-   * @apilevel internal
-   */
-  public String Define_methodHost(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    {
-        throw new Error("Needs extra equation for methodHost()");
-      }
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:33
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute methodHost
-   */
-  protected boolean canDefine_methodHost(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:188
-   * @apilevel internal
-   */
-  public boolean Define_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:188
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute inExplicitConstructorInvocation
-   */
-  protected boolean canDefine_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:196
-   * @apilevel internal
-   */
-  public TypeDecl Define_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return null;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:196
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute enclosingExplicitConstructorHostType
-   */
-  protected boolean canDefine_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:207
-   * @apilevel internal
-   */
-  public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:207
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute inStaticContext
-   */
-  protected boolean canDefine_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:280
-   * @apilevel internal
-   */
-  public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:280
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute reportUnreachable
-   */
-  protected boolean canDefine_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:44
-   * @apilevel internal
-   */
-  public boolean Define_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:44
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isMethodParameter
-   */
-  protected boolean canDefine_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:45
-   * @apilevel internal
-   */
-  public boolean Define_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:45
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isConstructorParameter
-   */
-  protected boolean canDefine_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:46
-   * @apilevel internal
-   */
-  public boolean Define_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:46
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isExceptionHandlerParameter
-   */
-  protected boolean canDefine_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:131
-   * @apilevel internal
-   */
-  public boolean Define_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:131
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayUseAnnotationTarget
-   */
-  protected boolean canDefine_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:278
-   * @apilevel internal
-   */
-  public ElementValue Define_lookupElementTypeValue(ASTNode _callerNode, ASTNode _childNode, String name) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return null;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:278
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupElementTypeValue
-   */
-  protected boolean canDefine_lookupElementTypeValue(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\SuppressWarnings.jrag:37
-   * @apilevel internal
-   */
-  public boolean Define_withinSuppressWarnings(ASTNode _callerNode, ASTNode _childNode, String annot) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\SuppressWarnings.jrag:37
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute withinSuppressWarnings
-   */
-  protected boolean canDefine_withinSuppressWarnings(ASTNode _callerNode, ASTNode _childNode, String annot) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:533
-   * @apilevel internal
-   */
-  public boolean Define_withinDeprecatedAnnotation(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:533
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute withinDeprecatedAnnotation
-   */
-  protected boolean canDefine_withinDeprecatedAnnotation(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:604
-   * @apilevel internal
-   */
-  public Annotation Define_lookupAnnotation(ASTNode _callerNode, ASTNode _childNode, TypeDecl typeDecl) {
-    int i = this.getIndexOfChild(_callerNode);
-    return null;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:604
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupAnnotation
-   */
-  protected boolean canDefine_lookupAnnotation(ASTNode _callerNode, ASTNode _childNode, TypeDecl typeDecl) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:648
-   * @apilevel internal
-   */
-  public TypeDecl Define_enclosingAnnotationDecl(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return unknownType();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Annotations.jrag:648
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute enclosingAnnotationDecl
-   */
-  protected boolean canDefine_enclosingAnnotationDecl(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:69
-   * @apilevel internal
-   */
-  public TypeDecl Define_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeNull();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:69
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute assignConvertedType
-   */
-  protected boolean canDefine_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:383
-   * @apilevel internal
-   */
-  public boolean Define_inExtendsOrImplements(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:383
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute inExtendsOrImplements
-   */
-  protected boolean canDefine_inExtendsOrImplements(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1384
-   * @apilevel internal
-   */
-  public FieldDecl Define_fieldDecl(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return null;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1384
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute fieldDecl
-   */
-  protected boolean canDefine_fieldDecl(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1734
-   * @apilevel internal
-   */
-  public TypeDecl Define_typeWildcard(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return wildcards().typeWildcard();
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1734
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeWildcard
-   */
-  protected boolean canDefine_typeWildcard(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1733
-   * @apilevel internal
-   */
-  public TypeDecl Define_lookupWildcardExtends(ASTNode _callerNode, ASTNode _childNode, TypeDecl typeDecl) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return wildcards().lookupWildcardExtends(typeDecl);
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1733
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupWildcardExtends
-   */
-  protected boolean canDefine_lookupWildcardExtends(ASTNode _callerNode, ASTNode _childNode, TypeDecl typeDecl) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1732
-   * @apilevel internal
-   */
-  public TypeDecl Define_lookupWildcardSuper(ASTNode _callerNode, ASTNode _childNode, TypeDecl typeDecl) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return wildcards().lookupWildcardSuper(typeDecl);
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1732
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupWildcardSuper
-   */
-  protected boolean canDefine_lookupWildcardSuper(ASTNode _callerNode, ASTNode _childNode, TypeDecl typeDecl) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:210
-   * @apilevel internal
-   */
-  public LUBType Define_lookupLUBType(ASTNode _callerNode, ASTNode _childNode, Collection<TypeDecl> bounds) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return wildcards().lookupLUBType(bounds);
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\MultiCatch.jrag:210
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupLUBType
-   */
-  protected boolean canDefine_lookupLUBType(ASTNode _callerNode, ASTNode _childNode, Collection<TypeDecl> bounds) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1834
-   * @apilevel internal
-   */
-  public GLBType Define_lookupGLBType(ASTNode _callerNode, ASTNode _childNode, Collection<TypeDecl> bounds) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return wildcards().lookupGLBType(bounds);
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1834
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupGLBType
-   */
-  protected boolean canDefine_lookupGLBType(ASTNode _callerNode, ASTNode _childNode, Collection<TypeDecl> bounds) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericsParTypeDecl.jrag:74
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsParTypeDecl.jrag:74
    * @apilevel internal
    */
   public TypeDecl Define_genericDecl(ASTNode _callerNode, ASTNode _childNode) {
@@ -3073,7 +2849,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return null;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\GenericsParTypeDecl.jrag:74
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsParTypeDecl.jrag:74
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute genericDecl
    */
@@ -3081,7 +2857,23 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\VariableArityParameters.jrag:46
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:69
+   * @apilevel internal
+   */
+  public TypeDecl Define_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeNull();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:69
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute assignConvertedType
+   */
+  protected boolean canDefine_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/VariableArityParameters.jrag:46
    * @apilevel internal
    */
   public boolean Define_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
@@ -3089,7 +2881,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return false;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\VariableArityParameters.jrag:46
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/VariableArityParameters.jrag:46
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute variableArityValid
    */
@@ -3097,7 +2889,215 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Diamond.jrag:106
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:131
+   * @apilevel internal
+   */
+  public boolean Define_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:131
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute mayUseAnnotationTarget
+   */
+  protected boolean canDefine_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:278
+   * @apilevel internal
+   */
+  public ElementValue Define_lookupElementTypeValue(ASTNode _callerNode, ASTNode _childNode, String name) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return null;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:278
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupElementTypeValue
+   */
+  protected boolean canDefine_lookupElementTypeValue(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SuppressWarnings.jrag:37
+   * @apilevel internal
+   */
+  public boolean Define_withinSuppressWarnings(ASTNode _callerNode, ASTNode _childNode, String annot) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SuppressWarnings.jrag:37
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute withinSuppressWarnings
+   */
+  protected boolean canDefine_withinSuppressWarnings(ASTNode _callerNode, ASTNode _childNode, String annot) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:533
+   * @apilevel internal
+   */
+  public boolean Define_withinDeprecatedAnnotation(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:533
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute withinDeprecatedAnnotation
+   */
+  protected boolean canDefine_withinDeprecatedAnnotation(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:604
+   * @apilevel internal
+   */
+  public Annotation Define_lookupAnnotation(ASTNode _callerNode, ASTNode _childNode, TypeDecl typeDecl) {
+    int i = this.getIndexOfChild(_callerNode);
+    return null;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:604
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupAnnotation
+   */
+  protected boolean canDefine_lookupAnnotation(ASTNode _callerNode, ASTNode _childNode, TypeDecl typeDecl) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:648
+   * @apilevel internal
+   */
+  public TypeDecl Define_enclosingAnnotationDecl(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return unknownType();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:648
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute enclosingAnnotationDecl
+   */
+  protected boolean canDefine_enclosingAnnotationDecl(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:383
+   * @apilevel internal
+   */
+  public boolean Define_inExtendsOrImplements(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:383
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute inExtendsOrImplements
+   */
+  protected boolean canDefine_inExtendsOrImplements(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1384
+   * @apilevel internal
+   */
+  public FieldDecl Define_fieldDecl(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return null;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1384
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute fieldDecl
+   */
+  protected boolean canDefine_fieldDecl(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1734
+   * @apilevel internal
+   */
+  public TypeDecl Define_typeWildcard(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return wildcards().typeWildcard();
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1734
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeWildcard
+   */
+  protected boolean canDefine_typeWildcard(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1733
+   * @apilevel internal
+   */
+  public TypeDecl Define_lookupWildcardExtends(ASTNode _callerNode, ASTNode _childNode, TypeDecl typeDecl) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return wildcards().lookupWildcardExtends(typeDecl);
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1733
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupWildcardExtends
+   */
+  protected boolean canDefine_lookupWildcardExtends(ASTNode _callerNode, ASTNode _childNode, TypeDecl typeDecl) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1732
+   * @apilevel internal
+   */
+  public TypeDecl Define_lookupWildcardSuper(ASTNode _callerNode, ASTNode _childNode, TypeDecl typeDecl) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return wildcards().lookupWildcardSuper(typeDecl);
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1732
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupWildcardSuper
+   */
+  protected boolean canDefine_lookupWildcardSuper(ASTNode _callerNode, ASTNode _childNode, TypeDecl typeDecl) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:210
+   * @apilevel internal
+   */
+  public LUBType Define_lookupLUBType(ASTNode _callerNode, ASTNode _childNode, Collection<TypeDecl> bounds) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return wildcards().lookupLUBType(bounds);
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:210
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupLUBType
+   */
+  protected boolean canDefine_lookupLUBType(ASTNode _callerNode, ASTNode _childNode, Collection<TypeDecl> bounds) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1834
+   * @apilevel internal
+   */
+  public GLBType Define_lookupGLBType(ASTNode _callerNode, ASTNode _childNode, Collection<TypeDecl> bounds) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return wildcards().lookupGLBType(bounds);
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1834
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupGLBType
+   */
+  protected boolean canDefine_lookupGLBType(ASTNode _callerNode, ASTNode _childNode, Collection<TypeDecl> bounds) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:106
    * @apilevel internal
    */
   public ClassInstanceExpr Define_getClassInstanceExpr(ASTNode _callerNode, ASTNode _childNode) {
@@ -3105,7 +3105,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return null;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Diamond.jrag:106
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:106
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute getClassInstanceExpr
    */
@@ -3113,7 +3113,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Diamond.jrag:295
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:295
    * @apilevel internal
    */
   public boolean Define_isAnonymousDecl(ASTNode _callerNode, ASTNode _childNode) {
@@ -3121,7 +3121,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return false;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Diamond.jrag:295
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:295
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isAnonymousDecl
    */
@@ -3129,7 +3129,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Diamond.jrag:311
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:311
    * @apilevel internal
    */
   public boolean Define_isExplicitGenericConstructorAccess(ASTNode _callerNode, ASTNode _childNode) {
@@ -3137,7 +3137,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return false;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Diamond.jrag:311
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:311
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isExplicitGenericConstructorAccess
    */
@@ -3145,7 +3145,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:202
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:202
    * @apilevel internal
    */
   public boolean Define_isCatchParam(ASTNode _callerNode, ASTNode _childNode) {
@@ -3153,7 +3153,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return false;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:202
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:202
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isCatchParam
    */
@@ -3161,7 +3161,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:209
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:209
    * @apilevel internal
    */
   public CatchClause Define_catchClause(ASTNode _callerNode, ASTNode _childNode) {
@@ -3171,7 +3171,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
       }
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:209
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:209
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute catchClause
    */
@@ -3179,7 +3179,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\TryWithResources.jrag:178
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:178
    * @apilevel internal
    */
   public boolean Define_resourcePreviouslyDeclared(ASTNode _callerNode, ASTNode _childNode, String name) {
@@ -3187,7 +3187,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return false;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\TryWithResources.jrag:178
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:178
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute resourcePreviouslyDeclared
    */
@@ -3195,7 +3195,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:31
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    */
   public TypeDecl Define_targetType(ASTNode _callerNode, ASTNode _childNode) {
@@ -3203,7 +3203,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_BlockLam
     return typeNull();
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:31
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute targetType
    */

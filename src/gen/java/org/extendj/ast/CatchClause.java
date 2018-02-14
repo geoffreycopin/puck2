@@ -19,10 +19,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * Abstract superclass for catch clauses.
  * @ast node
- * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\grammar\\MultiCatch.ast:4
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/grammar/MultiCatch.ast:4
  * @astdecl CatchClause : ASTNode ::= Block;
  * @production CatchClause : {@link ASTNode} ::= <span class="component">{@link Block}</span>;
 
@@ -82,9 +82,9 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   public void flushAttrCache() {
     super.flushAttrCache();
     parameterDeclaration_String_reset();
+    reachableCatchClause_TypeDecl_reset();
     typeThrowable_reset();
     lookupVariable_String_reset();
-    reachableCatchClause_TypeDecl_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:40
@@ -155,10 +155,10 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect ExceptionHandling
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ExceptionHandling.jrag:279
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:279
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ExceptionHandling.jrag:279")
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:279")
   public boolean handles(TypeDecl exceptionType) {
     boolean handles_TypeDecl_value = false;
     return handles_TypeDecl_value;
@@ -175,10 +175,10 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect VariableScope
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupVariable.jrag:192
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:192
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupVariable.jrag:192")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:192")
   public SimpleSet<Variable> parameterDeclaration(String name) {
     Object _parameters = name;
     if (parameterDeclaration_String_computed == null) parameterDeclaration_String_computed = new java.util.HashMap(4);
@@ -204,93 +204,22 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:144
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:144
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:144")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:144")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = getBlock().modifiedInScope(var);
     return modifiedInScope_Variable_value;
   }
   /**
-   * @attribute inh
-   * @aspect SpecialClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:97
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupType.jrag:97")
-  public TypeDecl typeThrowable() {
-    ASTState state = state();
-    if (typeThrowable_computed == ASTState.NON_CYCLE || typeThrowable_computed == state().cycle()) {
-      return typeThrowable_value;
-    }
-    typeThrowable_value = getParent().Define_typeThrowable(this, null);
-    if (state().inCircle()) {
-      typeThrowable_computed = state().cycle();
-    
-    } else {
-      typeThrowable_computed = ASTState.NON_CYCLE;
-    
-    }
-    return typeThrowable_value;
-  }
-  /** @apilevel internal */
-  private void typeThrowable_reset() {
-    typeThrowable_computed = null;
-    typeThrowable_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle typeThrowable_computed = null;
-
-  /** @apilevel internal */
-  protected TypeDecl typeThrowable_value;
-
-  /**
-   * @attribute inh
-   * @aspect VariableScope
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupVariable.jrag:44
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupVariable.jrag:44")
-  public SimpleSet<Variable> lookupVariable(String name) {
-    Object _parameters = name;
-    if (lookupVariable_String_computed == null) lookupVariable_String_computed = new java.util.HashMap(4);
-    if (lookupVariable_String_values == null) lookupVariable_String_values = new java.util.HashMap(4);
-    ASTState state = state();
-    if (lookupVariable_String_values.containsKey(_parameters)
-        && lookupVariable_String_computed.containsKey(_parameters)
-        && (lookupVariable_String_computed.get(_parameters) == ASTState.NON_CYCLE || lookupVariable_String_computed.get(_parameters) == state().cycle())) {
-      return (SimpleSet<Variable>) lookupVariable_String_values.get(_parameters);
-    }
-    SimpleSet<Variable> lookupVariable_String_value = getParent().Define_lookupVariable(this, null, name);
-    if (state().inCircle()) {
-      lookupVariable_String_values.put(_parameters, lookupVariable_String_value);
-      lookupVariable_String_computed.put(_parameters, state().cycle());
-    
-    } else {
-      lookupVariable_String_values.put(_parameters, lookupVariable_String_value);
-      lookupVariable_String_computed.put(_parameters, ASTState.NON_CYCLE);
-    
-    }
-    return lookupVariable_String_value;
-  }
-  /** @apilevel internal */
-  private void lookupVariable_String_reset() {
-    lookupVariable_String_computed = null;
-    lookupVariable_String_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map lookupVariable_String_values;
-  /** @apilevel internal */
-  protected java.util.Map lookupVariable_String_computed;
-  /**
    * @return true if an exception of type exceptionType is catchable by the catch clause
    * @attribute inh
    * @aspect UnreachableStatements
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\UnreachableStatements.jrag:182
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:182
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\UnreachableStatements.jrag:182")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:182")
   public boolean reachableCatchClause(TypeDecl exceptionType) {
     Object _parameters = exceptionType;
     if (reachableCatchClause_TypeDecl_computed == null) reachableCatchClause_TypeDecl_computed = new java.util.HashMap(4);
@@ -324,11 +253,82 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   protected java.util.Map reachableCatchClause_TypeDecl_computed;
   /**
    * @attribute inh
-   * @aspect PreciseRethrow
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:217
+   * @aspect SpecialClasses
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:97
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:217")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:97")
+  public TypeDecl typeThrowable() {
+    ASTState state = state();
+    if (typeThrowable_computed == ASTState.NON_CYCLE || typeThrowable_computed == state().cycle()) {
+      return typeThrowable_value;
+    }
+    typeThrowable_value = getParent().Define_typeThrowable(this, null);
+    if (state().inCircle()) {
+      typeThrowable_computed = state().cycle();
+    
+    } else {
+      typeThrowable_computed = ASTState.NON_CYCLE;
+    
+    }
+    return typeThrowable_value;
+  }
+  /** @apilevel internal */
+  private void typeThrowable_reset() {
+    typeThrowable_computed = null;
+    typeThrowable_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle typeThrowable_computed = null;
+
+  /** @apilevel internal */
+  protected TypeDecl typeThrowable_value;
+
+  /**
+   * @attribute inh
+   * @aspect VariableScope
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:44
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:44")
+  public SimpleSet<Variable> lookupVariable(String name) {
+    Object _parameters = name;
+    if (lookupVariable_String_computed == null) lookupVariable_String_computed = new java.util.HashMap(4);
+    if (lookupVariable_String_values == null) lookupVariable_String_values = new java.util.HashMap(4);
+    ASTState state = state();
+    if (lookupVariable_String_values.containsKey(_parameters)
+        && lookupVariable_String_computed.containsKey(_parameters)
+        && (lookupVariable_String_computed.get(_parameters) == ASTState.NON_CYCLE || lookupVariable_String_computed.get(_parameters) == state().cycle())) {
+      return (SimpleSet<Variable>) lookupVariable_String_values.get(_parameters);
+    }
+    SimpleSet<Variable> lookupVariable_String_value = getParent().Define_lookupVariable(this, null, name);
+    if (state().inCircle()) {
+      lookupVariable_String_values.put(_parameters, lookupVariable_String_value);
+      lookupVariable_String_computed.put(_parameters, state().cycle());
+    
+    } else {
+      lookupVariable_String_values.put(_parameters, lookupVariable_String_value);
+      lookupVariable_String_computed.put(_parameters, ASTState.NON_CYCLE);
+    
+    }
+    return lookupVariable_String_value;
+  }
+  /** @apilevel internal */
+  private void lookupVariable_String_reset() {
+    lookupVariable_String_computed = null;
+    lookupVariable_String_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map lookupVariable_String_values;
+  /** @apilevel internal */
+  protected java.util.Map lookupVariable_String_computed;
+  /**
+   * @attribute inh
+   * @aspect PreciseRethrow
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:217
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:217")
   public Collection<TypeDecl> caughtExceptions() {
     Collection<TypeDecl> caughtExceptions_value = getParent().Define_caughtExceptions(this, null);
     return caughtExceptions_value;
@@ -336,21 +336,21 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect PreciseRethrow
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:280
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:280")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280")
   public boolean reportUnreachable() {
     boolean reportUnreachable_value = getParent().Define_reportUnreachable(this, null);
     return reportUnreachable_value;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LookupVariable.jrag:30
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LookupVariable.jrag:30
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\LookupVariable.jrag:138
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:138
       {
           SimpleSet<Variable> result = parameterDeclaration(name);
           if (!result.isEmpty()) {
@@ -364,7 +364,7 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
     }
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LookupVariable.jrag:30
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LookupVariable.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
    */
@@ -372,7 +372,7 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:209
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:209
    * @apilevel internal
    */
   public CatchClause Define_catchClause(ASTNode _callerNode, ASTNode _childNode) {
@@ -380,7 +380,7 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
     return this;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:209
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:209
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute catchClause
    */
@@ -388,12 +388,12 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
     return true;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:280
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
    * @apilevel internal
    */
   public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:281
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:281
       return false;
     }
     else {
@@ -401,7 +401,7 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
     }
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:280
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute reportUnreachable
    */

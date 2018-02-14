@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\grammar\\MethodReference.ast:8
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/grammar/MethodReference.ast:8
  * @astdecl ParMethodReferenceAccess : ParMethodAccess;
  * @production ParMethodReferenceAccess : {@link ParMethodAccess};
 
@@ -37,12 +37,12 @@ import java.io.DataInputStream;
 public class ParMethodReferenceAccess extends ParMethodAccess implements Cloneable {
   /**
    * @aspect Synthetics
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:439
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:439
    */
   private FunctionDescriptor targetDescriptor;
   /**
    * @aspect Synthetics
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodReference.jrag:440
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:440
    */
   public ParMethodReferenceAccess(String name,
       List<Expr> args, List<Access> typeArgs, FunctionDescriptor fd) {
@@ -458,10 +458,10 @@ public class ParMethodReferenceAccess extends ParMethodAccess implements Cloneab
   /**
    * @attribute syn
    * @aspect TargetType
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:196
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:196
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TargetType.jrag:196")
+  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:196")
   public TypeDecl assignConvertedType() {
     ASTState state = state();
     if (assignConvertedType_computed == ASTState.NON_CYCLE || assignConvertedType_computed == state().cycle()) {

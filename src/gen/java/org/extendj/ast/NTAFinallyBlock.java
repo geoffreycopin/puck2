@@ -19,10 +19,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -32,7 +32,7 @@ import java.io.DataInputStream;
  * regular, non-NTA, blocks. This is required to avoid an endlessly
  * recursive AST.
  * @ast node
- * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\NTAFinally.ast:6
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/NTAFinally.ast:6
  * @astdecl NTAFinallyBlock : Block;
  * @production NTAFinallyBlock : {@link Block};
 
@@ -40,12 +40,12 @@ import java.io.DataInputStream;
 public class NTAFinallyBlock extends Block implements Cloneable {
   /**
    * @aspect NTAFinally
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NTAFinally.jrag:82
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NTAFinally.jrag:82
    */
   private FinallyHost origin;
   /**
    * @aspect NTAFinally
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NTAFinally.jrag:84
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NTAFinally.jrag:84
    */
   public NTAFinallyBlock(FinallyHost finallyHost) {
     this.origin = finallyHost;
@@ -295,7 +295,7 @@ public class NTAFinallyBlock extends Block implements Cloneable {
     return getStmtListNoTransform();
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:273
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:273
    * @apilevel internal
    */
   public FinallyHost Define_enclosingFinally(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
@@ -303,7 +303,7 @@ public class NTAFinallyBlock extends Block implements Cloneable {
     return origin.enclosingFinally(branch);
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:273
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:273
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingFinally
    */

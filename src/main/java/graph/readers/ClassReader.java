@@ -4,61 +4,58 @@ import graph.Edge;
 import graph.Node;
 import graph.UniqueIdGenerator;
 
-import org.extendj.ast.Access;
-import org.extendj.ast.BodyDecl;
-import org.extendj.ast.ClassDecl;
-import org.extendj.ast.FieldDecl;
-import org.extendj.ast.FieldDeclarator;
-import org.extendj.ast.InterfaceDecl;
-import org.extendj.ast.MethodDecl;
-import org.extendj.ast.ParameterDeclaration;
-import org.extendj.ast.TypeDecl;
+import org.extendj.ast.*;
 
 import java.util.List;
 import java.util.Map;
 
-public class ClassReader extends AbstractReader {
-	private ClassDecl classDeclaration;
-	private Node classNode;
+public class ClassReader extends TypeDeclReader {
+    private ClassDecl classDeclaration;
 
-	public ClassReader(ClassDecl classDeclaration, UniqueIdGenerator idGenerator) {
-		super(idGenerator);
-		this.classDeclaration = classDeclaration;
-		this.idGenerator = idGenerator;
-	}
+    public ClassReader(ClassDecl classDeclaration, UniqueIdGenerator idGenerator) {
+        super(classDeclaration, idGenerator);
+        this.classDeclaration = classDeclaration;
+    }
 
-	public void readInto(Map<String, Node> nodes, List<Edge> edges) {
+    public void readInto(Map<String, Node> nodes, List<Edge> edges) {
         String className = classDeclaration.fullName();
-        FieldReader fieldreader;
-        MethodReader methodreader;
 
-        if (nodes.containsKey(className)) {
+        Node classNode = new Node(idGenerator.generate(), className,
+                            Node.Type.Class, classDeclaration.createQualifiedAccess());
+        nodes.put(className, classNode);
+
+        readBodyDeclarations(nodes, edges);
+
+        addPackageDependency(edges);
+        addSuperClassdependency(edges);
+        addInterfacesDependency(edges);
+    }
+
+    private void readBodyDeclarations(Map<String, Node> nodes, List<Edge> edges) {
+        for (BodyDecl decl : classDeclaration.getBodyDeclList()) {
+            if (decl instanceof FieldDecl) {
+                FieldReader fieldreader = new FieldReader(idGenerator, (FieldDecl) decl);
+                fieldreader.readInto(nodes, edges);
+            } else if (decl instanceof MethodDecl) {
+                MethodReader methodreader = new MethodReader(idGenerator, (MethodDecl) decl);
+                methodreader.readInto(nodes, edges);
+            }
+        }
+    }
+
+    private void addSuperClassdependency(List<Edge> edges) {
+        if (classDeclaration.getSuperClass() == null) {
             return;
         }
 
-        classNode = new Node(idGenerator.generate(), className, Node.Type.Class, classDeclaration.createQualifiedAccess());
-        nodes.put(className, classNode);
-        
-        if (classDeclaration.getNumBodyDecl() > 0) {
-        	for (BodyDecl decl : classDeclaration.getBodyDeclList()) {
-        		
-        		/* Add Fields */
-        		if (decl instanceof FieldDecl) {
-        			FieldDecl f = (FieldDecl) decl;
-        			fieldreader= new FieldReader(idGenerator,f,classDeclaration);
-        			fieldreader.readInto(nodes, edges);
-        		}
-        		/* Add Methods */
-        		if (decl instanceof MethodDecl) {
-        			MethodDecl m = (MethodDecl)decl;
-        			methodreader= new MethodReader(idGenerator,m,classDeclaration);
-        			methodreader.readInto(nodes, edges);
-        		}
+        String superClassName = classDeclaration.superclass().fullName();
+        edges.add(new Edge(classDeclaration.fullName(), superClassName, Edge.Type.IsA));
+    }
 
-        	}
+    private void addInterfacesDependency(List<Edge> edges) {
+        for (Access imp: classDeclaration.getImplementsList()) {
+            InterfaceDecl implement = (InterfaceDecl) imp.type();
+            edges.add(new Edge(classDeclaration.fullName(), implement.fullName(), Edge.Type.IsA));
         }
-             
-}
-
-
+    }
 }

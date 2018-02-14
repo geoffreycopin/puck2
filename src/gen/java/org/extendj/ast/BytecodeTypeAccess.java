@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\BoundNames.ast:10
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/BoundNames.ast:10
  * @astdecl BytecodeTypeAccess : TypeAccess;
  * @production BytecodeTypeAccess : {@link TypeAccess};
 
@@ -236,11 +236,11 @@ public class BytecodeTypeAccess extends TypeAccess implements Cloneable {
   }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
-    // Declared at C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BoundNames.jrag:115
+    // Declared at /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BoundNames.jrag:115
     return rewriteRule0();
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BoundNames.jrag:115
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BoundNames.jrag:115
    * @apilevel internal
    */
   private Access rewriteRule0() {

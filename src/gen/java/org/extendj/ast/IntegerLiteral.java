@@ -19,10 +19,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -31,7 +31,7 @@ import java.io.DataInputStream;
  * Default Java integer literal. Should only be used for numbers
  * that can be stored in 32 bits binary.
  * @ast node
- * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\Literals.ast:35
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Literals.ast:35
  * @astdecl IntegerLiteral : Literal;
  * @production IntegerLiteral : {@link Literal};
 
@@ -39,19 +39,19 @@ import java.io.DataInputStream;
 public class IntegerLiteral extends Literal implements Cloneable, NumericLiteral {
   /**
    * @aspect NodeConstructors
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NodeConstructors.jrag:62
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NodeConstructors.jrag:62
    */
   public IntegerLiteral(int i) {
     this(Integer.toString(i));
   }
   /**
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:922
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:922
    */
   protected Constant constant = null;
   /**
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:924
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:924
    */
   public IntegerLiteral(String literal, Constant constant) {
     this(literal);
@@ -229,13 +229,24 @@ public class IntegerLiteral extends Literal implements Cloneable, NumericLiteral
   /**
    * @attribute syn
    * @aspect PositiveLiterals
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PositiveLiterals.jrag:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PositiveLiterals.jrag:36
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PositiveLiterals", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PositiveLiterals.jrag:36")
+  @ASTNodeAnnotation.Source(aspect="PositiveLiterals", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PositiveLiterals.jrag:36")
   public boolean isPositive() {
     boolean isPositive_value = !getLITERAL().startsWith("-");
     return isPositive_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:750
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:750")
+  public Problem sizeError() {
+    Problem sizeError_value = errorf("The integer literal \"%s\" is too large for type int.", getLITERAL());
+    return sizeError_value;
   }
   /** @apilevel internal */
   private void type_reset() {
@@ -251,10 +262,10 @@ public class IntegerLiteral extends Literal implements Cloneable, NumericLiteral
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:295
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -270,17 +281,6 @@ public class IntegerLiteral extends Literal implements Cloneable, NumericLiteral
     }
     return type_value;
   }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:750
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:750")
-  public Problem sizeError() {
-    Problem sizeError_value = errorf("The integer literal \"%s\" is too large for type int.", getLITERAL());
-    return sizeError_value;
-  }
   /** @apilevel internal */
   private void constant_reset() {
     constant_computed = null;
@@ -295,10 +295,10 @@ public class IntegerLiteral extends Literal implements Cloneable, NumericLiteral
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ConstantExpression.jrag:38
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\ConstantExpression.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:38")
   public Constant constant() {
     ASTState state = state();
     if (constant_computed == ASTState.NON_CYCLE || constant_computed == state().cycle()) {
@@ -342,10 +342,10 @@ public class IntegerLiteral extends Literal implements Cloneable, NumericLiteral
    * @return {@code true} if this literal starts with a minus sign.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:303
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:303
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:303")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:303")
   public boolean isNegative() {
     boolean isNegative_value = getLITERAL().charAt(0) == '-';
     return isNegative_value;
@@ -353,10 +353,10 @@ public class IntegerLiteral extends Literal implements Cloneable, NumericLiteral
   /**
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:317
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:317
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:317")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:317")
   public boolean isHex() {
     boolean isHex_value = numericLiteralKind() == NumericLiteralKind.HEXADECIMAL;
     return isHex_value;
@@ -364,10 +364,10 @@ public class IntegerLiteral extends Literal implements Cloneable, NumericLiteral
   /**
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:319
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:319
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:319")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:319")
   public boolean isOctal() {
     boolean isOctal_value = numericLiteralKind() == NumericLiteralKind.OCTAL;
     return isOctal_value;
@@ -375,10 +375,10 @@ public class IntegerLiteral extends Literal implements Cloneable, NumericLiteral
   /**
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:321
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:321
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\Literals.jrag:321")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Literals.jrag:321")
   public boolean isDecimal() {
     boolean isDecimal_value = numericLiteralKind() == NumericLiteralKind.DECIMAL;
     return isDecimal_value;
@@ -393,7 +393,7 @@ public class IntegerLiteral extends Literal implements Cloneable, NumericLiteral
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:754
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:754
     if (constant().error) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

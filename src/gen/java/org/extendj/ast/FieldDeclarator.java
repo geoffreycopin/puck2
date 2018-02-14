@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\Java.ast:175
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:175
  * @astdecl FieldDeclarator : Declarator;
  * @production FieldDeclarator : {@link Declarator};
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class FieldDeclarator extends Declarator implements Cloneable {
   /** Create an access to this field. 
    * @aspect BoundNames
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BoundNames.jrag:33
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BoundNames.jrag:33
    */
   public Access createBoundAccess() {
     if (isStatic()) {
@@ -49,7 +49,7 @@ public class FieldDeclarator extends Declarator implements Cloneable {
   /**
    * Copies the declarator without initializer.
    * @aspect LookupParTypeDecl
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1486
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1486
    */
   public FieldDeclarator signatureCopy() {
     return new FieldDeclarator(getID(), getDimsList().treeCopyNoTransform(), new Opt<Expr>());
@@ -111,11 +111,11 @@ public class FieldDeclarator extends Declarator implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    constant_reset();
     accessibleFrom_TypeDecl_reset();
-    exceptions_reset();
     assignedAfter_Variable_reset();
     unassignedAfter_Variable_reset();
-    constant_reset();
+    exceptions_reset();
     usesTypeVariable_reset();
     isEffectivelyFinal_reset();
   }
@@ -423,6 +423,149 @@ public class FieldDeclarator extends Declarator implements Cloneable {
   protected int getTypeAccessChildPosition() {
     return 2;
   }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:55
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:55")
+  public boolean isParameter() {
+    boolean isParameter_value = false;
+    return isParameter_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:57
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:57")
+  public boolean isClassVariable() {
+    boolean isClassVariable_value = isStatic() || hostType().isInterfaceDecl();
+    return isClassVariable_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:58
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:58")
+  public boolean isInstanceVariable() {
+    boolean isInstanceVariable_value = (hostType().isClassDecl() || hostType().isAnonymous()) && !isStatic();
+    return isInstanceVariable_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:60
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:60")
+  public boolean isMethodParameter() {
+    boolean isMethodParameter_value = false;
+    return isMethodParameter_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:61
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:61")
+  public boolean isConstructorParameter() {
+    boolean isConstructorParameter_value = false;
+    return isConstructorParameter_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:62
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:62")
+  public boolean isExceptionHandlerParameter() {
+    boolean isExceptionHandlerParameter_value = false;
+    return isExceptionHandlerParameter_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:63
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:63")
+  public boolean isLocalVariable() {
+    boolean isLocalVariable_value = false;
+    return isLocalVariable_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:64
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:64")
+  public boolean isField() {
+    boolean isField_value = true;
+    return isField_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:66
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:66")
+  public boolean isBlank() {
+    boolean isBlank_value = !hasInit();
+    return isBlank_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:68
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:68")
+  public String name() {
+    String name_value = getID();
+    return name_value;
+  }
+  /** @apilevel internal */
+  private void constant_reset() {
+    constant_computed = null;
+    constant_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle constant_computed = null;
+
+  /** @apilevel internal */
+  protected Constant constant_value;
+
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:69
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:69")
+  public Constant constant() {
+    ASTState state = state();
+    if (constant_computed == ASTState.NON_CYCLE || constant_computed == state().cycle()) {
+      return constant_value;
+    }
+    constant_value = type().cast(getInit().constant());
+    if (state().inCircle()) {
+      constant_computed = state().cycle();
+    
+    } else {
+      constant_computed = ASTState.NON_CYCLE;
+    
+    }
+    return constant_value;
+  }
   /** @apilevel internal */
   private void accessibleFrom_TypeDecl_reset() {
     accessibleFrom_TypeDecl_computed = null;
@@ -435,10 +578,10 @@ public class FieldDeclarator extends Declarator implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessControl
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\AccessControl.jrag:138
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AccessControl.jrag:138
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\AccessControl.jrag:138")
+  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AccessControl.jrag:138")
   public boolean accessibleFrom(TypeDecl type) {
     Object _parameters = type;
     if (accessibleFrom_TypeDecl_computed == null) accessibleFrom_TypeDecl_computed = new java.util.HashMap(4);
@@ -479,55 +622,13 @@ public class FieldDeclarator extends Declarator implements Cloneable {
         return hostPackage().equals(type.hostPackage());
       }
     }
-  /** @apilevel internal */
-  private void exceptions_reset() {
-    exceptions_computed = null;
-    exceptions_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle exceptions_computed = null;
-
-  /** @apilevel internal */
-  protected Collection<TypeDecl> exceptions_value;
-
-  /**
-   * Used in bytecode generation to generate the exception list for this field.
-   * @attribute syn
-   * @aspect AnonymousClasses
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\AnonymousClasses.jrag:100
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\AnonymousClasses.jrag:100")
-  public Collection<TypeDecl> exceptions() {
-    ASTState state = state();
-    if (exceptions_computed == ASTState.NON_CYCLE || exceptions_computed == state().cycle()) {
-      return exceptions_value;
-    }
-    exceptions_value = exceptions_compute();
-    if (state().inCircle()) {
-      exceptions_computed = state().cycle();
-    
-    } else {
-      exceptions_computed = ASTState.NON_CYCLE;
-    
-    }
-    return exceptions_value;
-  }
-  /** @apilevel internal */
-  private Collection<TypeDecl> exceptions_compute() {
-      Collection<TypeDecl> exceptions = new HashSet<TypeDecl>();
-      if (isInstanceVariable() && hasInit()) {
-        collectExceptions(exceptions);
-      }
-      return exceptions;
-    }
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:197
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:197
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:197")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:197")
   public Collection<Problem> definiteAssignmentProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -591,7 +692,7 @@ public class FieldDeclarator extends Declarator implements Cloneable {
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:632")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:632")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -646,7 +747,7 @@ public class FieldDeclarator extends Declarator implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:1181")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1181")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -697,85 +798,11 @@ public class FieldDeclarator extends Declarator implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect Modifiers
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:273
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:273")
-  public boolean isPublic() {
-    boolean isPublic_value = getModifiers().isPublic() || hostType().isInterfaceDecl();
-    return isPublic_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:292
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:292")
-  public boolean isStatic() {
-    boolean isStatic_value = getModifiers().isStatic() || hostType().isInterfaceDecl();
-    return isStatic_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:294
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:294")
-  public boolean isFinal() {
-    boolean isFinal_value = getModifiers().isFinal() || hostType().isInterfaceDecl();
-    return isFinal_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:295
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:295")
-  public boolean isTransient() {
-    boolean isTransient_value = getModifiers().isTransient();
-    return isTransient_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:296
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\Modifiers.jrag:296")
-  public boolean isVolatile() {
-    boolean isVolatile_value = getModifiers().isVolatile();
-    return isVolatile_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect NameCheck
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:428
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:428")
-  public Collection<Problem> nameProblems() {
-    {
-        // 8.3
-        for (Variable v : hostType().memberFields(name())) {
-          if (v != this && v.hostType() == hostType()) {
-            return Collections.singletonList(errorf("field named %s is multiply declared in type %s",
-                name(), hostType().typeName()));
-          }
-        }
-        return Collections.emptyList();
-      }
-  }
-  /**
-   * @attribute syn
    * @aspect TypeCheck
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:49
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:49
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:49")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:49")
   public Collection<Problem> typeProblems() {
     {
         if (hasInit()) {
@@ -792,147 +819,120 @@ public class FieldDeclarator extends Declarator implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect Variables
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:55
+   * @aspect Modifiers
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:273
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:55")
-  public boolean isParameter() {
-    boolean isParameter_value = false;
-    return isParameter_value;
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:273")
+  public boolean isPublic() {
+    boolean isPublic_value = getModifiers().isPublic() || hostType().isInterfaceDecl();
+    return isPublic_value;
   }
   /**
    * @attribute syn
-   * @aspect Variables
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:57
+   * @aspect Modifiers
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:292
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:57")
-  public boolean isClassVariable() {
-    boolean isClassVariable_value = isStatic() || hostType().isInterfaceDecl();
-    return isClassVariable_value;
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:292")
+  public boolean isStatic() {
+    boolean isStatic_value = getModifiers().isStatic() || hostType().isInterfaceDecl();
+    return isStatic_value;
   }
   /**
    * @attribute syn
-   * @aspect Variables
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:58
+   * @aspect Modifiers
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:294
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:58")
-  public boolean isInstanceVariable() {
-    boolean isInstanceVariable_value = (hostType().isClassDecl() || hostType().isAnonymous()) && !isStatic();
-    return isInstanceVariable_value;
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:294")
+  public boolean isFinal() {
+    boolean isFinal_value = getModifiers().isFinal() || hostType().isInterfaceDecl();
+    return isFinal_value;
   }
   /**
    * @attribute syn
-   * @aspect Variables
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:60
+   * @aspect Modifiers
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:60")
-  public boolean isMethodParameter() {
-    boolean isMethodParameter_value = false;
-    return isMethodParameter_value;
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:295")
+  public boolean isTransient() {
+    boolean isTransient_value = getModifiers().isTransient();
+    return isTransient_value;
   }
   /**
    * @attribute syn
-   * @aspect Variables
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:61
+   * @aspect Modifiers
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:296
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:61")
-  public boolean isConstructorParameter() {
-    boolean isConstructorParameter_value = false;
-    return isConstructorParameter_value;
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:296")
+  public boolean isVolatile() {
+    boolean isVolatile_value = getModifiers().isVolatile();
+    return isVolatile_value;
   }
   /**
    * @attribute syn
-   * @aspect Variables
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:62
+   * @aspect NameCheck
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:428
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:62")
-  public boolean isExceptionHandlerParameter() {
-    boolean isExceptionHandlerParameter_value = false;
-    return isExceptionHandlerParameter_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Variables
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:63
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:63")
-  public boolean isLocalVariable() {
-    boolean isLocalVariable_value = false;
-    return isLocalVariable_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Variables
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:64
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:64")
-  public boolean isField() {
-    boolean isField_value = true;
-    return isField_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Variables
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:66
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:66")
-  public boolean isBlank() {
-    boolean isBlank_value = !hasInit();
-    return isBlank_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Variables
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:68
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:68")
-  public String name() {
-    String name_value = getID();
-    return name_value;
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:428")
+  public Collection<Problem> nameProblems() {
+    {
+        // 8.3
+        for (Variable v : hostType().memberFields(name())) {
+          if (v != this && v.hostType() == hostType()) {
+            return Collections.singletonList(errorf("field named %s is multiply declared in type %s",
+                name(), hostType().typeName()));
+          }
+        }
+        return Collections.emptyList();
+      }
   }
   /** @apilevel internal */
-  private void constant_reset() {
-    constant_computed = null;
-    constant_value = null;
+  private void exceptions_reset() {
+    exceptions_computed = null;
+    exceptions_value = null;
   }
   /** @apilevel internal */
-  protected ASTState.Cycle constant_computed = null;
+  protected ASTState.Cycle exceptions_computed = null;
 
   /** @apilevel internal */
-  protected Constant constant_value;
+  protected Collection<TypeDecl> exceptions_value;
 
   /**
+   * Used in bytecode generation to generate the exception list for this field.
    * @attribute syn
-   * @aspect Variables
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:69
+   * @aspect AnonymousClasses
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:100
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\VariableDeclaration.jrag:69")
-  public Constant constant() {
+  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:100")
+  public Collection<TypeDecl> exceptions() {
     ASTState state = state();
-    if (constant_computed == ASTState.NON_CYCLE || constant_computed == state().cycle()) {
-      return constant_value;
+    if (exceptions_computed == ASTState.NON_CYCLE || exceptions_computed == state().cycle()) {
+      return exceptions_value;
     }
-    constant_value = type().cast(getInit().constant());
+    exceptions_value = exceptions_compute();
     if (state().inCircle()) {
-      constant_computed = state().cycle();
+      exceptions_computed = state().cycle();
     
     } else {
-      constant_computed = ASTState.NON_CYCLE;
+      exceptions_computed = ASTState.NON_CYCLE;
     
     }
-    return constant_value;
+    return exceptions_value;
   }
+  /** @apilevel internal */
+  private Collection<TypeDecl> exceptions_compute() {
+      Collection<TypeDecl> exceptions = new HashSet<TypeDecl>();
+      if (isInstanceVariable() && hasInit()) {
+        collectExceptions(exceptions);
+      }
+      return exceptions;
+    }
   /** @apilevel internal */
   private void usesTypeVariable_reset() {
     usesTypeVariable_computed = null;
@@ -946,10 +946,10 @@ public class FieldDeclarator extends Declarator implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1317
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1317
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1317")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1317")
   public boolean usesTypeVariable() {
     ASTState state = state();
     if (usesTypeVariable_computed == ASTState.NON_CYCLE || usesTypeVariable_computed == state().cycle()) {
@@ -978,10 +978,10 @@ public class FieldDeclarator extends Declarator implements Cloneable {
   /**
    * @attribute syn
    * @aspect EffectivelyFinal
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:139
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:139
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="EffectivelyFinal", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:139")
+  @ASTNodeAnnotation.Source(aspect="EffectivelyFinal", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:139")
   public boolean isEffectivelyFinal() {
     ASTState state = state();
     if (isEffectivelyFinal_computed == ASTState.NON_CYCLE || isEffectivelyFinal_computed == state().cycle()) {
@@ -1000,21 +1000,21 @@ public class FieldDeclarator extends Declarator implements Cloneable {
   /**
    * @attribute inh
    * @aspect LookupParTypeDecl
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1643
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1643
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\Generics.jrag:1643")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1643")
   public FieldDeclarator erasedField() {
     FieldDeclarator erasedField_value = getParent().Define_erasedField(this, null);
     return erasedField_value;
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:256
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (_callerNode == getInitOptNoTransform()) {
-      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:368
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:368
       return assignedBefore(v);
     }
     else {
@@ -1022,7 +1022,7 @@ public class FieldDeclarator extends Declarator implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:256
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
    */
@@ -1039,7 +1039,7 @@ public class FieldDeclarator extends Declarator implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:195
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:195
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -1048,7 +1048,7 @@ public class FieldDeclarator extends Declarator implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:426
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:47
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -1057,7 +1057,7 @@ public class FieldDeclarator extends Declarator implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\TypeCheck.jrag:47
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:426
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -1066,7 +1066,7 @@ public class FieldDeclarator extends Declarator implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\UncheckedConversion.jrag:46
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/UncheckedConversion.jrag:46
     if (hasInit() && !suppressWarnings("unchecked")) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);
@@ -1085,10 +1085,10 @@ public class FieldDeclarator extends Declarator implements Cloneable {
     for (Problem value : definiteAssignmentProblems()) {
       collection.add(value);
     }
-    for (Problem value : nameProblems()) {
+    for (Problem value : typeProblems()) {
       collection.add(value);
     }
-    for (Problem value : typeProblems()) {
+    for (Problem value : nameProblems()) {
       collection.add(value);
     }
     if (hasInit() && !suppressWarnings("unchecked")) {

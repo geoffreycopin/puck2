@@ -19,10 +19,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast interface
  * @aspect BytecodeSignatures
- * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\BytecodeSignatures.jrag:393
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/BytecodeSignatures.jrag:393
  */
 public interface Flags {
 

@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\grammar\\Java.ast:306
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:306
  * @astdecl BreakStmt : Stmt ::= <Label:String> [Finally:Block];
  * @production BreakStmt : {@link Stmt} ::= <span class="component">&lt;Label:String&gt;</span> <span class="component">[Finally:{@link Block}]</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class BreakStmt extends Stmt implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\PrettyPrint.jadd:119
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:119
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("break");
@@ -49,7 +49,7 @@ public class BreakStmt extends Stmt implements Cloneable {
   }
   /**
    * @aspect BranchTarget
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:104
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:104
    */
   public void collectBranches(Collection<Stmt> c) {
     c.add(this);
@@ -106,13 +106,13 @@ public class BreakStmt extends Stmt implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    targetStmt_reset();
+    canCompleteNormally_reset();
+    getFinallyOpt_reset();
     assignedAfter_Variable_reset();
     unassignedAfterReachedFinallyBlocks_Variable_reset();
     assignedAfterReachedFinallyBlocks_Variable_reset();
     unassignedAfter_Variable_reset();
-    getFinallyOpt_reset();
-    canCompleteNormally_reset();
+    targetStmt_reset();
     lookupLabel_String_reset();
   }
   /** @apilevel internal 
@@ -291,94 +291,81 @@ public class BreakStmt extends Stmt implements Cloneable {
   protected int getFinallyOptChildPosition() {
     return 0;
   }
-  /**
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:122
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:122")
-  public boolean hasLabel() {
-    boolean hasLabel_value = !getLabel().equals("");
-    return hasLabel_value;
-  }
-  /**
-   * @return <code>true</code> if this statement can branch to
-   * the target statement.
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:182
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:182")
-  public boolean canBranchTo(BranchTargetStmt target) {
-    boolean canBranchTo_BranchTargetStmt_value = !hasLabel();
-    return canBranchTo_BranchTargetStmt_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:184
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:184")
-  public boolean canBranchTo(LabeledStmt target) {
-    boolean canBranchTo_LabeledStmt_value = hasLabel() && target.getLabel().equals(getLabel());
-    return canBranchTo_LabeledStmt_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:186
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:186")
-  public boolean canBranchTo(SwitchStmt target) {
-    boolean canBranchTo_SwitchStmt_value = !hasLabel();
-    return canBranchTo_SwitchStmt_value;
+  /** @apilevel internal */
+  private void canCompleteNormally_reset() {
+    canCompleteNormally_computed = null;
   }
   /** @apilevel internal */
-  private void targetStmt_reset() {
-    targetStmt_computed = null;
-    targetStmt_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle targetStmt_computed = null;
+  protected ASTState.Cycle canCompleteNormally_computed = null;
 
   /** @apilevel internal */
-  protected Stmt targetStmt_value;
+  protected boolean canCompleteNormally_value;
 
   /**
-   * Find the target statement for break and continue. This can be a try
-   * statement with a finally block that can not complete normally.
    * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:40
+   * @aspect UnreachableStatements
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:40")
-  public Stmt targetStmt() {
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50")
+  public boolean canCompleteNormally() {
     ASTState state = state();
-    if (targetStmt_computed == ASTState.NON_CYCLE || targetStmt_computed == state().cycle()) {
-      return targetStmt_value;
+    if (canCompleteNormally_computed == ASTState.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
+      return canCompleteNormally_value;
     }
-    targetStmt_value = branchTarget(this);
+    canCompleteNormally_value = false;
     if (state().inCircle()) {
-      targetStmt_computed = state().cycle();
+      canCompleteNormally_computed = state().cycle();
     
     } else {
-      targetStmt_computed = ASTState.NON_CYCLE;
+      canCompleteNormally_computed = ASTState.NON_CYCLE;
     
     }
-    return targetStmt_value;
+    return canCompleteNormally_value;
   }
+  /** @apilevel internal */
+  private void getFinallyOpt_reset() {
+    getFinallyOpt_computed = false;
+    
+    getFinallyOpt_value = null;
+  }
+  /** @apilevel internal */
+  protected boolean getFinallyOpt_computed = false;
+
+  /** @apilevel internal */
+  protected Opt<Block> getFinallyOpt_value;
+
+  /**
+   * @attribute syn nta
+   * @aspect NTAFinally
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NTAFinally.jrag:46
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
+  @ASTNodeAnnotation.Source(aspect="NTAFinally", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NTAFinally.jrag:46")
+  public Opt<Block> getFinallyOpt() {
+    ASTState state = state();
+    if (getFinallyOpt_computed) {
+      return (Opt<Block>) getChild(getFinallyOptChildPosition());
+    }
+    state().enterLazyAttribute();
+    getFinallyOpt_value = getFinallyOpt_compute();
+    setChild(getFinallyOpt_value, getFinallyOptChildPosition());
+    getFinallyOpt_computed = true;
+    state().leaveLazyAttribute();
+    Opt<Block> node = (Opt<Block>) this.getChild(getFinallyOptChildPosition());
+    return node;
+  }
+  /** @apilevel internal */
+  private Opt<Block> getFinallyOpt_compute() {
+      return branchFinallyOpt();
+    }
   /** @apilevel internal */
   private void assignedAfter_Variable_reset() {
     assignedAfter_Variable_values = null;
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -429,7 +416,7 @@ public class BreakStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map unassignedAfterReachedFinallyBlocks_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:1251")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1251")
   public boolean unassignedAfterReachedFinallyBlocks(Variable v) {
     Object _parameters = v;
     if (unassignedAfterReachedFinallyBlocks_Variable_values == null) unassignedAfterReachedFinallyBlocks_Variable_values = new java.util.HashMap(4);
@@ -494,7 +481,7 @@ public class BreakStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map assignedAfterReachedFinallyBlocks_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:1293")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1293")
   public boolean assignedAfterReachedFinallyBlocks(Variable v) {
     Object _parameters = v;
     if (assignedAfterReachedFinallyBlocks_Variable_values == null) assignedAfterReachedFinallyBlocks_Variable_values = new java.util.HashMap(4);
@@ -562,7 +549,7 @@ public class BreakStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:895")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -610,10 +597,10 @@ public class BreakStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:538
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:538
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:538")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:538")
   public Collection<Problem> nameProblems() {
     {
         if (!hasLabel() && !insideLoop() && !insideSwitch()) {
@@ -627,92 +614,127 @@ public class BreakStmt extends Stmt implements Cloneable {
         return Collections.emptyList();
       }
   }
-  /** @apilevel internal */
-  private void getFinallyOpt_reset() {
-    getFinallyOpt_computed = false;
-    
-    getFinallyOpt_value = null;
-  }
-  /** @apilevel internal */
-  protected boolean getFinallyOpt_computed = false;
-
-  /** @apilevel internal */
-  protected Opt<Block> getFinallyOpt_value;
-
-  /**
-   * @attribute syn nta
-   * @aspect NTAFinally
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NTAFinally.jrag:46
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="NTAFinally", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NTAFinally.jrag:46")
-  public Opt<Block> getFinallyOpt() {
-    ASTState state = state();
-    if (getFinallyOpt_computed) {
-      return (Opt<Block>) getChild(getFinallyOptChildPosition());
-    }
-    state().enterLazyAttribute();
-    getFinallyOpt_value = getFinallyOpt_compute();
-    setChild(getFinallyOpt_value, getFinallyOptChildPosition());
-    getFinallyOpt_computed = true;
-    state().leaveLazyAttribute();
-    Opt<Block> node = (Opt<Block>) this.getChild(getFinallyOptChildPosition());
-    return node;
-  }
-  /** @apilevel internal */
-  private Opt<Block> getFinallyOpt_compute() {
-      return branchFinallyOpt();
-    }
-  /** @apilevel internal */
-  private void canCompleteNormally_reset() {
-    canCompleteNormally_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle canCompleteNormally_computed = null;
-
-  /** @apilevel internal */
-  protected boolean canCompleteNormally_value;
-
   /**
    * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\UnreachableStatements.jrag:50
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:122
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\UnreachableStatements.jrag:50")
-  public boolean canCompleteNormally() {
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:122")
+  public boolean hasLabel() {
+    boolean hasLabel_value = !getLabel().equals("");
+    return hasLabel_value;
+  }
+  /**
+   * @return <code>true</code> if this statement can branch to
+   * the target statement.
+   * @attribute syn
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:182
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:182")
+  public boolean canBranchTo(BranchTargetStmt target) {
+    boolean canBranchTo_BranchTargetStmt_value = !hasLabel();
+    return canBranchTo_BranchTargetStmt_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:184
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:184")
+  public boolean canBranchTo(LabeledStmt target) {
+    boolean canBranchTo_LabeledStmt_value = hasLabel() && target.getLabel().equals(getLabel());
+    return canBranchTo_LabeledStmt_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:186
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:186")
+  public boolean canBranchTo(SwitchStmt target) {
+    boolean canBranchTo_SwitchStmt_value = !hasLabel();
+    return canBranchTo_SwitchStmt_value;
+  }
+  /** @apilevel internal */
+  private void targetStmt_reset() {
+    targetStmt_computed = null;
+    targetStmt_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle targetStmt_computed = null;
+
+  /** @apilevel internal */
+  protected Stmt targetStmt_value;
+
+  /**
+   * Find the target statement for break and continue. This can be a try
+   * statement with a finally block that can not complete normally.
+   * @attribute syn
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:40
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:40")
+  public Stmt targetStmt() {
     ASTState state = state();
-    if (canCompleteNormally_computed == ASTState.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
-      return canCompleteNormally_value;
+    if (targetStmt_computed == ASTState.NON_CYCLE || targetStmt_computed == state().cycle()) {
+      return targetStmt_value;
     }
-    canCompleteNormally_value = false;
+    targetStmt_value = branchTarget(this);
     if (state().inCircle()) {
-      canCompleteNormally_computed = state().cycle();
+      targetStmt_computed = state().cycle();
     
     } else {
-      canCompleteNormally_computed = ASTState.NON_CYCLE;
+      targetStmt_computed = ASTState.NON_CYCLE;
     
     }
-    return canCompleteNormally_value;
+    return targetStmt_value;
   }
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:78
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java7\\frontend\\PreciseRethrow.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = false;
     return modifiedInScope_Variable_value;
   }
+  /**
+   * @attribute inh
+   * @aspect NameCheck
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:522
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:522")
+  public boolean insideLoop() {
+    boolean insideLoop_value = getParent().Define_insideLoop(this, null);
+    return insideLoop_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect NameCheck
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:531
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:531")
+  public boolean insideSwitch() {
+    boolean insideSwitch_value = getParent().Define_insideSwitch(this, null);
+    return insideSwitch_value;
+  }
   /** Lookup visible label. 
    * @attribute inh
    * @aspect BranchTarget
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:252
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:252
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\BranchTarget.jrag:252")
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:252")
   public LabeledStmt lookupLabel(String name) {
     Object _parameters = name;
     if (lookupLabel_String_computed == null) lookupLabel_String_computed = new java.util.HashMap(4);
@@ -744,28 +766,6 @@ public class BreakStmt extends Stmt implements Cloneable {
   protected java.util.Map lookupLabel_String_values;
   /** @apilevel internal */
   protected java.util.Map lookupLabel_String_computed;
-  /**
-   * @attribute inh
-   * @aspect NameCheck
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:522
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:522")
-  public boolean insideLoop() {
-    boolean insideLoop_value = getParent().Define_insideLoop(this, null);
-    return insideLoop_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect NameCheck
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:531
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:531")
-  public boolean insideSwitch() {
-    boolean insideSwitch_value = getParent().Define_insideSwitch(this, null);
-    return insideSwitch_value;
-  }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
     return super.rewriteTo();
@@ -776,7 +776,7 @@ public class BreakStmt extends Stmt implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\NameCheck.jrag:536
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:536
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

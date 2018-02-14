@@ -1,25 +1,27 @@
-package test.aa;
+package test;
 
-class SuperTest extends Test { }
+class SuperTest extends Test {
+    int r;
+    void superMethod(Test t, Foo f) {}
+}
 
-public class Test implements Foo,Boo{
-	SuperTest r;
-  void f() {
-  }
+public class Test implements Foo{
+    int r;
+    SuperTest f;
+    void f() {
+    }
 
-  int m(int x) {
-    return x * x;
-  }
-  int m(SuperTest x){
-	  return (int) x;
-  }
+    int m(int x) {
+        return x * x;
+    }
+    int m(double x){
+        return (int) x;
+    }
+    int m(Foo f) {}
 }
 
 
 interface Foo {
-void t();
-}
-
-interface Boo extends Foo{
-void t();
+    void t();
+    void t(Test t)
 }

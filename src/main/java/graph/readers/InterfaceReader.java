@@ -14,38 +14,33 @@ import org.extendj.ast.ParameterDeclaration;
 import java.util.List;
 import java.util.Map;
 
-public class InterfaceReader extends AbstractReader {
+public class InterfaceReader extends TypeDeclReader {
     private InterfaceDecl interfaceDecl;
-    private Node interfaceNode;
 
     public InterfaceReader(InterfaceDecl interfaceDecl, UniqueIdGenerator idGenerator) {
-        super(idGenerator);
+        super(interfaceDecl, idGenerator);
         this.interfaceDecl = interfaceDecl;
     }
 
 
     @Override
     public void readInto(Map<String, Node> nodes, List<Edge> edges) {
-    	Node MethodNode;
-    	MethodReader methodreader;
+        Node interfaceNode = new Node(idGenerator.generate(), interfaceDecl.fullName(),
+                Node.Type.Interface, interfaceDecl.createQualifiedAccess());
+        nodes.put(interfaceNode.getFullName(), interfaceNode);
 
-    	interfaceNode = new Node(idGenerator.generate(), interfaceDecl.fullName(),
-    			Node.Type.Interface, interfaceDecl.createQualifiedAccess());
-    	nodes.put(interfaceNode.getFullName(), interfaceNode);
+        readBodyDeclarations(nodes, edges);
 
-
-    	interfaceNode = nodes.get(interfaceDecl.fullName());
-
-    	if (interfaceDecl.getNumBodyDecl() > 0) {      	
-    		for (BodyDecl decl : interfaceDecl.getBodyDeclList()) {
-    			/*Add Methods*/
-    			if(decl instanceof MethodDecl){
-    				MethodDecl m = (MethodDecl)decl;
-    				methodreader= new MethodReader(idGenerator,m,interfaceDecl);
-    				methodreader.readInto(nodes, edges);			      
-    			}
-    		}
-    	}
+        addPackageDependency(edges);
     }
 
+    private void readBodyDeclarations(Map<String, Node> nodes, List<Edge> edges) {
+        for (BodyDecl decl : interfaceDecl.getBodyDeclList()) {
+            if (decl instanceof MethodDecl) {
+                MethodDecl m = (MethodDecl) decl;
+                MethodReader methodreader = new MethodReader(idGenerator, m);
+                methodreader.readInto(nodes, edges);
+            }
+        }
+    }
 }

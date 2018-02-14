@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\grammar\\Generics.ast:65
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/Generics.ast:65
  * @astdecl AbstractWildcard : Access;
  * @production AbstractWildcard : {@link Access};
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public abstract class AbstractWildcard extends Access implements Cloneable {
   /**
    * @aspect FunctionalInterface
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\FunctionalInterface.jrag:253
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/FunctionalInterface.jrag:253
    */
   public boolean sameType(AbstractWildcard w) {
     if (this instanceof Wildcard && w instanceof Wildcard) {
@@ -134,10 +134,10 @@ public abstract class AbstractWildcard extends Access implements Cloneable {
    * @return {@code true} if this is an unbounded wildcard access
    * @attribute syn
    * @aspect ReifiableTypes
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\ReifiableTypes.jrag:106
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/ReifiableTypes.jrag:106
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java5\\frontend\\ReifiableTypes.jrag:106")
+  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/ReifiableTypes.jrag:106")
   public boolean isWildcard() {
     boolean isWildcard_value = true;
     return isWildcard_value;

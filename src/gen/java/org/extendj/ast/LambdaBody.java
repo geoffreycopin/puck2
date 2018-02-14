@@ -19,17 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\grammar\\Lambda.ast:11
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/grammar/Lambda.ast:11
  * @astdecl LambdaBody : ASTNode;
  * @production LambdaBody : {@link ASTNode};
 
@@ -38,7 +38,7 @@ public abstract class LambdaBody extends ASTNode<ASTNode> implements Cloneable {
   /**
    * Copies the method block for the lambda body.
    * @aspect LambdaToClass
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaAnonymousDecl.jrag:86
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaAnonymousDecl.jrag:86
    */
   protected abstract Block toBlock();
   /**
@@ -74,8 +74,8 @@ public abstract class LambdaBody extends ASTNode<ASTNode> implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    enclosingLambda_reset();
     lookupVariable_String_reset();
+    enclosingLambda_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:29
@@ -119,76 +119,54 @@ public abstract class LambdaBody extends ASTNode<ASTNode> implements Cloneable {
   public abstract LambdaBody treeCopy();
   /**
    * @attribute syn
-   * @aspect PreciseRethrow
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:43
+   * @aspect LambdaExpr
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaExpr.jrag:89
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:43")
-  public abstract boolean modifiedInScope(Variable var);
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaExpr.jrag:89")
+  public abstract boolean congruentTo(FunctionDescriptor fd);
   /**
    * @attribute syn
    * @aspect LambdaBody
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:29
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:29
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:29")
+  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:29")
   public abstract boolean isBlockBody();
   /**
    * @attribute syn
    * @aspect LambdaBody
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:30
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:30
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaBody.jrag:30")
+  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaBody.jrag:30")
   public abstract boolean isExprBody();
   /**
    * @attribute syn
-   * @aspect LambdaExpr
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaExpr.jrag:89
+   * @aspect PreciseRethrow
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:43
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LambdaExpr.jrag:89")
-  public abstract boolean congruentTo(FunctionDescriptor fd);
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:43")
+  public abstract boolean modifiedInScope(Variable var);
   /**
    * @attribute inh
-   * @aspect EnclosingLambda
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\EnclosingLambda.jrag:29
+   * @aspect TypeCheck
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:32
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\EnclosingLambda.jrag:29")
-  public LambdaExpr enclosingLambda() {
-    ASTState state = state();
-    if (enclosingLambda_computed == ASTState.NON_CYCLE || enclosingLambda_computed == state().cycle()) {
-      return enclosingLambda_value;
-    }
-    enclosingLambda_value = getParent().Define_enclosingLambda(this, null);
-    if (state().inCircle()) {
-      enclosingLambda_computed = state().cycle();
-    
-    } else {
-      enclosingLambda_computed = ASTState.NON_CYCLE;
-    
-    }
-    return enclosingLambda_value;
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:32")
+  public TypeDecl unknownType() {
+    TypeDecl unknownType_value = getParent().Define_unknownType(this, null);
+    return unknownType_value;
   }
-  /** @apilevel internal */
-  private void enclosingLambda_reset() {
-    enclosingLambda_computed = null;
-    enclosingLambda_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle enclosingLambda_computed = null;
-
-  /** @apilevel internal */
-  protected LambdaExpr enclosingLambda_value;
-
   /**
    * @attribute inh
    * @aspect VariableScope
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LookupVariable.jrag:30
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LookupVariable.jrag:30
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\LookupVariable.jrag:30")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LookupVariable.jrag:30")
   public SimpleSet<Variable> lookupVariable(String name) {
     Object _parameters = name;
     if (lookupVariable_String_computed == null) lookupVariable_String_computed = new java.util.HashMap(4);
@@ -222,15 +200,37 @@ public abstract class LambdaBody extends ASTNode<ASTNode> implements Cloneable {
   protected java.util.Map lookupVariable_String_computed;
   /**
    * @attribute inh
-   * @aspect TypeCheck
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:32
+   * @aspect EnclosingLambda
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EnclosingLambda.jrag:29
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\TypeCheck.jrag:32")
-  public TypeDecl unknownType() {
-    TypeDecl unknownType_value = getParent().Define_unknownType(this, null);
-    return unknownType_value;
+  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EnclosingLambda.jrag:29")
+  public LambdaExpr enclosingLambda() {
+    ASTState state = state();
+    if (enclosingLambda_computed == ASTState.NON_CYCLE || enclosingLambda_computed == state().cycle()) {
+      return enclosingLambda_value;
+    }
+    enclosingLambda_value = getParent().Define_enclosingLambda(this, null);
+    if (state().inCircle()) {
+      enclosingLambda_computed = state().cycle();
+    
+    } else {
+      enclosingLambda_computed = ASTState.NON_CYCLE;
+    
+    }
+    return enclosingLambda_value;
   }
+  /** @apilevel internal */
+  private void enclosingLambda_reset() {
+    enclosingLambda_computed = null;
+    enclosingLambda_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle enclosingLambda_computed = null;
+
+  /** @apilevel internal */
+  protected LambdaExpr enclosingLambda_value;
+
   /** @apilevel internal */
   public ASTNode rewriteTo() {
     return super.rewriteTo();

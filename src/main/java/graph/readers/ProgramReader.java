@@ -29,7 +29,6 @@ public class ProgramReader extends AbstractReader {
         for (CompilationUnit cu: program.getCompilationUnitList()) {
             CompilationUnitReader reader = new CompilationUnitReader(cu, idGenerator);
             reader.readInto(nodes, edges);
-            
         }
     }
 }

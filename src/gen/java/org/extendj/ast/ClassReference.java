@@ -19,25 +19,39 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\grammar\\ConstructorReference.ast:3
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/grammar/ConstructorReference.ast:3
  * @astdecl ClassReference : ConstructorReference ::= TypeArgument:Access*;
  * @production ClassReference : {@link ConstructorReference} ::= <span class="component">TypeArgument:{@link Access}*</span>;
 
  */
 public class ClassReference extends ConstructorReference implements Cloneable {
   /**
+   * @aspect PrettyPrintUtil8
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PrettyPrintUtil.jadd:87
+   */
+  @Override public String toString() {
+    StringBuilder params = new StringBuilder();
+    for (Access arg : getTypeArgumentListNoTransform()) {
+      if (params.length() > 0) {
+        params.append(", ");
+      }
+      params.append(arg.toString());
+    }
+    return String.format("%s::<%s>new", getTypeAccessNoTransform().toString(), params.toString());
+  }
+  /**
    * @aspect Java8PrettyPrint
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\PrettyPrint.jadd:42
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PrettyPrint.jadd:42
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getTypeAccess());
@@ -53,20 +67,6 @@ public class ClassReference extends ConstructorReference implements Cloneable {
       out.print(">");
     }
     out.print("new");
-  }
-  /**
-   * @aspect PrettyPrintUtil8
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\PrettyPrintUtil.jadd:87
-   */
-  @Override public String toString() {
-    StringBuilder params = new StringBuilder();
-    for (Access arg : getTypeArgumentListNoTransform()) {
-      if (params.length() > 0) {
-        params.append(", ");
-      }
-      params.append(arg.toString());
-    }
-    return String.format("%s::<%s>new", getTypeAccessNoTransform().toString(), params.toString());
   }
   /**
    * @declaredat ASTNode:1
@@ -358,10 +358,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:32
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:32
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:32")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:32")
   public ConstructorDecl targetConstructor(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (targetConstructor_FunctionDescriptor_computed == null) targetConstructor_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -397,10 +397,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:35
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:35
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:35")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:35")
   public ClassInstanceExpr syntheticInstanceExpr(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (syntheticInstanceExpr_FunctionDescriptor_values == null) syntheticInstanceExpr_FunctionDescriptor_values = new java.util.HashMap(4);
@@ -470,10 +470,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:72
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:72
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:72")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:72")
   public boolean congruentTo(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -530,10 +530,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
    * function descriptor.
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:120
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:120
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:120")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:120")
   public java.util.List<ConstructorDecl> potentiallyApplicableConstructors(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (potentiallyApplicableConstructors_FunctionDescriptor_computed == null) potentiallyApplicableConstructors_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -601,10 +601,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:155
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:155
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:155")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:155")
   public ConstructorDecl exactCompileTimeDeclaration() {
     ASTState state = state();
     if (exactCompileTimeDeclaration_computed == ASTState.NON_CYCLE || exactCompileTimeDeclaration_computed == state().cycle()) {
@@ -669,10 +669,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:153
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:153
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:153")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:153")
   public boolean isExact() {
     ASTState state = state();
     if (isExact_computed == ASTState.NON_CYCLE || isExact_computed == state().cycle()) {
@@ -700,10 +700,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:511
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:511
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\MethodSignature.jrag:511")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:511")
   public boolean potentiallyCompatible(TypeDecl type, BodyDecl candidateDecl) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(type);
@@ -754,10 +754,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect Java8NameCheck
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\NameCheck.jrag:522
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:522
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\NameCheck.jrag:522")
+  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:522")
   public Collection<Problem> nameProblems() {
     {
         for (int i = 0; i < getNumTypeArgument(); i++) {
@@ -770,12 +770,12 @@ public class ClassReference extends ConstructorReference implements Cloneable {
       }
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\ConstructorReference.jrag:69
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/ConstructorReference.jrag:69
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
@@ -784,7 +784,7 @@ public class ClassReference extends ConstructorReference implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -801,7 +801,7 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat C:\\Users\\amdja\\git\\puck2-develp\\extendj\\java8\\frontend\\NameCheck.jrag:520
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:520
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
