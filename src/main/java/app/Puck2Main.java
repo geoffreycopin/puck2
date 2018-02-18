@@ -15,6 +15,7 @@ public class Puck2Main {
     public static void main(String args[]) {
         if (args.length == 0 || args.length > 2) {
             System.out.println("Usage: java -jar puck2 programDir ?outputFile");
+            return;
         }
     	Program p = new Program();
         loadProgram(p, args[0], "");

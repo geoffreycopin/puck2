@@ -4,27 +4,24 @@ import static org.junit.Assert.assertEquals;
 
 import graph.Edge;
 import graph.Node;
-import graph.readers.ProgramReader;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class TestProgramReader {
-    private static ProgramLoader loader;
+public class TestProgramReader extends TestBase{
 
     @BeforeClass
     public static void init() {
-        loader = new ProgramLoader();
-        loader.addFile("testfiles/Test.java");
+        setTestFile("testfiles/Test.java");
+        load();
     }
 
     @Test
     public void extractClasses() {
         Set<String> expectedClasses = new HashSet<>(Arrays.asList(
                 "test.SuperTest", "test.Test"));
-        containsNodes(expectedClasses, Node.Type.Class);
+        nodesEquals(expectedClasses, Node.Type.Class);
     }
 
     @Test
@@ -32,7 +29,7 @@ public class TestProgramReader {
         Set<String> expectedPackages = new HashSet<>(Arrays.asList(
                 "test"
         ));
-        containsNodes(expectedPackages, Node.Type.Package);
+        nodesEquals(expectedPackages, Node.Type.Package);
     }
 
     @Test
@@ -40,7 +37,7 @@ public class TestProgramReader {
         Set<String> expectedInterfaces = new HashSet<>(Arrays.asList(
                 "test.Foo"
         ));
-        containsNodes(expectedInterfaces, Node.Type.Interface);
+        nodesEquals(expectedInterfaces, Node.Type.Interface);
     }
 
     @Test
@@ -60,7 +57,7 @@ public class TestProgramReader {
                 new TestEdge("test.Foo", "test.Foo.t()"),
                 new TestEdge("test.Foo", "test.Foo.t(test.Test)")
         ));
-        containsEdge(contains, Edge.Type.Contains);
+        edgesEquals(contains, Edge.Type.Contains);
     }
 
     @Test
@@ -70,7 +67,7 @@ public class TestProgramReader {
                 new TestEdge("test.Test", "test.Foo"),
                 new TestEdge("test.Test.f", "test.SuperTest")
         ));
-        containsEdge(isA, Edge.Type.IsA);
+        edgesEquals(isA, Edge.Type.IsA);
     }
 
     @Test
@@ -81,52 +78,6 @@ public class TestProgramReader {
                 new TestEdge("test.Test.m(test.Foo)", "test.Foo"),
                 new TestEdge("test.Foo.t(test.Test)", "test.Test")
         ));
-        containsEdge(uses, Edge.Type.Uses);
-    }
-
-    private void containsNodes(Set<String> expected, Node.Type type) {
-        Map<String, Node> nodes = new HashMap<>();
-        List<Edge> edges = new ArrayList<>();
-        ProgramReader r = new ProgramReader(loader.getProgram());
-        r.readInto(nodes, edges);
-
-        Set<String> actual = nodes.values().stream()
-                .filter(n -> n.getType() == type)
-                .map(Node::getFullName)
-                .collect(Collectors.toSet());
-
-        assertEquals(actual, expected);
-    }
-
-    private void containsEdge(Set<TestEdge> expected, Edge.Type type) {
-        Map<String, Node> nodes_map = new HashMap<>();
-        List<Edge> edges = new ArrayList<>();
-        ProgramReader r = new ProgramReader(loader.getProgram());
-        r.readInto(nodes_map, edges);
-
-        Set<String> actual = edges.stream()
-                .filter(n -> n.getType() == type)
-                .map(n -> new TestEdge(n.getSourceName(), n.getTargetName()).toString())
-                .collect(Collectors.toSet());
-        Set<String> expected_edges = expected.stream()
-                .map(Object::toString)
-                .collect(Collectors.toSet());
-
-        assertEquals(actual, expected_edges);
-    }
-
-
-    class TestEdge{
-        public String source;
-        public String target;
-
-        public TestEdge(String source, String target) {
-            this.source = source;
-            this.target = target;
-        }
-
-        public String toString() {
-            return String.format("<source=%s target=%s>", source, target);
-        }
+        edgesEquals(uses, Edge.Type.Uses);
     }
 }

@@ -3,13 +3,7 @@ package graph.readers;
 import java.util.List;
 import java.util.Map;
 
-import org.extendj.ast.Block;
-import org.extendj.ast.ClassDecl;
-import org.extendj.ast.FieldDecl;
-import org.extendj.ast.InterfaceDecl;
-import org.extendj.ast.MethodDecl;
-import org.extendj.ast.ParameterDeclaration;
-import org.extendj.ast.TypeDecl;
+import org.extendj.ast.*;
 
 import graph.Edge;
 import graph.Node;
@@ -54,11 +48,21 @@ public class MethodReader extends BodyDeclReader {
     private void addParametersTypeDependency(List<Edge> edges) {
         for (ParameterDeclaration p: methodDecl.getParameterList()) {
             TypeDecl parameterType = p.getTypeAccess().type();
-            if (Util.isPrimitive(parameterType)) {
-                continue;
-            }
 
-            edges.add(new Edge(methodNode.getFullName(), parameterType.fullName(), Edge.Type.Uses));
+            if (parameterType.isParameterizedType()) {
+                addGenericTypeDependency(edges, parameterType);
+            } else if (! Util.isPrimitive(parameterType)) {
+                edges.add(new Edge(methodNode.getFullName(), parameterType.fullName(), Edge.Type.Uses));
+            }
+        }
+    }
+
+    private void addGenericTypeDependency(List<Edge> edges, TypeDecl type) {
+        String genericTypeName = TypeDeclReader.getGenericTypeName(type);
+        edges.add(new Edge(methodNode.getFullName(), genericTypeName, Edge.Type.Uses));
+
+        for (String typeParameterName: TypeDeclReader.getTypeParametersName(type)) {
+            edges.add(new Edge(methodNode.getFullName(), typeParameterName, Edge.Type.Uses));
         }
     }
 }
