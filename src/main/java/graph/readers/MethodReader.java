@@ -34,6 +34,7 @@ public class MethodReader extends BodyDeclReader {
         }
 
         addHostClassDependency(edges);
+        addReturnTypeDependency(edges);
         addParametersTypeDependency(edges);
     }
 
@@ -45,15 +46,22 @@ public class MethodReader extends BodyDeclReader {
         edges.add(new Edge(getHostTypeName(), methodNode.getFullName(), Edge.Type.Contains));
     }
 
+    private void addReturnTypeDependency(List<Edge> edges) {
+        addTypeDependency(edges, methodDecl.type());
+    }
+
     private void addParametersTypeDependency(List<Edge> edges) {
         for (ParameterDeclaration p: methodDecl.getParameterList()) {
             TypeDecl parameterType = p.getTypeAccess().type();
+            addTypeDependency(edges, parameterType);
+        }
+    }
 
-            if (parameterType.isParameterizedType()) {
-                addGenericTypeDependency(edges, parameterType);
-            } else if (! Util.isPrimitive(parameterType)) {
-                edges.add(new Edge(methodNode.getFullName(), parameterType.fullName(), Edge.Type.Uses));
-            }
+    private void addTypeDependency(List<Edge> edges, TypeDecl type) {
+        if (type.isParameterizedType()) {
+            addGenericTypeDependency(edges, type);
+        } else if (! Util.isPrimitive(type)) {
+            edges.add(new Edge(methodNode.getFullName(), type.fullName(), Edge.Type.Uses));
         }
     }
 

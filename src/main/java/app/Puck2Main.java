@@ -18,7 +18,7 @@ public class Puck2Main {
             return;
         }
     	Program p = new Program();
-        loadProgram(p, args[0], "");
+        loadProgram(p, args[0]);
 
         HashMap<String, Node> nodes = new HashMap<>();
         ArrayList<Edge> edges = new ArrayList<>();
@@ -60,17 +60,16 @@ public class Puck2Main {
         }
     }
 
-    private static void loadProgram(Program program, String p, String previousPath) {
+    private static void loadProgram(Program program, String p) {
         File currentFile = new File(p);
-        String path = previousPath + p;
 
         if (currentFile.isDirectory()) {
             for (String innerFile: currentFile.list()) {
-                loadProgram(program, innerFile, previousPath + path);
+                loadProgram(program, Paths.get(p, innerFile).toString());
             }
         } else {
             try {
-                addSource(program, Paths.get(previousPath, currentFile.getPath()).toString());
+                addSource(program, currentFile.getAbsolutePath());
             } catch (Exception e) {
                 e.printStackTrace();
             }

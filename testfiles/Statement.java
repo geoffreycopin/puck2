@@ -9,7 +9,7 @@ class Statement {
     }
   }
 
-  void f(List<X> list) {
+  Double f(List<X> list) {
     for (X item : list) {
       item.doThing();
     }
