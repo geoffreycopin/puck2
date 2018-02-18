@@ -7,6 +7,7 @@ import org.extendj.ast.Block;
 import org.extendj.ast.MethodDecl;
 import org.extendj.ast.Stmt;
 import org.extendj.ast.TypeDecl;
+import org.extendj.ast.VarDeclStmt;
 
 import graph.Edge;
 import graph.Node;
@@ -38,18 +39,33 @@ public class MethodBodyReader extends AbstractReader {
 				null);
 
 		nodes.put(name, BodyNode);
-		
+
 		if(block.getNumStmt()>0){
-			for(Stmt s: block.getStmtList()){
-			//	System.out.println(s.toString());
+			addMethodBodyTypeDependancy(edges);
+		}
+		
+		addMSignatureDependency(edges);
+
+	}
+	
+	private void addMSignatureDependency(List<Edge> edges) {
+		edges.add(new Edge(MethodNode.getFullName(), BodyNode.getFullName(), Edge.Type.Contains));
+	}
+
+
+	public void addMethodBodyTypeDependancy(List<Edge> edges) {
+		for(Stmt s: block.getStmtList()){
+			if(s.value instanceof VarDeclStmt) {
+				VarDeclStmt varStmt = (VarDeclStmt) s;
+				TypeDecl varType = varStmt.type();
+				if (Util.isPrimitive(varType)) {
+					continue;
+				}
+				edges.add(new Edge(BodyNode.getFullName(), varType.fullName(), Edge.Type.Uses));
+
 			}
 		}
 
-
-
-
-
 	}
-
 
 }

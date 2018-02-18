@@ -48,12 +48,17 @@ public class TestProgramReader extends TestBase{
                 new TestEdge("test", "test.Foo"),
                 new TestEdge("test.SuperTest", "test.SuperTest.r"),
                 new TestEdge("test.SuperTest", "test.SuperTest.superMethod(test.Test, test.Foo)"),
+                new TestEdge("test.SuperTest.superMethod(test.Test, test.Foo)", "test.SuperTest.superMethod(test.Test, test.Foo).body"),
                 new TestEdge("test.Test", "test.Test.r"),
                 new TestEdge("test.Test", "test.Test.f"),
                 new TestEdge("test.Test", "test.Test.f()"),
+                new TestEdge("test.Test.f()", "test.Test.f().body"),
                 new TestEdge("test.Test", "test.Test.m(int)"),
+                new TestEdge("test.Test.m(int)", "test.Test.m(int).body"),
                 new TestEdge("test.Test", "test.Test.m(double)"),
+                new TestEdge( "test.Test.m(double)", "test.Test.m(double).body"),
                 new TestEdge("test.Test", "test.Test.m(test.Foo)"),
+                new TestEdge("test.Test.m(test.Foo)", "test.Test.m(test.Foo).body"),
                 new TestEdge("test.Foo", "test.Foo.t()"),
                 new TestEdge("test.Foo", "test.Foo.t(test.Test)")
         ));
