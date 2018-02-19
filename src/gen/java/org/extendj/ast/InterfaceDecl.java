@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:155
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:155
  * @astdecl InterfaceDecl : ReferenceType ::= Modifiers <ID:String> SuperInterface:Access* BodyDecl*;
  * @production InterfaceDecl : {@link ReferenceType} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">SuperInterface:{@link Access}*</span> <span class="component">{@link BodyDecl}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:402
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:402
    */
   public void prettyPrint(PrettyPrinter out) {
     if (hasDocComment()) {
@@ -75,7 +75,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect Generics
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:310
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:310
    */
   public TypeDecl makeGeneric(Signatures.ClassSignature s) {
     if (s.hasFormalTypeParameters()) {
@@ -158,11 +158,11 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    isStatic_reset();
     memberFieldsMap_reset();
     memberFields_String_reset();
     methods_reset();
     ancestorMethods_String_reset();
+    isStatic_reset();
     castingConversionTo_TypeDecl_reset();
     instanceOf_TypeDecl_reset();
     superInterfaces_reset();
@@ -171,14 +171,14 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     implementedInterfaces_reset();
     subtype_TypeDecl_reset();
     iterableElementType_reset();
-    hasAnnotationFunctionalInterface_reset();
+    strictSubtype_TypeDecl_reset();
     isFunctionalInterface_reset();
     isFunctional_reset();
     collectAbstractMethods_reset();
     hasFunctionDescriptor_reset();
     functionDescriptor_reset();
     hasOverridingMethodInSuper_MethodDecl_reset();
-    strictSubtype_TypeDecl_reset();
+    hasAnnotationFunctionalInterface_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:68
@@ -544,7 +544,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect Generics
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:141
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:141
    */
   private boolean refined_Generics_InterfaceDecl_castingConversionTo_TypeDecl(TypeDecl type)
 {
@@ -557,156 +557,6 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     } else {
       return T.instanceOf(S);
     }
-  }
-  /**
-   * @attribute syn
-   * @aspect ConstructScope
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupConstructor.jrag:47
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructScope", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupConstructor.jrag:47")
-  public Collection<ConstructorDecl> lookupSuperConstructor() {
-    Collection<ConstructorDecl> lookupSuperConstructor_value = typeObject().constructors();
-    return lookupSuperConstructor_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect AccessControl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AccessControl.jrag:214
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AccessControl.jrag:214")
-  public Collection<Problem> accessControlProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-    
-        if (!isCircular()) {
-          // 9.1.2
-          Collection<TypeDecl> interfaces = new HashSet<TypeDecl>();
-          for (Access access : getSuperInterfaceList()) {
-            TypeDecl decl = access.type();
-            if (!decl.isInterfaceDecl() && !decl.isUnknown()) {
-              problems.add(errorf("interface %s can not extend non interface type %s",
-                  fullName(), decl.fullName()));
-            }
-            if (!decl.isCircular() && !decl.accessibleFrom(this)) {
-              problems.add(errorf("interface %s can not extend non accessible type %s",
-                  fullName(), decl.fullName()));
-            }
-            if (interfaces.contains(decl)) {
-              problems.add(errorf(
-                  "extended interface %s is mentionened multiple times in extends clause",
-                  decl.fullName()));
-            }
-            interfaces.add(decl);
-          }
-        }
-        return problems;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeHierarchyCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:508
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:508")
-  public Collection<Problem> typeHierarchyProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        //9.6.3.8
-        if (hasAnnotationFunctionalInterface() && !isFunctional()) {
-          problems.add(errorf("%s is not a functional interface", name()));
-        }
-    
-        if (isCircular()) {
-          problems.add(errorf("circular inheritance dependency in %s", typeName()));
-        } else {
-          for (int i = 0; i < getNumSuperInterface(); i++) {
-            TypeDecl typeDecl = getSuperInterface(i).type();
-            if (typeDecl.isCircular()) {
-              problems.add(errorf("circular inheritance dependency in %s", typeName()));
-            }
-          }
-        }
-        for (SimpleSet<MethodDecl> set : methodsSignatureMap().values()) {
-          if (set.size() > 1) {
-            Iterator i2 = set.iterator();
-            MethodDecl m = (MethodDecl) i2.next();
-            while (i2.hasNext()) {
-              MethodDecl n = (MethodDecl) i2.next();
-              checkInterfaceMethodDecls(problems, m, n);
-            }
-          }
-        }
-        return problems;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeScopePropagation
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:678
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:678")
-  public SimpleSet<TypeDecl> memberTypes(String name) {
-    {
-        SimpleSet<TypeDecl> result = localTypeDecls(name);
-        if (!result.isEmpty()) {
-          return result;
-        }
-        for (InterfaceDecl iface : superInterfaces()) {
-          for (TypeDecl decl : iface.memberTypes(name)) {
-            if (!decl.isPrivate()) {
-              result = result.add(decl);
-            }
-          }
-        }
-        return result;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:235
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:235")
-  public boolean isAbstract() {
-    boolean isAbstract_value = true;
-    return isAbstract_value;
-  }
-  /** @apilevel internal */
-  private void isStatic_reset() {
-    isStatic_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle isStatic_computed = null;
-
-  /** @apilevel internal */
-  protected boolean isStatic_value;
-
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:237
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:237")
-  public boolean isStatic() {
-    ASTState state = state();
-    if (isStatic_computed == ASTState.NON_CYCLE || isStatic_computed == state().cycle()) {
-      return isStatic_value;
-    }
-    isStatic_value = getModifiers().isStatic() || isMemberType();
-    if (state().inCircle()) {
-      isStatic_computed = state().cycle();
-    
-    } else {
-      isStatic_computed = ASTState.NON_CYCLE;
-    
-    }
-    return isStatic_value;
   }
   /** @apilevel internal */
   private void memberFieldsMap_reset() {
@@ -722,10 +572,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect Fields
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:402
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:402
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:402")
+  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:402")
   public Map<String, SimpleSet<Variable>> memberFieldsMap() {
     ASTState state = state();
     if (memberFieldsMap_computed == ASTState.NON_CYCLE || memberFieldsMap_computed == state().cycle()) {
@@ -768,10 +618,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect Fields
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:471
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:471
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:471")
+  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:471")
   public SimpleSet<Variable> memberFields(String name) {
     Object _parameters = name;
     if (memberFields_String_computed == null) memberFields_String_computed = new java.util.HashMap(4);
@@ -811,6 +661,17 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
       }
       return fields;
     }
+  /**
+   * @attribute syn
+   * @aspect ConstructScope
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupConstructor.jrag:47
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstructScope", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupConstructor.jrag:47")
+  public Collection<ConstructorDecl> lookupSuperConstructor() {
+    Collection<ConstructorDecl> lookupSuperConstructor_value = typeObject().constructors();
+    return lookupSuperConstructor_value;
+  }
   /** @apilevel internal */
   private void methods_reset() {
     methods_computed = null;
@@ -828,10 +689,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
    * <p>Shadowed declarations are not included in the result.
    * @attribute syn
    * @aspect MemberMethods
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:636
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:636
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MemberMethods", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:636")
+  @ASTNodeAnnotation.Source(aspect="MemberMethods", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:636")
   public java.util.List<MethodDecl> methods() {
     ASTState state = state();
     if (methods_computed == ASTState.NON_CYCLE || methods_computed == state().cycle()) {
@@ -883,10 +744,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
    * abstract methods.
    * @attribute syn
    * @aspect AncestorMethods
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:743
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:743
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AncestorMethods", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:743")
+  @ASTNodeAnnotation.Source(aspect="AncestorMethods", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:743")
   public SimpleSet<MethodDecl> ancestorMethods(String signature) {
     Object _parameters = signature;
     if (ancestorMethods_String_computed == null) ancestorMethods_String_computed = new java.util.HashMap(4);
@@ -928,14 +789,153 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
     }
   /**
    * @attribute syn
-   * @aspect PrettyPrintUtil
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:314
+   * @aspect AccessControl
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/AccessControl.jrag:214
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:314")
+  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/AccessControl.jrag:214")
+  public Collection<Problem> accessControlProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+    
+        if (!isCircular()) {
+          // 9.1.2
+          Collection<TypeDecl> interfaces = new HashSet<TypeDecl>();
+          for (Access access : getSuperInterfaceList()) {
+            TypeDecl decl = access.type();
+            if (!decl.isInterfaceDecl() && !decl.isUnknown()) {
+              problems.add(errorf("interface %s can not extend non interface type %s",
+                  fullName(), decl.fullName()));
+            }
+            if (!decl.isCircular() && !decl.accessibleFrom(this)) {
+              problems.add(errorf("interface %s can not extend non accessible type %s",
+                  fullName(), decl.fullName()));
+            }
+            if (interfaces.contains(decl)) {
+              problems.add(errorf(
+                  "extended interface %s is mentionened multiple times in extends clause",
+                  decl.fullName()));
+            }
+            interfaces.add(decl);
+          }
+        }
+        return problems;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:235
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:235")
+  public boolean isAbstract() {
+    boolean isAbstract_value = true;
+    return isAbstract_value;
+  }
+  /** @apilevel internal */
+  private void isStatic_reset() {
+    isStatic_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle isStatic_computed = null;
+
+  /** @apilevel internal */
+  protected boolean isStatic_value;
+
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:237
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:237")
+  public boolean isStatic() {
+    ASTState state = state();
+    if (isStatic_computed == ASTState.NON_CYCLE || isStatic_computed == state().cycle()) {
+      return isStatic_value;
+    }
+    isStatic_value = getModifiers().isStatic() || isMemberType();
+    if (state().inCircle()) {
+      isStatic_computed = state().cycle();
+    
+    } else {
+      isStatic_computed = ASTState.NON_CYCLE;
+    
+    }
+    return isStatic_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect PrettyPrintUtil
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:314
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:314")
   public boolean hasModifiers() {
     boolean hasModifiers_value = getModifiers().getNumModifier() > 0;
     return hasModifiers_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeScopePropagation
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:678
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:678")
+  public SimpleSet<TypeDecl> memberTypes(String name) {
+    {
+        SimpleSet<TypeDecl> result = localTypeDecls(name);
+        if (!result.isEmpty()) {
+          return result;
+        }
+        for (InterfaceDecl iface : superInterfaces()) {
+          for (TypeDecl decl : iface.memberTypes(name)) {
+            if (!decl.isPrivate()) {
+              result = result.add(decl);
+            }
+          }
+        }
+        return result;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeHierarchyCheck
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:508
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:508")
+  public Collection<Problem> typeHierarchyProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        //9.6.3.8
+        if (hasAnnotationFunctionalInterface() && !isFunctional()) {
+          problems.add(errorf("%s is not a functional interface", name()));
+        }
+    
+        if (isCircular()) {
+          problems.add(errorf("circular inheritance dependency in %s", typeName()));
+        } else {
+          for (int i = 0; i < getNumSuperInterface(); i++) {
+            TypeDecl typeDecl = getSuperInterface(i).type();
+            if (typeDecl.isCircular()) {
+              problems.add(errorf("circular inheritance dependency in %s", typeName()));
+            }
+          }
+        }
+        for (SimpleSet<MethodDecl> set : methodsSignatureMap().values()) {
+          if (set.size() > 1) {
+            Iterator i2 = set.iterator();
+            MethodDecl m = (MethodDecl) i2.next();
+            while (i2.hasNext()) {
+              MethodDecl n = (MethodDecl) i2.next();
+              checkInterfaceMethodDecls(problems, m, n);
+            }
+          }
+        }
+        return problems;
+      }
   }
   /** @apilevel internal */
   private void castingConversionTo_TypeDecl_reset() {
@@ -949,10 +949,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeConversion
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:100
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:100
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:100")
+  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:100")
   public boolean castingConversionTo(TypeDecl type) {
     Object _parameters = type;
     if (castingConversionTo_TypeDecl_computed == null) castingConversionTo_TypeDecl_computed = new java.util.HashMap(4);
@@ -990,10 +990,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:226
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:226
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:226")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:226")
   public boolean isInterfaceDecl() {
     boolean isInterfaceDecl_value = true;
     return isInterfaceDecl_value;
@@ -1010,10 +1010,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:442
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:442
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:442")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:442")
   public boolean instanceOf(TypeDecl type) {
     Object _parameters = type;
     if (instanceOf_TypeDecl_computed == null) instanceOf_TypeDecl_computed = new java.util.HashMap(4);
@@ -1043,10 +1043,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:458
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:458
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:458")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:458")
   public boolean isSupertypeOfClassDecl(ClassDecl type) {
     {
         if (super.isSupertypeOfClassDecl(type)) {
@@ -1063,10 +1063,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:477
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:477
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:477")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:477")
   public boolean isSupertypeOfInterfaceDecl(InterfaceDecl type) {
     {
         if (super.isSupertypeOfInterfaceDecl(type)) {
@@ -1083,10 +1083,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:491
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:491
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:491")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:491")
   public boolean isSupertypeOfArrayDecl(ArrayDecl type) {
     {
         if (super.isSupertypeOfArrayDecl(type)) {
@@ -1117,10 +1117,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
    * @return the interfaces directly implemented by this type.
    * @attribute syn
    * @aspect SuperClasses
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:686
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:686
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SuperClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:686")
+  @ASTNodeAnnotation.Source(aspect="SuperClasses", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:686")
   public Collection<InterfaceDecl> superInterfaces() {
     ASTState state = state();
     if (superInterfaces_computed == ASTState.NON_CYCLE || superInterfaces_computed == state().cycle()) {
@@ -1164,7 +1164,7 @@ protected ASTState.Cycle isCircular_cycle = null;
   /** @apilevel internal */
   protected boolean isCircular_initialized = false;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="Circularity", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:720")
+  @ASTNodeAnnotation.Source(aspect="Circularity", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:720")
   public boolean isCircular() {
     if (isCircular_computed) {
       return isCircular_value;
@@ -1225,10 +1225,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsTypeCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:535
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:535
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsTypeCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:535")
+  @ASTNodeAnnotation.Source(aspect="GenericsTypeCheck", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:535")
   public Map<String, SimpleSet<MethodDecl>> erasedAncestorMethodsMap() {
     ASTState state = state();
     if (erasedAncestorMethodsMap_computed == ASTState.NON_CYCLE || erasedAncestorMethodsMap_computed == state().cycle()) {
@@ -1282,10 +1282,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsTypeCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:640
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:640
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsTypeCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:640")
+  @ASTNodeAnnotation.Source(aspect="GenericsTypeCheck", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:640")
   public Collection<InterfaceDecl> implementedInterfaces() {
     ASTState state = state();
     if (implementedInterfaces_computed == ASTState.NON_CYCLE || implementedInterfaces_computed == state().cycle()) {
@@ -1317,7 +1317,7 @@ protected ASTState.Cycle isCircular_cycle = null;
   }
   protected java.util.Map subtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:492")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:492")
   public boolean subtype(TypeDecl type) {
     Object _parameters = type;
     if (subtype_TypeDecl_values == null) subtype_TypeDecl_values = new java.util.HashMap(4);
@@ -1365,10 +1365,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:507
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:507
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:507")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:507")
   public boolean supertypeClassDecl(ClassDecl type) {
     {
         if (super.supertypeClassDecl(type)) {
@@ -1385,10 +1385,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:523
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:523
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:523")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:523")
   public boolean supertypeInterfaceDecl(InterfaceDecl type) {
     {
         if (super.supertypeInterfaceDecl(type)) {
@@ -1405,10 +1405,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:539
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:539
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:539")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:539")
   public boolean supertypeArrayDecl(ArrayDecl type) {
     {
         if (super.supertypeArrayDecl(type)) {
@@ -1438,10 +1438,10 @@ protected ASTState.Cycle isCircular_cycle = null;
    * Returns UnknownType if this type does not implement java.lang.Iterable.
    * @attribute syn
    * @aspect EnhancedFor
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/EnhancedFor.jrag:77
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/EnhancedFor.jrag:77
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="EnhancedFor", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/EnhancedFor.jrag:77")
+  @ASTNodeAnnotation.Source(aspect="EnhancedFor", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/EnhancedFor.jrag:77")
   public TypeDecl iterableElementType() {
     ASTState state = state();
     if (iterableElementType_computed == ASTState.NON_CYCLE || iterableElementType_computed == state().cycle()) {
@@ -1473,36 +1473,116 @@ protected ASTState.Cycle isCircular_cycle = null;
       }
     }
   /** @apilevel internal */
-  private void hasAnnotationFunctionalInterface_reset() {
-    hasAnnotationFunctionalInterface_computed = null;
+  private void strictSubtype_TypeDecl_reset() {
+    strictSubtype_TypeDecl_values = null;
   }
-  /** @apilevel internal */
-  protected ASTState.Cycle hasAnnotationFunctionalInterface_computed = null;
+  protected java.util.Map strictSubtype_TypeDecl_values;
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:363")
+  public boolean strictSubtype(TypeDecl type) {
+    Object _parameters = type;
+    if (strictSubtype_TypeDecl_values == null) strictSubtype_TypeDecl_values = new java.util.HashMap(4);
+    ASTState.CircularValue _value;
+    if (strictSubtype_TypeDecl_values.containsKey(_parameters)) {
+      Object _cache = strictSubtype_TypeDecl_values.get(_parameters);
+      if (!(_cache instanceof ASTState.CircularValue)) {
+        return (Boolean) _cache;
+      } else {
+        _value = (ASTState.CircularValue) _cache;
+      }
+    } else {
+      _value = new ASTState.CircularValue();
+      strictSubtype_TypeDecl_values.put(_parameters, _value);
+      _value.value = true;
+    }
+    ASTState state = state();
+    if (!state.inCircle() || state.calledByLazyAttribute()) {
+      state.enterCircle();
+      boolean new_strictSubtype_TypeDecl_value;
+      do {
+        _value.cycle = state.nextCycle();
+        new_strictSubtype_TypeDecl_value = type.strictSupertypeInterfaceDecl(this);
+        if (((Boolean)_value.value) != new_strictSubtype_TypeDecl_value) {
+          state.setChangeInCycle();
+          _value.value = new_strictSubtype_TypeDecl_value;
+        }
+      } while (state.testAndClearChangeInCycle());
+      strictSubtype_TypeDecl_values.put(_parameters, new_strictSubtype_TypeDecl_value);
 
-  /** @apilevel internal */
-  protected boolean hasAnnotationFunctionalInterface_value;
-
+      state.leaveCircle();
+      return new_strictSubtype_TypeDecl_value;
+    } else if (_value.cycle != state.cycle()) {
+      _value.cycle = state.cycle();
+      boolean new_strictSubtype_TypeDecl_value = type.strictSupertypeInterfaceDecl(this);
+      if (((Boolean)_value.value) != new_strictSubtype_TypeDecl_value) {
+        state.setChangeInCycle();
+        _value.value = new_strictSubtype_TypeDecl_value;
+      }
+      return new_strictSubtype_TypeDecl_value;
+    } else {
+      return (Boolean) _value.value;
+    }
+  }
   /**
    * @attribute syn
-   * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/Annotations.jrag:29
+   * @aspect StrictSubtype
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:378
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/Annotations.jrag:29")
-  public boolean hasAnnotationFunctionalInterface() {
-    ASTState state = state();
-    if (hasAnnotationFunctionalInterface_computed == ASTState.NON_CYCLE || hasAnnotationFunctionalInterface_computed == state().cycle()) {
-      return hasAnnotationFunctionalInterface_value;
-    }
-    hasAnnotationFunctionalInterface_value = getModifiers().hasAnnotationFunctionalInterface();
-    if (state().inCircle()) {
-      hasAnnotationFunctionalInterface_computed = state().cycle();
-    
-    } else {
-      hasAnnotationFunctionalInterface_computed = ASTState.NON_CYCLE;
-    
-    }
-    return hasAnnotationFunctionalInterface_value;
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:378")
+  public boolean strictSupertypeClassDecl(ClassDecl type) {
+    {
+        if (super.strictSupertypeClassDecl(type)) {
+          return true;
+        }
+        for (InterfaceDecl iface : type.superInterfaces()) {
+          if (iface.strictSubtype(this)) {
+            return true;
+          }
+        }
+        return type.hasSuperclass() && type.superclass() != null
+            && type.superclass().strictSubtype(this);
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect StrictSubtype
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:397
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:397")
+  public boolean strictSupertypeInterfaceDecl(InterfaceDecl type) {
+    {
+        if (super.strictSupertypeInterfaceDecl(type)) {
+          return true;
+        }
+        for (InterfaceDecl superinterface : type.superInterfaces()) {
+          if (superinterface.strictSubtype(this)) {
+            return true;
+          }
+        }
+        return false;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect StrictSubtype
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:413
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:413")
+  public boolean strictSupertypeArrayDecl(ArrayDecl type) {
+    {
+        if (super.strictSupertypeArrayDecl(type)) {
+          return true;
+        }
+        for (InterfaceDecl iface : type.superInterfaces()) {
+          if (iface.strictSubtype(this)) {
+            return true;
+          }
+        }
+        return false;
+      }
   }
   /** @apilevel internal */
   private void isFunctionalInterface_reset() {
@@ -1517,10 +1597,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect FunctionalInterface
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/FunctionalInterface.jrag:30
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/FunctionalInterface.jrag:30
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/FunctionalInterface.jrag:30")
+  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/FunctionalInterface.jrag:30")
   public boolean isFunctionalInterface() {
     ASTState state = state();
     if (isFunctionalInterface_computed == ASTState.NON_CYCLE || isFunctionalInterface_computed == state().cycle()) {
@@ -1549,10 +1629,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect FunctionalInterface
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/FunctionalInterface.jrag:33
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/FunctionalInterface.jrag:33
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/FunctionalInterface.jrag:33")
+  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/FunctionalInterface.jrag:33")
   public boolean isFunctional() {
     ASTState state = state();
     if (isFunctional_computed == ASTState.NON_CYCLE || isFunctional_computed == state().cycle()) {
@@ -1608,10 +1688,10 @@ protected ASTState.Cycle isCircular_cycle = null;
    * a function type from a functional interface.
    * @attribute syn
    * @aspect FunctionalInterface
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/FunctionalInterface.jrag:317
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/FunctionalInterface.jrag:317
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/FunctionalInterface.jrag:317")
+  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/FunctionalInterface.jrag:317")
   public java.util.List<MethodDecl> collectAbstractMethods() {
     ASTState state = state();
     if (collectAbstractMethods_computed == ASTState.NON_CYCLE || collectAbstractMethods_computed == state().cycle()) {
@@ -1680,10 +1760,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect FunctionDescriptor
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/FunctionDescriptor.jrag:80
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/FunctionDescriptor.jrag:80
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionDescriptor", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/FunctionDescriptor.jrag:80")
+  @ASTNodeAnnotation.Source(aspect="FunctionDescriptor", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/FunctionDescriptor.jrag:80")
   public boolean hasFunctionDescriptor() {
     ASTState state = state();
     if (hasFunctionDescriptor_computed == ASTState.NON_CYCLE || hasFunctionDescriptor_computed == state().cycle()) {
@@ -1721,10 +1801,10 @@ protected ASTState.Cycle isCircular_cycle = null;
    * type then {@code null} is returned.
    * @attribute syn
    * @aspect FunctionDescriptor
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/FunctionDescriptor.jrag:91
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/FunctionDescriptor.jrag:91
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionDescriptor", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/FunctionDescriptor.jrag:91")
+  @ASTNodeAnnotation.Source(aspect="FunctionDescriptor", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/FunctionDescriptor.jrag:91")
   public FunctionDescriptor functionDescriptor() {
     ASTState state = state();
     if (functionDescriptor_computed == ASTState.NON_CYCLE || functionDescriptor_computed == state().cycle()) {
@@ -1855,10 +1935,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:1198
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:1198
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:1198")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:1198")
   public boolean hasOverridingMethodInSuper(MethodDecl m) {
     Object _parameters = m;
     if (hasOverridingMethodInSuper_MethodDecl_computed == null) hasOverridingMethodInSuper_MethodDecl_computed = new java.util.HashMap(4);
@@ -1893,157 +1973,55 @@ protected ASTState.Cycle isCircular_cycle = null;
       return false;
     }
   /** @apilevel internal */
-  private void strictSubtype_TypeDecl_reset() {
-    strictSubtype_TypeDecl_values = null;
+  private void hasAnnotationFunctionalInterface_reset() {
+    hasAnnotationFunctionalInterface_computed = null;
   }
-  protected java.util.Map strictSubtype_TypeDecl_values;
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:363")
-  public boolean strictSubtype(TypeDecl type) {
-    Object _parameters = type;
-    if (strictSubtype_TypeDecl_values == null) strictSubtype_TypeDecl_values = new java.util.HashMap(4);
-    ASTState.CircularValue _value;
-    if (strictSubtype_TypeDecl_values.containsKey(_parameters)) {
-      Object _cache = strictSubtype_TypeDecl_values.get(_parameters);
-      if (!(_cache instanceof ASTState.CircularValue)) {
-        return (Boolean) _cache;
-      } else {
-        _value = (ASTState.CircularValue) _cache;
-      }
-    } else {
-      _value = new ASTState.CircularValue();
-      strictSubtype_TypeDecl_values.put(_parameters, _value);
-      _value.value = true;
-    }
-    ASTState state = state();
-    if (!state.inCircle() || state.calledByLazyAttribute()) {
-      state.enterCircle();
-      boolean new_strictSubtype_TypeDecl_value;
-      do {
-        _value.cycle = state.nextCycle();
-        new_strictSubtype_TypeDecl_value = type.strictSupertypeInterfaceDecl(this);
-        if (((Boolean)_value.value) != new_strictSubtype_TypeDecl_value) {
-          state.setChangeInCycle();
-          _value.value = new_strictSubtype_TypeDecl_value;
-        }
-      } while (state.testAndClearChangeInCycle());
-      strictSubtype_TypeDecl_values.put(_parameters, new_strictSubtype_TypeDecl_value);
+  /** @apilevel internal */
+  protected ASTState.Cycle hasAnnotationFunctionalInterface_computed = null;
 
-      state.leaveCircle();
-      return new_strictSubtype_TypeDecl_value;
-    } else if (_value.cycle != state.cycle()) {
-      _value.cycle = state.cycle();
-      boolean new_strictSubtype_TypeDecl_value = type.strictSupertypeInterfaceDecl(this);
-      if (((Boolean)_value.value) != new_strictSubtype_TypeDecl_value) {
-        state.setChangeInCycle();
-        _value.value = new_strictSubtype_TypeDecl_value;
-      }
-      return new_strictSubtype_TypeDecl_value;
-    } else {
-      return (Boolean) _value.value;
+  /** @apilevel internal */
+  protected boolean hasAnnotationFunctionalInterface_value;
+
+  /**
+   * @attribute syn
+   * @aspect Annotations
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/Annotations.jrag:29
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/Annotations.jrag:29")
+  public boolean hasAnnotationFunctionalInterface() {
+    ASTState state = state();
+    if (hasAnnotationFunctionalInterface_computed == ASTState.NON_CYCLE || hasAnnotationFunctionalInterface_computed == state().cycle()) {
+      return hasAnnotationFunctionalInterface_value;
     }
-  }
-  /**
-   * @attribute syn
-   * @aspect StrictSubtype
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:378
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:378")
-  public boolean strictSupertypeClassDecl(ClassDecl type) {
-    {
-        if (super.strictSupertypeClassDecl(type)) {
-          return true;
-        }
-        for (InterfaceDecl iface : type.superInterfaces()) {
-          if (iface.strictSubtype(this)) {
-            return true;
-          }
-        }
-        return type.hasSuperclass() && type.superclass() != null
-            && type.superclass().strictSubtype(this);
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect StrictSubtype
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:397
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:397")
-  public boolean strictSupertypeInterfaceDecl(InterfaceDecl type) {
-    {
-        if (super.strictSupertypeInterfaceDecl(type)) {
-          return true;
-        }
-        for (InterfaceDecl superinterface : type.superInterfaces()) {
-          if (superinterface.strictSubtype(this)) {
-            return true;
-          }
-        }
-        return false;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect StrictSubtype
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:413
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:413")
-  public boolean strictSupertypeArrayDecl(ArrayDecl type) {
-    {
-        if (super.strictSupertypeArrayDecl(type)) {
-          return true;
-        }
-        for (InterfaceDecl iface : type.superInterfaces()) {
-          if (iface.strictSubtype(this)) {
-            return true;
-          }
-        }
-        return false;
-      }
+    hasAnnotationFunctionalInterface_value = getModifiers().hasAnnotationFunctionalInterface();
+    if (state().inCircle()) {
+      hasAnnotationFunctionalInterface_computed = state().cycle();
+    
+    } else {
+      hasAnnotationFunctionalInterface_computed = ASTState.NON_CYCLE;
+    
+    }
+    return hasAnnotationFunctionalInterface_value;
   }
   /**
    * @attribute inh
    * @aspect TypeConversion
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:113
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:113
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:113")
+  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:113")
   public MethodDecl unknownMethod() {
     MethodDecl unknownMethod_value = getParent().Define_unknownMethod(this, null);
     return unknownMethod_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
-   * @apilevel internal
-   */
-  public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getSuperInterfaceListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:99
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return NameType.TYPE_NAME;
-    }
-    else {
-      return super.Define_nameType(_callerNode, _childNode);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute nameType
-   */
-  protected boolean canDefine_nameType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:76
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/MultiCatch.jrag:76
    * @apilevel internal
    */
   public TypeDecl Define_hostType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getSuperInterfaceListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:647
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:647
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return hostType();
     }
@@ -2052,7 +2030,7 @@ protected ASTState.Cycle isCircular_cycle = null;
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/MultiCatch.jrag:76
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/MultiCatch.jrag:76
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute hostType
    */
@@ -2060,56 +2038,34 @@ protected ASTState.Cycle isCircular_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SuppressWarnings.jrag:37
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
-  public boolean Define_withinSuppressWarnings(ASTNode _callerNode, ASTNode _childNode, String annot) {
+  public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getSuperInterfaceListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:417
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:99
       int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return hasAnnotationSuppressWarnings(annot) || withinSuppressWarnings(annot);
+      return NameType.TYPE_NAME;
     }
     else {
-      return getParent().Define_withinSuppressWarnings(this, _callerNode, annot);
+      return super.Define_nameType(_callerNode, _childNode);
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SuppressWarnings.jrag:37
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute withinSuppressWarnings
+   * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
-  protected boolean canDefine_withinSuppressWarnings(ASTNode _callerNode, ASTNode _childNode, String annot) {
+  protected boolean canDefine_nameType(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:533
-   * @apilevel internal
-   */
-  public boolean Define_withinDeprecatedAnnotation(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getSuperInterfaceListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:544
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return isDeprecated() || withinDeprecatedAnnotation();
-    }
-    else {
-      return super.Define_withinDeprecatedAnnotation(_callerNode, _childNode);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:533
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute withinDeprecatedAnnotation
-   */
-  protected boolean canDefine_withinDeprecatedAnnotation(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:383
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:383
    * @apilevel internal
    */
   public boolean Define_inExtendsOrImplements(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getSuperInterfaceListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:382
+      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:382
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return true;
     }
@@ -2118,11 +2074,55 @@ protected ASTState.Cycle isCircular_cycle = null;
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:383
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:383
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inExtendsOrImplements
    */
   protected boolean canDefine_inExtendsOrImplements(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/SuppressWarnings.jrag:37
+   * @apilevel internal
+   */
+  public boolean Define_withinSuppressWarnings(ASTNode _callerNode, ASTNode _childNode, String annot) {
+    if (_callerNode == getSuperInterfaceListNoTransform()) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:417
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return hasAnnotationSuppressWarnings(annot) || withinSuppressWarnings(annot);
+    }
+    else {
+      return getParent().Define_withinSuppressWarnings(this, _callerNode, annot);
+    }
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/SuppressWarnings.jrag:37
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute withinSuppressWarnings
+   */
+  protected boolean canDefine_withinSuppressWarnings(ASTNode _callerNode, ASTNode _childNode, String annot) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:533
+   * @apilevel internal
+   */
+  public boolean Define_withinDeprecatedAnnotation(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getSuperInterfaceListNoTransform()) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:544
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return isDeprecated() || withinDeprecatedAnnotation();
+    }
+    else {
+      return super.Define_withinDeprecatedAnnotation(_callerNode, _childNode);
+    }
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:533
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute withinDeprecatedAnnotation
+   */
+  protected boolean canDefine_withinDeprecatedAnnotation(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /** @apilevel internal */
@@ -2135,7 +2135,7 @@ protected ASTState.Cycle isCircular_cycle = null;
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AccessControl.jrag:212
+    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/AccessControl.jrag:212
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -2144,7 +2144,7 @@ protected ASTState.Cycle isCircular_cycle = null;
       }
       contributors.add(this);
     }
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:506
+    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:506
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

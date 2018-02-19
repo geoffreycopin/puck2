@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:160
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:160
  * @astdecl BodyDecl : ASTNode;
  * @production BodyDecl : {@link ASTNode};
 
@@ -37,14 +37,14 @@ import java.io.DataInputStream;
 public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect DocumentationComments
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DocumentationComments.jadd:36
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DocumentationComments.jadd:36
    */
   public String docComment = "";
   /**
    * Copies the signature of this body decl. The type and name and parameters
    * are copied where applicable, but the body or initializer is not copied.
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1416
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1416
    */
   public BodyDecl signatureCopy() {
     throw new Error("Can not susbtitute type parameters in body decl of type "
@@ -55,7 +55,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
    * 
    * <p>Occurrences of type variables are replaced by their type bound.
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1518
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1518
    */
   public BodyDecl erasedCopy() {
     throw new Error("Can not erase types in body decl of type " + getClass().getSimpleName());
@@ -96,8 +96,8 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     assignedAfter_Variable_reset();
     assignedBefore_Variable_reset();
     unassignedAfter_Variable_reset();
-    typeThrowable_reset();
     lookupVariable_String_reset();
+    typeThrowable_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:32
@@ -142,10 +142,10 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect DocumentationComments
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DocumentationComments.jadd:42
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DocumentationComments.jadd:42
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DocumentationComments", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DocumentationComments.jadd:42")
+  @ASTNodeAnnotation.Source(aspect="DocumentationComments", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DocumentationComments.jadd:42")
   public String docComment() {
     String docComment_value = docComment;
     return docComment_value;
@@ -153,13 +153,57 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect DocumentationComments
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DocumentationComments.jadd:46
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DocumentationComments.jadd:46
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DocumentationComments", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DocumentationComments.jadd:46")
+  @ASTNodeAnnotation.Source(aspect="DocumentationComments", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DocumentationComments.jadd:46")
   public boolean hasDocComment() {
     boolean hasDocComment_value = !docComment.isEmpty();
     return hasDocComment_value;
+  }
+  /** @return {@code true} if the field declaration is inside this node. 
+   * @attribute syn
+   * @aspect DeclareBeforeUse
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:46
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="DeclareBeforeUse", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:46")
+  public boolean declaredIn(Variable decl) {
+    boolean declaredIn_Variable_value = declaredBefore(decl);
+    return declaredIn_Variable_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:247
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:247")
+  public boolean isSynthetic() {
+    boolean isSynthetic_value = false;
+    return isSynthetic_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeScopePropagation
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:657
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:657")
+  public boolean declaresType(String name) {
+    boolean declaresType_String_value = false;
+    return declaresType_String_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeScopePropagation
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:659
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:659")
+  public TypeDecl type(String name) {
+    TypeDecl type_String_value = null;
+    return type_String_value;
   }
   /** @apilevel internal */
   private void assignedAfter_Variable_reset() {
@@ -167,7 +211,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:272")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:272")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -218,7 +262,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   }
   protected java.util.Map assignedBefore_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:278")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:278")
   public boolean assignedBefore(Variable v) {
     Object _parameters = v;
     if (assignedBefore_Variable_values == null) assignedBefore_Variable_values = new java.util.HashMap(4);
@@ -269,7 +313,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:911")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:911")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -317,133 +361,45 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteUnassignment
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:917
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:917
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:917")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:917")
   public boolean unassignedBefore(Variable v) {
     boolean unassignedBefore_Variable_value = unassignedBefore(v, this);
     return unassignedBefore_Variable_value;
   }
   /**
    * @attribute syn
-   * @aspect TypeScopePropagation
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:657
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:657")
-  public boolean declaresType(String name) {
-    boolean declaresType_String_value = false;
-    return declaresType_String_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeScopePropagation
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:659
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:659")
-  public TypeDecl type(String name) {
-    TypeDecl type_String_value = null;
-    return type_String_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:247
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:247")
-  public boolean isSynthetic() {
-    boolean isSynthetic_value = false;
-    return isSynthetic_value;
-  }
-  /** @return {@code true} if the field declaration is inside this node. 
-   * @attribute syn
-   * @aspect DeclareBeforeUse
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:46
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DeclareBeforeUse", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:46")
-  public boolean declaredIn(Variable decl) {
-    boolean declaredIn_Variable_value = declaredBefore(decl);
-    return declaredIn_Variable_value;
-  }
-  /**
-   * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:291
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:291
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:291")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:291")
   public boolean isVoid() {
     boolean isVoid_value = false;
     return isVoid_value;
   }
   /**
    * @attribute syn
-   * @aspect GenericsParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsParTypeDecl.jrag:98
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsParTypeDecl.jrag:98")
-  public boolean visibleTypeParameters() {
-    boolean visibleTypeParameters_value = true;
-    return visibleTypeParameters_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:425
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:425")
-  public boolean hasAnnotationSuppressWarnings(String annot) {
-    boolean hasAnnotationSuppressWarnings_String_value = false;
-    return hasAnnotationSuppressWarnings_String_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:486
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:486")
-  public boolean isDeprecated() {
-    boolean isDeprecated_value = false;
-    return isDeprecated_value;
-  }
-  /**
-   * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1714
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1714
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1714")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1714")
   public boolean isSubstitutable() {
     boolean isSubstitutable_value = false;
     return isSubstitutable_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Enums
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Enums.jrag:50
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Enums.jrag:50")
-  public boolean isEnumConstant() {
-    boolean isEnumConstant_value = false;
-    return isEnumConstant_value;
   }
   /**
    * @return {@code true} if this is a generic method or constructor, or a
    * substitued generic method or constructor.
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:413
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:413
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:413")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:413")
   public boolean isGeneric() {
     boolean isGeneric_value = false;
     return isGeneric_value;
@@ -454,23 +410,67 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
    * @return type parameters for this declaration.
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:448
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:448
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:448")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:448")
   public List<TypeVariable> typeParameters() {
     {
         throw new Error("can not evaulate type parameters for non-generic declaration");
       }
   }
   /**
+   * @attribute syn
+   * @aspect GenericsParTypeDecl
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericsParTypeDecl.jrag:98
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsParTypeDecl.jrag:98")
+  public boolean visibleTypeParameters() {
+    boolean visibleTypeParameters_value = true;
+    return visibleTypeParameters_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Annotations
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:425
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:425")
+  public boolean hasAnnotationSuppressWarnings(String annot) {
+    boolean hasAnnotationSuppressWarnings_String_value = false;
+    return hasAnnotationSuppressWarnings_String_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Annotations
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:486
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:486")
+  public boolean isDeprecated() {
+    boolean isDeprecated_value = false;
+    return isDeprecated_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Enums
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:50
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:50")
+  public boolean isEnumConstant() {
+    boolean isEnumConstant_value = false;
+    return isEnumConstant_value;
+  }
+  /**
    * @return true if the modifier list includes the SafeVarargs annotation
    * @attribute syn
    * @aspect SafeVarargs
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SafeVarargs.jrag:41
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/SafeVarargs.jrag:41
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SafeVarargs", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SafeVarargs.jrag:41")
+  @ASTNodeAnnotation.Source(aspect="SafeVarargs", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/SafeVarargs.jrag:41")
   public boolean hasAnnotationSafeVarargs() {
     boolean hasAnnotationSafeVarargs_value = false;
     return hasAnnotationSafeVarargs_value;
@@ -478,10 +478,10 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect SafeVarargs
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SafeVarargs.jrag:93
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/SafeVarargs.jrag:93
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SafeVarargs", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SafeVarargs.jrag:93")
+  @ASTNodeAnnotation.Source(aspect="SafeVarargs", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/SafeVarargs.jrag:93")
   public Collection<Problem> safeVarargsProblems() {
     {
         if (hasAnnotationSafeVarargs()) {
@@ -497,10 +497,10 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
    * the source declaration being identical to the given method.
    * @attribute syn
    * @aspect LambdaParametersInference
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:561
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TypeCheck.jrag:561
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:561")
+  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/TypeCheck.jrag:561")
   public boolean isSubstitutionOf(MethodDecl method) {
     boolean isSubstitutionOf_MethodDecl_value = false;
     return isSubstitutionOf_MethodDecl_value;
@@ -508,98 +508,21 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:40
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:40
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:40")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:40")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = false;
     return modifiedInScope_Variable_value;
   }
   /**
    * @attribute inh
-   * @aspect ExceptionHandling
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:60
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:60")
-  public TypeDecl typeThrowable() {
-    ASTState state = state();
-    if (typeThrowable_computed == ASTState.NON_CYCLE || typeThrowable_computed == state().cycle()) {
-      return typeThrowable_value;
-    }
-    typeThrowable_value = getParent().Define_typeThrowable(this, null);
-    if (state().inCircle()) {
-      typeThrowable_computed = state().cycle();
-    
-    } else {
-      typeThrowable_computed = ASTState.NON_CYCLE;
-    
-    }
-    return typeThrowable_value;
-  }
-  /** @apilevel internal */
-  private void typeThrowable_reset() {
-    typeThrowable_computed = null;
-    typeThrowable_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle typeThrowable_computed = null;
-
-  /** @apilevel internal */
-  protected TypeDecl typeThrowable_value;
-
-  /**
-   * @attribute inh
-   * @aspect DefiniteAssignment
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:280
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:280")
-  public boolean assignedBefore(Variable v, BodyDecl b) {
-    boolean assignedBefore_Variable_BodyDecl_value = getParent().Define_assignedBefore(this, null, v, b);
-    return assignedBefore_Variable_BodyDecl_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect DefiniteUnassignment
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:923
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:923")
-  public boolean unassignedBefore(Variable v, BodyDecl b) {
-    boolean unassignedBefore_Variable_BodyDecl_value = getParent().Define_unassignedBefore(this, null, v, b);
-    return unassignedBefore_Variable_BodyDecl_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect LookupFullyQualifiedTypes
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:129
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:129")
-  public TypeDecl lookupType(String packageName, String typeName) {
-    TypeDecl lookupType_String_String_value = getParent().Define_lookupType(this, null, packageName, typeName);
-    return lookupType_String_String_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect TypeScopePropagation
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:398
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:398")
-  public SimpleSet<TypeDecl> lookupType(String name) {
-    SimpleSet<TypeDecl> lookupType_String_value = getParent().Define_lookupType(this, null, name);
-    return lookupType_String_value;
-  }
-  /**
-   * @attribute inh
    * @aspect VariableScope
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:39
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:39")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:39")
   public SimpleSet<Variable> lookupVariable(String name) {
     Object _parameters = name;
     if (lookupVariable_String_computed == null) lookupVariable_String_computed = new java.util.HashMap(4);
@@ -635,21 +558,98 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
    * Find all visible methods with the given name in the local scope.
    * @attribute inh
    * @aspect LookupMethod
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:121
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:121
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:121")
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:121")
   public Collection<MethodDecl> lookupMethod(String name) {
     Collection<MethodDecl> lookupMethod_String_value = getParent().Define_lookupMethod(this, null, name);
     return lookupMethod_String_value;
   }
   /**
    * @attribute inh
-   * @aspect NestedTypes
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:635
+   * @aspect ExceptionHandling
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:60
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:635")
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:60")
+  public TypeDecl typeThrowable() {
+    ASTState state = state();
+    if (typeThrowable_computed == ASTState.NON_CYCLE || typeThrowable_computed == state().cycle()) {
+      return typeThrowable_value;
+    }
+    typeThrowable_value = getParent().Define_typeThrowable(this, null);
+    if (state().inCircle()) {
+      typeThrowable_computed = state().cycle();
+    
+    } else {
+      typeThrowable_computed = ASTState.NON_CYCLE;
+    
+    }
+    return typeThrowable_value;
+  }
+  /** @apilevel internal */
+  private void typeThrowable_reset() {
+    typeThrowable_computed = null;
+    typeThrowable_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle typeThrowable_computed = null;
+
+  /** @apilevel internal */
+  protected TypeDecl typeThrowable_value;
+
+  /**
+   * @attribute inh
+   * @aspect LookupFullyQualifiedTypes
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:129
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:129")
+  public TypeDecl lookupType(String packageName, String typeName) {
+    TypeDecl lookupType_String_String_value = getParent().Define_lookupType(this, null, packageName, typeName);
+    return lookupType_String_String_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect TypeScopePropagation
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:398
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:398")
+  public SimpleSet<TypeDecl> lookupType(String name) {
+    SimpleSet<TypeDecl> lookupType_String_value = getParent().Define_lookupType(this, null, name);
+    return lookupType_String_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect DefiniteAssignment
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:280
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:280")
+  public boolean assignedBefore(Variable v, BodyDecl b) {
+    boolean assignedBefore_Variable_BodyDecl_value = getParent().Define_assignedBefore(this, null, v, b);
+    return assignedBefore_Variable_BodyDecl_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect DefiniteUnassignment
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:923
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:923")
+  public boolean unassignedBefore(Variable v, BodyDecl b) {
+    boolean unassignedBefore_Variable_BodyDecl_value = getParent().Define_unassignedBefore(this, null, v, b);
+    return unassignedBefore_Variable_BodyDecl_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect NestedTypes
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:635
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:635")
   public String hostPackage() {
     String hostPackage_value = getParent().Define_hostPackage(this, null);
     return hostPackage_value;
@@ -657,10 +657,10 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect NestedTypes
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:652
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:652
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:652")
+  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:652")
   public TypeDecl hostType() {
     TypeDecl hostType_value = getParent().Define_hostType(this, null);
     return hostType_value;
@@ -668,10 +668,10 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:402
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:402
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:402")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:402")
   public boolean withinSuppressWarnings(String annot) {
     boolean withinSuppressWarnings_String_value = getParent().Define_withinSuppressWarnings(this, null, annot);
     return withinSuppressWarnings_String_value;
@@ -679,144 +679,16 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute inh
    * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:533
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:533
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:533")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:533")
   public boolean withinDeprecatedAnnotation() {
     boolean withinDeprecatedAnnotation_value = getParent().Define_withinDeprecatedAnnotation(this, null);
     return withinDeprecatedAnnotation_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:86
-   * @apilevel internal
-   */
-  public boolean Define_isLeftChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:86
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isLeftChildOfDot
-   */
-  protected boolean canDefine_isLeftChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
-   * @apilevel internal
-   */
-  public boolean Define_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isRightChildOfDot
-   */
-  protected boolean canDefine_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
-   * @apilevel internal
-   */
-  public Expr Define_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return prevExprError();
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute prevExpr
-   */
-  protected boolean canDefine_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:142
-   * @apilevel internal
-   */
-  public Access Define_nextAccess(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return nextAccessError();
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:142
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute nextAccess
-   */
-  protected boolean canDefine_nextAccess(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539
-   * @apilevel internal
-   */
-  public boolean Define_canResolve(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute canResolve
-   */
-  protected boolean canDefine_canResolve(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
-   * @apilevel internal
-   */
-  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return assignedBefore(v, this);
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
-   */
-  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
-   * @apilevel internal
-   */
-  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return unassignedBefore(v, this);
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
-   */
-  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:680
-   * @apilevel internal
-   */
-  public SimpleSet<TypeDecl> Define_otherLocalClassDecls(ASTNode _callerNode, ASTNode _childNode, String name) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return emptySet();
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:680
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute otherLocalClassDecls
-   */
-  protected boolean canDefine_otherLocalClassDecls(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:230
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:230
    * @apilevel internal
    */
   public Stmt Define_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
@@ -826,7 +698,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
       }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:230
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:230
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute branchTarget
    */
@@ -834,7 +706,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:273
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:273
    * @apilevel internal
    */
   public FinallyHost Define_enclosingFinally(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
@@ -842,7 +714,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     return null;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:273
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:273
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingFinally
    */
@@ -850,7 +722,135 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:30
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:680
+   * @apilevel internal
+   */
+  public SimpleSet<TypeDecl> Define_otherLocalClassDecls(ASTNode _callerNode, ASTNode _childNode, String name) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return emptySet();
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:680
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute otherLocalClassDecls
+   */
+  protected boolean canDefine_otherLocalClassDecls(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @apilevel internal
+   */
+  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return assignedBefore(v, this);
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
+   */
+  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @apilevel internal
+   */
+  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return unassignedBefore(v, this);
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
+   */
+  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:86
+   * @apilevel internal
+   */
+  public boolean Define_isLeftChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:86
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute isLeftChildOfDot
+   */
+  protected boolean canDefine_isLeftChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
+   * @apilevel internal
+   */
+  public boolean Define_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute isRightChildOfDot
+   */
+  protected boolean canDefine_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
+   * @apilevel internal
+   */
+  public Expr Define_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return prevExprError();
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute prevExpr
+   */
+  protected boolean canDefine_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:142
+   * @apilevel internal
+   */
+  public Access Define_nextAccess(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return nextAccessError();
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:142
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute nextAccess
+   */
+  protected boolean canDefine_nextAccess(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539
+   * @apilevel internal
+   */
+  public boolean Define_canResolve(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute canResolve
+   */
+  protected boolean canDefine_canResolve(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/NameCheck.jrag:30
    * @apilevel internal
    */
   public BodyDecl Define_enclosingBodyDecl(ASTNode _callerNode, ASTNode _childNode) {
@@ -858,7 +858,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     return this;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:30
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/NameCheck.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingBodyDecl
    */
@@ -866,7 +866,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:95
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:95
    * @apilevel internal
    */
   public boolean Define_inComplexAnnotation(ASTNode _callerNode, ASTNode _childNode) {
@@ -874,7 +874,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     return false;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:95
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:95
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inComplexAnnotation
    */
@@ -882,7 +882,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SuppressWarnings.jrag:37
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/SuppressWarnings.jrag:37
    * @apilevel internal
    */
   public boolean Define_withinSuppressWarnings(ASTNode _callerNode, ASTNode _childNode, String annot) {
@@ -892,7 +892,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
           || withinSuppressWarnings(annot);
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SuppressWarnings.jrag:37
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/SuppressWarnings.jrag:37
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute withinSuppressWarnings
    */
@@ -900,7 +900,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:533
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:533
    * @apilevel internal
    */
   public boolean Define_withinDeprecatedAnnotation(ASTNode _callerNode, ASTNode _childNode) {
@@ -908,7 +908,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     return isDeprecated() || isDeprecated() || withinDeprecatedAnnotation();
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:533
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:533
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute withinDeprecatedAnnotation
    */
@@ -916,7 +916,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Enums.jrag:130
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:130
    * @apilevel internal
    */
   public boolean Define_isOriginalEnumConstructor(ASTNode _callerNode, ASTNode _childNode) {
@@ -924,7 +924,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     return false;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Enums.jrag:130
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:130
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isOriginalEnumConstructor
    */
@@ -932,23 +932,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:106
-   * @apilevel internal
-   */
-  public ClassInstanceExpr Define_getClassInstanceExpr(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return null;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:106
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute getClassInstanceExpr
-   */
-  protected boolean canDefine_getClassInstanceExpr(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:178
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:178
    * @apilevel internal
    */
   public boolean Define_resourcePreviouslyDeclared(ASTNode _callerNode, ASTNode _childNode, String name) {
@@ -956,11 +940,27 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     return false;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:178
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:178
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute resourcePreviouslyDeclared
    */
   protected boolean canDefine_resourcePreviouslyDeclared(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Diamond.jrag:106
+   * @apilevel internal
+   */
+  public ClassInstanceExpr Define_getClassInstanceExpr(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return null;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Diamond.jrag:106
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute getClassInstanceExpr
+   */
+  protected boolean canDefine_getClassInstanceExpr(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /** @apilevel internal */
@@ -973,7 +973,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SafeVarargs.jrag:91
+    // @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/SafeVarargs.jrag:91
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

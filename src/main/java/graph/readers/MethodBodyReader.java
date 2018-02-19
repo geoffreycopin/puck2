@@ -4,8 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.extendj.ast.Block;
+import org.extendj.ast.ForStmt;
+import org.extendj.ast.LocalClassDeclStmt;
 import org.extendj.ast.MethodDecl;
+import org.extendj.ast.ReturnStmt;
 import org.extendj.ast.Stmt;
+import org.extendj.ast.ThrowStmt;
+import org.extendj.ast.TryStmt;
 import org.extendj.ast.TypeDecl;
 import org.extendj.ast.VarDeclStmt;
 
@@ -43,27 +48,48 @@ public class MethodBodyReader extends AbstractReader {
 		if(block.getNumStmt()>0){
 			addMethodBodyTypeDependancy(edges);
 		}
-		
+
 		addMSignatureDependency(edges);
 
 	}
-	
+
 	private void addMSignatureDependency(List<Edge> edges) {
 		edges.add(new Edge(MethodNode.getFullName(), BodyNode.getFullName(), Edge.Type.Contains));
 	}
 
 
 	public void addMethodBodyTypeDependancy(List<Edge> edges) {
+		TypeDecl stmtType;
 		for(Stmt s: block.getStmtList()){
 			if(s.value instanceof VarDeclStmt) {
 				VarDeclStmt varStmt = (VarDeclStmt) s;
-				TypeDecl varType = varStmt.type();
-				if (Util.isPrimitive(varType)) {
+				stmtType = varStmt.type();
+				if (Util.isPrimitive(stmtType)) {
 					continue;
 				}
-				edges.add(new Edge(BodyNode.getFullName(), varType.fullName(), Edge.Type.Uses));
+
+				Edge e =new Edge(BodyNode.getFullName(), stmtType.fullName(), Edge.Type.Uses);		
+				if(e.Contains(edges)) continue;
+				edges.add(e);
 
 			}
+			
+		
+			
+			/* Return Stmt  
+			if(s.value instanceof ReturnStmt) {
+				ReturnStmt returnStmt= (ReturnStmt )s.value;
+				stmtType = returnStmt.getResult().type();
+				if (Util.isPrimitive(stmtType)) {
+					continue;
+				}
+				Edge e =new Edge(BodyNode.getFullName(), stmtType.fullName(), Edge.Type.Uses);		
+				if(e.Contains(edges)) continue;
+				edges.add(e);
+
+			}*/
+			
+
 		}
 
 	}

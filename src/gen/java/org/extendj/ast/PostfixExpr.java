@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:236
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:236
  * @astdecl PostfixExpr : Unary;
  * @production PostfixExpr : {@link Unary};
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public abstract class PostfixExpr extends Unary implements Cloneable {
   /**
    * @aspect DefiniteAssignment
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:597
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:597
    */
   protected boolean checkDUeverywhere(Variable v) {
     if (getOperand().isVariable() && getOperand().varDecl() == v) {
@@ -160,12 +160,12 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
     return (Expr) getChildNoTransform(0);
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:34
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:34
    * @apilevel internal
    */
   public boolean Define_isDest(ASTNode _callerNode, ASTNode _childNode) {
     if (getOperandNoTransform() != null && _callerNode == getOperand()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:62
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:62
       return true;
     }
     else {
@@ -173,7 +173,7 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:34
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:34
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isDest
    */
@@ -181,12 +181,12 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
    * @apilevel internal
    */
   public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
     if (getOperandNoTransform() != null && _callerNode == getOperand()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:72
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:72
       return true;
     }
     else {
@@ -194,7 +194,7 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
    */
@@ -202,12 +202,12 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getOperandNoTransform() != null && _callerNode == getOperand()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:121
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:121
       return NameType.EXPRESSION_NAME;
     }
     else {
@@ -215,7 +215,7 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -232,20 +232,7 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:82
-    if (getOperand().isVariable()
-              && getOperand().varDecl() != null
-              && getOperand().varDecl().isFinal()) {
-      {
-        java.util.Set<ASTNode> contributors = _map.get(_root);
-        if (contributors == null) {
-          contributors = new java.util.LinkedHashSet<ASTNode>();
-          _map.put((ASTNode) _root, contributors);
-        }
-        contributors.add(this);
-      }
-    }
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:401
+    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:401
     if (!getOperand().isVariable()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);
@@ -256,8 +243,21 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
         contributors.add(this);
       }
     }
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:406
+    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:406
     if (!getOperand().type().isNumericType()) {
+      {
+        java.util.Set<ASTNode> contributors = _map.get(_root);
+        if (contributors == null) {
+          contributors = new java.util.LinkedHashSet<ASTNode>();
+          _map.put((ASTNode) _root, contributors);
+        }
+        contributors.add(this);
+      }
+    }
+    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:82
+    if (getOperand().isVariable()
+              && getOperand().varDecl() != null
+              && getOperand().varDecl().isFinal()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);
         if (contributors == null) {
@@ -272,16 +272,16 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
   /** @apilevel internal */
   protected void contributeTo_CompilationUnit_problems(LinkedList<Problem> collection) {
     super.contributeTo_CompilationUnit_problems(collection);
-    if (getOperand().isVariable()
-              && getOperand().varDecl() != null
-              && getOperand().varDecl().isFinal()) {
-      collection.add(error("++ and -- can not be applied to final variable " + getOperand().varDecl().name()));
-    }
     if (!getOperand().isVariable()) {
       collection.add(error("postfix expression only works on variables"));
     }
     if (!getOperand().type().isNumericType()) {
       collection.add(error("postfix expression only operates on numeric types"));
+    }
+    if (getOperand().isVariable()
+              && getOperand().varDecl() != null
+              && getOperand().varDecl().isFinal()) {
+      collection.add(error("++ and -- can not be applied to final variable " + getOperand().varDecl().name()));
     }
   }
 }

@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,12 +21,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
@@ -33,30 +33,37 @@ import java.io.DataInputStream;
  * <p>Parse names are classified automatically using the JastAdd rewrite
  * mechanism.
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:108
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:108
  * @astdecl ParseName : Access;
  * @production ParseName : {@link Access};
 
  */
 public class ParseName extends Access implements Cloneable {
   /**
+   * @aspect Java4PrettyPrint
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:539
+   */
+  public void prettyPrint(PrettyPrinter out) {
+    out.print(name());
+  }
+  /**
    * @aspect DumpTree
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DumpTree.jadd:112
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DumpTree.jadd:112
    */
   @Override
   public String getTokens() {
     return " " + name();
   }
   /**
-   * @aspect Java4PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:539
+   * @aspect PrettyPrintUtil
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:113
    */
-  public void prettyPrint(PrettyPrinter out) {
-    out.print(name());
+  @Override public String toString() {
+    return name();
   }
   /**
    * @aspect QualifiedNames
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:217
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:217
    */
   public Access qualifiesAccess(Access access) {
     if (access instanceof ParseName) {
@@ -73,26 +80,26 @@ public class ParseName extends Access implements Cloneable {
   }
   /**
    * @aspect QualifiedNames
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:438
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:438
    */
   private ArrayList<NamePart> nameParts = new ArrayList<NamePart>();
   /**
    * @aspect QualifiedNames
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:440
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:440
    */
   public ParseName(ArrayList<NamePart> nameParts) {
     this.nameParts.addAll(nameParts);
   }
   /**
    * @aspect QualifiedNames
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:444
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:444
    */
   public ParseName(Symbol name) {
     nameParts.add(new NamePart(name));
   }
   /**
    * @aspect QualifiedNames
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:456
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:456
    */
   public Access buildMethodAccess(List<Expr> arguments) {
     if (nameParts.isEmpty()) {
@@ -113,7 +120,7 @@ public class ParseName extends Access implements Cloneable {
   }
   /**
    * @aspect NameResolution
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:508
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:508
    */
   protected NamePart resolvePackageOrTypeName(NamePart qualifier, NamePart name) {
     if (qualifier.isPackageQualifier()) {
@@ -125,7 +132,7 @@ public class ParseName extends Access implements Cloneable {
   }
   /**
    * @aspect NameResolution
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:517
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:517
    */
   protected NamePart resolveAmbiguousName(NamePart qualifier, NamePart name) {
     if (qualifier == NamePart.EMPTY) {
@@ -143,13 +150,6 @@ public class ParseName extends Access implements Cloneable {
       }
     }
     return resolvePackageOrTypeName(qualifier, name);
-  }
-  /**
-   * @aspect PrettyPrintUtil
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:113
-   */
-  @Override public String toString() {
-    return name();
   }
   /**
    * @declaredat ASTNode:1
@@ -275,11 +275,33 @@ public class ParseName extends Access implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect NameResolution
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:493
+   * @aspect VariableScope
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:264
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameResolution", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:493")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:264")
+  public SimpleSet<Variable> qualifiedLookupVariable(String name) {
+    SimpleSet<Variable> qualifiedLookupVariable_String_value = emptySet();
+    return qualifiedLookupVariable_String_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeScopePropagation
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:612
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:612")
+  public SimpleSet<TypeDecl> qualifiedLookupType(String name) {
+    SimpleSet<TypeDecl> qualifiedLookupType_String_value = emptySet();
+    return qualifiedLookupType_String_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect NameResolution
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:493
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="NameResolution", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:493")
   public boolean isParseName() {
     boolean isParseName_value = true;
     return isParseName_value;
@@ -287,10 +309,10 @@ public class ParseName extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect NameResolution
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:497
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:497
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameResolution", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:497")
+  @ASTNodeAnnotation.Source(aspect="NameResolution", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:497")
   public String name() {
     {
         StringBuilder sb = new StringBuilder();
@@ -307,59 +329,37 @@ public class ParseName extends Access implements Cloneable {
    * Test if an expression contains an unresolved parse name.
    * @attribute syn
    * @aspect NameResolution
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:554
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:554
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameResolution", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:554")
+  @ASTNodeAnnotation.Source(aspect="NameResolution", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:554")
   public boolean containsParseName() {
     boolean containsParseName_value = true;
     return containsParseName_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeScopePropagation
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:612
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:612")
-  public SimpleSet<TypeDecl> qualifiedLookupType(String name) {
-    SimpleSet<TypeDecl> qualifiedLookupType_String_value = emptySet();
-    return qualifiedLookupType_String_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect VariableScope
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:264
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:264")
-  public SimpleSet<Variable> qualifiedLookupVariable(String name) {
-    SimpleSet<Variable> qualifiedLookupVariable_String_value = emptySet();
-    return qualifiedLookupVariable_String_value;
   }
   /**
    * A parse name can only be disambiguated if it is not qualified by an
    * expression containing another unresolved parse name.
    * @attribute inh
    * @aspect NameResolution
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NameResolution", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539")
+  @ASTNodeAnnotation.Source(aspect="NameResolution", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539")
   public boolean canResolve() {
     boolean canResolve_value = getParent().Define_canResolve(this, null);
     return canResolve_value;
   }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
-    // Declared at /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:567
+    // Declared at /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:567
     if (canResolve()) {
       return rewriteRule0();
     }
     return super.rewriteTo();
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:567
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:567
    * @apilevel internal
    */
   private Access rewriteRule0() {
@@ -413,7 +413,7 @@ public class ParseName extends Access implements Cloneable {
     }  }
   /** @apilevel internal */
   public boolean canRewrite() {
-    // Declared at /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:567
+    // Declared at /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:567
     if (canResolve()) {
       return true;
     }

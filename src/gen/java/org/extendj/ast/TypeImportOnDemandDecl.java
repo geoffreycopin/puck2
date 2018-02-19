@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:63
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:63
  * @astdecl TypeImportOnDemandDecl : ImportDecl;
  * @production TypeImportOnDemandDecl : {@link ImportDecl};
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class TypeImportOnDemandDecl extends ImportDecl implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:615
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:615
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("import ");
@@ -205,13 +205,31 @@ public class TypeImportOnDemandDecl extends ImportDecl implements Cloneable {
   public Access getAccessNoTransform() {
     return (Access) getChildNoTransform(0);
   }
+  /**
+   * @attribute syn
+   * @aspect NameCheck
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:56
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:56")
+  public Collection<Problem> nameProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        if (getAccess().lastAccess().isTypeAccess()
+            && !getAccess().type().typeName().equals(typeName())) {
+          problems.add(errorf("On demand type import %s.* is not the canonical name of type %s",
+              typeName(), getAccess().type().typeName()));
+        }
+        return problems;
+      }
+  }
   /** @apilevel internal */
   private void importedTypes_String_reset() {
     importedTypes_String_values = null;
   }
   protected java.util.Map importedTypes_String_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:506")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:506")
   public SimpleSet<TypeDecl> importedTypes(String name) {
     Object _parameters = name;
     if (importedTypes_String_values == null) importedTypes_String_values = new java.util.HashMap(4);
@@ -281,50 +299,32 @@ public class TypeImportOnDemandDecl extends ImportDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:531
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:531
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:531")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:531")
   public boolean isOnDemand() {
     boolean isOnDemand_value = true;
     return isOnDemand_value;
   }
   /**
-   * @attribute syn
-   * @aspect NameCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:56
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:56")
-  public Collection<Problem> nameProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        if (getAccess().lastAccess().isTypeAccess()
-            && !getAccess().type().typeName().equals(typeName())) {
-          problems.add(errorf("On demand type import %s.* is not the canonical name of type %s",
-              typeName(), getAccess().type().typeName()));
-        }
-        return problems;
-      }
-  }
-  /**
    * @attribute inh
    * @aspect TypeScopePropagation
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:528
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:528
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:528")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:528")
   public TypeDecl lookupType(String packageName, String typeName) {
     TypeDecl lookupType_String_String_value = getParent().Define_lookupType(this, null, packageName, typeName);
     return lookupType_String_String_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getAccessNoTransform() != null && _callerNode == getAccess()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:127
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:127
       return NameType.PACKAGE_OR_TYPE_NAME;
     }
     else {
@@ -332,7 +332,7 @@ public class TypeImportOnDemandDecl extends ImportDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -349,7 +349,7 @@ public class TypeImportOnDemandDecl extends ImportDecl implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:54
+    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:54
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
