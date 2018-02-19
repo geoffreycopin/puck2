@@ -18,6 +18,11 @@ public class FieldReader extends BodyDeclReader {
 		this.fieldDecl=fieldDecl;
 	}
 
+	@Override
+    protected String getFullName() {
+	    return fieldNode.getFullName();
+    }
+
 	public void readInto(Map<String, Node> nodes, List<Edge> edges) {
 		for (FieldDeclarator v : fieldDecl.getDeclaratorList()) {
 		    String fullName = getHostTypeName() + "." + v.name();
@@ -34,11 +39,6 @@ public class FieldReader extends BodyDeclReader {
     }
 
     private void addFieldTypeDependency(List<Edge> edges) {
-	    if (Util.isPrimitive(fieldDecl.getTypeAccess().type())) {
-            return;
-        }
-
-	    String fieldTypeName = fieldDecl.getTypeAccess().type().fullName();
-	    edges.add(new Edge(fieldNode.getFullName(), fieldTypeName, Edge.Type.IsA));
+	    addTypeDependency(edges, fieldDecl.getTypeAccess().type(), Edge.Type.IsA);
     }
 }

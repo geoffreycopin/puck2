@@ -18,6 +18,10 @@ public class MethodReader extends BodyDeclReader {
         this.methodDecl = methodDecl;
     }
 
+    @Override
+    protected String getFullName() {
+        return methodNode.getFullName();
+    }
 
     @Override
     public void readInto(Map<String, Node> nodes, List<Edge> edges) {
@@ -47,30 +51,13 @@ public class MethodReader extends BodyDeclReader {
     }
 
     private void addReturnTypeDependency(List<Edge> edges) {
-        addTypeDependency(edges, methodDecl.type());
+        addTypeDependency(edges, methodDecl.type(), Edge.Type.Uses);
     }
 
     private void addParametersTypeDependency(List<Edge> edges) {
         for (ParameterDeclaration p: methodDecl.getParameterList()) {
             TypeDecl parameterType = p.getTypeAccess().type();
-            addTypeDependency(edges, parameterType);
-        }
-    }
-
-    private void addTypeDependency(List<Edge> edges, TypeDecl type) {
-        if (type.isParameterizedType()) {
-            addGenericTypeDependency(edges, type);
-        } else if (! Util.isPrimitive(type)) {
-            edges.add(new Edge(methodNode.getFullName(), type.fullName(), Edge.Type.Uses));
-        }
-    }
-
-    private void addGenericTypeDependency(List<Edge> edges, TypeDecl type) {
-        String genericTypeName = TypeDeclReader.getGenericTypeName(type);
-        edges.add(new Edge(methodNode.getFullName(), genericTypeName, Edge.Type.Uses));
-
-        for (String typeParameterName: TypeDeclReader.getTypeParametersName(type)) {
-            edges.add(new Edge(methodNode.getFullName(), typeParameterName, Edge.Type.Uses));
+            addTypeDependency(edges, parameterType, Edge.Type.Uses);
         }
     }
 }
