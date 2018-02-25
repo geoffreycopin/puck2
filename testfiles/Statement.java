@@ -4,6 +4,7 @@ package statement;
 import java.util.List;
 
 class Statement {
+    Set<E> hey;
   class X {
     void doThing() {
     }

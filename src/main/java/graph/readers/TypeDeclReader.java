@@ -3,7 +3,9 @@ package graph.readers;
 import graph.Edge;
 import graph.Node;
 import graph.UniqueIdGenerator;
+import org.extendj.ast.ParClassDecl;
 import org.extendj.ast.ParInterfaceDecl;
+import org.extendj.ast.Parameterization;
 import org.extendj.ast.TypeDecl;
 
 import java.util.ArrayList;
@@ -31,18 +33,24 @@ public abstract class TypeDeclReader extends AbstractReader{
         return type.fullName().split("<")[0];
     }
 
-    public static List<String> getTypeParametersName(TypeDecl type) {
-        List<String> result = new ArrayList<>();
+    public static List<TypeDecl> getTypeParameters(TypeDecl type) {
+        List<TypeDecl> result = new ArrayList<>();
 
-        for (TypeDecl subtype: ((ParInterfaceDecl) type).getParameterization().args) {
+        for (TypeDecl subtype: getParameterization(type).args) {
             if (subtype.isParameterizedType()) {
-                result.add(getGenericTypeName(subtype));
-                result.addAll(getTypeParametersName(subtype));
-            } else {
-                result.add(subtype.fullName());
+                result.addAll(getTypeParameters(subtype));
             }
+            result.add(subtype.hostType());
         }
 
         return result;
+    }
+
+    private static Parameterization getParameterization(TypeDecl type) {
+        if (type instanceof ParInterfaceDecl) {
+            return ((ParInterfaceDecl) type).getParameterization();
+        } else {
+            return ((ParClassDecl) type).getParameterization();
+        }
     }
 }

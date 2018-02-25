@@ -25,6 +25,11 @@ public class CompilationUnitReader extends AbstractReader{
         readTypeDecalarations(nodes, edges);
     }
 
+    @Override
+    String getFullName() {
+        return compilationUnit.pathName();
+    }
+
     private void readCurrentPackage(Map<String, Node> nodes) {
         String currentPackage = compilationUnit.getPackageDecl();
 

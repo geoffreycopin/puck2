@@ -17,6 +17,11 @@ public class ClassReader extends TypeDeclReader {
         this.classDeclaration = classDeclaration;
     }
 
+    @Override
+    String getFullName() {
+        return classDeclaration.fullName();
+    }
+
     public void readInto(Map<String, Node> nodes, List<Edge> edges) {
         String className = classDeclaration.fullName();
 
@@ -39,23 +44,33 @@ public class ClassReader extends TypeDeclReader {
             } else if (decl instanceof MethodDecl) {
                 MethodReader methodreader = new MethodReader(idGenerator, (MethodDecl) decl);
                 methodreader.readInto(nodes, edges);
+            } else if (decl instanceof MemberClassDecl) {
+                TypeDecl memberType = ((MemberClassDecl) decl).typeDecl();
+                ClassReader reader = new ClassReader((ClassDecl) memberType, idGenerator);
+                reader.readInto(nodes, edges);
+            } else if (decl instanceof MemberInterfaceDecl) {
+                TypeDecl memberType = ((MemberInterfaceDecl) decl).typeDecl();
+                InterfaceReader reader = new InterfaceReader((InterfaceDecl) memberType, idGenerator);
+                reader.readInto(nodes, edges);
             }
         }
     }
 
     private void addSuperClassdependency(List<Edge> edges) {
-        if (classDeclaration.getSuperClass() == null) {
+        Access superClass = classDeclaration.getSuperClass();
+        if (superClass == null || Util.isPrimitive(superClass.type()) ||
+                Util.isBuiltin(superClass.type())) {
             return;
         }
-
-        String superClassName = classDeclaration.superclass().fullName();
-        edges.add(new Edge(classDeclaration.fullName(), superClassName, Edge.Type.IsA));
+        addTypeDependency(edges, superClass.type(), Edge.Type.IsA);
     }
 
     private void addInterfacesDependency(List<Edge> edges) {
         for (Access imp: classDeclaration.getImplementsList()) {
-            InterfaceDecl implement = (InterfaceDecl) imp.type();
-            edges.add(new Edge(classDeclaration.fullName(), implement.fullName(), Edge.Type.IsA));
+            if (! (imp.type() instanceof InterfaceDecl)) {
+                continue;
+            }
+            addTypeDependency(edges, imp.type(), Edge.Type.IsA);
         }
     }
 }

@@ -34,6 +34,11 @@ public class InterfaceReader extends TypeDeclReader {
         addPackageDependency(edges);
     }
 
+    @Override
+    String getFullName() {
+        return interfaceDecl.fullName();
+    }
+
     private void readBodyDeclarations(Map<String, Node> nodes, List<Edge> edges) {
         for (BodyDecl decl : interfaceDecl.getBodyDeclList()) {
             if (decl instanceof MethodDecl) {

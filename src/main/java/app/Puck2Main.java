@@ -10,76 +10,33 @@ import javafx.stage.Stage;
 import org.extendj.ast.Program;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Puck2Main {
-    public static void main(String args[]) {
-        if (args.length == 0) {
-            launchGui();
-            return;
-        } else if (args.length > 2) {
-            System.out.println("Usage: java -jar puck2 programDir ?outputFile");
-            return;
-        }
-    	Program p = new Program();
-        loadProgram(p, args[0]);
-
-        HashMap<String, Node> nodes = new HashMap<>();
-        ArrayList<Edge> edges = new ArrayList<>();
-        ProgramReader reader = new ProgramReader(p);
-        reader.readInto(nodes, edges);
-
-        if (args.length == 2) {
-            outputXML(nodes, edges, args[1]);
-        } else {
-            displayGraph(nodes, edges);
+    public static void main(String args[]) throws IOException {
+        switch (args.length) {
+            case 0: launchGui(); break;
+            case 1: run(args[0]); break;
+            case 2: {
+                run(args[0]).outputToFile(args[1]);
+                break;
+            }
+            default: System.out.println("Usage: java -jar puck2 programDir ?outputFile");
         }
     }
 
-    private static void displayGraph(HashMap<String, Node> nodes, ArrayList<Edge> edges) {
-        for (Node node: nodes.values()) {
-            System.out.println(node);
-        }
-
-        for (Edge edge: edges) {
-            System.out.println(edge);
-        }
-    }
-
-    private static void outputXML(HashMap<String, Node> nodes, ArrayList<Edge> edges, String path) {
-        XMLExporter exporter = new XMLExporter();
-        exporter.add(nodes, edges);
+    private static Puck2Runner run(String projectPath) {
+        Puck2Runner runner = new Puck2Runner(projectPath);
         try {
-            exporter.writeTo(path);
-        } catch (Exception e) {
+            runner.run();
+            runner.displayGraph();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private static void addSource(Program p, String path) {
-        try {
-            p.addSourceFile(path);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void loadProgram(Program program, String p) {
-        File currentFile = new File(p);
-
-        if (currentFile.isDirectory()) {
-            for (String innerFile: currentFile.list()) {
-                loadProgram(program, Paths.get(p, innerFile).toString());
-            }
-        } else {
-            try {
-                addSource(program, currentFile.getAbsolutePath());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        return runner;
     }
 
     private static void launchGui() {

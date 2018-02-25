@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 
 public class ConfigurationUI extends Application {
     private final int HEIGHT = 175;
-    private Button launchButton;
+    private Button runButton;
     private TextField programDirField;
     private Button openFileChooserButton;
     private TextField outputDirField;
@@ -42,14 +42,14 @@ public class ConfigurationUI extends Application {
         VBox root = new VBox();
         root.setSpacing(12);
         root.setFillWidth(true);
-        root.getChildren().addAll(form, launchButton);
+        root.getChildren().addAll(form, runButton);
         root.setPadding(new Insets(0, 16, 0, 16));
 
         primaryStage.setScene(new Scene(root, 500, HEIGHT));
     }
 
     private void initViews(Stage primaryStage) {
-        initLaunchButton();
+        initRunButton();
         initOpenFileChooserButton(primaryStage);
         initOutputDirChooser(primaryStage);
         initProgramDirField();
@@ -82,16 +82,16 @@ public class ConfigurationUI extends Application {
         return form;
     }
 
-    private void initLaunchButton() {
-        launchButton = new Button("Launch");
-        launchButton.setMaxWidth(Double.MAX_VALUE);
-        launchButton.setOnMouseClicked((e) -> {
+    private void initRunButton() {
+        runButton = new Button("Run");
+        runButton.setMaxWidth(Double.MAX_VALUE);
+        runButton.setOnMouseClicked((e) -> {
             try {
-                launch();
+                run();
+                displaySuccess();
             } catch (Exception err) {
-                displayError(err.getMessage());
+                displayError(err.toString());
             }
-            displaySuccess();
         });
     }
 
@@ -153,8 +153,18 @@ public class ConfigurationUI extends Application {
         alert.showAndWait();
     }
 
-    private void launch() throws Exception {
+    private void run() throws Exception {
         checkInputValidity();
+
+        Puck2Runner runner = new Puck2Runner(programDirField.getText());
+        runner.run();
+        runner.outputToFile(getOutputFilePath());
+    }
+
+    private String getOutputFilePath() {
+        String directory = outputDirField.getText();
+        String file = outputFileField.getText();
+        return Paths.get(directory, file).toString();
     }
 
     private void checkInputValidity() throws Exception {
