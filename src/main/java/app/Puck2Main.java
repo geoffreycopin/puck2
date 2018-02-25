@@ -1,9 +1,12 @@
 package app;
 
+import com.sun.javafx.application.LauncherImpl;
 import graph.Edge;
 import graph.Node;
 import graph.XMLExporter;
 import graph.readers.ProgramReader;
+import javafx.application.Application;
+import javafx.stage.Stage;
 import org.extendj.ast.Program;
 
 import java.io.File;
@@ -13,7 +16,10 @@ import java.util.HashMap;
 
 public class Puck2Main {
     public static void main(String args[]) {
-        if (args.length == 0 || args.length > 2) {
+        if (args.length == 0) {
+            launchGui();
+            return;
+        } else if (args.length > 2) {
             System.out.println("Usage: java -jar puck2 programDir ?outputFile");
             return;
         }
@@ -74,5 +80,9 @@ public class Puck2Main {
                 e.printStackTrace();
             }
         }
+    }
+
+    private static void launchGui() {
+        LauncherImpl.launchApplication(ConfigurationUI.class, null);
     }
 }
