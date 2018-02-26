@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'org.jastadd' version '1.12.0'
+    id 'eclipse'
 }
 
 defaultTasks 'jar'
@@ -70,3 +71,20 @@ task run(type: JavaExec) {
 dependencies {
     testCompile 'junit:junit:4.12'
 }
+
+
+eclipse.classpath.file {
+	beforeMerged { classpath ->
+		classpath.entries << new org.gradle.plugins.ide.eclipse.model.SourceFolder('extendj/tools', null)
+		classpath.entries << new org.gradle.plugins.ide.eclipse.model.SourceFolder('extendj/java8/src/main/java', null)
+		classpath.entries << new org.gradle.plugins.ide.eclipse.model.SourceFolder('extendj/src/frontend', null)
+	}
+	withXml { node ->
+		// Make eclipse ignore Java compile warnings for the generated Java code.
+		def gen = node.asNode().find { it.@kind == 'src' && it.@path == 'src/gen/java' }
+		if (gen?.children()?.isEmpty())
+			gen.appendNode('attributes').appendNode('attribute', [ name: 'ignore_optional_problems', value: 'true' ])
+	}
+}
+
+
