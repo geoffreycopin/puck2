@@ -27,12 +27,11 @@ serton ajoutés au projet.
 
 Configuration avec Eclipse 
 ---------------------------
-
 1. Plugins nécessaires : dans le menu Help ▸ Eclipse Marketplace    
    Gradle : Buildship Gradle Integration.    
    JavaFX : e(fx)clipe.    
 
-2.Importer le projet:  
+2. Importer le projet:  
   1.Selectionner dans le menu File ▸ Import… ▸ Gradle ▸ Gradle Project.     
   2.Sur la fenêtre qui s'ouvre, spécifier l'emplacement du projet puis cliqué sur le bouton Finish.    
 
