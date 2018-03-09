@@ -28,28 +28,23 @@ public class XMLExporter {
     public String generateXml() {
         StringBuilder builder = new StringBuilder("<?xml version=\"1.0\"?>\n");
         builder.append("<DependencyGraphe>\n");
-        builder.append("\t<nodes>\n");
 
         for (Node n: nodes.values()) {
             builder.append(nodeToString(n));
         }
-
-        builder.append("\t</nodes>\n");
-        builder.append("\t<edges>\n");
 
         int currentEdgeIndex = 0;
         for (Edge e: edges) {
             builder.append(edgeToString(e, currentEdgeIndex++));
         }
 
-        builder.append("\t</edges>\n");
         builder.append("</DependencyGraphe>\n");
 
         return builder.toString();
     }
 
     private String nodeToString(Node node) {
-        String formatString = "\t\t<node type=\"%s\" id=\"%d\" name=\"%s\"/>\n";
+        String formatString = "\t<node type=\"%s\" id=\"%d\" name=\"%s\"/>\n";
         String type = node.getType().toString().toLowerCase();
         Integer id = node.getId();
         String name = extractNodeName(node.getFullName());
@@ -65,7 +60,7 @@ public class XMLExporter {
     }
 
     private String edgeToString(Edge edge, int id) {
-        String formatString = "\t\t<edge type=\"%s\" src=\"%d\" dest=\"%s\" id=\"%d\"/>\n";
+        String formatString = "\t<edge type=\"%s\" src=\"%d\" dest=\"%s\" id=\"%d\"/>\n";
         String type = edge.getType().toString().toLowerCase();
         Integer src = nodes.get(edge.getSourceName()).getId();
         String tname = edge.getTargetName();
