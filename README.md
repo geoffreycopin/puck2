@@ -27,22 +27,26 @@ serton ajoutés au projet.
 
 Configuration avec Eclipse 
 ---------------------------
+1. Plugins nécessaires : dans le menu Help ▸ Eclipse Marketplace    
+   Gradle : Buildship Gradle Integration.    
+   JavaFX : e(fx)clipe.    
 
-1. Plugins : 
-Gradle : Buildship Gradle Integration 
-JavaFX : e(fx)clipe
+2. Importer le projet:  
+  1.Selectionner dans le menu File ▸ Import… ▸ Gradle ▸ Gradle Project.     
+  2.Sur la fenêtre qui s'ouvre, spécifier l'emplacement du projet puis cliqué sur le bouton Finish.    
 
-2. Gradle tasks:
+3. Utilisation des Gradle tasks:  
+   Build ▸ build : génère une archive JAR exécutable.  
+   Ide ▸ eclipse : génère un projet eclipse.  
 
-Build->build : génère une archive JAR exécutable 
-Ide -> eclipse : génère un projet eclipse
-
+(Eclipse ne met pas à jour le classpath automatiquement, si le fichier build.gradle est mis à jour: clic-droit sur le projet,
+Gradle ▸ Refresh Gradle Project).  
 
 Usage 
 -----
 
 1. clic-droit sur le projet
-2. Run As > Java Application
+2. Run As ▸ Java Application
 3. Sélectionner Puck2Main.java
 
 
