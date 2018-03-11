@@ -31,14 +31,14 @@ public class FieldReader extends BodyDeclReader {
 		}
 
 		addHostClassDependency(edges);
-		addFieldTypeDependency(edges);
+		addFieldTypeDependency(edges,nodes);
 	}
 
 	private void addHostClassDependency(List<Edge> edges) {
 	    edges.add(new Edge(getHostTypeName(), fieldNode.getFullName(), Edge.Type.Contains));
     }
 
-    private void addFieldTypeDependency(List<Edge> edges) {
-	    addTypeDependency(edges, fieldDecl.getTypeAccess().type(), Edge.Type.IsA);
+    private void addFieldTypeDependency(List<Edge> edges,Map<String, Node> nodes) {
+	    addTypeDependency(edges, fieldDecl.getTypeAccess().type(), Edge.Type.IsA,nodes);
     }
 }

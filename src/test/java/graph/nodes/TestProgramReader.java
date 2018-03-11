@@ -21,6 +21,7 @@ public class TestProgramReader extends TestBase{
     public void extractClasses() {
         Set<String> expectedClasses = new HashSet<>(Arrays.asList(
                 "test.SuperTest", "test.Test"));
+        
         nodesEquals(expectedClasses, Node.Type.Class);
     }
 

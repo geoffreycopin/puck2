@@ -12,6 +12,11 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -29,6 +34,7 @@ public class ConfigurationUI extends Application {
         initUi(primaryStage);
         primaryStage.show();
     }
+    
 
     private void initUi(Stage primaryStage) {
         primaryStage.setMaxHeight(HEIGHT);
@@ -142,7 +148,7 @@ public class ConfigurationUI extends Application {
     private void displaySuccess() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Success");
-        alert.setHeaderText("Sucess");
+        alert.setHeaderText("Success");
         alert.showAndWait();
     }
 
@@ -160,10 +166,15 @@ public class ConfigurationUI extends Application {
         runner.run();
         runner.outputToFile(getOutputFilePath());
     }
-
-    private String getOutputFilePath() {
+     
+  
+    
+    private String getOutputFilePath() throws Exception {
         String directory = outputDirField.getText();
         String file = outputFileField.getText();
+        
+        /* new File(directory+"/output").mkdir();
+        return Paths.get(directory+"/output", file).toString();*/
         return Paths.get(directory, file).toString();
     }
 

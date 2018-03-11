@@ -20,6 +20,7 @@ public class TestBase {
     public static void load() {
         loader = new ProgramLoader();
         loader.addFile(testFile);
+        
     }
 
     protected static void setTestFile(String path) {
