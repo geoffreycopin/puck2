@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<DependencyGraphe>
+	<node type="package" id="0" name="p"/>
+	<node type="class" id="1" name="A"/>
+	<node type="methodbody" id="10" name="mb"/>
+	<node type="class" id="6" name="C"/>
+	<node type="class" id="4" name="void"/>
+	<node type="class" id="7" name="B"/>
+	<node type="package" id="5" name="@primitive"/>
+	<node type="attribute" id="8" name="r"/>
+	<node type="method" id="9" name="mb"/>
+	<node type="methodbody" id="3" name="add"/>
+	<node type="method" id="2" name="add"/>
+	<edge type="contains" src="2" dest="3" id="0"/>
+	<edge type="contains" src="1" dest="2" id="1"/>
+	<edge type="contains" src="5" dest="4" id="2"/>
+	<edge type="uses" src="2" dest="4" id="3"/>
+	<edge type="uses" src="2" dest="6" id="4"/>
+	<edge type="uses" src="2" dest="6" id="5"/>
+	<edge type="contains" src="0" dest="1" id="6"/>
+	<edge type="contains" src="0" dest="6" id="7"/>
+	<edge type="contains" src="7" dest="8" id="8"/>
+	<edge type="isa" src="8" dest="1" id="9"/>
+	<edge type="uses" src="10" dest="6" id="10"/>
+	<edge type="uses" src="10" dest="6" id="11"/>
+	<edge type="uses" src="10" dest="1" id="12"/>
+	<edge type="contains" src="9" dest="10" id="13"/>
+	<edge type="contains" src="7" dest="9" id="14"/>
+	<edge type="uses" src="9" dest="4" id="15"/>
+	<edge type="contains" src="0" dest="7" id="16"/>
+</DependencyGraphe>

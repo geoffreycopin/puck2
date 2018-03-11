@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<DependencyGraphe>
+	<node type="package" id="0" name="p"/>
+	<node type="class" id="1" name="A"/>
+	<node type="methodbody" id="5" name="mb"/>
+	<node type="class" id="2" name="C"/>
+	<node type="class" id="3" name="B"/>
+	<node type="class" id="6" name="void"/>
+	<node type="package" id="7" name="@primitive"/>
+	<node type="method" id="4" name="mb"/>
+	<edge type="contains" src="0" dest="1" id="0"/>
+	<edge type="contains" src="0" dest="2" id="1"/>
+	<edge type="contains" src="4" dest="5" id="2"/>
+	<edge type="contains" src="3" dest="4" id="3"/>
+	<edge type="contains" src="7" dest="6" id="4"/>
+	<edge type="uses" src="4" dest="6" id="5"/>
+	<edge type="contains" src="0" dest="3" id="6"/>
+</DependencyGraphe>
