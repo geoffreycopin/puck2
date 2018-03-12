@@ -102,7 +102,6 @@ public class MethodBodyReader extends BodyDeclReader {
 		TypeDecl stmtType;
 		for ( Expr er :ma.getArgList() ) {
 			if ( er instanceof ClassInstanceExpr) {
-
 				ClassInstanceExpr ce = (ClassInstanceExpr) er;
 				stmtType = ce.getAccess().type();
 				addTypeDependency(edges, stmtType, Edge.Type.Uses,nodes);

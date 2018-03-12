@@ -32,6 +32,7 @@ public class InterfaceReader extends TypeDeclReader {
         readBodyDeclarations(nodes, edges);
 
         addPackageDependency(edges);
+        addSuperInterfacesDependency(nodes, edges);
     }
 
     @Override
@@ -48,4 +49,11 @@ public class InterfaceReader extends TypeDeclReader {
             }
         }
     }
+    
+    private void addSuperInterfacesDependency(Map<String, Node> nodes, List<Edge> edges) {
+    	
+        for (Access sup: interfaceDecl.getSuperInterfaceList()) {
+        	addTypeDependency(edges, sup.type(), Edge.Type.IsA,nodes);
+        }
+}
 }

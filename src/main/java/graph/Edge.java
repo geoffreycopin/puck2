@@ -34,7 +34,7 @@ public class Edge {
         return targetName;
     }
     
-    public Boolean Contains(List<Edge> e) {
+    public Boolean IsIn(List<Edge> e) {
     	for(Edge r : e) {
     		if(r.sourceName==this.sourceName && r.targetName==this.targetName && r.type==this.type) return true;
 

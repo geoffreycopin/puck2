@@ -21,7 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ConfigurationUI extends Application {
-    private final int HEIGHT = 175;
+    private final int HEIGHT = 200;
     private Button runButton;
     private TextField programDirField;
     private Button openFileChooserButton;

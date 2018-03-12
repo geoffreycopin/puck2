@@ -24,18 +24,18 @@ public abstract class AbstractReader {
 	protected void addTypeDependency(List<Edge> edges, TypeDecl type, Edge.Type edgeType,Map<String, Node> nodes) {
 
 		
-		if (type.isParameterizedType()) {     	
+		if (type.isParameterizedType()) {   
 			addGenericTypeDependency(edges, type, edgeType,nodes);
 		} else if (type.isWildcard()) {
 			addTypeDependency(edges, ((WildcardExtendsType) type).extendsType(), Edge.Type.Uses,nodes);
-		} else if (type.isArrayDecl()) {
-			
+		} else if (type.isArrayDecl()) {		
 			addTypeDependency(edges, type.elementType(), edgeType,nodes);
 		}else if ((Util.isPrimitive(type) || Util.isBuiltin(type))) {
 			addGenericNodes(nodes, type.elementType(), edgeType,edges);
 			addDependency(edges,type,edgeType);
 		} else if (! type.isTypeVariable()) {
-			edges.add(new Edge(getFullName(), type.fullName(), edgeType));
+			Edge e = new Edge(getFullName(), type.fullName(), edgeType);
+			if (!e.IsIn(edges))edges.add(e);
 		}
 		
 	}
@@ -65,11 +65,12 @@ public abstract class AbstractReader {
 		}
 		
 		Edge e = new Edge(type.packageName(),type.fullName(),Edge.Type.Contains);
-		if(!e.Contains(edges))edges.add(e);
+		if(!e.IsIn(edges))edges.add(e);
 		
 	}
 	protected void addDependency(List<Edge> edges, TypeDecl type, Edge.Type edgeType) {
-		edges.add(new Edge(getFullName(), type.fullName(), edgeType));
+		Edge e = new Edge(getFullName(), type.fullName(), edgeType);
+		if (!e.IsIn(edges))edges.add(e);
 	
 	}
 	
