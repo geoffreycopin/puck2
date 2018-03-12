@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java5/grammar/Enums.ast:1
+ * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\grammar\\Enums.ast:1
  * @astdecl EnumDecl : ClassDecl ::= Modifiers <ID:String> [SuperClass:Access] Implements:Access* BodyDecl*;
  * @production EnumDecl : {@link ClassDecl} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">[SuperClass:{@link Access}]</span> <span class="component">Implements:{@link Access}*</span> <span class="component">{@link BodyDecl}*</span>;
 
@@ -39,7 +39,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
    * Not implemented using generated pretty-print code because we have to separate
    * enum constants and enum body declarations.
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:683
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:683
    */
   public void prettyPrint(PrettyPrinter out) {
     if (!docComment.isEmpty()) {
@@ -625,10 +625,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:199
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:199
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:199")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:199")
   public boolean isValidAnnotationMethodReturnType() {
     boolean isValidAnnotationMethodReturnType_value = true;
     return isValidAnnotationMethodReturnType_value;
@@ -636,10 +636,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:38
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:38")
   public boolean isEnumDecl() {
     boolean isEnumDecl_value = true;
     return isEnumDecl_value;
@@ -657,10 +657,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:237
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:237
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:237")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:237")
   public boolean isStatic() {
     ASTState state = state();
     if (isStatic_computed == ASTState.NON_CYCLE || isStatic_computed == state().cycle()) {
@@ -679,10 +679,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeHierarchyCheck
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:352
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:352
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:352")
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:352")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>(super.typeProblems());
@@ -709,10 +709,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn nta
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:87
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:87
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:87")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:87")
   public Opt<Access> getSuperClassOpt() {
     ASTState state = state();
     if (getSuperClassOpt_computed) {
@@ -744,10 +744,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
    * Implicit constructor for enum type.
    * @attribute syn nta
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:104
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:104
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:104")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:104")
   public Opt<ConstructorDecl> getImplicitConstructorOpt() {
     ASTState state = state();
     if (getImplicitConstructorOpt_computed) {
@@ -798,10 +798,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Fields
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:390
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupVariable.jrag:390
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:390")
+  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupVariable.jrag:390")
   public Map<String, SimpleSet<Variable>> localFieldsMap() {
     ASTState state = state();
     if (localFieldsMap_computed == ASTState.NON_CYCLE || localFieldsMap_computed == state().cycle()) {
@@ -833,10 +833,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:242
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:242
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:242")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:242")
   public boolean isFinal() {
     {
         for (EnumConstant c : enumConstants()) {
@@ -862,10 +862,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:406
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:406
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:406")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:406")
   public Collection<EnumConstant> enumConstants() {
     ASTState state = state();
     if (enumConstants_computed == ASTState.NON_CYCLE || enumConstants_computed == state().cycle()) {
@@ -909,10 +909,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
    * <p>Each method name can map to multiple declarations.
    * @attribute syn
    * @aspect MemberMethods
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:499
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupMethod.jrag:499
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MemberMethods", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:499")
+  @ASTNodeAnnotation.Source(aspect="MemberMethods", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupMethod.jrag:499")
   public Map<String, Collection<MethodDecl>> methodsNameMap() {
     ASTState state = state();
     if (methodsNameMap_computed == ASTState.NON_CYCLE || methodsNameMap_computed == state().cycle()) {
@@ -956,10 +956,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:456
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:456
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:456")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:456")
   public FieldDeclarator valuesFieldDeclarator() {
     ASTState state = state();
     if (valuesFieldDeclarator_computed == ASTState.NON_CYCLE || valuesFieldDeclarator_computed == state().cycle()) {
@@ -990,10 +990,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:459
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:459
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:459")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:459")
   public FieldDecl implicitValuesField() {
     ASTState state = state();
     if (implicitValuesField_computed) {
@@ -1048,10 +1048,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:487
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:487
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:487")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:487")
   public MethodDecl implicitValuesMethod() {
     ASTState state = state();
     if (implicitValuesMethod_computed) {
@@ -1097,10 +1097,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:509
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:509
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:509")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:509")
   public MethodDecl implicitValueOfMethod() {
     ASTState state = state();
     if (implicitValueOfMethod_computed) {
@@ -1142,10 +1142,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:235
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:235
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:235")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:235")
   public boolean isAbstract() {
     {
         for (int i = 0; i < getNumBodyDecl(); i++) {
@@ -1173,10 +1173,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:35
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:35
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:35")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:35")
   public Collection<MethodDecl> unimplementedMethods() {
     ASTState state = state();
     if (unimplementedMethods_computed == ASTState.NON_CYCLE || unimplementedMethods_computed == state().cycle()) {
@@ -1246,10 +1246,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
    * Check that the enum does not contain unimplemented abstract methods.
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:788
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:788
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:788")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:788")
   public Collection<Problem> modifierProblems() {
     {
         if (!unimplementedMethods().isEmpty()) {
@@ -1281,10 +1281,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
    * <p>Does not include supertype methods.
    * @attribute syn
    * @aspect MemberMethods
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:546
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupMethod.jrag:546
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MemberMethods", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:546")
+  @ASTNodeAnnotation.Source(aspect="MemberMethods", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupMethod.jrag:546")
   public java.util.List<MethodDecl> localMethods() {
     ASTState state = state();
     if (localMethods_computed == ASTState.NON_CYCLE || localMethods_computed == state().cycle()) {
@@ -1313,21 +1313,21 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:538
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:538
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:538")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:538")
   public TypeDecl typeString() {
     TypeDecl typeString_value = getParent().Define_typeString(this, null);
     return typeString_value;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:435
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:435
    * @apilevel internal
    */
   public boolean Define_mayBeAbstract(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:60
+      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:60
       return false;
     }
     else {
@@ -1335,7 +1335,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:435
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:435
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeAbstract
    */
@@ -1343,12 +1343,12 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:433
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:433
    * @apilevel internal
    */
   public boolean Define_mayBeStatic(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:67
+      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:67
       return isNestedType();
     }
     else {
@@ -1356,7 +1356,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:433
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:433
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeStatic
    */
@@ -1364,16 +1364,16 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:130
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:130
    * @apilevel internal
    */
   public boolean Define_isOriginalEnumConstructor(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getImplicitConstructorOptNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:134
+      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:134
       return false;
     }
     else if (_callerNode == getBodyDeclListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:132
+      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:132
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return true;
     }
@@ -1382,7 +1382,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:130
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:130
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isOriginalEnumConstructor
    */
@@ -1390,12 +1390,12 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:434
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:434
    * @apilevel internal
    */
   public boolean Define_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:404
+      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:404
       return false;
     }
     else {
@@ -1403,7 +1403,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:434
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:434
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeFinal
    */
@@ -1420,7 +1420,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:783
+    // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:783
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

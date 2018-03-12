@@ -1,10 +1,11 @@
 package graph;
 
+import java.io.Serializable;
 import java.lang.annotation.Target;
 import java.util.List;
 import java.util.Optional;
 
-public class Edge {
+public class Edge implements Serializable {
     private String sourceName;
     private String targetName;
     private Type type;
@@ -33,7 +34,15 @@ public class Edge {
     public String getTargetName() {
         return targetName;
     }
-    
+
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
+    }
+
+    public void setTargetName(String targetName) {
+        this.targetName = targetName;
+    }
+
     public Boolean Contains(List<Edge> e) {
     	for(Edge r : e) {
     		if(r.sourceName==this.sourceName && r.targetName==this.targetName && r.type==this.type) return true;

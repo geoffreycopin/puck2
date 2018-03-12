@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/BoundNames.ast:3
+ * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\grammar\\BoundNames.ast:3
  * @astdecl BoundMethodAccess : MethodAccess;
  * @production BoundMethodAccess : {@link MethodAccess};
 
@@ -43,7 +43,7 @@ public class BoundMethodAccess extends MethodAccess implements Cloneable {
    * <p>Specifying the hostType changes the target qualifier type which is used
    * to invoke the bound method.
    * @aspect BoundNames
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BoundNames.jrag:68
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\BoundNames.jrag:68
    */
   public BoundMethodAccess(String name, List args, MethodDecl methodDecl,
       TypeDecl hostType) {
@@ -53,24 +53,24 @@ public class BoundMethodAccess extends MethodAccess implements Cloneable {
   }
   /**
    * @aspect BoundNames
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BoundNames.jrag:75
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\BoundNames.jrag:75
    */
   public BoundMethodAccess(String name, List args, MethodDecl methodDecl) {
     this(name, args, methodDecl, methodDecl.hostType());
   }
   /**
    * @aspect BoundNames
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BoundNames.jrag:79
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\BoundNames.jrag:79
    */
   private MethodDecl methodDecl;
   /**
    * @aspect BoundNames
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BoundNames.jrag:81
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\BoundNames.jrag:81
    */
   private TypeDecl boundHostType;
   /**
    * @aspect PrettyPrintUtil
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:109
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:109
    */
   @Override public String toString() {
     return methodDecl.toString();
@@ -375,10 +375,10 @@ public class BoundMethodAccess extends MethodAccess implements Cloneable {
    * instead.
    * @attribute syn
    * @aspect LookupMethod
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:260
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupMethod.jrag:260
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:260")
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupMethod.jrag:260")
   public MethodDecl decl() {
     ASTState state = state();
     if (decl_computed == ASTState.NON_CYCLE || decl_computed == state().cycle()) {
@@ -395,12 +395,12 @@ public class BoundMethodAccess extends MethodAccess implements Cloneable {
     return decl_value;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:69
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:69
    * @apilevel internal
    */
   public TypeDecl Define_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:179
+      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:179
       int index = _callerNode.getIndexOfChild(_childNode);
       return decl().paramType(index);
     }
@@ -409,7 +409,7 @@ public class BoundMethodAccess extends MethodAccess implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:69
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:69
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignConvertedType
    */

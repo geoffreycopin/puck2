@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java5/grammar/Enums.ast:3
+ * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\grammar\\Enums.ast:3
  * @astdecl EnumConstant : BodyDecl ::= Modifiers <ID:String> Arg:Expr* [Init:Expr] TypeAccess:Access;
  * @production EnumConstant : {@link BodyDecl} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">Arg:{@link Expr}*</span> <span class="component">[Init:{@link Expr}]</span> <span class="component">TypeAccess:{@link Access}</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/PrettyPrint.jadd:107
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\PrettyPrint.jadd:107
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getModifiers());
@@ -79,7 +79,7 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   }
   /**
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:279
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:279
    */
   public EnumConstant(Modifiers mods, String name, List<Expr> args,
       List<BodyDecl> bds) {
@@ -87,7 +87,7 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   }
   /**
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:321
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:321
    */
   private static Opt<TypeDecl> createOptAnonymousDecl(List<BodyDecl> bds) {
     if (bds.getNumChildNoTransform() == 0) {
@@ -103,7 +103,7 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   }
   /**
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:335
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:335
    */
   public int getNumBodyDecl() {
     int cnt = 0;
@@ -120,7 +120,7 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   }
   /**
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:349
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:349
    */
   public BodyDecl getBodyDecl(int i) {
     ClassInstanceExpr init = (ClassInstanceExpr) getInit();
@@ -137,7 +137,7 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   }
   /**
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:364
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:364
    */
   public boolean hasBodyDecl() {
     ClassInstanceExpr init = (ClassInstanceExpr) getInit();
@@ -148,7 +148,7 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   }
   /**
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:373
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:373
    */
   public List<BodyDecl> getBodyDeclList() {
     ClassInstanceExpr init = (ClassInstanceExpr) getInit();
@@ -159,7 +159,7 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   }
   /** Create an access to this field. 
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:417
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:417
    */
   public Access createBoundAccess() {
     if (isStatic()) {
@@ -574,10 +574,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:50
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:50")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:50")
   public boolean isEnumConstant() {
     boolean isEnumConstant_value = true;
     return isEnumConstant_value;
@@ -585,10 +585,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:54
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:54
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:54")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:54")
   public String name() {
     String name_value = getID();
     return name_value;
@@ -596,10 +596,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:212
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:212
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:212")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:212")
   public boolean isField() {
     boolean isField_value = true;
     return isField_value;
@@ -607,10 +607,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:214
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:214
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:214")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:214")
   public boolean isPublic() {
     boolean isPublic_value = true;
     return isPublic_value;
@@ -618,10 +618,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:215
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:215
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:215")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:215")
   public boolean isStatic() {
     boolean isStatic_value = true;
     return isStatic_value;
@@ -629,10 +629,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:216
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:216
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:216")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:216")
   public boolean isFinal() {
     boolean isFinal_value = true;
     return isFinal_value;
@@ -640,10 +640,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:217
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:217
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:217")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:217")
   public boolean isTransient() {
     boolean isTransient_value = getModifiers().isTransient();
     return isTransient_value;
@@ -651,10 +651,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:218
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:218
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:218")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:218")
   public boolean isVolatile() {
     boolean isVolatile_value = getModifiers().isVolatile();
     return isVolatile_value;
@@ -662,10 +662,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:219
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:219
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:219")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:219")
   public boolean isSynthetic() {
     boolean isSynthetic_value = getModifiers().isSynthetic();
     return isSynthetic_value;
@@ -673,10 +673,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:220
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:220
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:220")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:220")
   public boolean isClassVariable() {
     boolean isClassVariable_value = true;
     return isClassVariable_value;
@@ -684,10 +684,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:221
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:221
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:221")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:221")
   public boolean isInstanceVariable() {
     boolean isInstanceVariable_value = false;
     return isInstanceVariable_value;
@@ -695,10 +695,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:222
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:222
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:222")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:222")
   public boolean isLocalVariable() {
     boolean isLocalVariable_value = false;
     return isLocalVariable_value;
@@ -706,10 +706,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:223
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:223
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:223")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:223")
   public boolean isBlank() {
     boolean isBlank_value = !hasInit();
     return isBlank_value;
@@ -717,10 +717,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:224
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:224
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:224")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:224")
   public boolean isParameter() {
     boolean isParameter_value = false;
     return isParameter_value;
@@ -728,10 +728,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:225
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:225
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:225")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:225")
   public boolean isMethodParameter() {
     boolean isMethodParameter_value = false;
     return isMethodParameter_value;
@@ -739,10 +739,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:226
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:226
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:226")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:226")
   public boolean isConstructorParameter() {
     boolean isConstructorParameter_value = false;
     return isConstructorParameter_value;
@@ -750,10 +750,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:227
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:227
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:227")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:227")
   public boolean isExceptionHandlerParameter() {
     boolean isExceptionHandlerParameter_value = !hasInit();
     return isExceptionHandlerParameter_value;
@@ -771,10 +771,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:228
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:228
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:228")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:228")
   public boolean isEffectivelyFinal() {
     ASTState state = state();
     if (isEffectivelyFinal_computed == ASTState.NON_CYCLE || isEffectivelyFinal_computed == state().cycle()) {
@@ -793,10 +793,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:230
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:230
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:230")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:230")
   public boolean accessibleFrom(TypeDecl type) {
     {
         if (isPublic()) {
@@ -819,10 +819,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:248
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:248
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:248")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:248")
   public boolean isConstant() {
     boolean isConstant_value = true;
     return isConstant_value;
@@ -830,10 +830,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /** The constant value of an enum constant is the ID. 
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:251
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:251
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:251")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:251")
   public Constant constant() {
     Constant constant_value = Constant.create(getID());
     return constant_value;
@@ -852,10 +852,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:253
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:253
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:253")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:253")
   public Collection<TypeDecl> throwTypes() {
     ASTState state = state();
     if (throwTypes_computed == ASTState.NON_CYCLE || throwTypes_computed == state().cycle()) {
@@ -880,10 +880,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:275
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:275
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:275")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:275")
   public TypeDecl type() {
     TypeDecl type_value = hostType();
     return type_value;
@@ -903,10 +903,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn nta
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:277
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:277
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:277")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:277")
   public Access getTypeAccess() {
     ASTState state = state();
     if (getTypeAccess_computed) {
@@ -923,10 +923,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:801
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:801
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:801")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:801")
   public SimpleSet<MethodDecl> localMethodsSignature(String signature) {
     {
         SimpleSet<MethodDecl> set = localMethodsSignatureMap().get(signature);
@@ -950,10 +950,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /** Maps method signature to method declaration. 
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:810
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:810
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:810")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:810")
   public Map<String, SimpleSet<MethodDecl>> localMethodsSignatureMap() {
     ASTState state = state();
     if (localMethodsSignatureMap_computed == ASTState.NON_CYCLE || localMethodsSignatureMap_computed == state().cycle()) {
@@ -984,10 +984,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:835
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:835
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:835")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:835")
   public boolean implementsMethod(MethodDecl method) {
     {
         SimpleSet<MethodDecl> methods = localMethodsSignature(method.signature());
@@ -1003,10 +1003,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /** @return {@code true} if the field declaration is inside this node. 
    * @attribute syn
    * @aspect DeclareBeforeUse
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:46
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:46
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DeclareBeforeUse", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:46")
+  @ASTNodeAnnotation.Source(aspect="DeclareBeforeUse", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:46")
   public boolean declaredIn(Variable decl) {
     boolean declaredIn_Variable_value = this == decl || declaredBefore(decl);
     return declaredIn_Variable_value;
@@ -1014,10 +1014,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:278
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:278
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:278")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:278")
   public boolean isProtected() {
     boolean isProtected_value = getModifiers().isProtected();
     return isProtected_value;
@@ -1025,10 +1025,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:280
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:280
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:280")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\Modifiers.jrag:280")
   public boolean isPrivate() {
     boolean isPrivate_value = getModifiers().isPrivate();
     return isPrivate_value;
@@ -1036,10 +1036,10 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute inh
    * @aspect NestedTypes
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:637
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:637
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:637")
+  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:637")
   public String hostPackage() {
     String hostPackage_value = getParent().Define_hostPackage(this, null);
     return hostPackage_value;
@@ -1047,21 +1047,21 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   /**
    * @attribute inh
    * @aspect LookupParTypeDecl
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1384
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1384
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1384")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1384")
   public FieldDecl fieldDecl() {
     FieldDecl fieldDecl_value = getParent().Define_fieldDecl(this, null);
     return fieldDecl_value;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:131
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:131
    * @apilevel internal
    */
   public boolean Define_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:147
+      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:147
       return name.equals("FIELD");
     }
     else {
@@ -1069,7 +1069,7 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:131
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:131
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayUseAnnotationTarget
    */
@@ -1077,7 +1077,7 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:207
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:207
    * @apilevel internal
    */
   public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
@@ -1085,7 +1085,7 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
     return isStatic();
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:207
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:207
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inStaticContext
    */
@@ -1093,12 +1093,12 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:628
+      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:628
       return NameType.TYPE_NAME;
     }
     else {
@@ -1106,7 +1106,7 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */

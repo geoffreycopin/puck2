@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,10 +19,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
@@ -32,7 +32,7 @@ import java.io.DataInputStream;
  * Can store any value representable as an
  * IEEE 754 64-bit double-precision floating point number.
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Literals.ast:54
+ * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\grammar\\Literals.ast:54
  * @astdecl DoubleLiteral : Literal;
  * @production DoubleLiteral : {@link Literal};
 
@@ -40,19 +40,19 @@ import java.io.DataInputStream;
 public class DoubleLiteral extends Literal implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:347
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\PrettyPrint.jadd:347
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getLITERAL());
   }
   /**
    * @aspect Java7Literals
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:898
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:898
    */
   protected Constant constant = null;
   /**
    * @aspect Java7Literals
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:900
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:900
    */
   public DoubleLiteral(String literal, Constant constant) {
     this(literal);
@@ -242,10 +242,10 @@ public class DoubleLiteral extends Literal implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -275,10 +275,10 @@ public class DoubleLiteral extends Literal implements Cloneable {
    * @return true if this floating point literal is equivalent to a zero literal
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:61
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:61
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:61")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:61")
   public boolean isZero() {
     ASTState state = state();
     if (isZero_computed == ASTState.NON_CYCLE || isZero_computed == state().cycle()) {
@@ -322,10 +322,10 @@ public class DoubleLiteral extends Literal implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:38
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:38")
   public Constant constant() {
     ASTState state = state();
     if (constant_computed == ASTState.NON_CYCLE || constant_computed == state().cycle()) {
@@ -364,7 +364,7 @@ public class DoubleLiteral extends Literal implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:778
+    // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeCheck.jrag:778
     if (!isZero() && constant().doubleValue() == 0.0f) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);
@@ -375,7 +375,7 @@ public class DoubleLiteral extends Literal implements Cloneable {
         contributors.add(this);
       }
     }
-    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:783
+    // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeCheck.jrag:783
     if (constant().doubleValue() == Double.NEGATIVE_INFINITY
               || constant().doubleValue() == Double.POSITIVE_INFINITY) {
       {

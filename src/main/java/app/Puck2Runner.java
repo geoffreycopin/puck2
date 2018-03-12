@@ -6,9 +6,7 @@ import graph.XMLExporter;
 import graph.readers.ProgramReader;
 import org.extendj.ast.Program;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
+import java.io.*;
 import java.util.*;
 
 public class Puck2Runner {
@@ -42,12 +40,6 @@ public class Puck2Runner {
         reader.readInto(nodes, edges);
     }
 
-    public void outputToFile(String outputFile) throws IOException {
-        XMLExporter exporter = new XMLExporter();
-        exporter.add(nodes, new ArrayList<>(edges));
-        exporter.writeTo(outputFile);
-    }
-
     private void loadProgram(String path) throws IOException {
         File f = new File(path);
         if (f.isDirectory()) {
@@ -67,6 +59,12 @@ public class Puck2Runner {
         }
 
         return fileName.substring(index + 1);
+    }
+
+    public void outputToFile(String outputFile) throws IOException {
+        XMLExporter exporter = new XMLExporter();
+        exporter.add(nodes, new ArrayList<>(edges));
+        exporter.writeTo(outputFile);
     }
 
     public void displayGraph() {

@@ -26,7 +26,7 @@ public class ClassReader extends TypeDeclReader {
         String className = classDeclaration.fullName();
 
         Node classNode = new Node(idGenerator.generate(), className,
-                            Node.Type.Class, classDeclaration.createQualifiedAccess());
+                            Node.Type.Class, classDeclaration);
         nodes.put(className, classNode);
 
         readBodyDeclarations(nodes, edges);

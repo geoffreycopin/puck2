@@ -1,16 +1,19 @@
 package graph;
 
+import org.extendj.ast.ASTNode;
 import org.extendj.ast.Access;
 
-public class Node {
+import java.io.Serializable;
+
+public class Node implements Serializable{
     private Integer id;
     private String fullName;
     private Type type;
-    private Access extendjNode;
+    private ASTNode<ASTNode> extendjNode;
 
     public enum Type { Package, Class, Interface, Attribute, Method, MethodBody }
 
-    public Node(Integer id, String fullName, Type type, Access extendjNode) {
+    public Node(Integer id, String fullName, Type type, ASTNode<ASTNode> extendjNode) {
         this.id = id;
         this.fullName = fullName;
         this.extendjNode = extendjNode;
@@ -25,7 +28,7 @@ public class Node {
         return fullName;
     }
 
-    public Access getExtendjNode() {
+    public ASTNode<ASTNode> getExtendjNode() {
         return extendjNode;
     }
 

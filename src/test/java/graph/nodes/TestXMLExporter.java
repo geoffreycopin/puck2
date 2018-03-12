@@ -35,13 +35,9 @@ public class TestXMLExporter {
     public void generateXML() {
         String expected = "<?xml version=\"1.0\"?>\n" +
                 "<DependencyGraphe>\n" +
-                "\t<Nodes>\n" +
-                "\t\t<Node type=\"class\" id=\"1\" name=\"TestClass\"/>\n" +
-                "\t\t<Node type=\"package\" id=\"0\" name=\"exporter\"/>\n" +
-                "\t</Nodes>\n" +
-                "\t<Edges>\n" +
-                "\t\t<Edge type=\"Contains\" src=\"0\" dest=\"1\"/>\n" +
-                "\t</Edges>\n" +
+                "\t<node type=\"class\" id=\"1\" name=\"TestClass\"/>\n" +
+                "\t<node type=\"package\" id=\"0\" name=\"exporter\"/>\n" +
+                "\t<edge type=\"contains\" src=\"0\" dest=\"1\" id=\"0\"/>\n" +
                 "</DependencyGraphe>\n";
         assertEquals(expected, exporter.generateXml());
     }

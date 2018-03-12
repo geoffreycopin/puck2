@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java8/grammar/Lambda.ast:8
+ * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\grammar\\Lambda.ast:8
  * @astdecl InferredLambdaParameters : LambdaParameters ::= Parameter:InferredParameterDeclaration*;
  * @production InferredLambdaParameters : {@link LambdaParameters} ::= <span class="component">Parameter:{@link InferredParameterDeclaration}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class InferredLambdaParameters extends LambdaParameters implements Cloneable {
   /**
    * @aspect Java8PrettyPrint
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PrettyPrint.jadd:85
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\PrettyPrint.jadd:85
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("(");
@@ -51,7 +51,7 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
   }
   /**
    * @aspect PrettyPrintUtil8
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PrettyPrintUtil.jadd:41
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\PrettyPrintUtil.jadd:41
    */
   @Override public String toString() {
     int numParams = 0;
@@ -71,7 +71,7 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
   }
   /**
    * @aspect LambdaToClass
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LambdaAnonymousDecl.jrag:121
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LambdaAnonymousDecl.jrag:121
    */
   protected List<ParameterDeclaration> toParameterList() {
     List<ParameterDeclaration> paramList = new List<ParameterDeclaration>();
@@ -134,9 +134,9 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    parameterDeclaration_String_reset();
     numParameters_reset();
     congruentTo_FunctionDescriptor_reset();
+    parameterDeclaration_String_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:40
@@ -336,6 +336,84 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
     return getParameterListNoTransform();
   }
   /** @apilevel internal */
+  private void numParameters_reset() {
+    numParameters_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle numParameters_computed = null;
+
+  /** @apilevel internal */
+  protected int numParameters_value;
+
+  /**
+   * @attribute syn
+   * @aspect LambdaExpr
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LambdaExpr.jrag:47
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LambdaExpr.jrag:47")
+  public int numParameters() {
+    ASTState state = state();
+    if (numParameters_computed == ASTState.NON_CYCLE || numParameters_computed == state().cycle()) {
+      return numParameters_value;
+    }
+    numParameters_value = getNumParameter();
+    if (state().inCircle()) {
+      numParameters_computed = state().cycle();
+    
+    } else {
+      numParameters_computed = ASTState.NON_CYCLE;
+    
+    }
+    return numParameters_value;
+  }
+  /** @apilevel internal */
+  private void congruentTo_FunctionDescriptor_reset() {
+    congruentTo_FunctionDescriptor_computed = null;
+    congruentTo_FunctionDescriptor_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map congruentTo_FunctionDescriptor_values;
+  /** @apilevel internal */
+  protected java.util.Map congruentTo_FunctionDescriptor_computed;
+  /**
+   * @attribute syn
+   * @aspect LambdaExpr
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LambdaExpr.jrag:53
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LambdaExpr.jrag:53")
+  public boolean congruentTo(FunctionDescriptor fd) {
+    Object _parameters = fd;
+    if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
+    if (congruentTo_FunctionDescriptor_values == null) congruentTo_FunctionDescriptor_values = new java.util.HashMap(4);
+    ASTState state = state();
+    if (congruentTo_FunctionDescriptor_values.containsKey(_parameters)
+        && congruentTo_FunctionDescriptor_computed.containsKey(_parameters)
+        && (congruentTo_FunctionDescriptor_computed.get(_parameters) == ASTState.NON_CYCLE || congruentTo_FunctionDescriptor_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) congruentTo_FunctionDescriptor_values.get(_parameters);
+    }
+    boolean congruentTo_FunctionDescriptor_value = congruentTo_compute(fd);
+    if (state().inCircle()) {
+      congruentTo_FunctionDescriptor_values.put(_parameters, congruentTo_FunctionDescriptor_value);
+      congruentTo_FunctionDescriptor_computed.put(_parameters, state().cycle());
+    
+    } else {
+      congruentTo_FunctionDescriptor_values.put(_parameters, congruentTo_FunctionDescriptor_value);
+      congruentTo_FunctionDescriptor_computed.put(_parameters, ASTState.NON_CYCLE);
+    
+    }
+    return congruentTo_FunctionDescriptor_value;
+  }
+  /** @apilevel internal */
+  private boolean congruentTo_compute(FunctionDescriptor fd) {
+      if (fd.method.hasValue()) {
+        return numParameters() == fd.method.get().getNumParameter();
+      } else {
+        return false;
+      }
+    }
+  /** @apilevel internal */
   private void parameterDeclaration_String_reset() {
     parameterDeclaration_String_computed = null;
     parameterDeclaration_String_values = null;
@@ -347,10 +425,10 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
   /**
    * @attribute syn
    * @aspect VariableScope
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:47
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LookupVariable.jrag:47
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:47")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LookupVariable.jrag:47")
   public SimpleSet<Variable> parameterDeclaration(String name) {
     Object _parameters = name;
     if (parameterDeclaration_String_computed == null) parameterDeclaration_String_computed = new java.util.HashMap(4);
@@ -382,91 +460,13 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
       }
       return emptySet();
     }
-  /** @apilevel internal */
-  private void numParameters_reset() {
-    numParameters_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle numParameters_computed = null;
-
-  /** @apilevel internal */
-  protected int numParameters_value;
-
-  /**
-   * @attribute syn
-   * @aspect LambdaExpr
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LambdaExpr.jrag:47
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/LambdaExpr.jrag:47")
-  public int numParameters() {
-    ASTState state = state();
-    if (numParameters_computed == ASTState.NON_CYCLE || numParameters_computed == state().cycle()) {
-      return numParameters_value;
-    }
-    numParameters_value = getNumParameter();
-    if (state().inCircle()) {
-      numParameters_computed = state().cycle();
-    
-    } else {
-      numParameters_computed = ASTState.NON_CYCLE;
-    
-    }
-    return numParameters_value;
-  }
-  /** @apilevel internal */
-  private void congruentTo_FunctionDescriptor_reset() {
-    congruentTo_FunctionDescriptor_computed = null;
-    congruentTo_FunctionDescriptor_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map congruentTo_FunctionDescriptor_values;
-  /** @apilevel internal */
-  protected java.util.Map congruentTo_FunctionDescriptor_computed;
-  /**
-   * @attribute syn
-   * @aspect LambdaExpr
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LambdaExpr.jrag:53
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/LambdaExpr.jrag:53")
-  public boolean congruentTo(FunctionDescriptor fd) {
-    Object _parameters = fd;
-    if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
-    if (congruentTo_FunctionDescriptor_values == null) congruentTo_FunctionDescriptor_values = new java.util.HashMap(4);
-    ASTState state = state();
-    if (congruentTo_FunctionDescriptor_values.containsKey(_parameters)
-        && congruentTo_FunctionDescriptor_computed.containsKey(_parameters)
-        && (congruentTo_FunctionDescriptor_computed.get(_parameters) == ASTState.NON_CYCLE || congruentTo_FunctionDescriptor_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) congruentTo_FunctionDescriptor_values.get(_parameters);
-    }
-    boolean congruentTo_FunctionDescriptor_value = congruentTo_compute(fd);
-    if (state().inCircle()) {
-      congruentTo_FunctionDescriptor_values.put(_parameters, congruentTo_FunctionDescriptor_value);
-      congruentTo_FunctionDescriptor_computed.put(_parameters, state().cycle());
-    
-    } else {
-      congruentTo_FunctionDescriptor_values.put(_parameters, congruentTo_FunctionDescriptor_value);
-      congruentTo_FunctionDescriptor_computed.put(_parameters, ASTState.NON_CYCLE);
-    
-    }
-    return congruentTo_FunctionDescriptor_value;
-  }
-  /** @apilevel internal */
-  private boolean congruentTo_compute(FunctionDescriptor fd) {
-      if (fd.method.hasValue()) {
-        return numParameters() == fd.method.get().getNumParameter();
-      } else {
-        return false;
-      }
-    }
   /**
    * @attribute syn
    * @aspect Java8NameCheck
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/NameCheck.jrag:560
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\NameCheck.jrag:560
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/NameCheck.jrag:560")
+  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\NameCheck.jrag:560")
   public Collection<Problem> nameProblems() {
     {
         for (int i = 0; i < getNumParameter(); i++) {
@@ -480,12 +480,34 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
       }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:30
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:30
+   * @apilevel internal
+   */
+  public boolean Define_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
+    if (_callerNode == getParameterListNoTransform()) {
+      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:37
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return inhModifiedInScope(var);
+    }
+    else {
+      return getParent().Define_inhModifiedInScope(this, _callerNode, var);
+    }
+  }
+  /**
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:30
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute inhModifiedInScope
+   */
+  protected boolean canDefine_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
+    return true;
+  }
+  /**
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LookupVariable.jrag:30
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:35
+      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LookupVariable.jrag:35
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return parameterDeclaration(name);
     }
@@ -494,7 +516,7 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:30
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LookupVariable.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
    */
@@ -502,12 +524,12 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TypeCheck.jrag:502
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TypeCheck.jrag:502
    * @apilevel internal
    */
   public TypeDecl Define_inferredType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TypeCheck.jrag:503
+      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TypeCheck.jrag:503
       int i = _callerNode.getIndexOfChild(_childNode);
       {
           if (enclosingLambda().targetInterface() == null) {
@@ -538,33 +560,11 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TypeCheck.jrag:502
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TypeCheck.jrag:502
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inferredType
    */
   protected boolean canDefine_inferredType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:30
-   * @apilevel internal
-   */
-  public boolean Define_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
-    if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:37
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return inhModifiedInScope(var);
-    }
-    else {
-      return getParent().Define_inhModifiedInScope(this, _callerNode, var);
-    }
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:30
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute inhModifiedInScope
-   */
-  protected boolean canDefine_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
     return true;
   }
   /** @apilevel internal */
@@ -577,7 +577,7 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/NameCheck.jrag:558
+    // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\NameCheck.jrag:558
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

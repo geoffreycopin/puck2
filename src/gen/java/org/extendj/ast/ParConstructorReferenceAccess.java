@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
+import java.util.LinkedHashSet;
+import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java8/grammar/ConstructorReference.ast:6
+ * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\grammar\\ConstructorReference.ast:6
  * @astdecl ParConstructorReferenceAccess : ParClassInstanceExpr;
  * @production ParConstructorReferenceAccess : {@link ParClassInstanceExpr};
 
@@ -37,12 +37,12 @@ import java.io.DataInputStream;
 public class ParConstructorReferenceAccess extends ParClassInstanceExpr implements Cloneable {
   /**
    * @aspect Synthetics
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:453
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\MethodReference.jrag:453
    */
   private FunctionDescriptor targetDescriptor;
   /**
    * @aspect Synthetics
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:454
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\MethodReference.jrag:454
    */
   public ParConstructorReferenceAccess(Access access,
       List<Expr> args, Opt<TypeDecl> optDecl, List<Access> typeArgs, FunctionDescriptor fd) {
@@ -500,10 +500,10 @@ public class ParConstructorReferenceAccess extends ParClassInstanceExpr implemen
   /**
    * @attribute syn
    * @aspect TargetType
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:215
+   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:215
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:215")
+  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:215")
   public TypeDecl targetType() {
     ASTState state = state();
     if (targetType_computed == ASTState.NON_CYCLE || targetType_computed == state().cycle()) {
