@@ -32,7 +32,7 @@ Configuration avec Eclipse
    JavaFX : e(fx)clipe.    
 
 2. Importer le projet:  
-  1.Selectionner dans le menu File ▸ Import… ▸ Gradle ▸ Gradle Project.     
+  1.Selectionner dans le menu File ▸ Import… ▸ Gradle ▸ Existing Gradle Project.     
   2.Sur la fenêtre qui s'ouvre, spécifier l'emplacement du projet puis cliqué sur le bouton Finish.    
 
 3. Utilisation des Gradle tasks:  
