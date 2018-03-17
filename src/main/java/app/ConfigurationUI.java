@@ -36,6 +36,7 @@ public class ConfigurationUI extends Application {
         primaryStage.show();
     }
     
+    
 
     private void initUi(Stage primaryStage) {
             
@@ -172,7 +173,7 @@ public class ConfigurationUI extends Application {
         Puck2Runner runner = new Puck2Runner(programDirField.getText());
        
         runner.run();
-        runner.XMLValidation(getOutputFilePath());
+        runner.XMLValidation();
         runner.outputToFile(getOutputFilePath());
        
        

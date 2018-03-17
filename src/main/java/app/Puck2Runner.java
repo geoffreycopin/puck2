@@ -66,7 +66,7 @@ public class Puck2Runner {
               
     }
     
-    public void XMLValidation(String outputfile)throws Exception{
+    public void XMLValidation()throws Exception{
     	 XMLExporter exporter = new XMLExporter();
     	 exporter.add(nodes, edges);    
     	  File temp = File.createTempFile("file", ".tmp");
