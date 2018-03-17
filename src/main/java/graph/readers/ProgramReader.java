@@ -7,6 +7,7 @@ import org.extendj.ast.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ProgramReader extends AbstractReader {
     private Program program;
@@ -21,7 +22,7 @@ public class ProgramReader extends AbstractReader {
     }
 
     @Override
-    public void readInto(Map<String, Node> nodes, List<Edge> edges) {
+    public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
         readCompilationUnits(nodes, edges);
     }
 
@@ -30,7 +31,7 @@ public class ProgramReader extends AbstractReader {
         return "PROGRAM";
     }
 
-    private void readCompilationUnits(Map<String, Node> nodes, List<Edge> edges) {
+    private void readCompilationUnits(Map<String, Node> nodes, Set<Edge> edges) {
         for (CompilationUnit cu: program.getCompilationUnitList()) {
             CompilationUnitReader reader = new CompilationUnitReader(cu, idGenerator);
             reader.readInto(nodes, edges);

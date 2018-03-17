@@ -34,7 +34,7 @@ public class TestBase {
 
     private Set<String> computeNodes(Node.Type type) {
         Map<String, Node> nodes = new HashMap<>();
-        List<Edge> edges = new ArrayList<>();
+        Set<Edge> edges = new HashSet();
         ProgramReader r = new ProgramReader(loader.getProgram());
         r.readInto(nodes, edges);
 
@@ -56,7 +56,7 @@ public class TestBase {
 
     private Set<TestEdge> computeEdges(Edge.Type type) {
         Map<String, Node> nodes_map = new HashMap<>();
-        List<Edge> edges = new ArrayList<>();
+        Set<Edge> edges = new HashSet();
         ProgramReader r = new ProgramReader(loader.getProgram());
         r.readInto(nodes_map, edges);
 

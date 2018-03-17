@@ -9,6 +9,7 @@ import org.extendj.ast.WildcardExtendsType;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public abstract class AbstractReader {
 	protected UniqueIdGenerator idGenerator;
@@ -17,11 +18,11 @@ public abstract class AbstractReader {
 		this.idGenerator = generator;
 	}
 
-	public abstract void readInto(Map<String, Node> nodes, List<Edge> edges);
+	public abstract void readInto(Map<String, Node> nodes, Set<Edge> edges);
 
 	abstract String getFullName();
 
-	protected void addTypeDependency(List<Edge> edges, TypeDecl type, Edge.Type edgeType,Map<String, Node> nodes) {
+	protected void addTypeDependency(Set<Edge> edges, TypeDecl type, Edge.Type edgeType,Map<String, Node> nodes) {
 
 		
 		if (type.isParameterizedType()) {   
@@ -35,12 +36,12 @@ public abstract class AbstractReader {
 			addDependency(edges,type,edgeType);
 		} else if (! type.isTypeVariable()) {
 			Edge e = new Edge(getFullName(), type.fullName(), edgeType);
-			if (!e.IsIn(edges))edges.add(e);
+			edges.add(e);
 		}
 		
 	}
 
-	protected void addGenericTypeDependency(List<Edge> edges, TypeDecl type, Edge.Type edgeType,Map<String, Node> nodes) {
+	protected void addGenericTypeDependency(Set<Edge> edges, TypeDecl type, Edge.Type edgeType,Map<String, Node> nodes) {
 		if (!Util.isBuiltin(type)) {
 
 			String genericTypeName = TypeDeclReader.getGenericTypeName(type);
@@ -52,7 +53,7 @@ public abstract class AbstractReader {
 		}
 	}
 
-	protected void addGenericNodes(Map<String, Node> nodes, TypeDecl type, Edge.Type edgeType,List<Edge> edges) {
+	protected void addGenericNodes(Map<String, Node> nodes, TypeDecl type, Edge.Type edgeType,Set<Edge> edges) {
 		
 		if(!nodes.containsKey(type.fullName())) {
 			Node n =new Node(idGenerator.generate(),type.fullName(),Node.Type.Class,type.createQualifiedAccess());
@@ -65,12 +66,12 @@ public abstract class AbstractReader {
 		}
 		
 		Edge e = new Edge(type.packageName(),type.fullName(),Edge.Type.Contains);
-		if(!e.IsIn(edges))edges.add(e);
+		edges.add(e);
 		
 	}
-	protected void addDependency(List<Edge> edges, TypeDecl type, Edge.Type edgeType) {
+	protected void addDependency(Set<Edge> edges, TypeDecl type, Edge.Type edgeType) {
 		Edge e = new Edge(getFullName(), type.fullName(), edgeType);
-		if (!e.IsIn(edges))edges.add(e);
+		edges.add(e);
 	
 	}
 	

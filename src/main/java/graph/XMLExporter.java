@@ -7,11 +7,11 @@ import java.util.*;
 
 public class XMLExporter {
     Map<String, Node> nodes;
-    List<Edge> edges;
+    Set<Edge> edges;
 
     public XMLExporter() {
         nodes = new HashMap<>();
-        edges = new ArrayList<>();
+        edges  = new HashSet();
     }
 
     public void writeTo(String path) throws IOException {
@@ -20,15 +20,14 @@ public class XMLExporter {
         writer.close();
     }
 
-    public void add(Map<String, Node> nodes, List<Edge> edges) {
-        this.nodes.putAll(nodes);
+    public void add(Map<String, Node> nodes, Set<Edge> edges) {
+         this.nodes.putAll(nodes);
         this.edges.addAll(edges);
     }
 
     public String generateXml() {
         StringBuilder builder = new StringBuilder("<?xml version=\"1.0\"?>\n");
-        builder.append("<DependencyGraphe>\n");
-
+        builder.append("<DG>\n");
         for (Node n: nodes.values()) {
             builder.append(nodeToString(n));
         }
@@ -38,7 +37,7 @@ public class XMLExporter {
             builder.append(edgeToString(e, currentEdgeIndex++));
         }
 
-        builder.append("</DependencyGraphe>\n");
+        builder.append("</DG>");
 
         return builder.toString();
     }

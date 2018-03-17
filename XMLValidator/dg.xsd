@@ -3,7 +3,7 @@
 <!-- New XSD document created with EditiX XML Editor (http://www.editix.com) at Mon Jan 22 15:40:38 CET 2018 -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:element name="DependencyGraphe" type="dgtype"/>
+	<xs:element name="DG" type="dgtype"/>
 	
 	<xs:complexType name="dgtype">
 		<xs:sequence maxOccurs="unbounded">
@@ -21,7 +21,6 @@
 	<xs:simpleType name="nodeclass">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="package"/>
-			<xs:enumeration value="class"/>
 			<xs:enumeration value="interface"/>
 			<xs:enumeration value="method"/>
 			<xs:enumeration value="methodbody"/>

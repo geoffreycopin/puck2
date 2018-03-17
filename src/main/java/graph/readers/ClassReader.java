@@ -8,6 +8,7 @@ import org.extendj.ast.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ClassReader extends TypeDeclReader {
     private ClassDecl classDeclaration;
@@ -24,7 +25,7 @@ public class ClassReader extends TypeDeclReader {
     
     
 
-    public void readInto(Map<String, Node> nodes, List<Edge> edges) {
+    public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
         String className = classDeclaration.fullName();
 
         Node classNode = new Node(idGenerator.generate(), className,
@@ -40,7 +41,7 @@ public class ClassReader extends TypeDeclReader {
     
     
 
-    private void readBodyDeclarations(Map<String, Node> nodes, List<Edge> edges) {
+    private void readBodyDeclarations(Map<String, Node> nodes, Set<Edge> edges) {
         for (BodyDecl decl : classDeclaration.getBodyDeclList()) {
             if (decl instanceof FieldDecl) {
                 FieldReader fieldreader = new FieldReader(idGenerator, (FieldDecl) decl);
@@ -65,7 +66,7 @@ public class ClassReader extends TypeDeclReader {
         }
     }
 
-    private void addSuperClassdependency(List<Edge> edges,Map<String, Node> nodes) {
+    private void addSuperClassdependency(Set<Edge> edges,Map<String, Node> nodes) {
         Access superClass = classDeclaration.getSuperClass();
   
         if (superClass == null || Util.isPrimitive(superClass.type())) {
@@ -75,7 +76,7 @@ public class ClassReader extends TypeDeclReader {
         addTypeDependency(edges, superClass.type(), Edge.Type.IsA,nodes);
     }
 
-    private void addInterfacesDependency(List<Edge> edges,Map<String, Node> nodes) {
+    private void addInterfacesDependency(Set<Edge> edges,Map<String, Node> nodes) {
         for (Access imp: classDeclaration.getImplementsList()) {
             if (! (imp.type() instanceof InterfaceDecl)) {
                 continue;

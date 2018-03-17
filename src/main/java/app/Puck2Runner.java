@@ -8,7 +8,9 @@ import org.extendj.ast.Program;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.*;
@@ -27,12 +29,12 @@ import javax.xml.validation.Validator;
 public class Puck2Runner {
     String projectPath;
     HashMap<String, Node> nodes;
-    List<Edge> edges;
+    Set<Edge> edges;
     Program program;
 
     public Puck2Runner(String path) {
         nodes = new HashMap<>();
-        edges = new ArrayList<>();
+        edges = new HashSet();
         projectPath = path;
         program = new Program();
     }
@@ -42,7 +44,7 @@ public class Puck2Runner {
         return nodes;
     }
 
-    public List<Edge> getEdges() {
+    public Set<Edge> getEdges() {
         return edges;
     }
 
@@ -57,11 +59,21 @@ public class Puck2Runner {
     }
 
     public void outputToFile(String outputFile) throws Exception {
-        XMLExporter exporter = new XMLExporter();
-        exporter.add(nodes, new ArrayList<>(edges));
+    	
+    	XMLExporter exporter = new XMLExporter();
+        exporter.add(nodes, edges);      
         exporter.writeTo(outputFile);
-        this.XMLValidator(outputFile);
-        
+              
+    }
+    
+    public void XMLValidation(String outputfile)throws Exception{
+    	 XMLExporter exporter = new XMLExporter();
+    	 exporter.add(nodes, edges);    
+    	  File temp = File.createTempFile("file", ".tmp");
+          BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+          writer.write(exporter.generateXml());
+          writer.close();
+          this.XMLValidator(temp.getPath());
     }
     
     public void XMLValidator(String outputfile) throws Exception {

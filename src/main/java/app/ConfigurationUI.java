@@ -163,8 +163,13 @@ public class ConfigurationUI extends Application {
         checkInputValidity();
 
         Puck2Runner runner = new Puck2Runner(programDirField.getText());
+       
         runner.run();
+        runner.XMLValidation(getOutputFilePath());
         runner.outputToFile(getOutputFilePath());
+       
+       
+        
     }
      
   

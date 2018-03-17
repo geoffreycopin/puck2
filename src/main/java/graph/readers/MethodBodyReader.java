@@ -3,6 +3,7 @@ package graph.readers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.extendj.ast.Access;
 import org.extendj.ast.ArrayCreationExpr;
@@ -41,10 +42,11 @@ public class MethodBodyReader extends BodyDeclReader {
 		this.block=block;
 		this.MethodNode=MethodNode;
 		this.method=method;
+
 	}
 
 	@Override
-	public void readInto(Map<String, Node> nodes, List<Edge> edges) {
+	public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
 		String name = this.MethodNode.getFullName()+".body";
 		BodyNode = new Node(idGenerator.generate(), name, Node.Type.MethodBody,
 				null);
@@ -59,12 +61,12 @@ public class MethodBodyReader extends BodyDeclReader {
 
 	}
 
-	private void addMSignatureDependency(List<Edge> edges) {
+	private void addMSignatureDependency(Set<Edge> edges) {
 		edges.add(new Edge(MethodNode.getFullName(), BodyNode.getFullName(), Edge.Type.Contains));
 	}
 
 
-	public void addMethodBodyTypeDependency(List<Edge> edges,Map<String, Node> nodes) {
+	public void addMethodBodyTypeDependency(Set<Edge> edges,Map<String, Node> nodes) {
 		TypeDecl stmtType;
 		MethodAccess ma = null;
 
@@ -98,7 +100,7 @@ public class MethodBodyReader extends BodyDeclReader {
 
 
 
-	public void BodyMDependency(MethodAccess ma,List<Edge> edges,Map<String, Node> nodes) {
+	public void BodyMDependency(MethodAccess ma,Set<Edge> edges,Map<String, Node> nodes) {
 		TypeDecl stmtType;
 		for ( Expr er :ma.getArgList() ) {
 			if ( er instanceof ClassInstanceExpr) {

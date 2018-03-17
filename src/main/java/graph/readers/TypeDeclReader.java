@@ -10,6 +10,7 @@ import org.extendj.ast.TypeDecl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public abstract class TypeDeclReader extends AbstractReader{
     private TypeDecl typeDecl;
@@ -19,7 +20,7 @@ public abstract class TypeDeclReader extends AbstractReader{
         this.typeDecl = typeDecl;
     }
 
-    protected void addPackageDependency(List<Edge> edges) {
+    protected void addPackageDependency(Set<Edge> edges) {
         String packageName = typeDecl.packageName();
 
         if (packageName.isEmpty()) {

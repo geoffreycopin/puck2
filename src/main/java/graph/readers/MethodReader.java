@@ -3,6 +3,7 @@ package graph.readers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.extendj.ast.*;
 
@@ -26,7 +27,7 @@ public class MethodReader extends BodyDeclReader {
     }
 
     @Override
-    public void readInto(Map<String, Node> nodes, List<Edge> edges) {
+    public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
         String fullName = getHostClassName() + "." + methodDecl.fullSignature();
        
 
@@ -51,15 +52,15 @@ public class MethodReader extends BodyDeclReader {
         return methodDecl.hostType().fullName();
     }
 
-    private void addHostClassDependency(List<Edge> edges) {
+    private void addHostClassDependency(Set<Edge> edges) {
         edges.add(new Edge(getHostTypeName(), methodNode.getFullName(), Edge.Type.Contains));
     }
 
-    private void addReturnTypeDependency(List<Edge> edges,Map<String, Node> nodes) {
+    private void addReturnTypeDependency(Set<Edge> edges,Map<String, Node> nodes) {
         addTypeDependency(edges, methodDecl.type(), Edge.Type.Uses,nodes);
     }
 
-    private void addParametersTypeDependency(List<Edge> edges,Map<String, Node> nodes) {
+    private void addParametersTypeDependency(Set<Edge> edges,Map<String, Node> nodes) {
         for (ParameterDeclaration p: methodDecl.getParameterList()) {
             TypeDecl parameterType = p.getTypeAccess().type();
             addTypeDependency(edges, parameterType, Edge.Type.Uses,nodes);
