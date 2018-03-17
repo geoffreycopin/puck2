@@ -1,0 +1,5 @@
+ aspect A {
+      abstract public void AbstractReader.try();
+      public void ClassReader.try() { return 0; }
+     
+   }
