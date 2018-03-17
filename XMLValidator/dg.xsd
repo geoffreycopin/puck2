@@ -21,6 +21,7 @@
 	<xs:simpleType name="nodeclass">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="package"/>
+			<xs:enumeration value="class"/>
 			<xs:enumeration value="interface"/>
 			<xs:enumeration value="method"/>
 			<xs:enumeration value="methodbody"/>

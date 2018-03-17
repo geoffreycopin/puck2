@@ -2,6 +2,7 @@ package app;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -21,14 +22,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ConfigurationUI extends Application {
-    private final int HEIGHT = 200;
+    private final int HEIGHT = 175;
     private Button runButton;
     private TextField programDirField;
     private Button openFileChooserButton;
     private TextField outputDirField;
     private Button openOutputDirChooserButton;
     private TextField outputFileField;
-
+   
     @Override
     public void start(Stage primaryStage) {
         initUi(primaryStage);
@@ -37,25 +38,23 @@ public class ConfigurationUI extends Application {
     
 
     private void initUi(Stage primaryStage) {
-        primaryStage.setMaxHeight(HEIGHT);
-        primaryStage.setMinHeight(HEIGHT);
-        primaryStage.setMinWidth(300);
-
+            
         initViews(primaryStage);
+        
+     
+       
+        GridPane form = createForm();        
+        StackPane p = new StackPane(); 
+        form.prefWidthProperty().bind(p.prefWidthProperty());
+        form.prefHeightProperty().bind(p.prefHeightProperty());
+        p.getChildren().addAll(form);
 
-        GridPane form = createForm();
 
-        VBox root = new VBox();
-        root.setSpacing(12);
-        root.setFillWidth(true);
-        root.getChildren().addAll(form, runButton);
-        root.setPadding(new Insets(0, 16, 0, 16));
-
-        primaryStage.setScene(new Scene(root, 500, HEIGHT));
+        primaryStage.setScene(new Scene(p,  550, HEIGHT));
     }
 
     private void initViews(Stage primaryStage) {
-        initRunButton();
+      //  initRunButton();
         initOpenFileChooserButton(primaryStage);
         initOutputDirChooser(primaryStage);
         initProgramDirField();
@@ -84,7 +83,15 @@ public class ConfigurationUI extends Application {
 
         Label outputFileLabel = new Label("Output File");
         form.addRow(3, outputFileLabel, outputFileField);
-
+        initRunButton();
+       
+        VBox hbBtn = new VBox(10);
+        hbBtn.setAlignment(Pos.BOTTOM_CENTER);
+        hbBtn.getChildren().add(runButton);
+        
+        form.add(hbBtn, 1, 5);     
+        form.setPadding(new Insets(5, 5, 5, 5));
+       
         return form;
     }
 
