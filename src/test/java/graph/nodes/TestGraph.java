@@ -1,27 +1,37 @@
 package graph.nodes;
 
-import com.sun.tools.javac.util.Pair;
 import graph.Edge;
 import graph.Node;
 import graph.readers.ProgramReader;
 import org.extendj.ast.Program;
 import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
+import javax.xml.bind.Element;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static org.junit.Assert.assertEquals;
 
 public class TestGraph {
     private static final File testDir = new File("testdir");
     private static final Pattern resultFilePattern = Pattern.compile(".*_(all|contains)\\.result");
     private static final Pattern graphStringPAttern =
-            Pattern.compile(".*(\\p{Alnum}*\\p{Blank}*=\\p{Blank}*\\p{Alnum}*)*.*");
+            Pattern.compile("<(Node|Edge)[\\h]*([\\w]*[\\h]*=[\\h]*[\\w]*[\\h]*)+.*>");
     private int failed = 0;
     private int passed = 0;
     private int nbTests = 0;
@@ -35,6 +45,12 @@ public class TestGraph {
         for (TestCase t: testCases) {
             runTest(t);
         }
+
+        System.out.println("Total: " + nbTests);
+        System.out.println("Failed: " + failed);
+        System.out.println("Passed: " + passed);
+
+        assertEquals(failed, 0);
     }
 
     private ArrayList<TestCase> extractTestCases() {
@@ -67,62 +83,106 @@ public class TestGraph {
     }
 
     private void runTest(TestCase currentTest) {
-        System.out.println("Running test: " + currentTest.getTitle());
-        HashSet<String> graphStrings = generateGraphsStrings(currentTest.program());
+        System.out.println ("Running test: " + currentTest.getTitle());
+        HashSet<String> actual;
+
+        try {
+            actual = new HashSet<>(readXml(getProgramOutput(currentTest.program())));
+        } catch (Exception e) {
+            System.out.println("\tfailed: " + e.getMessage());
+            return;
+        }
+
+        for (String resultFile: currentTest.getResultFiles().keySet()) {
+            try {
+                boolean exhaustive = currentTest.getResultFiles().get(resultFile);
+                runSubTest(resultFile, actual, exhaustive);
+            } catch (Exception e) {
+                System.out.println("\t" + resultFile + " " + e.getMessage());
+            }
+        }
     }
 
-    private void runSubTest(String resultFile, boolean exhaustive, HashSet<String> graphLines) throws IOException {
-        HashSet<String> resultLines = generateResultStrings(resultFile);
+    private void runSubTest(String resultFile, HashSet<String> actual, boolean exhaustive) throws Exception {
+        HashSet<String> expected = new HashSet<>(readXml(getExpectedValues(resultFile)));
+        TestResult result = match(expected, actual, exhaustive);
+        System.out.print("\t" + resultFile + ": ");
+        result.display();
+        if (result.isSuccess()) {
+            passed++;
+        } else {
+            failed++;
+        }
     }
 
-    private Pair<HashSet<String>, HashSet<String>> match(HashSet<String> expetcted, HashSet<String> actual) {
-        HashSet<String> remaining;
-        HashSet<String> missing;
-        // TODO: implement
+    private TestResult match(HashSet<String> expetcted, HashSet<String> actual, boolean exhaustive) {
+        HashSet<String> savedActual = new HashSet<>(actual);
+        actual.removeAll(expetcted);
+        expetcted.removeAll(savedActual);
+
+        if (expetcted.size() == 0 && (!exhaustive || actual.size() == 0)) {
+            return new TestResult(true);
+        }
+
+        TestResult result = new TestResult(false);
+        result.addAdditionnalElements(expetcted);
+
+        if (exhaustive) {
+            result.addMissingLines(actual);
+        }
+
+        return result;
     }
 
-    private HashSet<String> generateGraphsStrings(Program p) {
+    private String getProgramOutput(Program p) {
         HashMap<String, Node> nodes = new HashMap<>();
         ArrayList<Edge> edges = new ArrayList<>();
         ProgramReader reader = new ProgramReader(p);
         reader.readInto(nodes, edges);
 
-        HashSet<String> result = new HashSet<>();
+        StringBuilder result = new StringBuilder();
+        result.append("<DependencyGraph>\n");
 
-        nodes.values().forEach((n) -> result.add(n.toString()));
-        edges.forEach((e) -> result.add(e.toString()));
+        nodes.values().forEach((n) -> result.append(n.toString()));
+        edges.forEach((e) -> result.append(e.toString()));
 
-        return result;
+        result.append("\n</DependencyGraph>");
+        return result.toString();
     }
 
-    private HashSet<String> generateResultStrings(String resultFile) throws IOException {
+    private String getExpectedValues(String resultFile) throws IOException {
         return Files.lines(Paths.get(resultFile))
-                    .collect(Collectors.toCollection(HashSet::new));
+                    .collect(Collectors.joining());
     }
 
-    private ArrayList<String> normalizeLines(ArrayList<String> lines) {
-        return lines.stream()
-                .map(this::normalizeLine)
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
+    private ArrayList<String> readXml(String text) throws Exception {
+        ArrayList<String> result = new ArrayList();
 
-    private String normalizeLine(String line) {
-        Matcher m = graphStringPAttern.matcher(line);
-        String result = "";
-        HashMap<String, String> values = new HashMap<>();
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        InputSource source = new InputSource(new StringReader(text));
+        Document doc = dBuilder.parse(source);
+        doc.getDocumentElement().normalize();
 
-        for (int i = 0; i < m.groupCount(); i++) {
-            String[] splitedLine = m.group(i).split("=");
-            values.put(splitedLine[0], splitedLine[1]);
+        NodeList nodes = doc.getElementsByTagName("Node");
+        for(int i = 0; i < nodes.getLength(); i++) {
+            result.add(nodeToString(nodes.item(i)));
         }
 
-        ArrayList<String> keys = values.keySet().stream().sorted()
-                .collect(Collectors.toCollection(ArrayList::new));
-        for (String key: keys) {
-            result += key + "=" + values.get(key);
+        NodeList edges = doc.getElementsByTagName("Edge");
+        for (int i = 0; i < edges.getLength(); i++) {
+            result.add(nodeToString(edges.item(i)));
         }
 
         return result;
+    }
+
+    private String nodeToString(org.w3c.dom.Node n) throws TransformerException {
+        Transformer t = TransformerFactory.newInstance().newTransformer();
+        t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+        StringWriter sw = new StringWriter();
+        t.transform(new DOMSource(n), new StreamResult(sw));
+        return sw.toString();
     }
 
     private class TestCase {
@@ -160,6 +220,52 @@ public class TestGraph {
             ProgramLoader loader = new ProgramLoader();
             loader.addFiles(getTestFiles());
             return loader.getProgram();
+        }
+    }
+
+    private class TestResult {
+        boolean success;
+        ArrayList<String> additionnalLines = new ArrayList<>();
+        ArrayList<String> missingLines = new ArrayList<>();
+
+        public TestResult(boolean success) {
+            this.success = success;
+        }
+
+        public void addAdditionnalElements(Collection<String> lines) {
+            additionnalLines.addAll(lines);
+        }
+
+        public void addMissingLines(Collection<String> lines) {
+            missingLines.addAll(lines);
+        }
+
+        public boolean isSuccess() {
+            return success;
+        }
+
+        public ArrayList<String> getAdditionnalLines() {
+            return additionnalLines;
+        }
+
+        public ArrayList<String> getMissingLines() {
+            return missingLines;
+        }
+
+        public void display() {
+            if (isSuccess()) {
+                System.out.println("ok.");
+            } else {
+                System.out.println("failed");
+            }
+
+            for (String a: getAdditionnalLines()) {
+                System.out.println("\t\tAdditionnal: " + a);
+            }
+
+            for (String m: getMissingLines()) {
+                System.out.println("\t\tMissing: " + m);
+            }
         }
     }
 }
