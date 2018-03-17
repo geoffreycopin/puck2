@@ -25,7 +25,7 @@ public class TestXMLExporter {
         loader.addFile("testfiles/ExporterTest.java");
 
         Map<String, Node> nodes = new HashMap<>();
-        Set<Edge> edges = new HashSet();
+        Set<Edge> edges = new HashSet<>();
         ProgramReader r = new ProgramReader(loader.getProgram());
         r.readInto(nodes, edges);
 
@@ -36,15 +36,11 @@ public class TestXMLExporter {
     @Test
     public void generateXML() {
         String expected = "<?xml version=\"1.0\"?>\n" +
-                "<DependencyGraphe>\n" +
-                "\t<Nodes>\n" +
-                "\t\t<Node type=\"class\" id=\"1\" name=\"TestClass\"/>\n" +
-                "\t\t<Node type=\"package\" id=\"0\" name=\"exporter\"/>\n" +
-                "\t</Nodes>\n" +
-                "\t<Edges>\n" +
-                "\t\t<Edge type=\"Contains\" src=\"0\" dest=\"1\"/>\n" +
-                "\t</Edges>\n" +
-                "</DependencyGraphe>\n";
+                "<DG>\n" +
+                "\t<node type=\"class\" id=\"1\" name=\"TestClass\"/>\n" +
+                "\t<node type=\"package\" id=\"0\" name=\"exporter\"/>\n" +
+                "\t<edge type=\"contains\" src=\"0\" dest=\"1\" id=\"0\"/>\n" +
+                "</DG>\n";
         assertEquals(expected, exporter.generateXml());
     }
 }

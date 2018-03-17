@@ -28,6 +28,7 @@ public class XMLExporter {
     public String generateXml() {
         StringBuilder builder = new StringBuilder("<?xml version=\"1.0\"?>\n");
         builder.append("<DG>\n");
+        
         for (Node n: nodes.values()) {
             builder.append(nodeToString(n));
         }
@@ -37,7 +38,7 @@ public class XMLExporter {
             builder.append(edgeToString(e, currentEdgeIndex++));
         }
 
-        builder.append("</DG>");
+        builder.append("</DG>\n");
 
         return builder.toString();
     }

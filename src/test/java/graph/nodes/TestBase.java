@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+
 public class TestBase {
     protected static ProgramLoader loader;
     protected static String testFile;
@@ -20,7 +21,6 @@ public class TestBase {
     public static void load() {
         loader = new ProgramLoader();
         loader.addFile(testFile);
-        
     }
 
     protected static void setTestFile(String path) {
@@ -34,7 +34,7 @@ public class TestBase {
 
     private Set<String> computeNodes(Node.Type type) {
         Map<String, Node> nodes = new HashMap<>();
-        Set<Edge> edges = new HashSet();
+        Set<Edge> edges = new HashSet<>();
         ProgramReader r = new ProgramReader(loader.getProgram());
         r.readInto(nodes, edges);
 
@@ -56,7 +56,7 @@ public class TestBase {
 
     private Set<TestEdge> computeEdges(Edge.Type type) {
         Map<String, Node> nodes_map = new HashMap<>();
-        Set<Edge> edges = new HashSet();
+        Set<Edge> edges = new HashSet<>();
         ProgramReader r = new ProgramReader(loader.getProgram());
         r.readInto(nodes_map, edges);
 

@@ -31,13 +31,13 @@ public class ClassReader extends TypeDeclReader {
         Node classNode = new Node(idGenerator.generate(), className,
                             Node.Type.Class, classDeclaration.createQualifiedAccess());
         nodes.put(className, classNode);
-
         readBodyDeclarations(nodes, edges);
         addPackageDependency(edges);
         addSuperClassdependency(edges,nodes);
         addInterfacesDependency(edges,nodes);
         
     }
+    
     
     
 
@@ -59,7 +59,6 @@ public class ClassReader extends TypeDeclReader {
                 reader.readInto(nodes, edges);
             } else if (decl instanceof GenericMethodDecl) {
             	GenericMethodDecl genMethod = (GenericMethodDecl)decl;
-            	//System.out.println(genMethod.fullSignature());
             }else if (decl instanceof ConstructorDecl) {
             	
             }

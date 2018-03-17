@@ -73,8 +73,11 @@ dependencies {
 }
 
 
-eclipse.classpath.file {
+eclipse.classpath {
+defaultOutputDir = file('build-eclipse')
+file{
 	beforeMerged { classpath ->
+	defaultOutputDir = file('build-eclipse')
 		classpath.entries << new org.gradle.plugins.ide.eclipse.model.SourceFolder('extendj/tools', null)
 		classpath.entries << new org.gradle.plugins.ide.eclipse.model.SourceFolder('extendj/java8/src/main/java', null)
 		classpath.entries << new org.gradle.plugins.ide.eclipse.model.SourceFolder('extendj/src/frontend', null)
@@ -84,6 +87,7 @@ eclipse.classpath.file {
 		def gen = node.asNode().find { it.@kind == 'src' && it.@path == 'src/gen/java' }
 		if (gen?.children()?.isEmpty())
 			gen.appendNode('attributes').appendNode('attribute', [ name: 'ignore_optional_problems', value: 'true' ])
+	}
 	}
 }
 

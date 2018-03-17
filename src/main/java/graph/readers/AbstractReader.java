@@ -65,6 +65,7 @@ public abstract class AbstractReader {
 			}		
 		}
 		
+		
 		Edge e = new Edge(type.packageName(),type.fullName(),Edge.Type.Contains);
 		edges.add(e);
 		

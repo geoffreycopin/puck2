@@ -25,6 +25,7 @@ public class MethodReader extends BodyDeclReader {
     protected String getFullName() {
         return methodNode.getFullName();
     }
+    
 
     @Override
     public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
