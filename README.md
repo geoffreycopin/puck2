@@ -32,7 +32,7 @@ Configuration avec Eclipse
    JavaFX : e(fx)clipe.    
 
 2. Importer le projet:  
-  1.Selectionner dans le menu File ▸ Import… ▸ Gradle ▸ Gradle Project.     
+  1.Selectionner dans le menu File ▸ Import… ▸ Gradle ▸ Existing Gradle Project.     
   2.Sur la fenêtre qui s'ouvre, spécifier l'emplacement du projet puis cliqué sur le bouton Finish. 
 
 (Une fois le projet importé, accéder a ses propriétés (clic-droit sur le projet, sélectionner Properties) puis dans Java build path ▸ source dans la zone "Default output folder", s'assurer que le répertoire de compilation soit celui par défaut). 
@@ -66,6 +66,7 @@ Si l'agument outputFile n'est pas fourni, le graphe sera affiché sur la console
 L'argument programDir peut être un nom de fichier ou un nom de dossier. Dans le 
 second cas, tous les fichier .java contenus dans le dossier et ses sous-dossiers
 serton ajoutés au projet.
+
 
 
 
