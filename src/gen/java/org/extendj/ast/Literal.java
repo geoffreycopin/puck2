@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,18 +21,16 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * The abstract base class for all literals.
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\grammar\\Literals.ast:4
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Literals.ast:4
  * @astdecl Literal : PrimaryExpr ::= <LITERAL:String>;
  * @production Literal : {@link PrimaryExpr} ::= <span class="component">&lt;LITERAL:String&gt;</span>;
 
@@ -38,28 +38,14 @@ import java.io.DataInputStream;
 public abstract class Literal extends PrimaryExpr implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\PrettyPrint.jadd:442
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:442
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getLITERAL());
   }
   /**
-   * @aspect BytecodeCONSTANT
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\BytecodeCONSTANT.jrag:96
-   */
-  public static Literal buildBooleanLiteral(boolean value) {
-    return new BooleanLiteral(value ? "true" : "false");
-  }
-  /**
-   * @aspect BytecodeCONSTANT
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\BytecodeCONSTANT.jrag:100
-   */
-  public static Literal buildStringLiteral(String value) {
-    return new StringLiteral(value);
-  }
-  /**
    * @aspect PrettyPrintUtil
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:117
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:117
    */
   @Override public String toString() {
     return getLITERAL();
@@ -69,7 +55,7 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
    * @param s string to escape
    * @return escaped string literal
    * @aspect PrettyPrintUtil
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:398
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:398
    */
   protected static String escape(String s) {
     StringBuilder result = new StringBuilder();
@@ -112,7 +98,7 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   }
   /**
    * @aspect PrettyPrintUtil
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:438
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:438
    */
   protected static String asEscape(int value) {
     StringBuilder s = new StringBuilder("\\u");
@@ -122,6 +108,20 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
     }
     s.append(hex);
     return s.toString();
+  }
+  /**
+   * @aspect BytecodeCONSTANT
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BytecodeCONSTANT.jrag:96
+   */
+  public static Literal buildBooleanLiteral(boolean value) {
+    return new BooleanLiteral(value ? "true" : "false");
+  }
+  /**
+   * @aspect BytecodeCONSTANT
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BytecodeCONSTANT.jrag:100
+   */
+  public static Literal buildStringLiteral(String value) {
+    return new StringLiteral(value);
   }
   /**
    * @declaredat ASTNode:1
@@ -255,7 +255,7 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   }
   /**
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:905
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:905
    */
    
   public static Literal buildDoubleLiteral(double value) {
@@ -263,7 +263,7 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   }
   /**
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:917
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:917
    */
    
   public static Literal buildFloatLiteral(float value) {
@@ -271,7 +271,7 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   }
   /**
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:929
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:929
    */
    
   public static Literal buildIntegerLiteral(int value) {
@@ -279,7 +279,7 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   }
   /**
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:941
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:941
    */
    
   public static Literal buildLongLiteral(long value) {
@@ -299,10 +299,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:38
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:38")
   public Constant constant() {
     ASTState state = state();
     if (constant_computed == ASTState.NON_CYCLE || constant_computed == state().cycle()) {
@@ -326,10 +326,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:383
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:383
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:383")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:383")
   public boolean isConstant() {
     boolean isConstant_value = true;
     return isConstant_value;
@@ -337,10 +337,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:435
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:435
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:435")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:435")
   public boolean isTrue() {
     boolean isTrue_value = false;
     return isTrue_value;
@@ -348,10 +348,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:438
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:438
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:438")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:438")
   public boolean isFalse() {
     boolean isFalse_value = false;
     return isFalse_value;
@@ -365,10 +365,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
    * bounds requirements on the resulting parsed value.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:175
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:175
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:175")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:175")
   public long parseLong() {
     {
         switch (numericLiteralKind()) {
@@ -390,10 +390,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
    * @throws NumberFormatException if the literal is too large.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:194
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:194
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:194")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:194")
   public long parseLongHexadecimal() {
     {
         long val = 0;
@@ -422,10 +422,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
    * @throws NumberFormatException if the literal is too large.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:220
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:220
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:220")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:220")
   public long parseLongOctal() {
     {
         long val = 0;
@@ -455,10 +455,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
    * @throws NumberFormatException if the literal is too large.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:247
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:247
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:247")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:247")
   public long parseLongBinary() {
     {
         long val = 0;
@@ -482,10 +482,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
    * @throws NumberFormatException if the literal is too large.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:268
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:268
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:268")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:268")
   public long parseLongDecimal() {
     {
         long val = 0;
@@ -523,10 +523,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
    * @return {@code true} if this literal starts with a minus sign.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:303
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:303
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:303")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:303")
   public boolean isNegative() {
     boolean isNegative_value = false;
     return isNegative_value;
@@ -536,10 +536,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
    * with underscores, leading minus, and type suffix removed.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:331
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:331
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:331")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:331")
   public String normalizedDigits() {
     {
         String lit = getLITERAL().toLowerCase();
@@ -576,10 +576,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
    * prefix, leading minus, suffix, and underscores.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:366
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:366
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:366")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:366")
   public String normalizedValueDigits() {
     {
         String digits = normalizedDigits();
@@ -602,10 +602,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
    * either a DECIMAL, HEXADECIMAL, OCTAL or BINARY literal.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:386
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:386
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Literals.jrag:386")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/Literals.jrag:386")
   public NumericLiteralKind numericLiteralKind() {
     {
         String digits = normalizedDigits();

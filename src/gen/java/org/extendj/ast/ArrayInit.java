@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\grammar\\Java.ast:183
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:183
  * @astdecl ArrayInit : Expr ::= Init:Expr*;
  * @production ArrayInit : {@link Expr} ::= <span class="component">Init:{@link Expr}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ArrayInit extends Expr implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\PrettyPrint.jadd:48
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:48
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("{ ");
@@ -299,16 +299,40 @@ public class ArrayInit extends Expr implements Cloneable {
     return getInitListNoTransform();
   }
   /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:188
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:188")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        TypeDecl initializerType = declType().componentType();
+        if (initializerType.isUnknown()) {
+          problems.add(error("the dimension of the initializer is larger than the expected dimension"));
+        }
+        for (int i = 0; i < getNumInit(); i++) {
+          Expr e = getInit(i);
+          if (!e.type().assignConversionTo(initializerType, e)) {
+            problems.add(errorf("the type %s of the initializer is not compatible with %s",
+                e.type().name(), initializerType.name()));
+          }
+        }
+        return problems;
+      }
+  }
+  /**
    * representableIn(T) is true if and only if the the expression is a
    * compile-time constant of type byte, char, short or int, and the value
    * of the expression can be represented (by an expression) in the type T
    * where T must be byte, char or short.
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:328
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:328
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:328")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:328")
   public boolean representableIn(TypeDecl t) {
     {
         for (int i = 0; i < getNumInit(); i++) {
@@ -322,10 +346,10 @@ public class ArrayInit extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:268
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:268")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268")
   public boolean assignedAfter(Variable v) {
     boolean assignedAfter_Variable_value = getNumInit() == 0
           ? assignedBefore(v)
@@ -338,7 +362,7 @@ public class ArrayInit extends Expr implements Cloneable {
   }
   protected java.util.Map computeDABefore_int_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:649")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:649")
   public boolean computeDABefore(int childIndex, Variable v) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(childIndex);
@@ -402,7 +426,7 @@ public class ArrayInit extends Expr implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:899")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:899")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -453,7 +477,7 @@ public class ArrayInit extends Expr implements Cloneable {
   }
   protected java.util.Map computeDUbefore_int_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:1196")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1196")
   public boolean computeDUbefore(int childIndex, Variable v) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(childIndex);
@@ -525,10 +549,10 @@ public class ArrayInit extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:295
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -546,35 +570,11 @@ public class ArrayInit extends Expr implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeCheck.jrag:188
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeCheck.jrag:188")
-  public Collection<Problem> typeProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        TypeDecl initializerType = declType().componentType();
-        if (initializerType.isUnknown()) {
-          problems.add(error("the dimension of the initializer is larger than the expected dimension"));
-        }
-        for (int i = 0; i < getNumInit(); i++) {
-          Expr e = getInit(i);
-          if (!e.type().assignConversionTo(initializerType, e)) {
-            problems.add(errorf("the type %s of the initializer is not compatible with %s",
-                e.type().name(), initializerType.name()));
-          }
-        }
-        return problems;
-      }
-  }
-  /**
-   * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\PreciseRethrow.jrag:145
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:145
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\PreciseRethrow.jrag:145")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:145")
   public boolean modifiedInScope(Variable var) {
     {
         for (int i = 0; i < getNumInit(); ++i) {
@@ -588,10 +588,10 @@ public class ArrayInit extends Expr implements Cloneable {
   /**
    * @attribute inh
    * @aspect TypeAnalysis
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:276
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:276
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:276")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:276")
   public TypeDecl declType() {
     ASTState state = state();
     if (declType_computed == ASTState.NON_CYCLE || declType_computed == state().cycle()) {
@@ -619,12 +619,12 @@ public class ArrayInit extends Expr implements Cloneable {
   protected TypeDecl declType_value;
 
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:44
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:44
    * @apilevel internal
    */
   public boolean Define_isSource(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getInitListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:59
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:59
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return true;
     }
@@ -633,7 +633,7 @@ public class ArrayInit extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:44
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:44
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isSource
    */
@@ -641,12 +641,12 @@ public class ArrayInit extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:256
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (_callerNode == getInitListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:647
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:647
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return computeDABefore(childIndex, v);
     }
@@ -655,7 +655,7 @@ public class ArrayInit extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:256
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
    */
@@ -663,12 +663,12 @@ public class ArrayInit extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:887
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (_callerNode == getInitListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:1194
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1194
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return computeDUbefore(childIndex, v);
     }
@@ -677,7 +677,7 @@ public class ArrayInit extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:887
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
    */
@@ -685,12 +685,12 @@ public class ArrayInit extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:723
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:723
    * @apilevel internal
    */
   public TypeDecl Define_declType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getInitListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:283
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:283
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return declType().componentType();
     }
@@ -699,7 +699,7 @@ public class ArrayInit extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:723
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:723
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declType
    */
@@ -707,12 +707,12 @@ public class ArrayInit extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:69
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:69
    * @apilevel internal
    */
   public TypeDecl Define_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getInitListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:72
+      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:72
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return declType().componentType();
     }
@@ -721,7 +721,7 @@ public class ArrayInit extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:69
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:69
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignConvertedType
    */
@@ -729,12 +729,12 @@ public class ArrayInit extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:31
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    */
   public TypeDecl Define_targetType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getInitListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:80
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:80
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       {
           if (!(targetType() instanceof ArrayDecl)) {
@@ -749,7 +749,7 @@ public class ArrayInit extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:31
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute targetType
    */
@@ -757,12 +757,12 @@ public class ArrayInit extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:235
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getInitListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:362
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:362
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return true;
     }
@@ -771,7 +771,7 @@ public class ArrayInit extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:235
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
    */
@@ -779,12 +779,12 @@ public class ArrayInit extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:236
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getInitListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:363
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:363
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -793,7 +793,7 @@ public class ArrayInit extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:236
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute invocationContext
    */
@@ -801,12 +801,12 @@ public class ArrayInit extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:237
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getInitListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:364
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:364
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -815,7 +815,7 @@ public class ArrayInit extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:237
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute castContext
    */
@@ -823,12 +823,12 @@ public class ArrayInit extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:238
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getInitListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:365
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:365
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -837,7 +837,7 @@ public class ArrayInit extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:238
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute stringContext
    */
@@ -845,12 +845,12 @@ public class ArrayInit extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:239
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getInitListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:366
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:366
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -859,7 +859,7 @@ public class ArrayInit extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:239
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute numericContext
    */
@@ -876,7 +876,7 @@ public class ArrayInit extends Expr implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeCheck.jrag:186
+    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:186
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

@@ -9,8 +9,10 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,7 +25,7 @@ public class TestXMLExporter {
         loader.addFile("testfiles/ExporterTest.java");
 
         Map<String, Node> nodes = new HashMap<>();
-        List<Edge> edges = new ArrayList<>();
+        Set<Edge> edges = new HashSet<>();
         ProgramReader r = new ProgramReader(loader.getProgram());
         r.readInto(nodes, edges);
 
@@ -34,11 +36,11 @@ public class TestXMLExporter {
     @Test
     public void generateXML() {
         String expected = "<?xml version=\"1.0\"?>\n" +
-                "<DependencyGraphe>\n" +
+                "<DG>\n" +
                 "\t<node type=\"class\" id=\"1\" name=\"TestClass\"/>\n" +
                 "\t<node type=\"package\" id=\"0\" name=\"exporter\"/>\n" +
                 "\t<edge type=\"contains\" src=\"0\" dest=\"1\" id=\"0\"/>\n" +
-                "</DependencyGraphe>\n";
+                "</DG>\n";
         assertEquals(expected, exporter.generateXml());
     }
 }

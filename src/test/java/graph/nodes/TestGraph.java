@@ -136,17 +136,17 @@ public class TestGraph {
 
     private String getProgramOutput(Program p) {
         HashMap<String, Node> nodes = new HashMap<>();
-        ArrayList<Edge> edges = new ArrayList<>();
+        Set<Edge> edges = new HashSet<>();
         ProgramReader reader = new ProgramReader(p);
         reader.readInto(nodes, edges);
 
         StringBuilder result = new StringBuilder();
-        result.append("<DependencyGraph>\n");
+        result.append("<DG>\n");
 
         nodes.values().forEach((n) -> result.append(n.toString()));
         edges.forEach((e) -> result.append(e.toString()));
 
-        result.append("\n</DependencyGraph>");
+        result.append("\n</DG>");
         return result.toString();
     }
 

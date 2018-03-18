@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\grammar\\IntersectionCasts.ast:1
+ * @declaredat /home/hadjer/git/puck2/extendj/java8/grammar/IntersectionCasts.ast:1
  * @astdecl IntersectionCastExpr : Expr ::= TypeAccess:Access TypeList:Access* Expr;
  * @production IntersectionCastExpr : {@link Expr} ::= <span class="component">TypeAccess:{@link Access}</span> <span class="component">TypeList:{@link Access}*</span> <span class="component">{@link Expr}</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class IntersectionCastExpr extends Expr implements Cloneable {
   /**
    * @aspect Java8PrettyPrint
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\PrettyPrint.jadd:98
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PrettyPrint.jadd:98
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("(");
@@ -367,10 +367,10 @@ public class IntersectionCastExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TypeCheck.jrag:36
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TypeCheck.jrag:36
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TypeCheck.jrag:36")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/TypeCheck.jrag:36")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {

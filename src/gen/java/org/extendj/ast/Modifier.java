@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\grammar\\Java.ast:280
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:280
  * @astdecl Modifier : ASTNode ::= <ID:String>;
  * @production Modifier : {@link ASTNode} ::= <span class="component">&lt;ID:String&gt;</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class Modifier extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\PrettyPrint.jadd:508
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:508
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getID());
@@ -221,16 +221,16 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:342
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:342
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:342")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:342")
   public boolean isAnnotation(String packageName, String name) {
     boolean isAnnotation_String_String_value = false;
     return isAnnotation_String_String_value;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:86
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:86
    * @apilevel internal
    */
   public boolean Define_isLeftChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
@@ -238,7 +238,7 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
     return false;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:86
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:86
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isLeftChildOfDot
    */
@@ -246,7 +246,7 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:101
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
    * @apilevel internal
    */
   public boolean Define_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
@@ -254,7 +254,7 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
     return false;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:101
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isRightChildOfDot
    */
@@ -262,7 +262,7 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:118
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
    * @apilevel internal
    */
   public Expr Define_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
@@ -270,7 +270,7 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
     return prevExprError();
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:118
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute prevExpr
    */
@@ -278,7 +278,7 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:142
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:142
    * @apilevel internal
    */
   public Access Define_nextAccess(ASTNode _callerNode, ASTNode _childNode) {
@@ -286,7 +286,7 @@ public class Modifier extends ASTNode<ASTNode> implements Cloneable {
     return nextAccessError();
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:142
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:142
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nextAccess
    */

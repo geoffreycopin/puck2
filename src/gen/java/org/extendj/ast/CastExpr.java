@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\grammar\\Java.ast:234
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:234
  * @astdecl CastExpr : Expr ::= TypeAccess:Access Expr;
  * @production CastExpr : {@link Expr} ::= <span class="component">TypeAccess:{@link Access}</span> <span class="component">{@link Expr}</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class CastExpr extends Expr implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\PrettyPrint.jadd:130
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:130
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("(");
@@ -235,11 +235,35 @@ public class CastExpr extends Expr implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:32
+   * @aspect TypeCheck
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:354
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:32")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:354")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        TypeDecl expr = getExpr().type();
+        TypeDecl type = getTypeAccess().type();
+        if (!expr.isUnknown()) {
+          if (!expr.castingConversionTo(type)) {
+            problems.add(errorf("%s can not be cast into %s", expr.typeName(), type.typeName()));
+          }
+          if (!getTypeAccess().isTypeAccess()) {
+            problems.add(errorf("%s is not a type access in cast expression",
+                getTypeAccess().prettyPrint()));
+          }
+        }
+        return problems;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:32
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:32")
   public Constant constant() {
     Constant constant_value = type().cast(getExpr().constant());
     return constant_value;
@@ -247,10 +271,10 @@ public class CastExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:383
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:383
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ConstantExpression.jrag:383")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:383")
   public boolean isConstant() {
     boolean isConstant_value = getExpr().isConstant()
           && (getTypeAccess().type().isPrimitive() || getTypeAccess().type().isString());
@@ -259,10 +283,10 @@ public class CastExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:268
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:268")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268")
   public boolean assignedAfter(Variable v) {
     boolean assignedAfter_Variable_value = getExpr().assignedAfter(v);
     return assignedAfter_Variable_value;
@@ -273,7 +297,7 @@ public class CastExpr extends Expr implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:899")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:899")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -321,10 +345,10 @@ public class CastExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:56
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:56
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:56")
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:56")
   public boolean isSuperAccess() {
     boolean isSuperAccess_value = getExpr().isSuperAccess();
     return isSuperAccess_value;
@@ -332,10 +356,10 @@ public class CastExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:62
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:62
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:62")
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:62")
   public boolean isThisAccess() {
     boolean isThisAccess_value = getExpr().isThisAccess();
     return isThisAccess_value;
@@ -344,13 +368,24 @@ public class CastExpr extends Expr implements Cloneable {
    * Test if an expression contains an unresolved parse name.
    * @attribute syn
    * @aspect NameResolution
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:554
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:554
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameResolution", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\ResolveAmbiguousNames.jrag:554")
+  @ASTNodeAnnotation.Source(aspect="NameResolution", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:554")
   public boolean containsParseName() {
     boolean containsParseName_value = getTypeAccess().containsParseName() || getExpr().containsParseName();
     return containsParseName_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeHierarchyCheck
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:224
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:224")
+  public boolean staticContextQualifier() {
+    boolean staticContextQualifier_value = getExpr().staticContextQualifier();
+    return staticContextQualifier_value;
   }
   /** @apilevel internal */
   private void type_reset() {
@@ -366,10 +401,10 @@ public class CastExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:295
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -387,46 +422,11 @@ public class CastExpr extends Expr implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeCheck.jrag:354
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeCheck.jrag:354")
-  public Collection<Problem> typeProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        TypeDecl expr = getExpr().type();
-        TypeDecl type = getTypeAccess().type();
-        if (!expr.isUnknown()) {
-          if (!expr.castingConversionTo(type)) {
-            problems.add(errorf("%s can not be cast into %s", expr.typeName(), type.typeName()));
-          }
-          if (!getTypeAccess().isTypeAccess()) {
-            problems.add(errorf("%s is not a type access in cast expression",
-                getTypeAccess().prettyPrint()));
-          }
-        }
-        return problems;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeHierarchyCheck
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:224
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeHierarchyCheck.jrag:224")
-  public boolean staticContextQualifier() {
-    boolean staticContextQualifier_value = getExpr().staticContextQualifier();
-    return staticContextQualifier_value;
-  }
-  /**
-   * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\PreciseRethrow.jrag:145
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:145
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\PreciseRethrow.jrag:145")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:145")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = getExpr().modifiedInScope(var);
     return modifiedInScope_Variable_value;
@@ -434,21 +434,21 @@ public class CastExpr extends Expr implements Cloneable {
   /**
    * @attribute inh
    * @aspect SuppressWarnings
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\SuppressWarnings.jrag:37
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/SuppressWarnings.jrag:37
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="SuppressWarnings", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\SuppressWarnings.jrag:37")
+  @ASTNodeAnnotation.Source(aspect="SuppressWarnings", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/SuppressWarnings.jrag:37")
   public boolean withinSuppressWarnings(String annot) {
     boolean withinSuppressWarnings_String_value = getParent().Define_withinSuppressWarnings(this, null, annot);
     return withinSuppressWarnings_String_value;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\SyntacticClassification.jrag:111
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:111
       return NameType.TYPE_NAME;
     }
     else {
@@ -456,7 +456,7 @@ public class CastExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -464,12 +464,12 @@ public class CastExpr extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:31
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    */
   public TypeDecl Define_targetType(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:42
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:42
       return type();
     }
     else {
@@ -477,7 +477,7 @@ public class CastExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:31
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute targetType
    */
@@ -485,12 +485,12 @@ public class CastExpr extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:235
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:326
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:326
       return false;
     }
     else {
@@ -498,7 +498,7 @@ public class CastExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:235
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
    */
@@ -506,12 +506,12 @@ public class CastExpr extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:236
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:327
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:327
       return false;
     }
     else {
@@ -519,7 +519,7 @@ public class CastExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:236
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute invocationContext
    */
@@ -527,12 +527,12 @@ public class CastExpr extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:237
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:328
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:328
       return true;
     }
     else {
@@ -540,7 +540,7 @@ public class CastExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:237
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute castContext
    */
@@ -548,12 +548,12 @@ public class CastExpr extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:238
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:329
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:329
       return false;
     }
     else {
@@ -561,7 +561,7 @@ public class CastExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:238
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute stringContext
    */
@@ -569,12 +569,12 @@ public class CastExpr extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:239
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:330
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:330
       return false;
     }
     else {
@@ -582,7 +582,7 @@ public class CastExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:239
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute numericContext
    */
@@ -599,7 +599,7 @@ public class CastExpr extends Expr implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeCheck.jrag:352
+    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:352
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -608,7 +608,7 @@ public class CastExpr extends Expr implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\UncheckedConversion.jrag:56
+    // @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/UncheckedConversion.jrag:56
     if (!withinSuppressWarnings("unchecked")) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

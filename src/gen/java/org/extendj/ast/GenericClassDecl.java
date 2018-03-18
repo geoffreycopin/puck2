@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /** A generic class declaration. 
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\grammar\\Generics.ast:2
+ * @declaredat /home/hadjer/git/puck2/extendj/java5/grammar/Generics.ast:2
  * @astdecl GenericClassDecl : ClassDecl ::= Modifiers <ID:String> [SuperClass:Access] Implements:Access* BodyDecl* TypeParameter:TypeVariable*;
  * @production GenericClassDecl : {@link ClassDecl} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">[SuperClass:{@link Access}]</span> <span class="component">Implements:{@link Access}*</span> <span class="component">{@link BodyDecl}*</span> <span class="component">TypeParameter:{@link TypeVariable}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class GenericClassDecl extends ClassDecl implements Cloneable, GenericTypeDecl {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\PrettyPrint.jadd:145
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/PrettyPrint.jadd:145
    */
   public void prettyPrint(PrettyPrinter out) {
     if (hasDocComment()) {
@@ -87,7 +87,7 @@ public class GenericClassDecl extends ClassDecl implements Cloneable, GenericTyp
   }
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1503
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1503
    */
   public ClassDecl signatureCopy() {
     return new GenericClassDeclSubstituted(
@@ -100,7 +100,7 @@ public class GenericClassDecl extends ClassDecl implements Cloneable, GenericTyp
   }
   /**
    * @aspect PrettyPrintUtil5
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\PrettyPrintUtil.jrag:57
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/PrettyPrintUtil.jrag:57
    */
   @Override public String toString() {
     StringBuilder params = new StringBuilder();
@@ -114,7 +114,7 @@ public class GenericClassDecl extends ClassDecl implements Cloneable, GenericTyp
   }
   /**
    * @aspect Generics
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:333
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:333
    */
   public TypeDecl makeGeneric(Signatures.ClassSignature s) {
     return (TypeDecl) this;
@@ -128,7 +128,7 @@ public class GenericClassDecl extends ClassDecl implements Cloneable, GenericTyp
    * exists a type variable with the given name. If so, that type variable is
    * the target for the lookup.
    * @aspect GenericsNameBinding
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:769
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:769
    */
   public SimpleSet<TypeDecl> addTypeVariables(SimpleSet<TypeDecl> types,
       String name) {
@@ -790,6 +790,22 @@ public class GenericClassDecl extends ClassDecl implements Cloneable, GenericTyp
   protected int getImplicitConstructorOptChildPosition() {
     return 5;
   }
+  /**
+   * A type is reifiable if it either refers to a non-parameterized type,
+   * is a raw type, is a parameterized type with only unbound wildcard
+   * parameters or is an array type with a reifiable type parameter.
+   * 
+   * @see "JLS SE7 &sect;4.7"
+   * @attribute syn
+   * @aspect ReifiableTypes
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/ReifiableTypes.jrag:39
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/ReifiableTypes.jrag:39")
+  public boolean isReifiable() {
+    boolean isReifiable_value = false;
+    return isReifiable_value;
+  }
   /** @apilevel internal */
   private void rawType_reset() {
     rawType_computed = null;
@@ -804,10 +820,10 @@ public class GenericClassDecl extends ClassDecl implements Cloneable, GenericTyp
   /**
    * @attribute syn
    * @aspect Generics
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:248
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:248
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Generics", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:248")
+  @ASTNodeAnnotation.Source(aspect="Generics", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:248")
   public TypeDecl rawType() {
     ASTState state = state();
     if (rawType_computed == ASTState.NON_CYCLE || rawType_computed == state().cycle()) {
@@ -836,10 +852,10 @@ public class GenericClassDecl extends ClassDecl implements Cloneable, GenericTyp
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:945
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:945
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:945")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:945")
   public TypeDecl lookupParTypeDecl(Collection<TypeDecl> typeArgs) {
     Object _parameters = typeArgs;
     if (lookupParTypeDecl_Collection_TypeDecl__values == null) lookupParTypeDecl_Collection_TypeDecl__values = new java.util.HashMap(4);
@@ -905,7 +921,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /** @apilevel internal */
   protected boolean usesTypeVariable_initialized = false;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1321")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1321")
   public boolean usesTypeVariable() {
     if (usesTypeVariable_computed) {
       return usesTypeVariable_value;
@@ -945,7 +961,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   }
   protected java.util.Map subtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:492")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:492")
   public boolean subtype(TypeDecl type) {
     Object _parameters = type;
     if (subtype_TypeDecl_values == null) subtype_TypeDecl_values = new java.util.HashMap(4);
@@ -993,10 +1009,10 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:148
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:148
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:148")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:148")
   public boolean supertypeParClassDecl(ParClassDecl type) {
     boolean supertypeParClassDecl_ParClassDecl_value = type.genericDecl().original().subtype(this);
     return supertypeParClassDecl_ParClassDecl_value;
@@ -1004,10 +1020,10 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:152
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:152
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:152")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:152")
   public boolean supertypeParInterfaceDecl(ParInterfaceDecl type) {
     boolean supertypeParInterfaceDecl_ParInterfaceDecl_value = type.genericDecl().original().subtype(this);
     return supertypeParInterfaceDecl_ParInterfaceDecl_value;
@@ -1024,10 +1040,10 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:442
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:442
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:442")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:442")
   public boolean instanceOf(TypeDecl type) {
     Object _parameters = type;
     if (instanceOf_TypeDecl_computed == null) instanceOf_TypeDecl_computed = new java.util.HashMap(4);
@@ -1050,22 +1066,6 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
     }
     return instanceOf_TypeDecl_value;
   }
-  /**
-   * A type is reifiable if it either refers to a non-parameterized type,
-   * is a raw type, is a parameterized type with only unbound wildcard
-   * parameters or is an array type with a reifiable type parameter.
-   * 
-   * @see "JLS SE7 &sect;4.7"
-   * @attribute syn
-   * @aspect ReifiableTypes
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\ReifiableTypes.jrag:39
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\ReifiableTypes.jrag:39")
-  public boolean isReifiable() {
-    boolean isReifiable_value = false;
-    return isReifiable_value;
-  }
   /** @apilevel internal */
   private void getStandInMethodList_reset() {
     getStandInMethodList_computed = false;
@@ -1086,10 +1086,10 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
    * @return list of stand-in methods
    * @attribute syn
    * @aspect Diamond
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Diamond.jrag:137
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Diamond.jrag:137
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Diamond.jrag:137")
+  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/Diamond.jrag:137")
   public List<MethodDecl> getStandInMethodList() {
     ASTState state = state();
     if (getStandInMethodList_computed) {
@@ -1197,7 +1197,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   }
   protected java.util.Map strictSubtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:363")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:363")
   public boolean strictSubtype(TypeDecl type) {
     Object _parameters = type;
     if (strictSubtype_TypeDecl_values == null) strictSubtype_TypeDecl_values = new java.util.HashMap(4);
@@ -1245,10 +1245,10 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:149
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:149
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:149")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:149")
   public boolean strictSupertypeParClassDecl(ParClassDecl type) {
     boolean strictSupertypeParClassDecl_ParClassDecl_value = type.genericDecl().original().strictSubtype(this);
     return strictSupertypeParClassDecl_ParClassDecl_value;
@@ -1256,10 +1256,10 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:153
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:153
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:153")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:153")
   public boolean strictSupertypeParInterfaceDecl(ParInterfaceDecl type) {
     boolean strictSupertypeParInterfaceDecl_ParInterfaceDecl_value = type.genericDecl().original().strictSubtype(this);
     return strictSupertypeParInterfaceDecl_ParInterfaceDecl_value;
@@ -1267,10 +1267,10 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect Generics
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:243
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:243
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Generics", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:243")
+  @ASTNodeAnnotation.Source(aspect="Generics", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:243")
   public boolean isGenericType() {
     boolean isGenericType_value = true;
     return isGenericType_value;
@@ -1287,10 +1287,10 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /** Transforms the parameter and calls the lookupParTypeDecl attribute for ArrayList arguments. 
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:937
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:937
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:937")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:937")
   public TypeDecl lookupParTypeDecl(ParTypeAccess p) {
     Object _parameters = p;
     if (lookupParTypeDecl_ParTypeAccess_computed == null) lookupParTypeDecl_ParTypeAccess_computed = new java.util.HashMap(4);
@@ -1324,21 +1324,21 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute inh
    * @aspect GenericsTypeCheck
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:676
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:676
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="GenericsTypeCheck", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:676")
+  @ASTNodeAnnotation.Source(aspect="GenericsTypeCheck", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:676")
   public TypeDecl typeThrowable() {
     TypeDecl typeThrowable_value = getParent().Define_typeThrowable(this, null);
     return typeThrowable_value;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:576
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:576
    * @apilevel internal
    */
   public boolean Define_isNestedType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeParameterListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:754
+      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:754
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return true;
     }
@@ -1347,7 +1347,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:576
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:576
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isNestedType
    */
@@ -1355,12 +1355,12 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:551
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:551
    * @apilevel internal
    */
   public TypeDecl Define_enclosingType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeParameterListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:755
+      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:755
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return this;
     }
@@ -1369,7 +1369,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:551
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:551
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingType
    */
@@ -1377,12 +1377,12 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethods.jrag:231
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getBodyDeclListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:818
+      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:818
       int index = _callerNode.getIndexOfChild(_childNode);
       {
           SimpleSet<TypeDecl> result = memberTypes(name);
@@ -1410,7 +1410,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
         }
     }
     else if (_callerNode == getTypeParameterListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:796
+      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:796
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       {
           SimpleSet<TypeDecl> result = memberTypes(name);
@@ -1435,7 +1435,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
         }
     }
     else if (_callerNode == getImplementsListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:791
+      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:791
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       {
           SimpleSet<TypeDecl> result = addTypeVariables(ASTNode.<TypeDecl>emptySet(), name);
@@ -1443,7 +1443,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
         }
     }
     else if (_callerNode == getSuperClassOptNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:786
+      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:786
       {
           SimpleSet<TypeDecl> result = addTypeVariables(ASTNode.<TypeDecl>emptySet(), name);
           return !result.isEmpty() ? result : lookupType(name);
@@ -1454,7 +1454,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethods.jrag:231
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupType
    */
@@ -1462,7 +1462,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsParTypeDecl.jrag:74
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericsParTypeDecl.jrag:74
    * @apilevel internal
    */
   public TypeDecl Define_genericDecl(ASTNode _callerNode, ASTNode _childNode) {
@@ -1470,7 +1470,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
     return this;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsParTypeDecl.jrag:74
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericsParTypeDecl.jrag:74
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute genericDecl
    */
@@ -1478,12 +1478,12 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TypeVariablePositions.jrag:29
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TypeVariablePositions.jrag:29
    * @apilevel internal
    */
   public int Define_typeVarPosition(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeParameterListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TypeVariablePositions.jrag:43
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TypeVariablePositions.jrag:43
       int i = _callerNode.getIndexOfChild(_childNode);
       return i;
     }
@@ -1492,7 +1492,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TypeVariablePositions.jrag:29
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TypeVariablePositions.jrag:29
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeVarPosition
    */
@@ -1500,12 +1500,12 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TypeVariablePositions.jrag:32
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TypeVariablePositions.jrag:32
    * @apilevel internal
    */
   public boolean Define_typeVarInMethod(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeParameterListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TypeVariablePositions.jrag:44
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TypeVariablePositions.jrag:44
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -1514,7 +1514,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TypeVariablePositions.jrag:32
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TypeVariablePositions.jrag:32
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeVarInMethod
    */
@@ -1531,7 +1531,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:664
+    // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:664
     if (instanceOf(typeThrowable())) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

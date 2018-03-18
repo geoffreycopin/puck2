@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\grammar\\Lambda.ast:9
+ * @declaredat /home/hadjer/git/puck2/extendj/java8/grammar/Lambda.ast:9
  * @astdecl DeclaredLambdaParameters : LambdaParameters ::= Parameter:ParameterDeclaration*;
  * @production DeclaredLambdaParameters : {@link LambdaParameters} ::= <span class="component">Parameter:{@link ParameterDeclaration}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class DeclaredLambdaParameters extends LambdaParameters implements Cloneable {
   /**
    * @aspect Java8PrettyPrint
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\PrettyPrint.jadd:57
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PrettyPrint.jadd:57
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("(");
@@ -51,7 +51,7 @@ public class DeclaredLambdaParameters extends LambdaParameters implements Clonea
   }
   /**
    * @aspect PrettyPrintUtil8
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\PrettyPrintUtil.jadd:58
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PrettyPrintUtil.jadd:58
    */
   @Override public String toString() {
     int numParams = 0;
@@ -67,7 +67,7 @@ public class DeclaredLambdaParameters extends LambdaParameters implements Clonea
   }
   /**
    * @aspect LambdaToClass
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LambdaAnonymousDecl.jrag:117
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LambdaAnonymousDecl.jrag:117
    */
   protected List<ParameterDeclaration> toParameterList() {
     return getParameterList().treeCopyNoTransform();
@@ -118,9 +118,9 @@ public class DeclaredLambdaParameters extends LambdaParameters implements Clonea
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    parameterDeclaration_String_reset();
     numParameters_reset();
     congruentTo_FunctionDescriptor_reset();
-    parameterDeclaration_String_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:40
@@ -320,6 +320,53 @@ public class DeclaredLambdaParameters extends LambdaParameters implements Clonea
     return getParameterListNoTransform();
   }
   /** @apilevel internal */
+  private void parameterDeclaration_String_reset() {
+    parameterDeclaration_String_computed = null;
+    parameterDeclaration_String_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map parameterDeclaration_String_values;
+  /** @apilevel internal */
+  protected java.util.Map parameterDeclaration_String_computed;
+  /**
+   * @attribute syn
+   * @aspect VariableScope
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:38
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:38")
+  public SimpleSet<Variable> parameterDeclaration(String name) {
+    Object _parameters = name;
+    if (parameterDeclaration_String_computed == null) parameterDeclaration_String_computed = new java.util.HashMap(4);
+    if (parameterDeclaration_String_values == null) parameterDeclaration_String_values = new java.util.HashMap(4);
+    ASTState state = state();
+    if (parameterDeclaration_String_values.containsKey(_parameters)
+        && parameterDeclaration_String_computed.containsKey(_parameters)
+        && (parameterDeclaration_String_computed.get(_parameters) == ASTState.NON_CYCLE || parameterDeclaration_String_computed.get(_parameters) == state().cycle())) {
+      return (SimpleSet<Variable>) parameterDeclaration_String_values.get(_parameters);
+    }
+    SimpleSet<Variable> parameterDeclaration_String_value = parameterDeclaration_compute(name);
+    if (state().inCircle()) {
+      parameterDeclaration_String_values.put(_parameters, parameterDeclaration_String_value);
+      parameterDeclaration_String_computed.put(_parameters, state().cycle());
+    
+    } else {
+      parameterDeclaration_String_values.put(_parameters, parameterDeclaration_String_value);
+      parameterDeclaration_String_computed.put(_parameters, ASTState.NON_CYCLE);
+    
+    }
+    return parameterDeclaration_String_value;
+  }
+  /** @apilevel internal */
+  private SimpleSet<Variable> parameterDeclaration_compute(String name) {
+      for (ParameterDeclaration param : getParameterList()) {
+        if (param.name().equals(name)) {
+          return param;
+        }
+      }
+      return emptySet();
+    }
+  /** @apilevel internal */
   private void numParameters_reset() {
     numParameters_computed = null;
   }
@@ -332,10 +379,10 @@ public class DeclaredLambdaParameters extends LambdaParameters implements Clonea
   /**
    * @attribute syn
    * @aspect LambdaExpr
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LambdaExpr.jrag:47
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LambdaExpr.jrag:47
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LambdaExpr.jrag:47")
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/LambdaExpr.jrag:47")
   public int numParameters() {
     ASTState state = state();
     if (numParameters_computed == ASTState.NON_CYCLE || numParameters_computed == state().cycle()) {
@@ -363,10 +410,10 @@ public class DeclaredLambdaParameters extends LambdaParameters implements Clonea
   /**
    * @attribute syn
    * @aspect LambdaExpr
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LambdaExpr.jrag:53
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LambdaExpr.jrag:53
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LambdaExpr.jrag:53")
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/LambdaExpr.jrag:53")
   public boolean congruentTo(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -408,60 +455,13 @@ public class DeclaredLambdaParameters extends LambdaParameters implements Clonea
         return false;
       }
     }
-  /** @apilevel internal */
-  private void parameterDeclaration_String_reset() {
-    parameterDeclaration_String_computed = null;
-    parameterDeclaration_String_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map parameterDeclaration_String_values;
-  /** @apilevel internal */
-  protected java.util.Map parameterDeclaration_String_computed;
-  /**
-   * @attribute syn
-   * @aspect VariableScope
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LookupVariable.jrag:38
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LookupVariable.jrag:38")
-  public SimpleSet<Variable> parameterDeclaration(String name) {
-    Object _parameters = name;
-    if (parameterDeclaration_String_computed == null) parameterDeclaration_String_computed = new java.util.HashMap(4);
-    if (parameterDeclaration_String_values == null) parameterDeclaration_String_values = new java.util.HashMap(4);
-    ASTState state = state();
-    if (parameterDeclaration_String_values.containsKey(_parameters)
-        && parameterDeclaration_String_computed.containsKey(_parameters)
-        && (parameterDeclaration_String_computed.get(_parameters) == ASTState.NON_CYCLE || parameterDeclaration_String_computed.get(_parameters) == state().cycle())) {
-      return (SimpleSet<Variable>) parameterDeclaration_String_values.get(_parameters);
-    }
-    SimpleSet<Variable> parameterDeclaration_String_value = parameterDeclaration_compute(name);
-    if (state().inCircle()) {
-      parameterDeclaration_String_values.put(_parameters, parameterDeclaration_String_value);
-      parameterDeclaration_String_computed.put(_parameters, state().cycle());
-    
-    } else {
-      parameterDeclaration_String_values.put(_parameters, parameterDeclaration_String_value);
-      parameterDeclaration_String_computed.put(_parameters, ASTState.NON_CYCLE);
-    
-    }
-    return parameterDeclaration_String_value;
-  }
-  /** @apilevel internal */
-  private SimpleSet<Variable> parameterDeclaration_compute(String name) {
-      for (ParameterDeclaration param : getParameterList()) {
-        if (param.name().equals(name)) {
-          return param;
-        }
-      }
-      return emptySet();
-    }
   /**
    * @attribute syn
    * @aspect Java8NameCheck
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\NameCheck.jrag:547
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/NameCheck.jrag:547
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\NameCheck.jrag:547")
+  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/NameCheck.jrag:547")
   public Collection<Problem> nameProblems() {
     {
         for (int i = 0; i < getNumParameter(); i++) {
@@ -475,34 +475,12 @@ public class DeclaredLambdaParameters extends LambdaParameters implements Clonea
       }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:30
-   * @apilevel internal
-   */
-  public boolean Define_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
-    if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:35
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return inhModifiedInScope(var);
-    }
-    else {
-      return getParent().Define_inhModifiedInScope(this, _callerNode, var);
-    }
-  }
-  /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:30
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute inhModifiedInScope
-   */
-  protected boolean canDefine_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LookupVariable.jrag:30
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:30
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LookupVariable.jrag:33
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:33
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return parameterDeclaration(name);
     }
@@ -511,7 +489,7 @@ public class DeclaredLambdaParameters extends LambdaParameters implements Clonea
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LookupVariable.jrag:30
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
    */
@@ -519,12 +497,34 @@ public class DeclaredLambdaParameters extends LambdaParameters implements Clonea
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\VariableArityParameters.jrag:46
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:30
+   * @apilevel internal
+   */
+  public boolean Define_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
+    if (_callerNode == getParameterListNoTransform()) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:35
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return inhModifiedInScope(var);
+    }
+    else {
+      return getParent().Define_inhModifiedInScope(this, _callerNode, var);
+    }
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:30
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute inhModifiedInScope
+   */
+  protected boolean canDefine_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/VariableArityParameters.jrag:46
    * @apilevel internal
    */
   public boolean Define_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\VariableArityParameters.jrag:30
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/VariableArityParameters.jrag:30
       int i = _callerNode.getIndexOfChild(_childNode);
       return i == getNumParameter() - 1;
     }
@@ -533,7 +533,7 @@ public class DeclaredLambdaParameters extends LambdaParameters implements Clonea
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\VariableArityParameters.jrag:46
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/VariableArityParameters.jrag:46
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute variableArityValid
    */
@@ -550,7 +550,7 @@ public class DeclaredLambdaParameters extends LambdaParameters implements Clonea
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\NameCheck.jrag:545
+    // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/NameCheck.jrag:545
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

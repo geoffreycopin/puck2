@@ -28,7 +28,7 @@
 	<classpathentry kind="src" path="extendj/tools"/>
 	<classpathentry kind="src" path="extendj/java8/src/main/java"/>
 	<classpathentry kind="src" path="extendj/src/frontend"/>
-	<classpathentry kind="output" path="bin/default"/>
+	<classpathentry kind="output" path="build-eclipse"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
 	<classpathentry sourcepath="/home/hadjer/.gradle/caches/modules-2/files-2.1/junit/junit/4.12/a6c32b40bf3d76eca54e3c601e5d1470c86fcdfa/junit-4.12-sources.jar" kind="lib" path="/home/hadjer/.gradle/caches/modules-2/files-2.1/junit/junit/4.12/2973d150c0dc1fefe998f834810d68f278ea58ec/junit-4.12.jar">
 		<attributes>

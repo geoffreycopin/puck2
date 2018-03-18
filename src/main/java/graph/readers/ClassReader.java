@@ -8,6 +8,7 @@ import org.extendj.ast.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ClassReader extends TypeDeclReader {
     private ClassDecl classDeclaration;
@@ -21,22 +22,26 @@ public class ClassReader extends TypeDeclReader {
     String getFullName() {
         return classDeclaration.fullName();
     }
+    
+    
 
-    public void readInto(Map<String, Node> nodes, List<Edge> edges) {
+    public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
         String className = classDeclaration.fullName();
 
         Node classNode = new Node(idGenerator.generate(), className,
-                            Node.Type.Class, classDeclaration);
+                            Node.Type.Class, classDeclaration.createQualifiedAccess());
         nodes.put(className, classNode);
-
         readBodyDeclarations(nodes, edges);
-
         addPackageDependency(edges);
-        addSuperClassdependency(edges);
-        addInterfacesDependency(edges);
+        addSuperClassdependency(edges,nodes);
+        addInterfacesDependency(edges,nodes);
+        
     }
+    
+    
+    
 
-    private void readBodyDeclarations(Map<String, Node> nodes, List<Edge> edges) {
+    private void readBodyDeclarations(Map<String, Node> nodes, Set<Edge> edges) {
         for (BodyDecl decl : classDeclaration.getBodyDeclList()) {
             if (decl instanceof FieldDecl) {
                 FieldReader fieldreader = new FieldReader(idGenerator, (FieldDecl) decl);
@@ -52,25 +57,30 @@ public class ClassReader extends TypeDeclReader {
                 TypeDecl memberType = ((MemberInterfaceDecl) decl).typeDecl();
                 InterfaceReader reader = new InterfaceReader((InterfaceDecl) memberType, idGenerator);
                 reader.readInto(nodes, edges);
+            } else if (decl instanceof GenericMethodDecl) {
+            	GenericMethodDecl genMethod = (GenericMethodDecl)decl;
+            }else if (decl instanceof ConstructorDecl) {
+            	
             }
         }
     }
 
-    private void addSuperClassdependency(List<Edge> edges) {
+    private void addSuperClassdependency(Set<Edge> edges,Map<String, Node> nodes) {
         Access superClass = classDeclaration.getSuperClass();
-        if (superClass == null || Util.isPrimitive(superClass.type()) ||
-                Util.isBuiltin(superClass.type())) {
+  
+        if (superClass == null || Util.isPrimitive(superClass.type())) {
+
             return;
         }
-        addTypeDependency(edges, superClass.type(), Edge.Type.IsA);
+        addTypeDependency(edges, superClass.type(), Edge.Type.IsA,nodes);
     }
 
-    private void addInterfacesDependency(List<Edge> edges) {
+    private void addInterfacesDependency(Set<Edge> edges,Map<String, Node> nodes) {
         for (Access imp: classDeclaration.getImplementsList()) {
             if (! (imp.type() instanceof InterfaceDecl)) {
                 continue;
             }
-            addTypeDependency(edges, imp.type(), Edge.Type.IsA);
+            addTypeDependency(edges, imp.type(), Edge.Type.IsA,nodes);
         }
     }
 }

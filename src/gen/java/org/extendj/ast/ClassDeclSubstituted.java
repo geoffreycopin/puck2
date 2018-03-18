@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,12 +21,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
@@ -33,7 +33,7 @@ import java.io.DataInputStream;
  * 
  * <p>Member declaration signatures are copied on demand by the BodyDecl NTA.
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\grammar\\Generics.ast:92
+ * @declaredat /home/hadjer/git/puck2/extendj/java5/grammar/Generics.ast:92
  * @astdecl ClassDeclSubstituted : ClassDecl ::= <Original:TypeDecl> BodyDecl*;
  * @production ClassDeclSubstituted : {@link ClassDecl} ::= <span class="component">&lt;Original:TypeDecl&gt;</span> <span class="component">{@link BodyDecl}*</span>;
 
@@ -603,10 +603,10 @@ public class ClassDeclSubstituted extends ClassDecl implements Cloneable, Member
   /**
    * @attribute syn
    * @aspect NestedTypes
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:639
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:639
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:639")
+  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:639")
   public TypeDecl hostType() {
     TypeDecl hostType_value = getOriginal();
     return hostType_value;
@@ -614,10 +614,10 @@ public class ClassDeclSubstituted extends ClassDecl implements Cloneable, Member
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1664
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1664
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1664")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1664")
   public TypeDecl original() {
     TypeDecl original_value = getOriginal().original();
     return original_value;
@@ -637,10 +637,10 @@ public class ClassDeclSubstituted extends ClassDecl implements Cloneable, Member
   /**
    * @attribute syn nta
    * @aspect LookupParTypeDecl
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1694
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1694
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1694")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1694")
   public List<BodyDecl> getBodyDeclList() {
     ASTState state = state();
     if (getBodyDeclList_computed) {
@@ -668,10 +668,10 @@ public class ClassDeclSubstituted extends ClassDecl implements Cloneable, Member
   /**
    * @attribute syn
    * @aspect SourceDeclarations
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1879
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1879
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1879")
+  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1879")
   public TypeDecl sourceTypeDecl() {
     ASTState state = state();
     if (sourceTypeDecl_computed == ASTState.NON_CYCLE || sourceTypeDecl_computed == state().cycle()) {
@@ -699,10 +699,10 @@ public class ClassDeclSubstituted extends ClassDecl implements Cloneable, Member
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:442
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:442
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:442")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:442")
   public boolean instanceOf(TypeDecl type) {
     Object _parameters = type;
     if (instanceOf_TypeDecl_computed == null) instanceOf_TypeDecl_computed = new java.util.HashMap(4);
@@ -731,7 +731,7 @@ public class ClassDeclSubstituted extends ClassDecl implements Cloneable, Member
   }
   protected java.util.Map subtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:492")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:492")
   public boolean subtype(TypeDecl type) {
     Object _parameters = type;
     if (subtype_TypeDecl_values == null) subtype_TypeDecl_values = new java.util.HashMap(4);
@@ -779,10 +779,10 @@ public class ClassDeclSubstituted extends ClassDecl implements Cloneable, Member
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:591
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:591
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:591")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:591")
   public boolean supertypeClassDeclSubstituted(ClassDeclSubstituted type) {
     boolean supertypeClassDeclSubstituted_ClassDeclSubstituted_value = original() == type.original() && type.enclosingType().subtype(enclosingType())
           || super.supertypeClassDeclSubstituted(type);
@@ -791,10 +791,10 @@ public class ClassDeclSubstituted extends ClassDecl implements Cloneable, Member
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:507
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:507
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:507")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:507")
   public boolean supertypeClassDecl(ClassDecl type) {
     boolean supertypeClassDecl_ClassDecl_value = super.supertypeClassDecl(type) || original().supertypeClassDecl(type);
     return supertypeClassDecl_ClassDecl_value;
@@ -805,7 +805,7 @@ public class ClassDeclSubstituted extends ClassDecl implements Cloneable, Member
   }
   protected java.util.Map strictSubtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:363")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:363")
   public boolean strictSubtype(TypeDecl type) {
     Object _parameters = type;
     if (strictSubtype_TypeDecl_values == null) strictSubtype_TypeDecl_values = new java.util.HashMap(4);
@@ -853,10 +853,10 @@ public class ClassDeclSubstituted extends ClassDecl implements Cloneable, Member
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:460
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:460
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:460")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:460")
   public boolean strictSupertypeClassDeclSubstituted(ClassDeclSubstituted type) {
     boolean strictSupertypeClassDeclSubstituted_ClassDeclSubstituted_value = original() == type.original() && type.enclosingType().strictSubtype(enclosingType())
           || super.strictSupertypeClassDeclSubstituted(type);
@@ -865,10 +865,10 @@ public class ClassDeclSubstituted extends ClassDecl implements Cloneable, Member
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:378
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:378
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:378")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:378")
   public boolean strictSupertypeClassDecl(ClassDecl type) {
     boolean strictSupertypeClassDecl_ClassDecl_value = super.strictSupertypeClassDecl(type) || original().strictSupertypeClassDecl(type);
     return strictSupertypeClassDecl_ClassDecl_value;
@@ -890,10 +890,10 @@ public class ClassDeclSubstituted extends ClassDecl implements Cloneable, Member
    * <p>Includes all non-substitutable original methods plus all substituted methods.
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1348
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1348
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1348")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1348")
   public java.util.List<MethodDecl> localMethods() {
     ASTState state = state();
     if (localMethods_computed == ASTState.NON_CYCLE || localMethods_computed == state().cycle()) {
@@ -936,10 +936,10 @@ public class ClassDeclSubstituted extends ClassDecl implements Cloneable, Member
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1363
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1363
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1363")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1363")
   public SimpleSet<Variable> localFields(String name) {
     Object _parameters = name;
     if (localFields_String_computed == null) localFields_String_computed = new java.util.HashMap(4);
@@ -989,7 +989,7 @@ public class ClassDeclSubstituted extends ClassDecl implements Cloneable, Member
   }
   protected java.util.Map localTypeDecls_String_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1394")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1394")
   public SimpleSet<TypeDecl> localTypeDecls(String name) {
     Object _parameters = name;
     if (localTypeDecls_String_values == null) localTypeDecls_String_values = new java.util.HashMap(4);

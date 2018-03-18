@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,27 +21,36 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * Intersection type.
  * Occurs in, for example, conditional expression type analysis.
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\grammar\\Generics.ast:120
+ * @declaredat /home/hadjer/git/puck2/extendj/java5/grammar/Generics.ast:120
  * @astdecl LUBType : ReferenceType ::= Modifiers <ID:String> BodyDecl* TypeBound:Access*;
  * @production LUBType : {@link ReferenceType} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">{@link BodyDecl}*</span> <span class="component">TypeBound:{@link Access}*</span>;
 
  */
 public class LUBType extends ReferenceType implements Cloneable {
   /**
+   * @aspect LookupParTypeDecl
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1810
+   */
+  public Collection<InterfaceDecl> implementedInterfaces() {
+    Collection<InterfaceDecl> ret = new HashSet<InterfaceDecl>();
+    for (int i = 0; i < getNumTypeBound(); i++) {
+      ret.addAll(getTypeBound(i).type().implementedInterfaces());
+    }
+    return ret;
+  }
+  /**
    * @aspect GenericMethodsInference
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:706
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:706
    */
   public static Collection<TypeDecl> EC(ArrayList<TypeDecl> list) {
     Collection<TypeDecl> result = new HashSet<TypeDecl>();
@@ -61,7 +72,7 @@ public class LUBType extends ReferenceType implements Cloneable {
    * is MEC = {V | V in EC, forall  W != V in EC, not W <: V}
    * @return minimal erased candidate set for Tj
    * @aspect GenericMethodsInference
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:727
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:727
    */
   public static Collection<TypeDecl> MEC(ArrayList<TypeDecl> list) {
     Collection<TypeDecl> EC = LUBType.EC(list);
@@ -87,7 +98,7 @@ public class LUBType extends ReferenceType implements Cloneable {
    * Inv(G) = {V | 1 <= i <= k, V in ST(Ui), V = G<...>}
    * @return set of relevant invocations of G, Inv(G)
    * @aspect GenericMethodsInference
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:752
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:752
    */
   public static Collection<ParTypeDecl> Inv(TypeDecl G, Collection<TypeDecl> Us) {
     Collection<ParTypeDecl> result = new HashSet<ParTypeDecl>();
@@ -103,7 +114,7 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @return least containing invocation (lci)
    * @aspect GenericMethodsInference
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:767
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:767
    */
   public TypeDecl lci(Collection<ParTypeDecl> set, TypeDecl G) {
     ArrayList<TypeDecl> list = new ArrayList<TypeDecl>();
@@ -126,7 +137,7 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * Least containing type arguments.
    * @aspect GenericMethodsInference
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:789
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:789
    */
   public TypeDecl lcta(TypeDecl X, TypeDecl Y) {
     if (!X.isWildcard() && !Y.isWildcard()) {
@@ -181,7 +192,7 @@ public class LUBType extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect GenericMethodsInference
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:841
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:841
    */
   public TypeDecl lub(TypeDecl X, TypeDecl Y) {
     ArrayList<TypeDecl> list = new ArrayList<TypeDecl>(2);
@@ -191,14 +202,14 @@ public class LUBType extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect GenericMethodsInference
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:848
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:848
    */
   public TypeDecl lub(ArrayList<TypeDecl> list) {
     return lookupLUBType(list);
   }
   /** @return erased supertype set of the given type. 
    * @aspect GenericMethodsInference
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:853
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:853
    */
   public static Collection<TypeDecl> EST(TypeDecl type) {
     Collection<TypeDecl> result = new HashSet<TypeDecl>();
@@ -213,7 +224,7 @@ public class LUBType extends ReferenceType implements Cloneable {
   }
   /** @return supertype set of the given type. 
    * @aspect GenericMethodsInference
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:866
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:866
    */
   public static Collection<TypeDecl> ST(TypeDecl type) {
     Collection<TypeDecl> result = new HashSet<TypeDecl>();
@@ -222,7 +233,7 @@ public class LUBType extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect GenericMethodsInference
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:872
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:872
    */
   public static void addSupertypes(Collection<TypeDecl> set, TypeDecl t) {
     set.add(t);
@@ -262,17 +273,6 @@ public class LUBType extends ReferenceType implements Cloneable {
       throw new Error("Operation not supported for "
           + t.fullName() + ", " + t.getClass().getName());
     }
-  }
-  /**
-   * @aspect LookupParTypeDecl
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1810
-   */
-  public Collection<InterfaceDecl> implementedInterfaces() {
-    Collection<InterfaceDecl> ret = new HashSet<InterfaceDecl>();
-    for (int i = 0; i < getNumTypeBound(); i++) {
-      ret.addAll(getTypeBound(i).type().implementedInterfaces());
-    }
-    return ret;
   }
   /**
    * @declaredat ASTNode:1
@@ -333,8 +333,8 @@ public class LUBType extends ReferenceType implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    lub_reset();
     subtype_TypeDecl_reset();
+    lub_reset();
     strictSubtype_TypeDecl_reset();
   }
   /** @apilevel internal 
@@ -701,77 +701,11 @@ public class LUBType extends ReferenceType implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect TypeConversion
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:38
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:38")
-  public boolean wideningConversionTo(TypeDecl type) {
-    {
-        for (Access bound : getTypeBoundList()) {
-          if (bound.type().instanceOf(type)) {
-            return true;
-          }
-        }
-        return false;
-      }
-  }
-  /** @apilevel internal */
-  private void lub_reset() {
-    lub_computed = null;
-    lub_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle lub_computed = null;
-
-  /** @apilevel internal */
-  protected TypeDecl lub_value;
-
-  /**
-   * @attribute syn
-   * @aspect GenericMethodsInference
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:687
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericMethodsInference", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethodsInference.jrag:687")
-  public TypeDecl lub() {
-    ASTState state = state();
-    if (lub_computed == ASTState.NON_CYCLE || lub_computed == state().cycle()) {
-      return lub_value;
-    }
-    lub_value = lub_compute();
-    if (state().inCircle()) {
-      lub_computed = state().cycle();
-    
-    } else {
-      lub_computed = ASTState.NON_CYCLE;
-    
-    }
-    return lub_value;
-  }
-  /** @apilevel internal */
-  private TypeDecl lub_compute() {
-      ArrayList<TypeDecl> list = new ArrayList<TypeDecl>();
-      for (int i = 0; i < getNumTypeBound(); i++) {
-        list.add(getTypeBound(i).type());
-      }
-      ArrayList<TypeDecl> bounds = new ArrayList<TypeDecl>();
-      for (TypeDecl W : LUBType.MEC(list)) {
-        TypeDecl C = W instanceof GenericTypeDecl ? lci(Inv(W, list), W) : W;
-        bounds.add(C);
-      }
-      if (bounds.size() == 1) {
-        return bounds.iterator().next();
-      }
-      return lookupLUBType(bounds);
-    }
-  /**
-   * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1798
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1798
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1798")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1798")
   public String typeName() {
     {
         if (getNumTypeBound() == 0) {
@@ -785,13 +719,30 @@ public class LUBType extends ReferenceType implements Cloneable {
         return sb.toString();
       }
   }
+  /**
+   * @attribute syn
+   * @aspect TypeConversion
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:38
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:38")
+  public boolean wideningConversionTo(TypeDecl type) {
+    {
+        for (Access bound : getTypeBoundList()) {
+          if (bound.type().instanceOf(type)) {
+            return true;
+          }
+        }
+        return false;
+      }
+  }
   /** @apilevel internal */
   private void subtype_TypeDecl_reset() {
     subtype_TypeDecl_values = null;
   }
   protected java.util.Map subtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:492")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:492")
   public boolean subtype(TypeDecl type) {
     Object _parameters = type;
     if (subtype_TypeDecl_values == null) subtype_TypeDecl_values = new java.util.HashMap(4);
@@ -839,10 +790,10 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:507
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:507
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:507")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:507")
   public boolean supertypeClassDecl(ClassDecl type) {
     boolean supertypeClassDecl_ClassDecl_value = type.subtype(lub());
     return supertypeClassDecl_ClassDecl_value;
@@ -850,10 +801,10 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:523
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:523
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:523")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:523")
   public boolean supertypeInterfaceDecl(InterfaceDecl type) {
     boolean supertypeInterfaceDecl_InterfaceDecl_value = type.subtype(lub());
     return supertypeInterfaceDecl_InterfaceDecl_value;
@@ -861,10 +812,10 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:426
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:426
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericsSubtype.jrag:426")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:426")
   public boolean supertypeGLBType(GLBType type) {
     {
         // TODO(joqvist): changed from Access to TypeDecl, is this correct?
@@ -876,12 +827,61 @@ public class LUBType extends ReferenceType implements Cloneable {
       }
   }
   /** @apilevel internal */
+  private void lub_reset() {
+    lub_computed = null;
+    lub_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle lub_computed = null;
+
+  /** @apilevel internal */
+  protected TypeDecl lub_value;
+
+  /**
+   * @attribute syn
+   * @aspect GenericMethodsInference
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:687
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenericMethodsInference", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:687")
+  public TypeDecl lub() {
+    ASTState state = state();
+    if (lub_computed == ASTState.NON_CYCLE || lub_computed == state().cycle()) {
+      return lub_value;
+    }
+    lub_value = lub_compute();
+    if (state().inCircle()) {
+      lub_computed = state().cycle();
+    
+    } else {
+      lub_computed = ASTState.NON_CYCLE;
+    
+    }
+    return lub_value;
+  }
+  /** @apilevel internal */
+  private TypeDecl lub_compute() {
+      ArrayList<TypeDecl> list = new ArrayList<TypeDecl>();
+      for (int i = 0; i < getNumTypeBound(); i++) {
+        list.add(getTypeBound(i).type());
+      }
+      ArrayList<TypeDecl> bounds = new ArrayList<TypeDecl>();
+      for (TypeDecl W : LUBType.MEC(list)) {
+        TypeDecl C = W instanceof GenericTypeDecl ? lci(Inv(W, list), W) : W;
+        bounds.add(C);
+      }
+      if (bounds.size() == 1) {
+        return bounds.iterator().next();
+      }
+      return lookupLUBType(bounds);
+    }
+  /** @apilevel internal */
   private void strictSubtype_TypeDecl_reset() {
     strictSubtype_TypeDecl_values = null;
   }
   protected java.util.Map strictSubtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:363")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:363")
   public boolean strictSubtype(TypeDecl type) {
     Object _parameters = type;
     if (strictSubtype_TypeDecl_values == null) strictSubtype_TypeDecl_values = new java.util.HashMap(4);
@@ -929,10 +929,10 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:378
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:378
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:378")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:378")
   public boolean strictSupertypeClassDecl(ClassDecl type) {
     boolean strictSupertypeClassDecl_ClassDecl_value = type.strictSubtype(lub());
     return strictSupertypeClassDecl_ClassDecl_value;
@@ -940,10 +940,10 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:397
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:397
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:397")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:397")
   public boolean strictSupertypeInterfaceDecl(InterfaceDecl type) {
     boolean strictSupertypeInterfaceDecl_InterfaceDecl_value = type.strictSubtype(lub());
     return strictSupertypeInterfaceDecl_InterfaceDecl_value;
@@ -951,10 +951,10 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:342
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:342
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\GenericsSubtype.jrag:342")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:342")
   public boolean strictSupertypeGLBType(GLBType type) {
     {
         // TODO(joqvist): changed from Access to TypeDecl, is this correct?

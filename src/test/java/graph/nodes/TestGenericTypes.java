@@ -16,6 +16,7 @@ public class TestGenericTypes extends TestBase {
         load();
     }
 
+    
     @Test
     public void typeParamsAreRead() {
         Set<TestEdge> edges = new HashSet<>(Arrays.asList(

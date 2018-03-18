@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\grammar\\Java.ast:227
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:227
  * @astdecl PreIncExpr : Unary;
  * @production PreIncExpr : {@link Unary};
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class PreIncExpr extends Unary implements Cloneable {
   /**
    * @aspect DefiniteAssignment
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:606
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:606
    */
   protected boolean checkDUeverywhere(Variable v) {
     if (getOperand().isVariable() && getOperand().varDecl() == v) {
@@ -210,24 +210,13 @@ public class PreIncExpr extends Unary implements Cloneable {
   /**
    * @attribute syn
    * @aspect PrettyPrintUtil
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:385
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:385
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:385")
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:385")
   public String printPreOp() {
     String printPreOp_value = "++";
     return printPreOp_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect PreciseRethrow
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\PreciseRethrow.jrag:145
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\PreciseRethrow.jrag:145")
-  public boolean modifiedInScope(Variable var) {
-    boolean modifiedInScope_Variable_value = getOperand().isVariable(var);
-    return modifiedInScope_Variable_value;
   }
   /** @apilevel internal */
   private void stmtCompatible_reset() {
@@ -242,10 +231,10 @@ public class PreIncExpr extends Unary implements Cloneable {
   /**
    * @attribute syn
    * @aspect StmtCompatible
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LambdaExpr.jrag:151
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LambdaExpr.jrag:151
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StmtCompatible", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LambdaExpr.jrag:151")
+  @ASTNodeAnnotation.Source(aspect="StmtCompatible", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/LambdaExpr.jrag:151")
   public boolean stmtCompatible() {
     ASTState state = state();
     if (stmtCompatible_computed == ASTState.NON_CYCLE || stmtCompatible_computed == state().cycle()) {
@@ -262,12 +251,23 @@ public class PreIncExpr extends Unary implements Cloneable {
     return stmtCompatible_value;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:34
+   * @attribute syn
+   * @aspect PreciseRethrow
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:145
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:145")
+  public boolean modifiedInScope(Variable var) {
+    boolean modifiedInScope_Variable_value = getOperand().isVariable(var);
+    return modifiedInScope_Variable_value;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:34
    * @apilevel internal
    */
   public boolean Define_isDest(ASTNode _callerNode, ASTNode _childNode) {
     if (getOperandNoTransform() != null && _callerNode == getOperand()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:63
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:63
       return true;
     }
     else {
@@ -275,7 +275,7 @@ public class PreIncExpr extends Unary implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:34
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:34
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isDest
    */
@@ -283,12 +283,12 @@ public class PreIncExpr extends Unary implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:66
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
    * @apilevel internal
    */
   public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
     if (getOperandNoTransform() != null && _callerNode == getOperand()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:73
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:73
       return true;
     }
     else {
@@ -296,7 +296,7 @@ public class PreIncExpr extends Unary implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:66
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
    */
@@ -313,20 +313,7 @@ public class PreIncExpr extends Unary implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:89
-    if (getOperand().isVariable()
-              && getOperand().varDecl() != null
-              && getOperand().varDecl().isFinal()) {
-      {
-        java.util.Set<ASTNode> contributors = _map.get(_root);
-        if (contributors == null) {
-          contributors = new java.util.LinkedHashSet<ASTNode>();
-          _map.put((ASTNode) _root, contributors);
-        }
-        contributors.add(this);
-      }
-    }
-    // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeCheck.jrag:412
+    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:412
     if (!getOperand().isVariable()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);
@@ -337,8 +324,21 @@ public class PreIncExpr extends Unary implements Cloneable {
         contributors.add(this);
       }
     }
-    // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeCheck.jrag:417
+    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:417
     if (!getOperand().type().isNumericType()) {
+      {
+        java.util.Set<ASTNode> contributors = _map.get(_root);
+        if (contributors == null) {
+          contributors = new java.util.LinkedHashSet<ASTNode>();
+          _map.put((ASTNode) _root, contributors);
+        }
+        contributors.add(this);
+      }
+    }
+    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:89
+    if (getOperand().isVariable()
+              && getOperand().varDecl() != null
+              && getOperand().varDecl().isFinal()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);
         if (contributors == null) {
@@ -353,16 +353,16 @@ public class PreIncExpr extends Unary implements Cloneable {
   /** @apilevel internal */
   protected void contributeTo_CompilationUnit_problems(LinkedList<Problem> collection) {
     super.contributeTo_CompilationUnit_problems(collection);
-    if (getOperand().isVariable()
-              && getOperand().varDecl() != null
-              && getOperand().varDecl().isFinal()) {
-      collection.add(error("++ and -- can not be applied to final variable " + getOperand().varDecl().name()));
-    }
     if (!getOperand().isVariable()) {
       collection.add(error("prefix increment expression only works on variables"));
     }
     if (!getOperand().type().isNumericType()) {
       collection.add(error("unary increment only operates on numeric types"));
+    }
+    if (getOperand().isVariable()
+              && getOperand().varDecl() != null
+              && getOperand().varDecl().isFinal()) {
+      collection.add(error("++ and -- can not be applied to final variable " + getOperand().varDecl().name()));
     }
   }
 }

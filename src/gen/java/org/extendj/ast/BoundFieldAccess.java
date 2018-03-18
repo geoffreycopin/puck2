@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\grammar\\BoundNames.ast:6
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/BoundNames.ast:6
  * @astdecl BoundFieldAccess : VarAccess ::= <FieldDeclarator:FieldDeclarator>;
  * @production BoundFieldAccess : {@link VarAccess} ::= <span class="component">&lt;FieldDeclarator:FieldDeclarator&gt;</span>;
 
@@ -37,14 +37,14 @@ import java.io.DataInputStream;
 public class BoundFieldAccess extends VarAccess implements Cloneable {
   /**
    * @aspect BoundNames
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\BoundNames.jrag:85
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BoundNames.jrag:85
    */
   public BoundFieldAccess(FieldDeclarator f) {
     this(f.name(), f);
   }
   /**
    * @aspect BoundNames
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\BoundNames.jrag:91
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BoundNames.jrag:91
    */
   public boolean isExactVarAccess() {
     return false;
@@ -253,10 +253,10 @@ public class BoundFieldAccess extends VarAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect VariableScopePropagation
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupVariable.jrag:374
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:374
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScopePropagation", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupVariable.jrag:374")
+  @ASTNodeAnnotation.Source(aspect="VariableScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:374")
   public Variable decl() {
     ASTState state = state();
     if (decl_computed == ASTState.NON_CYCLE || decl_computed == state().cycle()) {

@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\grammar\\MethodReference.ast:7
+ * @declaredat /home/hadjer/git/puck2/extendj/java8/grammar/MethodReference.ast:7
  * @astdecl MethodReferenceAccess : MethodAccess;
  * @production MethodReferenceAccess : {@link MethodAccess};
 
@@ -37,12 +37,12 @@ import java.io.DataInputStream;
 public class MethodReferenceAccess extends MethodAccess implements Cloneable {
   /**
    * @aspect Synthetics
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\MethodReference.jrag:432
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:432
    */
   private FunctionDescriptor targetDescriptor;
   /**
    * @aspect Synthetics
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\MethodReference.jrag:433
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:433
    */
   public MethodReferenceAccess(String name,
       List<Expr> args, FunctionDescriptor fd) {
@@ -345,10 +345,10 @@ public class MethodReferenceAccess extends MethodAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect TargetType
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:188
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:188
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\TargetType.jrag:188")
+  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:188")
   public TypeDecl assignConvertedType() {
     ASTState state = state();
     if (assignConvertedType_computed == ASTState.NON_CYCLE || assignConvertedType_computed == state().cycle()) {

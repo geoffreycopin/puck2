@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\grammar\\Enums.ast:5
+ * @declaredat /home/hadjer/git/puck2/extendj/java5/grammar/Enums.ast:5
  * @astdecl EnumInstanceExpr : ClassInstanceExpr ::= Access Arg:Expr* [TypeDecl];
  * @production EnumInstanceExpr : {@link ClassInstanceExpr} ::= <span class="component">{@link Access}</span> <span class="component">Arg:{@link Expr}*</span> <span class="component">[{@link TypeDecl}]</span>;
 
@@ -389,10 +389,10 @@ public class EnumInstanceExpr extends ClassInstanceExpr implements Cloneable {
   /**
    * @attribute syn nta
    * @aspect Enums
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:292
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:292
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:292")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:292")
   public Access getAccess() {
     ASTState state = state();
     if (getAccess_computed) {
@@ -425,10 +425,10 @@ public class EnumInstanceExpr extends ClassInstanceExpr implements Cloneable {
   /**
    * @attribute syn nta
    * @aspect Enums
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:296
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:296
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Enums.jrag:296")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Enums.jrag:296")
   public List<Expr> getArgList() {
     ASTState state = state();
     if (getArgList_computed) {

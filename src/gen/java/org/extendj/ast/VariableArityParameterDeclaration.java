@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\grammar\\VariableArityParameters.ast:1
+ * @declaredat /home/hadjer/git/puck2/extendj/java5/grammar/VariableArityParameters.ast:1
  * @astdecl VariableArityParameterDeclaration : ParameterDeclaration;
  * @production VariableArityParameterDeclaration : {@link ParameterDeclaration};
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class VariableArityParameterDeclaration extends ParameterDeclaration implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\PrettyPrint.jadd:367
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/PrettyPrint.jadd:367
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getModifiers());
@@ -47,7 +47,7 @@ public class VariableArityParameterDeclaration extends ParameterDeclaration impl
   }
   /**
    * @aspect PrettyPrintUtil5
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\PrettyPrintUtil.jrag:149
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/PrettyPrintUtil.jrag:149
    */
   @Override public String toString() {
     return String.format("%s... %s",
@@ -56,7 +56,7 @@ public class VariableArityParameterDeclaration extends ParameterDeclaration impl
   }
   /**
    * @aspect Diamond
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\Diamond.jrag:244
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Diamond.jrag:244
    */
   @Override
   public ParameterDeclaration substituted(
@@ -295,10 +295,10 @@ public class VariableArityParameterDeclaration extends ParameterDeclaration impl
    * Creates a copy of this parameter declaration where parameterized types have been erased.
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1609
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1609
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Generics.jrag:1609")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1609")
   public ParameterDeclaration erasedCopy() {
     ParameterDeclaration erasedCopy_value = new VariableArityParameterDeclaration(
               getModifiers().treeCopyNoTransform(),
@@ -320,10 +320,10 @@ public class VariableArityParameterDeclaration extends ParameterDeclaration impl
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:272
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:272
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\TypeAnalysis.jrag:272")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:272")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -342,10 +342,10 @@ public class VariableArityParameterDeclaration extends ParameterDeclaration impl
   /**
    * @attribute syn
    * @aspect VariableArityParameters
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\VariableArityParameters.jrag:59
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/VariableArityParameters.jrag:59
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\VariableArityParameters.jrag:59")
+  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/VariableArityParameters.jrag:59")
   public boolean isVariableArity() {
     boolean isVariableArity_value = true;
     return isVariableArity_value;
@@ -353,10 +353,10 @@ public class VariableArityParameterDeclaration extends ParameterDeclaration impl
   /**
    * @attribute inh
    * @aspect VariableArityParameters
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\VariableArityParameters.jrag:46
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/VariableArityParameters.jrag:46
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\VariableArityParameters.jrag:46")
+  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/VariableArityParameters.jrag:46")
   public boolean variableArityValid() {
     boolean variableArityValid_value = getParent().Define_variableArityValid(this, null);
     return variableArityValid_value;
@@ -371,7 +371,7 @@ public class VariableArityParameterDeclaration extends ParameterDeclaration impl
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\VariableArityParameters.jrag:36
+    // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/VariableArityParameters.jrag:36
     if (!variableArityValid()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

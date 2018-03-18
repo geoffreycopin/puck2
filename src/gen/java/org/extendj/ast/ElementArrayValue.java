@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\grammar\\Annotations.ast:13
+ * @declaredat /home/hadjer/git/puck2/extendj/java5/grammar/Annotations.ast:13
  * @astdecl ElementArrayValue : ElementValue ::= ElementValue*;
  * @production ElementArrayValue : {@link ElementValue} ::= <span class="component">{@link ElementValue}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ElementArrayValue extends ElementValue implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\PrettyPrint.jadd:89
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/PrettyPrint.jadd:89
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("{ ");
@@ -296,10 +296,10 @@ public class ElementArrayValue extends ElementValue implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:111
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:111
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:111")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:111")
   public boolean validTarget(Annotation a) {
     {
         for (int i = 0;  i < getNumElementValue(); i++) {
@@ -313,10 +313,10 @@ public class ElementArrayValue extends ElementValue implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:285
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:285
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:285")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:285")
   public ElementValue definesElementTypeValue(String name) {
     {
         for (int i = 0; i < getNumElementValue(); i++) {
@@ -330,10 +330,10 @@ public class ElementArrayValue extends ElementValue implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:448
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:448
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:448")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:448")
   public boolean hasValue(String annot) {
     {
         for (int i = 0;  i < getNumElementValue(); i++) {
@@ -347,10 +347,10 @@ public class ElementArrayValue extends ElementValue implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:703
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:703
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:703")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:703")
   public boolean commensurateWithArrayDecl(ArrayDecl type) {
     {
         for (int i = 0; i < getNumElementValue(); i++) {
@@ -362,12 +362,12 @@ public class ElementArrayValue extends ElementValue implements Cloneable {
       }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:278
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:278
    * @apilevel internal
    */
   public ElementValue Define_lookupElementTypeValue(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getElementValueListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:280
+      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:280
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return definesElementTypeValue(name);
     }
@@ -376,7 +376,7 @@ public class ElementArrayValue extends ElementValue implements Cloneable {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:278
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:278
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupElementTypeValue
    */
@@ -384,7 +384,7 @@ public class ElementArrayValue extends ElementValue implements Cloneable {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:723
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:723
    * @apilevel internal
    */
   public TypeDecl Define_declType(ASTNode _callerNode, ASTNode _childNode) {
@@ -392,7 +392,7 @@ public class ElementArrayValue extends ElementValue implements Cloneable {
     return declType().elementType();
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\Annotations.jrag:723
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:723
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declType
    */

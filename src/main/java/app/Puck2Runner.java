@@ -5,28 +5,46 @@ import graph.Node;
 import graph.XMLExporter;
 import graph.readers.ProgramReader;
 import org.extendj.ast.Program;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.*;
+
+import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Source;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 
 public class Puck2Runner {
     String projectPath;
     HashMap<String, Node> nodes;
-    List<Edge> edges;
+    Set<Edge> edges;
     Program program;
 
     public Puck2Runner(String path) {
         nodes = new HashMap<>();
-        edges = new ArrayList<>();
+        edges = new HashSet();
         projectPath = path;
         program = new Program();
     }
+    
 
     public HashMap<String, Node> getNodes() {
         return nodes;
     }
 
-    public List<Edge> getEdges() {
+    public Set<Edge> getEdges() {
         return edges;
     }
 
@@ -38,6 +56,49 @@ public class Puck2Runner {
         loadProgram(projectPath);
         ProgramReader reader = new ProgramReader(program);
         reader.readInto(nodes, edges);
+    }
+
+    public void outputToFile(String outputFile) throws Exception {
+    	
+    	XMLExporter exporter = new XMLExporter();
+        exporter.add(nodes, edges);      
+        exporter.writeTo(outputFile);
+              
+    }
+    
+    public void XMLValidation()throws Exception{
+    	 XMLExporter exporter = new XMLExporter();
+    	 exporter.add(nodes, edges);    
+    	  File temp = File.createTempFile("file", ".tmp");
+          BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+          writer.write(exporter.generateXml());
+          writer.close();
+          this.XMLValidator(temp.getPath());
+    }
+    
+    public void XMLValidator(String outputfile) throws Exception {
+    	 // parse an XML document into a DOM tree
+        DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document document = parser.parse(new File(outputfile));
+
+        // create a SchemaFactory capable of understanding WXS schemas
+        SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
+        // load a WXS schema, represented by a Schema instance
+        Source schemaFile = new StreamSource(new File("XMLValidator/dg.xsd"));
+        Schema schema = factory.newSchema(schemaFile);
+
+        // create a Validator instance, which can be used to validate an instance document
+        Validator validator = schema.newValidator();
+
+        // validate the DOM tree
+        try {
+            validator.validate(new DOMSource(document));
+        } catch (SAXException e) {
+            // instance document is invalid!
+        	System.out.println(e.getMessage());
+        	throw new Exception();
+        }
     }
 
     private void loadProgram(String path) throws IOException {
@@ -59,12 +120,6 @@ public class Puck2Runner {
         }
 
         return fileName.substring(index + 1);
-    }
-
-    public void outputToFile(String outputFile) throws IOException {
-        XMLExporter exporter = new XMLExporter();
-        exporter.add(nodes, new ArrayList<>(edges));
-        exporter.writeTo(outputFile);
     }
 
     public void displayGraph() {

@@ -2,6 +2,7 @@ package app;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -12,44 +13,49 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ConfigurationUI extends Application {
-    private final int HEIGHT = 200;
+    private final int HEIGHT = 175;
     private Button runButton;
     private TextField programDirField;
     private Button openFileChooserButton;
     private TextField outputDirField;
     private Button openOutputDirChooserButton;
     private TextField outputFileField;
-
+   
     @Override
     public void start(Stage primaryStage) {
         initUi(primaryStage);
         primaryStage.show();
     }
+    
+    
 
     private void initUi(Stage primaryStage) {
-        primaryStage.setMaxHeight(HEIGHT);
-        primaryStage.setMinHeight(HEIGHT);
-        primaryStage.setMinWidth(300);
-
+            
         initViews(primaryStage);
+        
+     
+       
+        GridPane form = createForm();        
+        StackPane p = new StackPane(); 
+        form.prefWidthProperty().bind(p.prefWidthProperty());
+        form.prefHeightProperty().bind(p.prefHeightProperty());
+        p.getChildren().addAll(form);
 
-        GridPane form = createForm();
 
-        VBox root = new VBox();
-        root.setSpacing(12);
-        root.setFillWidth(true);
-        root.getChildren().addAll(form, runButton);
-        root.setPadding(new Insets(0, 16, 0, 16));
-
-        primaryStage.setScene(new Scene(root, 500, HEIGHT));
+        primaryStage.setScene(new Scene(p,  550, HEIGHT));
     }
 
     private void initViews(Stage primaryStage) {
-        initRunButton();
+      //  initRunButton();
         initOpenFileChooserButton(primaryStage);
         initOutputDirChooser(primaryStage);
         initProgramDirField();
@@ -78,7 +84,15 @@ public class ConfigurationUI extends Application {
 
         Label outputFileLabel = new Label("Output File");
         form.addRow(3, outputFileLabel, outputFileField);
-
+        initRunButton();
+       
+        VBox hbBtn = new VBox(10);
+        hbBtn.setAlignment(Pos.BOTTOM_CENTER);
+        hbBtn.getChildren().add(runButton);
+        
+        form.add(hbBtn, 1, 5);     
+        form.setPadding(new Insets(5, 5, 5, 5));
+       
         return form;
     }
 
@@ -142,7 +156,7 @@ public class ConfigurationUI extends Application {
     private void displaySuccess() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Success");
-        alert.setHeaderText("Sucess");
+        alert.setHeaderText("Success");
         alert.showAndWait();
     }
 
@@ -157,13 +171,23 @@ public class ConfigurationUI extends Application {
         checkInputValidity();
 
         Puck2Runner runner = new Puck2Runner(programDirField.getText());
+       
         runner.run();
+        runner.XMLValidation();
         runner.outputToFile(getOutputFilePath());
+       
+       
+        
     }
-
-    private String getOutputFilePath() {
+     
+  
+    
+    private String getOutputFilePath() throws Exception {
         String directory = outputDirField.getText();
         String file = outputFileField.getText();
+        
+        /* new File(directory+"/output").mkdir();
+        return Paths.get(directory+"/output", file).toString();*/
         return Paths.get(directory, file).toString();
     }
 

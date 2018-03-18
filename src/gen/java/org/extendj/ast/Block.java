@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.LinkedHashSet;
-import org.jastadd.util.*;
-import java.util.zip.*;
-import java.io.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\grammar\\Java.ast:291
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:291
  * @astdecl Block : Stmt ::= Stmt*;
  * @production Block : {@link Stmt} ::= <span class="component">{@link Stmt}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class Block extends Stmt implements Cloneable, VariableScope {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\PrettyPrint.jadd:101
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:101
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("{");
@@ -100,14 +100,14 @@ public class Block extends Stmt implements Cloneable, VariableScope {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    localVariableDeclaration_String_reset();
+    canCompleteNormally_reset();
     assignedAfterReturn_Variable_reset();
     assignedAfter_Variable_reset();
     unassignedAfterReturn_Variable_reset();
     unassignedAfter_Variable_reset();
-    localVariableDeclaration_String_reset();
-    canCompleteNormally_reset();
-    lookupType_String_reset();
     lookupVariable_String_reset();
+    lookupType_String_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:45
@@ -309,13 +309,106 @@ public class Block extends Stmt implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect DeclareBeforeUse
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:42
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:42
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DeclareBeforeUse", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:42")
+  @ASTNodeAnnotation.Source(aspect="DeclareBeforeUse", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:42")
   public boolean declaredBeforeUse(VariableDeclarator decl, int indexUse) {
     boolean declaredBeforeUse_VariableDeclarator_int_value = decl.blockIndex() < indexUse;
     return declaredBeforeUse_VariableDeclarator_int_value;
+  }
+  /** @apilevel internal */
+  private void localVariableDeclaration_String_reset() {
+    localVariableDeclaration_String_computed = null;
+    localVariableDeclaration_String_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map localVariableDeclaration_String_values;
+  /** @apilevel internal */
+  protected java.util.Map localVariableDeclaration_String_computed;
+  /**
+   * @attribute syn
+   * @aspect VariableScope
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:199
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:199")
+  public VariableDeclarator localVariableDeclaration(String name) {
+    Object _parameters = name;
+    if (localVariableDeclaration_String_computed == null) localVariableDeclaration_String_computed = new java.util.HashMap(4);
+    if (localVariableDeclaration_String_values == null) localVariableDeclaration_String_values = new java.util.HashMap(4);
+    ASTState state = state();
+    if (localVariableDeclaration_String_values.containsKey(_parameters)
+        && localVariableDeclaration_String_computed.containsKey(_parameters)
+        && (localVariableDeclaration_String_computed.get(_parameters) == ASTState.NON_CYCLE || localVariableDeclaration_String_computed.get(_parameters) == state().cycle())) {
+      return (VariableDeclarator) localVariableDeclaration_String_values.get(_parameters);
+    }
+    VariableDeclarator localVariableDeclaration_String_value = localVariableDeclaration_compute(name);
+    if (state().inCircle()) {
+      localVariableDeclaration_String_values.put(_parameters, localVariableDeclaration_String_value);
+      localVariableDeclaration_String_computed.put(_parameters, state().cycle());
+    
+    } else {
+      localVariableDeclaration_String_values.put(_parameters, localVariableDeclaration_String_value);
+      localVariableDeclaration_String_computed.put(_parameters, ASTState.NON_CYCLE);
+    
+    }
+    return localVariableDeclaration_String_value;
+  }
+  /** @apilevel internal */
+  private VariableDeclarator localVariableDeclaration_compute(String name) {
+      for (Stmt stmt : getStmtList()) {
+        VariableDeclarator decl = stmt.variableDeclaration(name);
+        if (decl != null) {
+          return decl;
+        }
+      }
+      return null;
+    }
+  /** @apilevel internal */
+  private void canCompleteNormally_reset() {
+    canCompleteNormally_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle canCompleteNormally_computed = null;
+
+  /** @apilevel internal */
+  protected boolean canCompleteNormally_value;
+
+  /**
+   * @attribute syn
+   * @aspect UnreachableStatements
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50")
+  public boolean canCompleteNormally() {
+    ASTState state = state();
+    if (canCompleteNormally_computed == ASTState.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
+      return canCompleteNormally_value;
+    }
+    canCompleteNormally_value = getNumStmt() == 0
+          ? reachable()
+          : getStmt(getNumStmt() - 1).canCompleteNormally();
+    if (state().inCircle()) {
+      canCompleteNormally_computed = state().cycle();
+    
+    } else {
+      canCompleteNormally_computed = ASTState.NON_CYCLE;
+    
+    }
+    return canCompleteNormally_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect PrettyPrintUtil
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:290
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:290")
+  public boolean hasStmts() {
+    boolean hasStmts_value = getNumStmt() > 0;
+    return hasStmts_value;
   }
   /** @apilevel internal */
   private void assignedAfterReturn_Variable_reset() {
@@ -323,7 +416,7 @@ public class Block extends Stmt implements Cloneable, VariableScope {
   }
   protected java.util.Map assignedAfterReturn_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:349")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:349")
   public boolean assignedAfterReturn(Variable v) {
     Object _parameters = v;
     if (assignedAfterReturn_Variable_values == null) assignedAfterReturn_Variable_values = new java.util.HashMap(4);
@@ -388,7 +481,7 @@ public class Block extends Stmt implements Cloneable, VariableScope {
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -436,10 +529,10 @@ public class Block extends Stmt implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:567
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:567
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:567")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:567")
   public boolean unassignedEverywhere(Variable v) {
     boolean unassignedEverywhere_Variable_value = unassignedBefore(v) && checkDUeverywhere(v);
     return unassignedEverywhere_Variable_value;
@@ -450,7 +543,7 @@ public class Block extends Stmt implements Cloneable, VariableScope {
   }
   protected java.util.Map unassignedAfterReturn_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:977")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:977")
   public boolean unassignedAfterReturn(Variable v) {
     Object _parameters = v;
     if (unassignedAfterReturn_Variable_values == null) unassignedAfterReturn_Variable_values = new java.util.HashMap(4);
@@ -515,7 +608,7 @@ public class Block extends Stmt implements Cloneable, VariableScope {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:895")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -560,106 +653,13 @@ public class Block extends Stmt implements Cloneable, VariableScope {
       return (Boolean) _value.value;
     }
   }
-  /** @apilevel internal */
-  private void localVariableDeclaration_String_reset() {
-    localVariableDeclaration_String_computed = null;
-    localVariableDeclaration_String_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map localVariableDeclaration_String_values;
-  /** @apilevel internal */
-  protected java.util.Map localVariableDeclaration_String_computed;
-  /**
-   * @attribute syn
-   * @aspect VariableScope
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupVariable.jrag:199
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupVariable.jrag:199")
-  public VariableDeclarator localVariableDeclaration(String name) {
-    Object _parameters = name;
-    if (localVariableDeclaration_String_computed == null) localVariableDeclaration_String_computed = new java.util.HashMap(4);
-    if (localVariableDeclaration_String_values == null) localVariableDeclaration_String_values = new java.util.HashMap(4);
-    ASTState state = state();
-    if (localVariableDeclaration_String_values.containsKey(_parameters)
-        && localVariableDeclaration_String_computed.containsKey(_parameters)
-        && (localVariableDeclaration_String_computed.get(_parameters) == ASTState.NON_CYCLE || localVariableDeclaration_String_computed.get(_parameters) == state().cycle())) {
-      return (VariableDeclarator) localVariableDeclaration_String_values.get(_parameters);
-    }
-    VariableDeclarator localVariableDeclaration_String_value = localVariableDeclaration_compute(name);
-    if (state().inCircle()) {
-      localVariableDeclaration_String_values.put(_parameters, localVariableDeclaration_String_value);
-      localVariableDeclaration_String_computed.put(_parameters, state().cycle());
-    
-    } else {
-      localVariableDeclaration_String_values.put(_parameters, localVariableDeclaration_String_value);
-      localVariableDeclaration_String_computed.put(_parameters, ASTState.NON_CYCLE);
-    
-    }
-    return localVariableDeclaration_String_value;
-  }
-  /** @apilevel internal */
-  private VariableDeclarator localVariableDeclaration_compute(String name) {
-      for (Stmt stmt : getStmtList()) {
-        VariableDeclarator decl = stmt.variableDeclaration(name);
-        if (decl != null) {
-          return decl;
-        }
-      }
-      return null;
-    }
-  /**
-   * @attribute syn
-   * @aspect PrettyPrintUtil
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:290
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\PrettyPrintUtil.jrag:290")
-  public boolean hasStmts() {
-    boolean hasStmts_value = getNumStmt() > 0;
-    return hasStmts_value;
-  }
-  /** @apilevel internal */
-  private void canCompleteNormally_reset() {
-    canCompleteNormally_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle canCompleteNormally_computed = null;
-
-  /** @apilevel internal */
-  protected boolean canCompleteNormally_value;
-
-  /**
-   * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\UnreachableStatements.jrag:50
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\UnreachableStatements.jrag:50")
-  public boolean canCompleteNormally() {
-    ASTState state = state();
-    if (canCompleteNormally_computed == ASTState.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
-      return canCompleteNormally_value;
-    }
-    canCompleteNormally_value = getNumStmt() == 0
-          ? reachable()
-          : getStmt(getNumStmt() - 1).canCompleteNormally();
-    if (state().inCircle()) {
-      canCompleteNormally_computed = state().cycle();
-    
-    } else {
-      canCompleteNormally_computed = ASTState.NON_CYCLE;
-    
-    }
-    return canCompleteNormally_value;
-  }
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\PreciseRethrow.jrag:78
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\PreciseRethrow.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
   public boolean modifiedInScope(Variable var) {
     {
         for (Stmt stmt : getStmtList()) {
@@ -672,49 +672,11 @@ public class Block extends Stmt implements Cloneable, VariableScope {
   }
   /**
    * @attribute inh
-   * @aspect TypeScopePropagation
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupType.jrag:400
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupType.jrag:400")
-  public SimpleSet<TypeDecl> lookupType(String name) {
-    Object _parameters = name;
-    if (lookupType_String_computed == null) lookupType_String_computed = new java.util.HashMap(4);
-    if (lookupType_String_values == null) lookupType_String_values = new java.util.HashMap(4);
-    ASTState state = state();
-    if (lookupType_String_values.containsKey(_parameters)
-        && lookupType_String_computed.containsKey(_parameters)
-        && (lookupType_String_computed.get(_parameters) == ASTState.NON_CYCLE || lookupType_String_computed.get(_parameters) == state().cycle())) {
-      return (SimpleSet<TypeDecl>) lookupType_String_values.get(_parameters);
-    }
-    SimpleSet<TypeDecl> lookupType_String_value = getParent().Define_lookupType(this, null, name);
-    if (state().inCircle()) {
-      lookupType_String_values.put(_parameters, lookupType_String_value);
-      lookupType_String_computed.put(_parameters, state().cycle());
-    
-    } else {
-      lookupType_String_values.put(_parameters, lookupType_String_value);
-      lookupType_String_computed.put(_parameters, ASTState.NON_CYCLE);
-    
-    }
-    return lookupType_String_value;
-  }
-  /** @apilevel internal */
-  private void lookupType_String_reset() {
-    lookupType_String_computed = null;
-    lookupType_String_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map lookupType_String_values;
-  /** @apilevel internal */
-  protected java.util.Map lookupType_String_computed;
-  /**
-   * @attribute inh
    * @aspect VariableScope
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupVariable.jrag:41
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:41
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupVariable.jrag:41")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:41")
   public SimpleSet<Variable> lookupVariable(String name) {
     Object _parameters = name;
     if (lookupVariable_String_computed == null) lookupVariable_String_computed = new java.util.HashMap(4);
@@ -748,33 +710,71 @@ public class Block extends Stmt implements Cloneable, VariableScope {
   protected java.util.Map lookupVariable_String_computed;
   /**
    * @attribute inh
-   * @aspect NameCheck
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\NameCheck.jrag:682
+   * @aspect UnreachableStatements
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\NameCheck.jrag:682")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49")
+  public boolean reachable() {
+    boolean reachable_value = getParent().Define_reachable(this, null);
+    return reachable_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect NameCheck
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:682
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:682")
   public SimpleSet<TypeDecl> otherLocalClassDecls(String name) {
     SimpleSet<TypeDecl> otherLocalClassDecls_String_value = getParent().Define_otherLocalClassDecls(this, null, name);
     return otherLocalClassDecls_String_value;
   }
   /**
    * @attribute inh
-   * @aspect UnreachableStatements
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\UnreachableStatements.jrag:49
+   * @aspect TypeScopePropagation
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:400
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\UnreachableStatements.jrag:49")
-  public boolean reachable() {
-    boolean reachable_value = getParent().Define_reachable(this, null);
-    return reachable_value;
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:400")
+  public SimpleSet<TypeDecl> lookupType(String name) {
+    Object _parameters = name;
+    if (lookupType_String_computed == null) lookupType_String_computed = new java.util.HashMap(4);
+    if (lookupType_String_values == null) lookupType_String_values = new java.util.HashMap(4);
+    ASTState state = state();
+    if (lookupType_String_values.containsKey(_parameters)
+        && lookupType_String_computed.containsKey(_parameters)
+        && (lookupType_String_computed.get(_parameters) == ASTState.NON_CYCLE || lookupType_String_computed.get(_parameters) == state().cycle())) {
+      return (SimpleSet<TypeDecl>) lookupType_String_values.get(_parameters);
+    }
+    SimpleSet<TypeDecl> lookupType_String_value = getParent().Define_lookupType(this, null, name);
+    if (state().inCircle()) {
+      lookupType_String_values.put(_parameters, lookupType_String_value);
+      lookupType_String_computed.put(_parameters, state().cycle());
+    
+    } else {
+      lookupType_String_values.put(_parameters, lookupType_String_value);
+      lookupType_String_computed.put(_parameters, ASTState.NON_CYCLE);
+    
+    }
+    return lookupType_String_value;
   }
+  /** @apilevel internal */
+  private void lookupType_String_reset() {
+    lookupType_String_computed = null;
+    lookupType_String_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map lookupType_String_values;
+  /** @apilevel internal */
+  protected java.util.Map lookupType_String_computed;
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:35
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:35
    * @apilevel internal
    */
   public int Define_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:40
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:40
       int index = _callerNode.getIndexOfChild(_childNode);
       return index;
     }
@@ -783,7 +783,7 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DeclareBeforeUse.jrag:35
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DeclareBeforeUse.jrag:35
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute blockIndex
    */
@@ -791,114 +791,12 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:66
-   * @apilevel internal
-   */
-  public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:69
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return false;
-    }
-    else {
-      return getParent().Define_isIncOrDec(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:66
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
-   */
-  protected boolean canDefine_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:256
-   * @apilevel internal
-   */
-  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:557
-      int index = _callerNode.getIndexOfChild(_childNode);
-      return index == 0 ? assignedBefore(v) : getStmt(index - 1).assignedAfter(v);
-    }
-    else {
-      return getParent().Define_assignedBefore(this, _callerNode, v);
-    }
-  }
-  /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:256
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
-   */
-  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:887
-   * @apilevel internal
-   */
-  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:1164
-      int index = _callerNode.getIndexOfChild(_childNode);
-      return index == 0 ? unassignedBefore(v) : getStmt(index - 1).unassignedAfter(v);
-    }
-    else {
-      return getParent().Define_unassignedBefore(this, _callerNode, v);
-    }
-  }
-  /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\DefiniteAssignment.jrag:887
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
-   */
-  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethods.jrag:231
-   * @apilevel internal
-   */
-  public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
-    if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupType.jrag:562
-      int index = _callerNode.getIndexOfChild(_childNode);
-      {
-          SimpleSet<TypeDecl> result = emptySet();
-          for (int i = index; i >= 0 && !(getStmt(i) instanceof Case); i--) {
-            if (getStmt(i) instanceof LocalClassDeclStmt) {
-              TypeDecl t = ((LocalClassDeclStmt) getStmt(i)).getClassDecl();
-              if (t.name().equals(name)) {
-                result = result.add(t);
-              }
-            }
-          }
-          if (!result.isEmpty()) {
-            return result;
-          }
-          return lookupType(name);
-        }
-    }
-    else {
-      return getParent().Define_lookupType(this, _callerNode, name);
-    }
-  }
-  /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\GenericMethods.jrag:231
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupType
-   */
-  protected boolean canDefine_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LookupVariable.jrag:30
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:30
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\LookupVariable.jrag:127
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:127
       int index = _callerNode.getIndexOfChild(_childNode);
       {
           VariableDeclarator v = localVariableDeclaration(name);
@@ -914,7 +812,7 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\LookupVariable.jrag:30
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
    */
@@ -922,12 +820,58 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\NameCheck.jrag:31
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @apilevel internal
+   */
+  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getStmtListNoTransform()) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:70
+      int index = _callerNode.getIndexOfChild(_childNode);
+      return index == 0
+            ? reachable()
+            : getStmt(index-1).canCompleteNormally();
+    }
+    else {
+      return getParent().Define_reachable(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute reachable
+   */
+  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
+   * @apilevel internal
+   */
+  public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getStmtListNoTransform()) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:208
+      int i = _callerNode.getIndexOfChild(_childNode);
+      return i == 0 ? reachable() : getStmt(i-1).reachable();
+    }
+    else {
+      return getParent().Define_reportUnreachable(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute reportUnreachable
+   */
+  protected boolean canDefine_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/NameCheck.jrag:31
    * @apilevel internal
    */
   public VariableScope Define_outerScope(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\NameCheck.jrag:445
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:445
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return this;
     }
@@ -936,7 +880,7 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\NameCheck.jrag:31
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/NameCheck.jrag:31
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute outerScope
    */
@@ -944,12 +888,12 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\NameCheck.jrag:680
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:680
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_otherLocalClassDecls(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\NameCheck.jrag:686
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:686
       int index = _callerNode.getIndexOfChild(_childNode);
       {
           SimpleSet<TypeDecl> local = emptySet();
@@ -973,7 +917,7 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\NameCheck.jrag:680
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:680
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute otherLocalClassDecls
    */
@@ -981,12 +925,114 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @apilevel internal
+   */
+  public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
+    if (_callerNode == getStmtListNoTransform()) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:562
+      int index = _callerNode.getIndexOfChild(_childNode);
+      {
+          SimpleSet<TypeDecl> result = emptySet();
+          for (int i = index; i >= 0 && !(getStmt(i) instanceof Case); i--) {
+            if (getStmt(i) instanceof LocalClassDeclStmt) {
+              TypeDecl t = ((LocalClassDeclStmt) getStmt(i)).getClassDecl();
+              if (t.name().equals(name)) {
+                result = result.add(t);
+              }
+            }
+          }
+          if (!result.isEmpty()) {
+            return result;
+          }
+          return lookupType(name);
+        }
+    }
+    else {
+      return getParent().Define_lookupType(this, _callerNode, name);
+    }
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupType
+   */
+  protected boolean canDefine_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
+   * @apilevel internal
+   */
+  public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getStmtListNoTransform()) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:69
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return false;
+    }
+    else {
+      return getParent().Define_isIncOrDec(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
+   */
+  protected boolean canDefine_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @apilevel internal
+   */
+  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    if (_callerNode == getStmtListNoTransform()) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:557
+      int index = _callerNode.getIndexOfChild(_childNode);
+      return index == 0 ? assignedBefore(v) : getStmt(index - 1).assignedAfter(v);
+    }
+    else {
+      return getParent().Define_assignedBefore(this, _callerNode, v);
+    }
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
+   */
+  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @apilevel internal
+   */
+  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    if (_callerNode == getStmtListNoTransform()) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1164
+      int index = _callerNode.getIndexOfChild(_childNode);
+      return index == 0 ? unassignedBefore(v) : getStmt(index - 1).unassignedAfter(v);
+    }
+    else {
+      return getParent().Define_unassignedBefore(this, _callerNode, v);
+    }
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
+   */
+  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\SyntacticClassification.jrag:134
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:134
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.EXPRESSION_NAME;
     }
@@ -995,7 +1041,7 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\SyntacticClassification.jrag:36
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -1003,53 +1049,7 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\UnreachableStatements.jrag:49
-   * @apilevel internal
-   */
-  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\UnreachableStatements.jrag:70
-      int index = _callerNode.getIndexOfChild(_childNode);
-      return index == 0
-            ? reachable()
-            : getStmt(index-1).canCompleteNormally();
-    }
-    else {
-      return getParent().Define_reachable(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\UnreachableStatements.jrag:49
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute reachable
-   */
-  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\PreciseRethrow.jrag:280
-   * @apilevel internal
-   */
-  public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java4\\frontend\\UnreachableStatements.jrag:208
-      int i = _callerNode.getIndexOfChild(_childNode);
-      return i == 0 ? reachable() : getStmt(i-1).reachable();
-    }
-    else {
-      return getParent().Define_reportUnreachable(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java7\\frontend\\PreciseRethrow.jrag:280
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute reportUnreachable
-   */
-  protected boolean canDefine_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\MethodSignature.jrag:519
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:519
    * @apilevel internal
    */
   public Block Define_enclosingBlock(ASTNode _callerNode, ASTNode _childNode) {
@@ -1057,7 +1057,7 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     return this;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java5\\frontend\\MethodSignature.jrag:519
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:519
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingBlock
    */
@@ -1065,12 +1065,12 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     return true;
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:30
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:30
    * @apilevel internal
    */
   public boolean Define_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
     if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:50
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:50
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return modifiedInScope(var);
     }
@@ -1079,7 +1079,7 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     }
   }
   /**
-   * @declaredat C:\\Users\\Geoffrey\\IdeaProjects\\puck2\\extendj\\java8\\frontend\\EffectivelyFinal.jrag:30
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inhModifiedInScope
    */
