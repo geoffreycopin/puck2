@@ -37,7 +37,7 @@ Configuration avec Eclipse
 
 (Une fois le projet importé, accéder a ses propriétés (clic-droit sur le projet, sélectionner Properties) puis dans Java build path ▸ source dans la zone "Default output folder", s'assurer que le répertoire de compilation soit celui par défaut). 
 
-3. Utilisation des Gradle tasks: Dans Window ▸ Show view ▸ Gradle tasks
+3. Utilisation des Gradle tasks: Dans Window ▸ Show view ▸ Gradle tasks  
    Pour générer une archive JAR exécutable : Sélectionner "Build" puis clic-droit sur "build" et choisir "Run gradle task".  
    Pour générer un projet eclipse: Sélectionner "Ide" puis clic-droit sur "eclipse" et choisir "Run gradle task"  .  
 
