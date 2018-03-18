@@ -46,6 +46,9 @@ public abstract class AbstractReader {
 
 			String genericTypeName = TypeDeclReader.getGenericTypeName(type);
 			edges.add(new Edge(getFullName(), genericTypeName, edgeType));
+		}else {
+			addGenericNodes(nodes, type.elementType(), edgeType,edges);
+			addDependency(edges,type,edgeType);
 		}
 
 		for (TypeDecl typeParameter : TypeDeclReader.getTypeParameters(type)) {
@@ -56,7 +59,7 @@ public abstract class AbstractReader {
 	protected void addGenericNodes(Map<String, Node> nodes, TypeDecl type, Edge.Type edgeType,Set<Edge> edges) {
 		
 		if(!nodes.containsKey(type.fullName())) {
-			Node n =new Node(idGenerator.generate(),type.fullName(),Node.Type.Class,type.createQualifiedAccess());
+			Node n =new Node(idGenerator.generate(),TypeDeclReader.getGenericTypeName(type),Node.Type.Class,type.createQualifiedAccess());
 			nodes.put(type.fullName(),n);
 			if(!nodes.containsKey(type.packageName())) {
 				n = new Node(idGenerator.generate(),type.packageName(),Node.Type.Package,type.createQualifiedAccess());

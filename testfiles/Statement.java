@@ -3,8 +3,9 @@ package statement;
 import test.SuperTest;
 
 import java.util.List;
+import java.util.Set;
 
-class Statement {
+class Statement<E> {
     Set<E> hey;
   class X {
     void doThing() {
