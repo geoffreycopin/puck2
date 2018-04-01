@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java5/grammar/GenericMethods.ast:22
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/GenericMethods.ast:22
  * @astdecl ParClassInstanceExpr : ClassInstanceExpr ::= TypeArgument:Access*;
  * @production ParClassInstanceExpr : {@link ClassInstanceExpr} ::= <span class="component">TypeArgument:{@link Access}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ParClassInstanceExpr extends ClassInstanceExpr implements Cloneable {
   /**
    * @aspect GenericMethodsPrettyPrint
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:288
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:288
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("<");
@@ -487,12 +487,12 @@ public class ParClassInstanceExpr extends ClassInstanceExpr implements Cloneable
     return getTypeArgumentListNoTransform();
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:245
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:245
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
@@ -501,7 +501,7 @@ public class ParClassInstanceExpr extends ClassInstanceExpr implements Cloneable
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -509,12 +509,12 @@ public class ParClassInstanceExpr extends ClassInstanceExpr implements Cloneable
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:246
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:246
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return unqualifiedScope().lookupType(name);
     }
@@ -523,7 +523,7 @@ public class ParClassInstanceExpr extends ClassInstanceExpr implements Cloneable
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupType
    */
@@ -531,12 +531,12 @@ public class ParClassInstanceExpr extends ClassInstanceExpr implements Cloneable
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Diamond.jrag:311
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:311
    * @apilevel internal
    */
   public boolean Define_isExplicitGenericConstructorAccess(ASTNode _callerNode, ASTNode _childNode) {
     if (getAccessNoTransform() != null && _callerNode == getAccess()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Diamond.jrag:313
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:313
       return true;
     }
     else {
@@ -544,7 +544,7 @@ public class ParClassInstanceExpr extends ClassInstanceExpr implements Cloneable
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Diamond.jrag:311
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:311
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isExplicitGenericConstructorAccess
    */

@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,10 +19,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
@@ -33,7 +33,7 @@ import java.io.DataInputStream;
  * <p>The empty type should never occur during type analysis of non-empty
  * expressions.
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:133
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:133
  * @astdecl EmptyType : PrimitiveType;
  * @production EmptyType : {@link PrimitiveType};
 
@@ -41,7 +41,7 @@ import java.io.DataInputStream;
 public class EmptyType extends PrimitiveType implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:356
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:356
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(";");

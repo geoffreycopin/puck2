@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:169
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:169
  * @astdecl VarDeclStmt : Stmt ::= Modifiers TypeAccess:Access Declarator:VariableDeclarator*;
  * @production VarDeclStmt : {@link Stmt} ::= <span class="component">{@link Modifiers}</span> <span class="component">TypeAccess:{@link Access}</span> <span class="component">Declarator:{@link VariableDeclarator}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class VarDeclStmt extends Stmt implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:629
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:629
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getModifiers());
@@ -352,23 +352,6 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   public List<VariableDeclarator> getDeclaratorsNoTransform() {
     return getDeclaratorListNoTransform();
   }
-  /**
-   * @attribute syn
-   * @aspect VariableScope
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:219
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:219")
-  public VariableDeclarator variableDeclaration(String name) {
-    {
-        for (VariableDeclarator decl : getDeclaratorList()) {
-          if (decl.declaresVariable(name)) {
-            return decl;
-          }
-        }
-        return null;
-      }
-  }
   /** @apilevel internal */
   private void canCompleteNormally_reset() {
     canCompleteNormally_computed = null;
@@ -382,10 +365,10 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50")
   public boolean canCompleteNormally() {
     ASTState state = state();
     if (canCompleteNormally_computed == ASTState.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
@@ -407,7 +390,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -458,7 +441,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -505,11 +488,28 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect TypeAnalysis
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:274
+   * @aspect VariableScope
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:219
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:274")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:219")
+  public VariableDeclarator variableDeclaration(String name) {
+    {
+        for (VariableDeclarator decl : getDeclaratorList()) {
+          if (decl.declaresVariable(name)) {
+            return decl;
+          }
+        }
+        return null;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeAnalysis
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:274
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:274")
   public TypeDecl type() {
     TypeDecl type_value = getTypeAccess().type();
     return type_value;
@@ -517,10 +517,10 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
   public boolean modifiedInScope(Variable var) {
     {
         for (VariableDeclarator decl : getDeclaratorList()) {
@@ -532,12 +532,164 @@ public class VarDeclStmt extends Stmt implements Cloneable {
       }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:30
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:133
+   * @apilevel internal
+   */
+  public Modifiers Define_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getDeclaratorListNoTransform()) {
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:135
+      int index = _callerNode.getIndexOfChild(_childNode);
+      return getModifiers();
+    }
+    else {
+      return getParent().Define_declarationModifiers(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:133
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute declarationModifiers
+   */
+  protected boolean canDefine_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:144
+   * @apilevel internal
+   */
+  public Access Define_declarationType(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getDeclaratorListNoTransform()) {
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:146
+      int index = _callerNode.getIndexOfChild(_childNode);
+      return getTypeAccess();
+    }
+    else {
+      return getParent().Define_declarationType(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:144
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute declarationType
+   */
+  protected boolean canDefine_declarationType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
+   * @apilevel internal
+   */
+  public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getDeclaratorListNoTransform()) {
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:70
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return false;
+    }
+    else {
+      return getParent().Define_isIncOrDec(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
+   */
+  protected boolean canDefine_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @apilevel internal
+   */
+  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    if (_callerNode == getDeclaratorListNoTransform()) {
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:560
+      int index = _callerNode.getIndexOfChild(_childNode);
+      return index == 0 ? assignedBefore(v) : getDeclarator(index - 1).assignedAfter(v);
+    }
+    else {
+      return getParent().Define_assignedBefore(this, _callerNode, v);
+    }
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
+   */
+  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @apilevel internal
+   */
+  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    if (_callerNode == getDeclaratorListNoTransform()) {
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1167
+      int index = _callerNode.getIndexOfChild(_childNode);
+      return index == 0 ? unassignedBefore(v) : getDeclarator(index - 1).unassignedAfter(v);
+    }
+    else {
+      return getParent().Define_unassignedBefore(this, _callerNode, v);
+    }
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
+   */
+  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:434
+   * @apilevel internal
+   */
+  public boolean Define_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
+    if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:320
+      return true;
+    }
+    else {
+      return getParent().Define_mayBeFinal(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:434
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute mayBeFinal
+   */
+  protected boolean canDefine_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:436
+   * @apilevel internal
+   */
+  public boolean Define_mayBeVolatile(ASTNode _callerNode, ASTNode _childNode) {
+    if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:321
+      return true;
+    }
+    else {
+      return getParent().Define_mayBeVolatile(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:436
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute mayBeVolatile
+   */
+  protected boolean canDefine_mayBeVolatile(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LookupVariable.jrag:30
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupVariable.jrag:114
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupVariable.jrag:114
       int index = _callerNode.getIndexOfChild(_childNode);
       {
           for (int i = index - 1; i >= 0; i -= 1) {
@@ -553,7 +705,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:30
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LookupVariable.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
    */
@@ -561,164 +713,33 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/VariableDeclaration.jrag:133
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
-  public Modifiers Define_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/VariableDeclaration.jrag:135
-      int index = _callerNode.getIndexOfChild(_childNode);
-      return getModifiers();
+  public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
+    if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:107
+      return NameType.TYPE_NAME;
     }
     else {
-      return getParent().Define_declarationModifiers(this, _callerNode);
+      return getParent().Define_nameType(this, _callerNode);
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/VariableDeclaration.jrag:133
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute declarationModifiers
+   * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
-  protected boolean canDefine_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_nameType(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/VariableDeclaration.jrag:144
-   * @apilevel internal
-   */
-  public Access Define_declarationType(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/VariableDeclaration.jrag:146
-      int index = _callerNode.getIndexOfChild(_childNode);
-      return getTypeAccess();
-    }
-    else {
-      return getParent().Define_declarationType(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/VariableDeclaration.jrag:144
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute declarationType
-   */
-  protected boolean canDefine_declarationType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:434
-   * @apilevel internal
-   */
-  public boolean Define_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
-    if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:320
-      return true;
-    }
-    else {
-      return getParent().Define_mayBeFinal(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:434
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayBeFinal
-   */
-  protected boolean canDefine_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:436
-   * @apilevel internal
-   */
-  public boolean Define_mayBeVolatile(ASTNode _callerNode, ASTNode _childNode) {
-    if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:321
-      return true;
-    }
-    else {
-      return getParent().Define_mayBeVolatile(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:436
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayBeVolatile
-   */
-  protected boolean canDefine_mayBeVolatile(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
-   * @apilevel internal
-   */
-  public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:70
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return false;
-    }
-    else {
-      return getParent().Define_isIncOrDec(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:66
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
-   */
-  protected boolean canDefine_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
-   * @apilevel internal
-   */
-  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:560
-      int index = _callerNode.getIndexOfChild(_childNode);
-      return index == 0 ? assignedBefore(v) : getDeclarator(index - 1).assignedAfter(v);
-    }
-    else {
-      return getParent().Define_assignedBefore(this, _callerNode, v);
-    }
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
-   */
-  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    return true;
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
-   * @apilevel internal
-   */
-  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1167
-      int index = _callerNode.getIndexOfChild(_childNode);
-      return index == 0 ? unassignedBefore(v) : getDeclarator(index - 1).unassignedAfter(v);
-    }
-    else {
-      return getParent().Define_unassignedBefore(this, _callerNode, v);
-    }
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
-   */
-  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    return true;
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:723
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:723
    * @apilevel internal
    */
   public TypeDecl Define_declType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:279
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:279
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return null;
     }
@@ -727,7 +748,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:723
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:723
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declType
    */
@@ -735,33 +756,33 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:131
    * @apilevel internal
    */
-  public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
-    if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:107
-      return NameType.TYPE_NAME;
+  public boolean Define_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
+    if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:162
+      return name.equals("LOCAL_VARIABLE");
     }
     else {
-      return getParent().Define_nameType(this, _callerNode);
+      return getParent().Define_mayUseAnnotationTarget(this, _callerNode, name);
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:131
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute nameType
+   * @return {@code true} if this node has an equation for the inherited attribute mayUseAnnotationTarget
    */
-  protected boolean canDefine_nameType(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1384
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1384
    * @apilevel internal
    */
   public FieldDecl Define_fieldDecl(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1388
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1388
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return null;
     }
@@ -770,7 +791,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1384
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1384
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute fieldDecl
    */
@@ -778,12 +799,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1643
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1643
    * @apilevel internal
    */
   public FieldDeclarator Define_erasedField(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1650
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1650
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       {
           throw new Error("FieldDeclarator child of VarDeclStmt");
@@ -794,32 +815,11 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1643
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1643
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute erasedField
    */
   protected boolean canDefine_erasedField(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:131
-   * @apilevel internal
-   */
-  public boolean Define_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
-    if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:162
-      return name.equals("LOCAL_VARIABLE");
-    }
-    else {
-      return getParent().Define_mayUseAnnotationTarget(this, _callerNode, name);
-    }
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:131
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute mayUseAnnotationTarget
-   */
-  protected boolean canDefine_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
     return true;
   }
   /** @apilevel internal */

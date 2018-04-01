@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:229
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:229
  * @astdecl MinusExpr : Unary;
  * @production MinusExpr : {@link Unary};
 
@@ -199,10 +199,10 @@ public class MinusExpr extends Unary implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:32
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:32
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:32")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:32")
   public Constant constant() {
     Constant constant_value = type().minus(getOperand().constant());
     return constant_value;
@@ -210,10 +210,10 @@ public class MinusExpr extends Unary implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:383
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:383
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:383")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:383")
   public boolean isConstant() {
     boolean isConstant_value = getOperand().isConstant();
     return isConstant_value;
@@ -221,10 +221,10 @@ public class MinusExpr extends Unary implements Cloneable {
   /**
    * @attribute syn
    * @aspect PrettyPrintUtil
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:385
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:385
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:385")
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:385")
   public String printPreOp() {
     String printPreOp_value = "-";
     return printPreOp_value;
@@ -243,10 +243,10 @@ public class MinusExpr extends Unary implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -264,13 +264,13 @@ public class MinusExpr extends Unary implements Cloneable {
   }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
-    // Declared at /home/hadjer/git/puck2/extendj/java4/frontend/UnaryMinusRewrite.jrag:38
+    // Declared at /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnaryMinusRewrite.jrag:38
     if (getOperand() instanceof IntegerLiteral
             && ((IntegerLiteral) getOperand()).isDecimal()
             && getOperand().isPositive()) {
       return rewriteRule0();
     }
-    // Declared at /home/hadjer/git/puck2/extendj/java4/frontend/UnaryMinusRewrite.jrag:48
+    // Declared at /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnaryMinusRewrite.jrag:48
     if (getOperand() instanceof LongLiteral
             && ((LongLiteral) getOperand()).isDecimal()
             && getOperand().isPositive()) {
@@ -279,7 +279,7 @@ public class MinusExpr extends Unary implements Cloneable {
     return super.rewriteTo();
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnaryMinusRewrite.jrag:38
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnaryMinusRewrite.jrag:38
    * @apilevel internal
    */
   private IntegerLiteral rewriteRule0() {
@@ -288,7 +288,7 @@ public class MinusExpr extends Unary implements Cloneable {
       return new IntegerLiteral("-" + original.getLITERAL());
     }  }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnaryMinusRewrite.jrag:48
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnaryMinusRewrite.jrag:48
    * @apilevel internal
    */
   private LongLiteral rewriteRule1() {
@@ -298,13 +298,13 @@ public class MinusExpr extends Unary implements Cloneable {
     }  }
   /** @apilevel internal */
   public boolean canRewrite() {
-    // Declared at /home/hadjer/git/puck2/extendj/java4/frontend/UnaryMinusRewrite.jrag:38
+    // Declared at /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnaryMinusRewrite.jrag:38
     if (getOperand() instanceof IntegerLiteral
             && ((IntegerLiteral) getOperand()).isDecimal()
             && getOperand().isPositive()) {
       return true;
     }
-    // Declared at /home/hadjer/git/puck2/extendj/java4/frontend/UnaryMinusRewrite.jrag:48
+    // Declared at /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnaryMinusRewrite.jrag:48
     if (getOperand() instanceof LongLiteral
             && ((LongLiteral) getOperand()).isDecimal()
             && getOperand().isPositive()) {
@@ -314,7 +314,7 @@ public class MinusExpr extends Unary implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:383
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:383
     if (!getOperand().type().isNumericType()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

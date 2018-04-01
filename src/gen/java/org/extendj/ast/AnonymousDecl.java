@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:158
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:158
  * @astdecl AnonymousDecl : ClassDecl ::= Modifiers <ID:String> [SuperClass:Access] Implements:Access* BodyDecl*;
  * @production AnonymousDecl : {@link ClassDecl} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">[SuperClass:{@link Access}]</span> <span class="component">Implements:{@link Access}*</span> <span class="component">{@link BodyDecl}*</span>;
 
@@ -571,7 +571,7 @@ public class AnonymousDecl extends ClassDecl implements Cloneable {
   }
   /**
    * @aspect VariableArityParameters
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/VariableArityParameters.jrag:132
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/VariableArityParameters.jrag:132
    */
    
   protected List constructorParameterList(ConstructorDecl decl) {
@@ -611,10 +611,10 @@ public class AnonymousDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn nta
    * @aspect ImplicitConstructor
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupConstructor.jrag:274
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupConstructor.jrag:274
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="ImplicitConstructor", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupConstructor.jrag:274")
+  @ASTNodeAnnotation.Source(aspect="ImplicitConstructor", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupConstructor.jrag:274")
   public Opt<ConstructorDecl> getImplicitConstructorOpt() {
     ASTState state = state();
     if (getImplicitConstructorOpt_computed) {
@@ -702,7 +702,7 @@ protected ASTState.Cycle isCircular_cycle = null;
   /** @apilevel internal */
   protected boolean isCircular_initialized = false;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="Circularity", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:720")
+  @ASTNodeAnnotation.Source(aspect="Circularity", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:720")
   public boolean isCircular() {
     if (isCircular_computed) {
       return isCircular_value;
@@ -751,10 +751,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute syn nta
    * @aspect AnonymousClasses
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/AnonymousClasses.jrag:56
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:56
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/AnonymousClasses.jrag:56")
+  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:56")
   public Opt getSuperClassOpt() {
     ASTState state = state();
     if (getSuperClassOpt_computed) {
@@ -791,10 +791,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute syn nta
    * @aspect AnonymousClasses
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/AnonymousClasses.jrag:64
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:64
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/AnonymousClasses.jrag:64")
+  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:64")
   public List getImplementsList() {
     ASTState state = state();
     if (getImplementsList_computed) {
@@ -819,10 +819,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute inh
    * @aspect AnonymousClasses
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/AnonymousClasses.jrag:33
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:33
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/AnonymousClasses.jrag:33")
+  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:33")
   public TypeDecl superType() {
     TypeDecl superType_value = getParent().Define_superType(this, null);
     return superType_value;
@@ -830,10 +830,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute inh
    * @aspect AnonymousClasses
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/AnonymousClasses.jrag:39
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/AnonymousClasses.jrag:39")
+  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:39")
   public ConstructorDecl constructorDecl() {
     ConstructorDecl constructorDecl_value = getParent().Define_constructorDecl(this, null);
     return constructorDecl_value;
@@ -841,10 +841,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute inh
    * @aspect AnonymousClasses
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/AnonymousClasses.jrag:95
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:95
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/AnonymousClasses.jrag:95")
+  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:95")
   public TypeDecl typeNullPointerException() {
     TypeDecl typeNullPointerException_value = getParent().Define_typeNullPointerException(this, null);
     return typeNullPointerException_value;

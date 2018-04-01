@@ -22,8 +22,6 @@ public class ClassReader extends TypeDeclReader {
     String getFullName() {
         return classDeclaration.fullName();
     }
-    
-    
 
     public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
         String className = classDeclaration.fullName();
@@ -37,9 +35,6 @@ public class ClassReader extends TypeDeclReader {
         addInterfacesDependency(edges,nodes);
         
     }
-    
-    
-    
 
     private void readBodyDeclarations(Map<String, Node> nodes, Set<Edge> edges) {
         for (BodyDecl decl : classDeclaration.getBodyDeclList()) {
@@ -60,7 +55,7 @@ public class ClassReader extends TypeDeclReader {
             } else if (decl instanceof GenericMethodDecl) {
             	GenericMethodDecl genMethod = (GenericMethodDecl)decl;
             }else if (decl instanceof ConstructorDecl) {
-            	
+            	// TODO: implement
             }
         }
     }
@@ -69,9 +64,9 @@ public class ClassReader extends TypeDeclReader {
         Access superClass = classDeclaration.getSuperClass();
   
         if (superClass == null || Util.isPrimitive(superClass.type())) {
-
             return;
         }
+
         addTypeDependency(edges, superClass.type(), Edge.Type.IsA,nodes);
     }
 

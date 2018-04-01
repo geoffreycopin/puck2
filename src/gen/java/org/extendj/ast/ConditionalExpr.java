@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:277
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:277
  * @astdecl ConditionalExpr : Expr ::= Condition:Expr TrueExpr:Expr FalseExpr:Expr;
  * @production ConditionalExpr : {@link Expr} ::= <span class="component">Condition:{@link Expr}</span> <span class="component">TrueExpr:{@link Expr}</span> <span class="component">FalseExpr:{@link Expr}</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:236
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:236
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getCondition());
@@ -93,12 +93,12 @@ public class ConditionalExpr extends Expr implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    constant_reset();
-    isConstant_reset();
     booleanOperator_reset();
     unassignedAfterTrue_Variable_reset();
     unassignedAfterFalse_Variable_reset();
     unassignedAfter_Variable_reset();
+    constant_reset();
+    isConstant_reset();
     type_reset();
     isBooleanExpression_reset();
     isBooleanConditional_reset();
@@ -280,7 +280,7 @@ public class ConditionalExpr extends Expr implements Cloneable {
   }
   /**
    * @aspect AutoBoxing
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/AutoBoxing.jrag:252
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/AutoBoxing.jrag:252
    */
   private TypeDecl refined_AutoBoxing_ConditionalExpr_type()
 {
@@ -314,72 +314,6 @@ public class ConditionalExpr extends Expr implements Cloneable {
     return conditionalExprType(second, third);
   }
   /** @apilevel internal */
-  private void constant_reset() {
-    constant_computed = null;
-    constant_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle constant_computed = null;
-
-  /** @apilevel internal */
-  protected Constant constant_value;
-
-  /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:85
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:85")
-  public Constant constant() {
-    ASTState state = state();
-    if (constant_computed == ASTState.NON_CYCLE || constant_computed == state().cycle()) {
-      return constant_value;
-    }
-    constant_value = type().questionColon(getCondition().constant(),
-              getTrueExpr().constant(),getFalseExpr().constant());
-    if (state().inCircle()) {
-      constant_computed = state().cycle();
-    
-    } else {
-      constant_computed = ASTState.NON_CYCLE;
-    
-    }
-    return constant_value;
-  }
-  /** @apilevel internal */
-  private void isConstant_reset() {
-    isConstant_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle isConstant_computed = null;
-
-  /** @apilevel internal */
-  protected boolean isConstant_value;
-
-  /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:406
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:406")
-  public boolean isConstant() {
-    ASTState state = state();
-    if (isConstant_computed == ASTState.NON_CYCLE || isConstant_computed == state().cycle()) {
-      return isConstant_value;
-    }
-    isConstant_value = getCondition().isConstant() && getTrueExpr().isConstant() && getFalseExpr().isConstant();
-    if (state().inCircle()) {
-      isConstant_computed = state().cycle();
-    
-    } else {
-      isConstant_computed = ASTState.NON_CYCLE;
-    
-    }
-    return isConstant_value;
-  }
-  /** @apilevel internal */
   private void booleanOperator_reset() {
     booleanOperator_computed = null;
   }
@@ -392,10 +326,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:253
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:253
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:253")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:253")
   public boolean booleanOperator() {
     ASTState state = state();
     if (booleanOperator_computed == ASTState.NON_CYCLE || booleanOperator_computed == state().cycle()) {
@@ -414,10 +348,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:375
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:375
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:375")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:375")
   public boolean assignedAfterTrue(Variable v) {
     boolean assignedAfterTrue_Variable_value = isFalse() || (getTrueExpr().assignedAfterTrue(v) && getFalseExpr().assignedAfterTrue(v));
     return assignedAfterTrue_Variable_value;
@@ -425,10 +359,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:377
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:377
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:377")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:377")
   public boolean assignedAfterFalse(Variable v) {
     boolean assignedAfterFalse_Variable_value = isTrue() || (getTrueExpr().assignedAfterFalse(v) && getFalseExpr().assignedAfterFalse(v));
     return assignedAfterFalse_Variable_value;
@@ -436,10 +370,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268")
   public boolean assignedAfter(Variable v) {
     boolean assignedAfter_Variable_value = booleanOperator()
           ? assignedAfterTrue(v) && assignedAfterFalse(v)
@@ -452,7 +386,7 @@ public class ConditionalExpr extends Expr implements Cloneable {
   }
   protected java.util.Map unassignedAfterTrue_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:905")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:905")
   public boolean unassignedAfterTrue(Variable v) {
     Object _parameters = v;
     if (unassignedAfterTrue_Variable_values == null) unassignedAfterTrue_Variable_values = new java.util.HashMap(4);
@@ -503,7 +437,7 @@ public class ConditionalExpr extends Expr implements Cloneable {
   }
   protected java.util.Map unassignedAfterFalse_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:907")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:907")
   public boolean unassignedAfterFalse(Variable v) {
     Object _parameters = v;
     if (unassignedAfterFalse_Variable_values == null) unassignedAfterFalse_Variable_values = new java.util.HashMap(4);
@@ -554,7 +488,7 @@ public class ConditionalExpr extends Expr implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:899")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:899")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -604,6 +538,72 @@ public class ConditionalExpr extends Expr implements Cloneable {
     }
   }
   /** @apilevel internal */
+  private void constant_reset() {
+    constant_computed = null;
+    constant_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle constant_computed = null;
+
+  /** @apilevel internal */
+  protected Constant constant_value;
+
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:85
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:85")
+  public Constant constant() {
+    ASTState state = state();
+    if (constant_computed == ASTState.NON_CYCLE || constant_computed == state().cycle()) {
+      return constant_value;
+    }
+    constant_value = type().questionColon(getCondition().constant(),
+              getTrueExpr().constant(),getFalseExpr().constant());
+    if (state().inCircle()) {
+      constant_computed = state().cycle();
+    
+    } else {
+      constant_computed = ASTState.NON_CYCLE;
+    
+    }
+    return constant_value;
+  }
+  /** @apilevel internal */
+  private void isConstant_reset() {
+    isConstant_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle isConstant_computed = null;
+
+  /** @apilevel internal */
+  protected boolean isConstant_value;
+
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:406
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:406")
+  public boolean isConstant() {
+    ASTState state = state();
+    if (isConstant_computed == ASTState.NON_CYCLE || isConstant_computed == state().cycle()) {
+      return isConstant_value;
+    }
+    isConstant_value = getCondition().isConstant() && getTrueExpr().isConstant() && getFalseExpr().isConstant();
+    if (state().inCircle()) {
+      isConstant_computed = state().cycle();
+    
+    } else {
+      isConstant_computed = ASTState.NON_CYCLE;
+    
+    }
+    return isConstant_value;
+  }
+  /** @apilevel internal */
   private void type_reset() {
     type_computed = null;
     type_value = null;
@@ -617,10 +617,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -660,10 +660,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
    * second and third operands.
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:395
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:395
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:395")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:395")
   public TypeDecl conditionalExprType(TypeDecl second, TypeDecl third) {
     {
         if (second == third) {
@@ -710,10 +710,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:145
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:145
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:145")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:145")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = getCondition().modifiedInScope(var)
           || getTrueExpr().modifiedInScope(var)
@@ -733,10 +733,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:29
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:29
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:29")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:29")
   public boolean isBooleanExpression() {
     ASTState state = state();
     if (isBooleanExpression_computed == ASTState.NON_CYCLE || isBooleanExpression_computed == state().cycle()) {
@@ -765,10 +765,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:55
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:55
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:55")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:55")
   public boolean isBooleanConditional() {
     ASTState state = state();
     if (isBooleanConditional_computed == ASTState.NON_CYCLE || isBooleanConditional_computed == state().cycle()) {
@@ -799,10 +799,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:60
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:60
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:60")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:60")
   public boolean isNumericExpression() {
     ASTState state = state();
     if (isNumericExpression_computed == ASTState.NON_CYCLE || isNumericExpression_computed == state().cycle()) {
@@ -831,10 +831,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:78
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:78")
   public boolean isNumericConditional() {
     ASTState state = state();
     if (isNumericConditional_computed == ASTState.NON_CYCLE || isNumericConditional_computed == state().cycle()) {
@@ -865,10 +865,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:83
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:83
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:83")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:83")
   public boolean isReferenceConditional() {
     ASTState state = state();
     if (isReferenceConditional_computed == ASTState.NON_CYCLE || isReferenceConditional_computed == state().cycle()) {
@@ -897,10 +897,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:86
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:86
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:86")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:86")
   public boolean isPolyExpression() {
     ASTState state = state();
     if (isPolyExpression_computed == ASTState.NON_CYCLE || isPolyExpression_computed == state().cycle()) {
@@ -928,10 +928,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:149
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:149
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:149")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:149")
   public boolean assignConversionTo(TypeDecl type) {
     Object _parameters = type;
     if (assignConversionTo_TypeDecl_computed == null) assignConversionTo_TypeDecl_computed = new java.util.HashMap(4);
@@ -974,10 +974,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /** Used to compute compatibility during phase 1 of overload resolution. 
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:58
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:58
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:58")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:58")
   public boolean compatibleStrictContext(TypeDecl type) {
     Object _parameters = type;
     if (compatibleStrictContext_TypeDecl_computed == null) compatibleStrictContext_TypeDecl_computed = new java.util.HashMap(4);
@@ -1021,10 +1021,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:102
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:102
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:102")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:102")
   public boolean compatibleLooseContext(TypeDecl type) {
     Object _parameters = type;
     if (compatibleLooseContext_TypeDecl_computed == null) compatibleLooseContext_TypeDecl_computed = new java.util.HashMap(4);
@@ -1068,10 +1068,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:130
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:130
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:130")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:130")
   public boolean pertinentToApplicability(Expr access, BodyDecl decl, int argIndex) {
     java.util.List _parameters = new java.util.ArrayList(3);
     _parameters.add(access);
@@ -1114,10 +1114,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
    * @return {@code true} if type1 is more specific than type2, {@code false} otherwise
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:256
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:256
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:256")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:256")
   public boolean moreSpecificThan(TypeDecl type1, TypeDecl type2) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(type1);
@@ -1162,10 +1162,10 @@ public class ConditionalExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:511
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:511
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:511")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:511")
   public boolean potentiallyCompatible(TypeDecl type, BodyDecl candidateDecl) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(type);
@@ -1199,20 +1199,20 @@ public class ConditionalExpr extends Expr implements Cloneable {
           && getFalseExpr().potentiallyCompatible(type, candidateDecl);
     }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getFalseExprNoTransform() != null && _callerNode == getFalseExpr()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:463
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:463
       return getCondition().assignedAfterFalse(v);
     }
     else if (getTrueExprNoTransform() != null && _callerNode == getTrueExpr()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:461
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:461
       return getCondition().assignedAfterTrue(v);
     }
     else if (getConditionNoTransform() != null && _callerNode == getCondition()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:459
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:459
       return assignedBefore(v);
     }
     else {
@@ -1220,7 +1220,7 @@ public class ConditionalExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
    */
@@ -1228,20 +1228,20 @@ public class ConditionalExpr extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getFalseExprNoTransform() != null && _callerNode == getFalseExpr()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1059
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1059
       return getCondition().unassignedAfterFalse(v);
     }
     else if (getTrueExprNoTransform() != null && _callerNode == getTrueExpr()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1056
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1056
       return getCondition().unassignedAfterTrue(v);
     }
     else if (getConditionNoTransform() != null && _callerNode == getCondition()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1054
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1054
       return unassignedBefore(v);
     }
     else {
@@ -1249,7 +1249,7 @@ public class ConditionalExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
    */
@@ -1257,16 +1257,16 @@ public class ConditionalExpr extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:31
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    */
   public TypeDecl Define_targetType(ASTNode _callerNode, ASTNode _childNode) {
     if (getFalseExprNoTransform() != null && _callerNode == getFalseExpr()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:36
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:36
       return targetType();
     }
     else if (getTrueExprNoTransform() != null && _callerNode == getTrueExpr()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:35
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:35
       return targetType();
     }
     else {
@@ -1274,7 +1274,7 @@ public class ConditionalExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:31
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute targetType
    */
@@ -1282,12 +1282,12 @@ public class ConditionalExpr extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getConditionNoTransform() != null && _callerNode == getCondition()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:297
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:297
       return false;
     }
     else {
@@ -1295,7 +1295,7 @@ public class ConditionalExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
    */
@@ -1303,12 +1303,12 @@ public class ConditionalExpr extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getConditionNoTransform() != null && _callerNode == getCondition()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:298
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:298
       return false;
     }
     else {
@@ -1316,7 +1316,7 @@ public class ConditionalExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute invocationContext
    */
@@ -1324,20 +1324,20 @@ public class ConditionalExpr extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getFalseExprNoTransform() != null && _callerNode == getFalseExpr()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:309
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:309
       return false;
     }
     else if (getTrueExprNoTransform() != null && _callerNode == getTrueExpr()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:304
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:304
       return false;
     }
     else if (getConditionNoTransform() != null && _callerNode == getCondition()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:299
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:299
       return false;
     }
     else {
@@ -1345,7 +1345,7 @@ public class ConditionalExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute castContext
    */
@@ -1353,20 +1353,20 @@ public class ConditionalExpr extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getFalseExprNoTransform() != null && _callerNode == getFalseExpr()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:311
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:311
       return false;
     }
     else if (getTrueExprNoTransform() != null && _callerNode == getTrueExpr()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:306
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:306
       return false;
     }
     else if (getConditionNoTransform() != null && _callerNode == getCondition()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:300
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:300
       return false;
     }
     else {
@@ -1374,7 +1374,7 @@ public class ConditionalExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute numericContext
    */
@@ -1382,20 +1382,20 @@ public class ConditionalExpr extends Expr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getFalseExprNoTransform() != null && _callerNode == getFalseExpr()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:310
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:310
       return false;
     }
     else if (getTrueExprNoTransform() != null && _callerNode == getTrueExpr()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:305
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:305
       return false;
     }
     else if (getConditionNoTransform() != null && _callerNode == getCondition()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:301
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:301
       return false;
     }
     else {
@@ -1403,7 +1403,7 @@ public class ConditionalExpr extends Expr implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute stringContext
    */
@@ -1420,7 +1420,7 @@ public class ConditionalExpr extends Expr implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:738
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:738
     if (!getCondition().type().isBoolean()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);
@@ -1431,7 +1431,7 @@ public class ConditionalExpr extends Expr implements Cloneable {
         contributors.add(this);
       }
     }
-    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:743
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:743
     if (type().isUnknown() && !getTrueExpr().type().isUnknown()
               && !getFalseExpr().type().isUnknown()) {
       {

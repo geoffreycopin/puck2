@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:307
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:307
  * @astdecl ContinueStmt : Stmt ::= <Label:String> [Finally:Block];
  * @production ContinueStmt : {@link Stmt} ::= <span class="component">&lt;Label:String&gt;</span> <span class="component">[Finally:{@link Block}]</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ContinueStmt extends Stmt implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:306
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:306
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("continue");
@@ -49,7 +49,7 @@ public class ContinueStmt extends Stmt implements Cloneable {
   }
   /**
    * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:100
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:100
    */
   public void collectBranches(Collection<Stmt> c) {
     c.add(this);
@@ -107,12 +107,12 @@ public class ContinueStmt extends Stmt implements Cloneable {
   public void flushAttrCache() {
     super.flushAttrCache();
     canCompleteNormally_reset();
-    targetStmt_reset();
+    getFinallyOpt_reset();
     assignedAfter_Variable_reset();
     unassignedAfterReachedFinallyBlocks_Variable_reset();
     assignedAfterReachedFinallyBlocks_Variable_reset();
     unassignedAfter_Variable_reset();
-    getFinallyOpt_reset();
+    targetStmt_reset();
     lookupLabel_String_reset();
   }
   /** @apilevel internal 
@@ -304,10 +304,10 @@ public class ContinueStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50")
   public boolean canCompleteNormally() {
     ASTState state = state();
     if (canCompleteNormally_computed == ASTState.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
@@ -323,117 +323,49 @@ public class ContinueStmt extends Stmt implements Cloneable {
     }
     return canCompleteNormally_value;
   }
-  /**
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:120
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:120")
-  public boolean hasLabel() {
-    boolean hasLabel_value = !getLabel().equals("");
-    return hasLabel_value;
-  }
-  /**
-   * @return <code>true</code> if this statement can branch to
-   * the target statement.
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:182
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:182")
-  public boolean canBranchTo(BranchTargetStmt target) {
-    boolean canBranchTo_BranchTargetStmt_value = !hasLabel();
-    return canBranchTo_BranchTargetStmt_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:184
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:184")
-  public boolean canBranchTo(LabeledStmt target) {
-    boolean canBranchTo_LabeledStmt_value = hasLabel() && target.getLabel().equals(getLabel());
-    return canBranchTo_LabeledStmt_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:186
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:186")
-  public boolean canBranchTo(SwitchStmt target) {
-    boolean canBranchTo_SwitchStmt_value = false;
-    return canBranchTo_SwitchStmt_value;
+  /** @apilevel internal */
+  private void getFinallyOpt_reset() {
+    getFinallyOpt_computed = false;
+    
+    getFinallyOpt_value = null;
   }
   /** @apilevel internal */
-  private void targetStmt_reset() {
-    targetStmt_computed = null;
-    targetStmt_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle targetStmt_computed = null;
+  protected boolean getFinallyOpt_computed = false;
 
   /** @apilevel internal */
-  protected Stmt targetStmt_value;
+  protected Opt<Block> getFinallyOpt_value;
 
   /**
-   * Find the target statement for break and continue. This can be a try
-   * statement with a finally block that can not complete normally.
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:46
+   * @attribute syn nta
+   * @aspect NTAFinally
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NTAFinally.jrag:50
    */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:46")
-  public Stmt targetStmt() {
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
+  @ASTNodeAnnotation.Source(aspect="NTAFinally", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NTAFinally.jrag:50")
+  public Opt<Block> getFinallyOpt() {
     ASTState state = state();
-    if (targetStmt_computed == ASTState.NON_CYCLE || targetStmt_computed == state().cycle()) {
-      return targetStmt_value;
+    if (getFinallyOpt_computed) {
+      return (Opt<Block>) getChild(getFinallyOptChildPosition());
     }
-    targetStmt_value = branchTarget(this);
-    if (state().inCircle()) {
-      targetStmt_computed = state().cycle();
-    
-    } else {
-      targetStmt_computed = ASTState.NON_CYCLE;
-    
+    state().enterLazyAttribute();
+    getFinallyOpt_value = getFinallyOpt_compute();
+    setChild(getFinallyOpt_value, getFinallyOptChildPosition());
+    getFinallyOpt_computed = true;
+    state().leaveLazyAttribute();
+    Opt<Block> node = (Opt<Block>) this.getChild(getFinallyOptChildPosition());
+    return node;
+  }
+  /** @apilevel internal */
+  private Opt<Block> getFinallyOpt_compute() {
+      return branchFinallyOpt();
     }
-    return targetStmt_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect NameCheck
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:552
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:552")
-  public Collection<Problem> nameProblems() {
-    {
-        if (!insideLoop()) {
-          return Collections.singletonList(error("continue outside loop"));
-        } else if (hasLabel()) {
-          LabeledStmt label = lookupLabel(getLabel());
-          if (label == null) {
-            return Collections.singletonList(
-                error("labeled continue must have visible matching label"));
-          } else if (!label.getStmt().continueLabel()) {
-            return Collections.singletonList(errorf("%s is not a loop label", getLabel()));
-          }
-        }
-        return Collections.emptyList();
-      }
-  }
   /** @apilevel internal */
   private void assignedAfter_Variable_reset() {
     assignedAfter_Variable_values = null;
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -484,7 +416,7 @@ public class ContinueStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map unassignedAfterReachedFinallyBlocks_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1265")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1265")
   public boolean unassignedAfterReachedFinallyBlocks(Variable v) {
     Object _parameters = v;
     if (unassignedAfterReachedFinallyBlocks_Variable_values == null) unassignedAfterReachedFinallyBlocks_Variable_values = new java.util.HashMap(4);
@@ -549,7 +481,7 @@ public class ContinueStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map assignedAfterReachedFinallyBlocks_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1310")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1310")
   public boolean assignedAfterReachedFinallyBlocks(Variable v) {
     Object _parameters = v;
     if (assignedAfterReachedFinallyBlocks_Variable_values == null) assignedAfterReachedFinallyBlocks_Variable_values = new java.util.HashMap(4);
@@ -617,7 +549,7 @@ public class ContinueStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -662,60 +594,139 @@ public class ContinueStmt extends Stmt implements Cloneable {
       return (Boolean) _value.value;
     }
   }
-  /** @apilevel internal */
-  private void getFinallyOpt_reset() {
-    getFinallyOpt_computed = false;
-    
-    getFinallyOpt_value = null;
+  /**
+   * @attribute syn
+   * @aspect NameCheck
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:552
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:552")
+  public Collection<Problem> nameProblems() {
+    {
+        if (!insideLoop()) {
+          return Collections.singletonList(error("continue outside loop"));
+        } else if (hasLabel()) {
+          LabeledStmt label = lookupLabel(getLabel());
+          if (label == null) {
+            return Collections.singletonList(
+                error("labeled continue must have visible matching label"));
+          } else if (!label.getStmt().continueLabel()) {
+            return Collections.singletonList(errorf("%s is not a loop label", getLabel()));
+          }
+        }
+        return Collections.emptyList();
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:120
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:120")
+  public boolean hasLabel() {
+    boolean hasLabel_value = !getLabel().equals("");
+    return hasLabel_value;
+  }
+  /**
+   * @return <code>true</code> if this statement can branch to
+   * the target statement.
+   * @attribute syn
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:182
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:182")
+  public boolean canBranchTo(BranchTargetStmt target) {
+    boolean canBranchTo_BranchTargetStmt_value = !hasLabel();
+    return canBranchTo_BranchTargetStmt_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:184
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:184")
+  public boolean canBranchTo(LabeledStmt target) {
+    boolean canBranchTo_LabeledStmt_value = hasLabel() && target.getLabel().equals(getLabel());
+    return canBranchTo_LabeledStmt_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:186
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:186")
+  public boolean canBranchTo(SwitchStmt target) {
+    boolean canBranchTo_SwitchStmt_value = false;
+    return canBranchTo_SwitchStmt_value;
   }
   /** @apilevel internal */
-  protected boolean getFinallyOpt_computed = false;
+  private void targetStmt_reset() {
+    targetStmt_computed = null;
+    targetStmt_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle targetStmt_computed = null;
 
   /** @apilevel internal */
-  protected Opt<Block> getFinallyOpt_value;
+  protected Stmt targetStmt_value;
 
   /**
-   * @attribute syn nta
-   * @aspect NTAFinally
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NTAFinally.jrag:50
+   * Find the target statement for break and continue. This can be a try
+   * statement with a finally block that can not complete normally.
+   * @attribute syn
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:46
    */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="NTAFinally", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/NTAFinally.jrag:50")
-  public Opt<Block> getFinallyOpt() {
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:46")
+  public Stmt targetStmt() {
     ASTState state = state();
-    if (getFinallyOpt_computed) {
-      return (Opt<Block>) getChild(getFinallyOptChildPosition());
+    if (targetStmt_computed == ASTState.NON_CYCLE || targetStmt_computed == state().cycle()) {
+      return targetStmt_value;
     }
-    state().enterLazyAttribute();
-    getFinallyOpt_value = getFinallyOpt_compute();
-    setChild(getFinallyOpt_value, getFinallyOptChildPosition());
-    getFinallyOpt_computed = true;
-    state().leaveLazyAttribute();
-    Opt<Block> node = (Opt<Block>) this.getChild(getFinallyOptChildPosition());
-    return node;
+    targetStmt_value = branchTarget(this);
+    if (state().inCircle()) {
+      targetStmt_computed = state().cycle();
+    
+    } else {
+      targetStmt_computed = ASTState.NON_CYCLE;
+    
+    }
+    return targetStmt_value;
   }
-  /** @apilevel internal */
-  private Opt<Block> getFinallyOpt_compute() {
-      return branchFinallyOpt();
-    }
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = false;
     return modifiedInScope_Variable_value;
   }
+  /**
+   * @attribute inh
+   * @aspect NameCheck
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:523
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:523")
+  public boolean insideLoop() {
+    boolean insideLoop_value = getParent().Define_insideLoop(this, null);
+    return insideLoop_value;
+  }
   /** Lookup visible label. 
    * @attribute inh
    * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:255
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:255
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:255")
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:255")
   public LabeledStmt lookupLabel(String name) {
     Object _parameters = name;
     if (lookupLabel_String_computed == null) lookupLabel_String_computed = new java.util.HashMap(4);
@@ -747,17 +758,6 @@ public class ContinueStmt extends Stmt implements Cloneable {
   protected java.util.Map lookupLabel_String_values;
   /** @apilevel internal */
   protected java.util.Map lookupLabel_String_computed;
-  /**
-   * @attribute inh
-   * @aspect NameCheck
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:523
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:523")
-  public boolean insideLoop() {
-    boolean insideLoop_value = getParent().Define_insideLoop(this, null);
-    return insideLoop_value;
-  }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
     return super.rewriteTo();
@@ -768,7 +768,7 @@ public class ContinueStmt extends Stmt implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:550
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:550
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

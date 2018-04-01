@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,10 +19,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
@@ -32,7 +32,7 @@ import java.io.DataInputStream;
  * members declared in the type named by a canonical name to be imported as
  * needed.
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java5/grammar/StaticImports.ast:19
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/StaticImports.ast:19
  * @astdecl StaticImportOnDemandDecl : StaticImportDecl;
  * @production StaticImportOnDemandDecl : {@link StaticImportDecl};
 
@@ -40,7 +40,7 @@ import java.io.DataInputStream;
 public class StaticImportOnDemandDecl extends StaticImportDecl implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/PrettyPrint.jadd:350
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/PrettyPrint.jadd:350
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("import static ");
@@ -209,10 +209,10 @@ public class StaticImportOnDemandDecl extends StaticImportDecl implements Clonea
   /**
    * @attribute syn
    * @aspect StaticImports
-   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/StaticImports.jrag:106
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/StaticImports.jrag:106
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/StaticImports.jrag:106")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/StaticImports.jrag:106")
   public TypeDecl type() {
     TypeDecl type_value = getAccess().type();
     return type_value;
@@ -220,21 +220,21 @@ public class StaticImportOnDemandDecl extends StaticImportDecl implements Clonea
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:531
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:531
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:531")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:531")
   public boolean isOnDemand() {
     boolean isOnDemand_value = true;
     return isOnDemand_value;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getAccessNoTransform() != null && _callerNode == getAccess()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/StaticImports.jrag:324
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/StaticImports.jrag:324
       return NameType.TYPE_NAME;
     }
     else {
@@ -242,7 +242,7 @@ public class StaticImportOnDemandDecl extends StaticImportDecl implements Clonea
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -259,7 +259,7 @@ public class StaticImportOnDemandDecl extends StaticImportDecl implements Clonea
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/StaticImports.jrag:146
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/StaticImports.jrag:146
     if (!getAccess().type().typeName().equals(typeName())) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

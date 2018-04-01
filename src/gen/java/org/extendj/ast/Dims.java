@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:224
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:224
  * @astdecl Dims : ASTNode ::= [Expr];
  * @production Dims : {@link ASTNode} ::= <span class="component">[{@link Expr}]</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class Dims extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:325
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:325
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("[");
@@ -230,12 +230,12 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     return (Opt<Expr>) getChildNoTransform(0);
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getExprOptNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:386
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:386
       return false;
     }
     else {
@@ -243,7 +243,7 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
    */
@@ -251,12 +251,12 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getExprOptNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:387
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:387
       return false;
     }
     else {
@@ -264,7 +264,7 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute invocationContext
    */
@@ -272,12 +272,12 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getExprOptNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:388
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:388
       return false;
     }
     else {
@@ -285,7 +285,7 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute castContext
    */
@@ -293,12 +293,12 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getExprOptNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:389
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:389
       return false;
     }
     else {
@@ -306,7 +306,7 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute stringContext
    */
@@ -314,12 +314,12 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getExprOptNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:390
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:390
       return false;
     }
     else {
@@ -327,7 +327,7 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute numericContext
    */

@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:293
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:293
  * @astdecl LabeledStmt : BranchTargetStmt ::= <Label:String> Stmt;
  * @production LabeledStmt : {@link BranchTargetStmt} ::= <span class="component">&lt;Label:String&gt;</span> <span class="component">{@link Stmt}</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class LabeledStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:436
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:436
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getLabel());
@@ -267,10 +267,10 @@ public class LabeledStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50")
   public boolean canCompleteNormally() {
     ASTState state = state();
     if (canCompleteNormally_computed == ASTState.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
@@ -286,44 +286,13 @@ public class LabeledStmt extends BranchTargetStmt implements Cloneable {
     }
     return canCompleteNormally_value;
   }
-  /**
-   * @return <code>true</code> if this statement is a potential
-   * branch target of the given branch statement.
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:215
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:215")
-  public boolean potentialTargetOf(Stmt branch) {
-    boolean potentialTargetOf_Stmt_value = branch.canBranchTo(this);
-    return potentialTargetOf_Stmt_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect NameCheck
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:512
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:512")
-  public Collection<Problem> nameProblems() {
-    {
-        LabeledStmt stmt = lookupLabel(getLabel());
-        if (stmt != null) {
-          if (stmt.enclosingBodyDecl() == enclosingBodyDecl()) {
-            return Collections.singletonList(error("Labels can not shadow labels in the same member"));
-          }
-        }
-        return Collections.emptyList();
-      }
-  }
   /** @apilevel internal */
   private void assignedAfter_Variable_reset() {
     assignedAfter_Variable_values = null;
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -386,7 +355,7 @@ public class LabeledStmt extends BranchTargetStmt implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -445,11 +414,42 @@ public class LabeledStmt extends BranchTargetStmt implements Cloneable {
     }
   /**
    * @attribute syn
-   * @aspect PreciseRethrow
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
+   * @aspect NameCheck
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:512
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:512")
+  public Collection<Problem> nameProblems() {
+    {
+        LabeledStmt stmt = lookupLabel(getLabel());
+        if (stmt != null) {
+          if (stmt.enclosingBodyDecl() == enclosingBodyDecl()) {
+            return Collections.singletonList(error("Labels can not shadow labels in the same member"));
+          }
+        }
+        return Collections.emptyList();
+      }
+  }
+  /**
+   * @return <code>true</code> if this statement is a potential
+   * branch target of the given branch statement.
+   * @attribute syn
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:215
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:215")
+  public boolean potentialTargetOf(Stmt branch) {
+    boolean potentialTargetOf_Stmt_value = branch.canBranchTo(this);
+    return potentialTargetOf_Stmt_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect PreciseRethrow
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = getStmt().modifiedInScope(var);
     return modifiedInScope_Variable_value;
@@ -457,10 +457,10 @@ public class LabeledStmt extends BranchTargetStmt implements Cloneable {
   /** Lookup visible label. 
    * @attribute inh
    * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:258
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:258
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:258")
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:258")
   public LabeledStmt lookupLabel(String name) {
     Object _parameters = name;
     if (lookupLabel_String_computed == null) lookupLabel_String_computed = new java.util.HashMap(4);
@@ -493,12 +493,12 @@ public class LabeledStmt extends BranchTargetStmt implements Cloneable {
   /** @apilevel internal */
   protected java.util.Map lookupLabel_String_computed;
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
    * @apilevel internal
    */
   public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
     if (getStmtNoTransform() != null && _callerNode == getStmt()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:83
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:83
       return reachable();
     }
     else {
@@ -506,7 +506,7 @@ public class LabeledStmt extends BranchTargetStmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute reachable
    */
@@ -514,49 +514,12 @@ public class LabeledStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:230
-   * @apilevel internal
-   */
-  public Stmt Define_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return branch.canBranchTo(this) ? this : branchTarget(branch);
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:230
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute branchTarget
-   */
-  protected boolean canDefine_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
-    return true;
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:255
-   * @apilevel internal
-   */
-  public LabeledStmt Define_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
-    if (getStmtNoTransform() != null && _callerNode == getStmt()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:260
-      return name.equals(getLabel()) ? this : lookupLabel(name);
-    }
-    else {
-      return getParent().Define_lookupLabel(this, _callerNode, name);
-    }
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:255
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupLabel
-   */
-  protected boolean canDefine_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getStmtNoTransform() != null && _callerNode == getStmt()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:660
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:660
       return assignedBefore(v);
     }
     else {
@@ -564,7 +527,7 @@ public class LabeledStmt extends BranchTargetStmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
    */
@@ -572,12 +535,12 @@ public class LabeledStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getStmtNoTransform() != null && _callerNode == getStmt()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1207
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1207
       return unassignedBefore(v);
     }
     else {
@@ -585,11 +548,48 @@ public class LabeledStmt extends BranchTargetStmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
    */
   protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:230
+   * @apilevel internal
+   */
+  public Stmt Define_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return branch.canBranchTo(this) ? this : branchTarget(branch);
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:230
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute branchTarget
+   */
+  protected boolean canDefine_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:255
+   * @apilevel internal
+   */
+  public LabeledStmt Define_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
+    if (getStmtNoTransform() != null && _callerNode == getStmt()) {
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:260
+      return name.equals(getLabel()) ? this : lookupLabel(name);
+    }
+    else {
+      return getParent().Define_lookupLabel(this, _callerNode, name);
+    }
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:255
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupLabel
+   */
+  protected boolean canDefine_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
     return true;
   }
   /** @apilevel internal */
@@ -602,7 +602,7 @@ public class LabeledStmt extends BranchTargetStmt implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:510
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:510
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

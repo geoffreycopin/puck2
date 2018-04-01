@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:319
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:319
  * @astdecl TryStmt : Stmt ::= Block CatchClause* [Finally:Block] ExceptionHandler:Block;
  * @production TryStmt : {@link Stmt} ::= <span class="component">{@link Block}</span> <span class="component">{@link CatchClause}*</span> <span class="component">[Finally:{@link Block}]</span> <span class="component">ExceptionHandler:{@link Block}</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class TryStmt extends Stmt implements Cloneable, FinallyHost {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:593
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:593
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("try ");
@@ -55,15 +55,8 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
     }
   }
   /**
-   * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:116
-   */
-  public void collectBranches(Collection<Stmt> c) {
-    c.addAll(escapedBranches());
-  }
-  /**
    * @aspect ExceptionHandling
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:307
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:307
    */
   protected boolean reachedException(TypeDecl catchType) {
     boolean found = false;
@@ -91,10 +84,17 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
   }
   /**
    * @aspect DefiniteUnassignment
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1232
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1232
    */
   public Block getFinallyBlock() {
     return getFinally();
+  }
+  /**
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:116
+   */
+  public void collectBranches(Collection<Stmt> c) {
+    c.addAll(escapedBranches());
   }
   /**
    * @declaredat ASTNode:1
@@ -145,20 +145,20 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    canCompleteNormally_reset();
-    branches_reset();
-    escapedBranches_reset();
     hasNonEmptyFinally_reset();
     catchableException_TypeDecl_reset();
+    canCompleteNormally_reset();
+    getExceptionHandler_reset();
     assignedAfter_Variable_reset();
     unassignedAfterFinally_Variable_reset();
     assignedAfterFinally_Variable_reset();
     unassignedBefore_Variable_reset();
     unassignedAfter_Variable_reset();
-    getExceptionHandler_reset();
+    branches_reset();
+    escapedBranches_reset();
+    handlesException_TypeDecl_reset();
     typeError_reset();
     typeRuntimeException_reset();
-    handlesException_TypeDecl_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:54
@@ -462,134 +462,6 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
     return 3;
   }
   /** @apilevel internal */
-  private void canCompleteNormally_reset() {
-    canCompleteNormally_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle canCompleteNormally_computed = null;
-
-  /** @apilevel internal */
-  protected boolean canCompleteNormally_value;
-
-  /**
-   * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50")
-  public boolean canCompleteNormally() {
-    ASTState state = state();
-    if (canCompleteNormally_computed == ASTState.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
-      return canCompleteNormally_value;
-    }
-    canCompleteNormally_value = canCompleteNormally_compute();
-    if (state().inCircle()) {
-      canCompleteNormally_computed = state().cycle();
-    
-    } else {
-      canCompleteNormally_computed = ASTState.NON_CYCLE;
-    
-    }
-    return canCompleteNormally_value;
-  }
-  /** @apilevel internal */
-  private boolean canCompleteNormally_compute() {
-       boolean anyCatchClauseCompleteNormally = false;
-       for (int i = 0; i < getNumCatchClause() && !anyCatchClauseCompleteNormally; i++) {
-         anyCatchClauseCompleteNormally = getCatchClause(i).getBlock().canCompleteNormally();
-       }
-       return (getBlock().canCompleteNormally() || anyCatchClauseCompleteNormally)
-         && (!hasNonEmptyFinally() || getFinally().canCompleteNormally());
-    }
-  /** @apilevel internal */
-  private void branches_reset() {
-    branches_computed = null;
-    branches_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle branches_computed = null;
-
-  /** @apilevel internal */
-  protected Collection<Stmt> branches_value;
-
-  /** All branches that reach this node. 
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:156
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:156")
-  public Collection<Stmt> branches() {
-    ASTState state = state();
-    if (branches_computed == ASTState.NON_CYCLE || branches_computed == state().cycle()) {
-      return branches_value;
-    }
-    branches_value = branches_compute();
-    if (state().inCircle()) {
-      branches_computed = state().cycle();
-    
-    } else {
-      branches_computed = ASTState.NON_CYCLE;
-    
-    }
-    return branches_value;
-  }
-  /** @apilevel internal */
-  private Collection<Stmt> branches_compute() {
-      Collection<Stmt> set = new HashSet<Stmt>();
-      getBlock().collectBranches(set);
-      for (int i = 0; i < getNumCatchClause(); i++) {
-        getCatchClause(i).collectBranches(set);
-      }
-      return set;
-    }
-  /** @apilevel internal */
-  private void escapedBranches_reset() {
-    escapedBranches_computed = null;
-    escapedBranches_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle escapedBranches_computed = null;
-
-  /** @apilevel internal */
-  protected Collection<Stmt> escapedBranches_value;
-
-  /** All branches that escape this node. 
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:166
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:166")
-  public Collection<Stmt> escapedBranches() {
-    ASTState state = state();
-    if (escapedBranches_computed == ASTState.NON_CYCLE || escapedBranches_computed == state().cycle()) {
-      return escapedBranches_value;
-    }
-    escapedBranches_value = escapedBranches_compute();
-    if (state().inCircle()) {
-      escapedBranches_computed = state().cycle();
-    
-    } else {
-      escapedBranches_computed = ASTState.NON_CYCLE;
-    
-    }
-    return escapedBranches_value;
-  }
-  /** @apilevel internal */
-  private Collection<Stmt> escapedBranches_compute() {
-      Collection<Stmt> set = new HashSet<Stmt>();
-      if (hasNonEmptyFinally()) {
-        // Branches from finally.
-        getFinally().collectBranches(set);
-      }
-      if (!hasFinally() || getFinally().canCompleteNormally()) {
-        set.addAll(branches());
-      }
-      return set;
-    }
-  /** @apilevel internal */
   private void hasNonEmptyFinally_reset() {
     hasNonEmptyFinally_computed = null;
   }
@@ -603,10 +475,10 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
    * @return <code>true</code> if this TyStmt has a non-empty finally block
    * @attribute syn
    * @aspect ExceptionHandling
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:43
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:43
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:43")
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:43")
   public boolean hasNonEmptyFinally() {
     ASTState state = state();
     if (hasNonEmptyFinally_computed == ASTState.NON_CYCLE || hasNonEmptyFinally_computed == state().cycle()) {
@@ -636,10 +508,10 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
    * a type assignable to the given type.
    * @attribute syn
    * @aspect ExceptionHandling
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:289
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:289
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:289")
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:289")
   public boolean catchableException(TypeDecl type) {
     Object _parameters = type;
     if (catchableException_TypeDecl_computed == null) catchableException_TypeDecl_computed = new java.util.HashMap(4);
@@ -663,12 +535,95 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
     return catchableException_TypeDecl_value;
   }
   /** @apilevel internal */
+  private void canCompleteNormally_reset() {
+    canCompleteNormally_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle canCompleteNormally_computed = null;
+
+  /** @apilevel internal */
+  protected boolean canCompleteNormally_value;
+
+  /**
+   * @attribute syn
+   * @aspect UnreachableStatements
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50")
+  public boolean canCompleteNormally() {
+    ASTState state = state();
+    if (canCompleteNormally_computed == ASTState.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
+      return canCompleteNormally_value;
+    }
+    canCompleteNormally_value = canCompleteNormally_compute();
+    if (state().inCircle()) {
+      canCompleteNormally_computed = state().cycle();
+    
+    } else {
+      canCompleteNormally_computed = ASTState.NON_CYCLE;
+    
+    }
+    return canCompleteNormally_value;
+  }
+  /** @apilevel internal */
+  private boolean canCompleteNormally_compute() {
+       boolean anyCatchClauseCompleteNormally = false;
+       for (int i = 0; i < getNumCatchClause() && !anyCatchClauseCompleteNormally; i++) {
+         anyCatchClauseCompleteNormally = getCatchClause(i).getBlock().canCompleteNormally();
+       }
+       return (getBlock().canCompleteNormally() || anyCatchClauseCompleteNormally)
+         && (!hasNonEmptyFinally() || getFinally().canCompleteNormally());
+    }
+  /** @apilevel internal */
+  private void getExceptionHandler_reset() {
+    getExceptionHandler_computed = false;
+    
+    getExceptionHandler_value = null;
+  }
+  /** @apilevel internal */
+  protected boolean getExceptionHandler_computed = false;
+
+  /** @apilevel internal */
+  protected Block getExceptionHandler_value;
+
+  /** Copy of the finally block for catch-all exception handling. 
+   * @attribute syn nta
+   * @aspect NTAFinally
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NTAFinally.jrag:59
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
+  @ASTNodeAnnotation.Source(aspect="NTAFinally", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NTAFinally.jrag:59")
+  public Block getExceptionHandler() {
+    ASTState state = state();
+    if (getExceptionHandler_computed) {
+      return (Block) getChild(getExceptionHandlerChildPosition());
+    }
+    state().enterLazyAttribute();
+    getExceptionHandler_value = getExceptionHandler_compute();
+    setChild(getExceptionHandler_value, getExceptionHandlerChildPosition());
+    getExceptionHandler_computed = true;
+    state().leaveLazyAttribute();
+    Block node = (Block) this.getChild(getExceptionHandlerChildPosition());
+    return node;
+  }
+  /** @apilevel internal */
+  private Block getExceptionHandler_compute() {
+      if (hasNonEmptyFinally()) {
+        NTAFinallyBlock ntaBlock = new NTAFinallyBlock(this);
+        ntaBlock.addStmt((Block) getFinally().treeCopyNoTransform());
+        return ntaBlock;
+      } else {
+        return new NTAFinallyBlock();
+      }
+    }
+  /** @apilevel internal */
   private void assignedAfter_Variable_reset() {
     assignedAfter_Variable_values = null;
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -748,7 +703,7 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
   }
   protected java.util.Map unassignedAfterFinally_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1240")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1240")
   public boolean unassignedAfterFinally(Variable v) {
     Object _parameters = v;
     if (unassignedAfterFinally_Variable_values == null) unassignedAfterFinally_Variable_values = new java.util.HashMap(4);
@@ -799,7 +754,7 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
   }
   protected java.util.Map assignedAfterFinally_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1245")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1245")
   public boolean assignedAfterFinally(Variable v) {
     Object _parameters = v;
     if (assignedAfterFinally_Variable_values == null) assignedAfterFinally_Variable_values = new java.util.HashMap(4);
@@ -850,7 +805,7 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
   }
   protected java.util.Map unassignedBefore_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1573")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1573")
   public boolean unassignedBefore(Variable v) {
     Object _parameters = v;
     if (unassignedBefore_Variable_values == null) unassignedBefore_Variable_values = new java.util.HashMap(4);
@@ -901,7 +856,7 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -964,54 +919,99 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
       }
     }
   /** @apilevel internal */
-  private void getExceptionHandler_reset() {
-    getExceptionHandler_computed = false;
-    
-    getExceptionHandler_value = null;
+  private void branches_reset() {
+    branches_computed = null;
+    branches_value = null;
   }
   /** @apilevel internal */
-  protected boolean getExceptionHandler_computed = false;
+  protected ASTState.Cycle branches_computed = null;
 
   /** @apilevel internal */
-  protected Block getExceptionHandler_value;
+  protected Collection<Stmt> branches_value;
 
-  /** Copy of the finally block for catch-all exception handling. 
-   * @attribute syn nta
-   * @aspect NTAFinally
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NTAFinally.jrag:59
+  /** All branches that reach this node. 
+   * @attribute syn
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:156
    */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="NTAFinally", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/NTAFinally.jrag:59")
-  public Block getExceptionHandler() {
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:156")
+  public Collection<Stmt> branches() {
     ASTState state = state();
-    if (getExceptionHandler_computed) {
-      return (Block) getChild(getExceptionHandlerChildPosition());
+    if (branches_computed == ASTState.NON_CYCLE || branches_computed == state().cycle()) {
+      return branches_value;
     }
-    state().enterLazyAttribute();
-    getExceptionHandler_value = getExceptionHandler_compute();
-    setChild(getExceptionHandler_value, getExceptionHandlerChildPosition());
-    getExceptionHandler_computed = true;
-    state().leaveLazyAttribute();
-    Block node = (Block) this.getChild(getExceptionHandlerChildPosition());
-    return node;
+    branches_value = branches_compute();
+    if (state().inCircle()) {
+      branches_computed = state().cycle();
+    
+    } else {
+      branches_computed = ASTState.NON_CYCLE;
+    
+    }
+    return branches_value;
   }
   /** @apilevel internal */
-  private Block getExceptionHandler_compute() {
-      if (hasNonEmptyFinally()) {
-        NTAFinallyBlock ntaBlock = new NTAFinallyBlock(this);
-        ntaBlock.addStmt((Block) getFinally().treeCopyNoTransform());
-        return ntaBlock;
-      } else {
-        return new NTAFinallyBlock();
+  private Collection<Stmt> branches_compute() {
+      Collection<Stmt> set = new HashSet<Stmt>();
+      getBlock().collectBranches(set);
+      for (int i = 0; i < getNumCatchClause(); i++) {
+        getCatchClause(i).collectBranches(set);
       }
+      return set;
+    }
+  /** @apilevel internal */
+  private void escapedBranches_reset() {
+    escapedBranches_computed = null;
+    escapedBranches_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle escapedBranches_computed = null;
+
+  /** @apilevel internal */
+  protected Collection<Stmt> escapedBranches_value;
+
+  /** All branches that escape this node. 
+   * @attribute syn
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:166
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:166")
+  public Collection<Stmt> escapedBranches() {
+    ASTState state = state();
+    if (escapedBranches_computed == ASTState.NON_CYCLE || escapedBranches_computed == state().cycle()) {
+      return escapedBranches_value;
+    }
+    escapedBranches_value = escapedBranches_compute();
+    if (state().inCircle()) {
+      escapedBranches_computed = state().cycle();
+    
+    } else {
+      escapedBranches_computed = ASTState.NON_CYCLE;
+    
+    }
+    return escapedBranches_value;
+  }
+  /** @apilevel internal */
+  private Collection<Stmt> escapedBranches_compute() {
+      Collection<Stmt> set = new HashSet<Stmt>();
+      if (hasNonEmptyFinally()) {
+        // Branches from finally.
+        getFinally().collectBranches(set);
+      }
+      if (!hasFinally() || getFinally().canCompleteNormally()) {
+        set.addAll(branches());
+      }
+      return set;
     }
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
   public boolean modifiedInScope(Variable var) {
     {
         if (getBlock().modifiedInScope(var)) {
@@ -1027,77 +1027,11 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
   }
   /**
    * @attribute inh
-   * @aspect UnreachableStatements
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:197
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:197")
-  public TypeDecl typeError() {
-    ASTState state = state();
-    if (typeError_computed == ASTState.NON_CYCLE || typeError_computed == state().cycle()) {
-      return typeError_value;
-    }
-    typeError_value = getParent().Define_typeError(this, null);
-    if (state().inCircle()) {
-      typeError_computed = state().cycle();
-    
-    } else {
-      typeError_computed = ASTState.NON_CYCLE;
-    
-    }
-    return typeError_value;
-  }
-  /** @apilevel internal */
-  private void typeError_reset() {
-    typeError_computed = null;
-    typeError_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle typeError_computed = null;
-
-  /** @apilevel internal */
-  protected TypeDecl typeError_value;
-
-  /**
-   * @attribute inh
-   * @aspect UnreachableStatements
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:198
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:198")
-  public TypeDecl typeRuntimeException() {
-    ASTState state = state();
-    if (typeRuntimeException_computed == ASTState.NON_CYCLE || typeRuntimeException_computed == state().cycle()) {
-      return typeRuntimeException_value;
-    }
-    typeRuntimeException_value = getParent().Define_typeRuntimeException(this, null);
-    if (state().inCircle()) {
-      typeRuntimeException_computed = state().cycle();
-    
-    } else {
-      typeRuntimeException_computed = ASTState.NON_CYCLE;
-    
-    }
-    return typeRuntimeException_value;
-  }
-  /** @apilevel internal */
-  private void typeRuntimeException_reset() {
-    typeRuntimeException_computed = null;
-    typeRuntimeException_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle typeRuntimeException_computed = null;
-
-  /** @apilevel internal */
-  protected TypeDecl typeRuntimeException_value;
-
-  /**
-   * @attribute inh
    * @aspect ExceptionHandling
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:93
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:93
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:93")
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:93")
   public boolean handlesException(TypeDecl exceptionType) {
     Object _parameters = exceptionType;
     if (handlesException_TypeDecl_computed == null) handlesException_TypeDecl_computed = new java.util.HashMap(4);
@@ -1130,16 +1064,123 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
   /** @apilevel internal */
   protected java.util.Map handlesException_TypeDecl_computed;
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @attribute inh
+   * @aspect UnreachableStatements
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:197
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:197")
+  public TypeDecl typeError() {
+    ASTState state = state();
+    if (typeError_computed == ASTState.NON_CYCLE || typeError_computed == state().cycle()) {
+      return typeError_value;
+    }
+    typeError_value = getParent().Define_typeError(this, null);
+    if (state().inCircle()) {
+      typeError_computed = state().cycle();
+    
+    } else {
+      typeError_computed = ASTState.NON_CYCLE;
+    
+    }
+    return typeError_value;
+  }
+  /** @apilevel internal */
+  private void typeError_reset() {
+    typeError_computed = null;
+    typeError_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle typeError_computed = null;
+
+  /** @apilevel internal */
+  protected TypeDecl typeError_value;
+
+  /**
+   * @attribute inh
+   * @aspect UnreachableStatements
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:198
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:198")
+  public TypeDecl typeRuntimeException() {
+    ASTState state = state();
+    if (typeRuntimeException_computed == ASTState.NON_CYCLE || typeRuntimeException_computed == state().cycle()) {
+      return typeRuntimeException_value;
+    }
+    typeRuntimeException_value = getParent().Define_typeRuntimeException(this, null);
+    if (state().inCircle()) {
+      typeRuntimeException_computed = state().cycle();
+    
+    } else {
+      typeRuntimeException_computed = ASTState.NON_CYCLE;
+    
+    }
+    return typeRuntimeException_value;
+  }
+  /** @apilevel internal */
+  private void typeRuntimeException_reset() {
+    typeRuntimeException_computed = null;
+    typeRuntimeException_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle typeRuntimeException_computed = null;
+
+  /** @apilevel internal */
+  protected TypeDecl typeRuntimeException_value;
+
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:112
+   * @apilevel internal
+   */
+  public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
+    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:266
+      {
+          for (int i = 0; i < getNumCatchClause(); i++) {
+            if (getCatchClause(i).handles(exceptionType)) {
+              return true;
+            }
+          }
+          if (hasNonEmptyFinally() && !getFinally().canCompleteNormally()) {
+            return true;
+          }
+          return handlesException(exceptionType);
+        }
+    }
+    else if (_callerNode == getCatchClauseListNoTransform()) {
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:259
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      {
+          if (hasNonEmptyFinally() && !getFinally().canCompleteNormally()) {
+            return true;
+          }
+          return handlesException(exceptionType);
+        }
+    }
+    else {
+      return getParent().Define_handlesException(this, _callerNode, exceptionType);
+    }
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:112
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute handlesException
+   */
+  protected boolean canDefine_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
    * @apilevel internal
    */
   public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getFinallyOptNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:176
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:176
       return reachable();
     }
     else if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:175
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:175
       return reachable();
     }
     else {
@@ -1147,7 +1188,7 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute reachable
    */
@@ -1155,12 +1196,12 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:182
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:182
    * @apilevel internal
    */
   public boolean Define_reachableCatchClause(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
     if (_callerNode == getCatchClauseListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:183
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:183
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       {
           for (int i = 0; i < childIndex; i++) {
@@ -1182,7 +1223,7 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:182
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:182
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute reachableCatchClause
    */
@@ -1190,21 +1231,21 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
    * @apilevel internal
    */
   public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getFinallyOptNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:216
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:216
       return reachable();
     }
     else if (_callerNode == getCatchClauseListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:215
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:215
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return reachable();
     }
     else if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:214
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:214
       return reachable();
     }
     else {
@@ -1212,7 +1253,7 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute reportUnreachable
    */
@@ -1220,84 +1261,21 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:273
-   * @apilevel internal
-   */
-  public FinallyHost Define_enclosingFinally(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
-    if (_callerNode == getFinallyOptNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:280
-      return enclosingFinally(branch);
-    }
-    else {
-      int childIndex = this.getIndexOfChild(_callerNode);
-      return hasNonEmptyFinally() ? this : enclosingFinally(branch);
-    }
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:273
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute enclosingFinally
-   */
-  protected boolean canDefine_enclosingFinally(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
-    return true;
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:112
-   * @apilevel internal
-   */
-  public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
-    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:266
-      {
-          for (int i = 0; i < getNumCatchClause(); i++) {
-            if (getCatchClause(i).handles(exceptionType)) {
-              return true;
-            }
-          }
-          if (hasNonEmptyFinally() && !getFinally().canCompleteNormally()) {
-            return true;
-          }
-          return handlesException(exceptionType);
-        }
-    }
-    else if (_callerNode == getCatchClauseListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:259
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      {
-          if (hasNonEmptyFinally() && !getFinally().canCompleteNormally()) {
-            return true;
-          }
-          return handlesException(exceptionType);
-        }
-    }
-    else {
-      return getParent().Define_handlesException(this, _callerNode, exceptionType);
-    }
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:112
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute handlesException
-   */
-  protected boolean canDefine_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
-    return true;
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (_callerNode == getFinallyOptNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:854
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:854
       return assignedBefore(v);
     }
     else if (_callerNode == getCatchClauseListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:851
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:851
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return getBlock().assignedBefore(v);
     }
     else if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:848
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:848
       return assignedBefore(v);
     }
     else {
@@ -1305,7 +1283,7 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
    */
@@ -1313,12 +1291,12 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (_callerNode == getFinallyOptNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1587
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1587
       {
           if (!getBlock().unassignedEverywhere(v)) {
             return false;
@@ -1332,7 +1310,7 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
         }
     }
     else if (_callerNode == getCatchClauseListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1576
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1576
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       {
           if (!getBlock().unassignedAfter(v)) {
@@ -1345,7 +1323,7 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
         }
     }
     else if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1571
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1571
       return unassignedBefore(v);
     }
     else {
@@ -1353,7 +1331,7 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
    */
@@ -1361,12 +1339,34 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:217
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:273
+   * @apilevel internal
+   */
+  public FinallyHost Define_enclosingFinally(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
+    if (_callerNode == getFinallyOptNoTransform()) {
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:280
+      return enclosingFinally(branch);
+    }
+    else {
+      int childIndex = this.getIndexOfChild(_callerNode);
+      return hasNonEmptyFinally() ? this : enclosingFinally(branch);
+    }
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:273
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute enclosingFinally
+   */
+  protected boolean canDefine_enclosingFinally(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:217
    * @apilevel internal
    */
   public Collection<TypeDecl> Define_caughtExceptions(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getCatchClauseListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:219
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:219
       int index = _callerNode.getIndexOfChild(_childNode);
       {
           Collection<TypeDecl> exceptions = new HashSet<TypeDecl>();
@@ -1397,7 +1397,7 @@ public class TryStmt extends Stmt implements Cloneable, FinallyHost {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:217
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:217
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute caughtExceptions
    */

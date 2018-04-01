@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,16 +19,18 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * A statement that can be reached by {@code break} or {@code continue}.
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:289
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:289
  * @astdecl BranchTargetStmt : Stmt;
  * @production BranchTargetStmt : {@link Stmt};
 
@@ -38,7 +38,7 @@ import java.io.DataInputStream;
 public abstract class BranchTargetStmt extends Stmt implements Cloneable {
   /**
    * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:112
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:112
    */
   public void collectBranches(Collection<Stmt> c) {
     c.addAll(escapedBranches());
@@ -137,10 +137,10 @@ public abstract class BranchTargetStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:85
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:85
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:85")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:85")
   public boolean reachableBreak() {
     ASTState state = state();
     if (reachableBreak_computed == ASTState.NON_CYCLE || reachableBreak_computed == state().cycle()) {
@@ -178,10 +178,10 @@ public abstract class BranchTargetStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:140
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:140
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:140")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:140")
   public boolean reachableContinue() {
     ASTState state = state();
     if (reachableContinue_computed == ASTState.NON_CYCLE || reachableContinue_computed == state().cycle()) {
@@ -220,10 +220,10 @@ public abstract class BranchTargetStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:88
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:88
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:88")
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:88")
   public Collection<Stmt> targetBranches() {
     ASTState state = state();
     if (targetBranches_computed == ASTState.NON_CYCLE || targetBranches_computed == state().cycle()) {
@@ -263,10 +263,10 @@ public abstract class BranchTargetStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:90
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:90
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:90")
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:90")
   public Collection<Stmt> escapedBranches() {
     ASTState state = state();
     if (escapedBranches_computed == ASTState.NON_CYCLE || escapedBranches_computed == state().cycle()) {
@@ -308,10 +308,10 @@ public abstract class BranchTargetStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:92
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:92
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:92")
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:92")
   public Collection<Stmt> branches() {
     ASTState state = state();
     if (branches_computed == ASTState.NON_CYCLE || branches_computed == state().cycle()) {
@@ -338,10 +338,10 @@ public abstract class BranchTargetStmt extends Stmt implements Cloneable {
    * branch target of the given branch statement.
    * @attribute syn
    * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:215
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:215
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:215")
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:215")
   public boolean potentialTargetOf(Stmt branch) {
     boolean potentialTargetOf_Stmt_value = false;
     return potentialTargetOf_Stmt_value;
@@ -360,10 +360,10 @@ public abstract class BranchTargetStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:84
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:84
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:84")
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:84")
   public Collection<ContinueStmt> targetContinues() {
     ASTState state = state();
     if (targetContinues_computed == ASTState.NON_CYCLE || targetContinues_computed == state().cycle()) {
@@ -410,10 +410,10 @@ public abstract class BranchTargetStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:86
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:86
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:86")
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:86")
   public Collection<BreakStmt> targetBreaks() {
     ASTState state = state();
     if (targetBreaks_computed == ASTState.NON_CYCLE || targetBreaks_computed == state().cycle()) {
@@ -440,7 +440,7 @@ public abstract class BranchTargetStmt extends Stmt implements Cloneable {
       return set;
     }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:273
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:273
    * @apilevel internal
    */
   public FinallyHost Define_enclosingFinally(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
@@ -448,7 +448,7 @@ public abstract class BranchTargetStmt extends Stmt implements Cloneable {
     return potentialTargetOf(branch) ? null : enclosingFinally(branch);
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:273
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:273
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingFinally
    */

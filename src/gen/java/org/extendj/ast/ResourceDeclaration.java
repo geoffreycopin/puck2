@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,16 +19,18 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * A resource declaration in a try with resources statement.
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java7/grammar/TryWithResources.ast:9
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/grammar/TryWithResources.ast:9
  * @astdecl ResourceDeclaration : VariableDeclarator ::= ResourceModifiers ResourceType:Access;
  * @production ResourceDeclaration : {@link VariableDeclarator} ::= <span class="component">{@link ResourceModifiers}</span> <span class="component">ResourceType:{@link Access}</span>;
 
@@ -38,7 +38,7 @@ import java.io.DataInputStream;
 public class ResourceDeclaration extends VariableDeclarator implements Cloneable {
   /**
    * @aspect Java7PrettyPrint
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PrettyPrint.jadd:56
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PrettyPrint.jadd:56
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getTypeAccess());
@@ -475,10 +475,10 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
    * Type checking for TWR.
    * @attribute syn
    * @aspect TryWithResources
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:47
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:47
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:47")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:47")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -510,10 +510,10 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
    * exception analysis.
    * @attribute syn
    * @aspect TryWithResources
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:247
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:247
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:247")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:247")
   public MethodAccess closeAccess() {
     ASTState state = state();
     if (closeAccess_computed) {
@@ -540,10 +540,10 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
   /** Modifiers are same as the parent declaration (e.g. VarDeclStmt). 
    * @attribute syn
    * @aspect VariableDeclarationTransformation
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/VariableDeclaration.jrag:130
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:130
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableDeclarationTransformation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/VariableDeclaration.jrag:130")
+  @ASTNodeAnnotation.Source(aspect="VariableDeclarationTransformation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/VariableDeclaration.jrag:130")
   public Modifiers getModifiers() {
     ASTState state = state();
     if (getModifiers_computed == ASTState.NON_CYCLE || getModifiers_computed == state().cycle()) {
@@ -574,10 +574,10 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
   /**
    * @attribute syn nta
    * @aspect TryWithResources
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:300
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:300
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:300")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:300")
   public Access getTypeAccess() {
     ASTState state = state();
     if (getTypeAccess_computed) {
@@ -595,25 +595,25 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
    * Inherit the lookupType attribute in ResourceDeclaration.
    * @attribute inh
    * @aspect TryWithResources
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:40
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:40
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:40")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:40")
   public TypeDecl lookupType(String packageName, String typeName) {
     TypeDecl lookupType_String_String_value = getParent().Define_lookupType(this, null, packageName, typeName);
     return lookupType_String_String_value;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getResourceTypeNoTransform() != null && _callerNode == getResourceType()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:310
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:310
       return NameType.TYPE_NAME;
     }
     else if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:35
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:35
       return NameType.TYPE_NAME;
     }
     else {
@@ -621,7 +621,7 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -629,12 +629,12 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:116
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:116
    * @apilevel internal
    */
   public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == closeAccess_value) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:251
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:251
       return getResourceType().type().memberMethods(name);
     }
     else {
@@ -642,7 +642,7 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:116
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:116
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupMethod
    */
@@ -650,12 +650,12 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:207
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:207
    * @apilevel internal
    */
   public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == closeAccess_value) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:256
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:256
       return false;
     }
     else {
@@ -663,7 +663,7 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:207
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:207
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inStaticContext
    */
@@ -671,12 +671,12 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:434
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:434
    * @apilevel internal
    */
   public boolean Define_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
     if (getResourceModifiersNoTransform() != null && _callerNode == getResourceModifiers()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:308
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:308
       return true;
     }
     else {
@@ -684,7 +684,7 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Modifiers.jrag:434
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Modifiers.jrag:434
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeFinal
    */
@@ -701,7 +701,7 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:42
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:42
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -710,7 +710,7 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
       }
       contributors.add(this);
     }
-    // @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/TryWithResources.jrag:194
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/TryWithResources.jrag:194
     if (resourcePreviouslyDeclared(name())) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

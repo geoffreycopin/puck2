@@ -56,5 +56,5 @@ public class InterfaceReader extends TypeDeclReader {
         for (Access sup: interfaceDecl.getSuperInterfaceList()) {
         	addTypeDependency(edges, sup.type(), Edge.Type.IsA,nodes);
         }
-}
+    }
 }

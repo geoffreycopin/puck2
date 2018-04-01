@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:302
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:302
  * @astdecl WhileStmt : BranchTargetStmt ::= Condition:Expr Stmt;
  * @production WhileStmt : {@link BranchTargetStmt} ::= <span class="component">Condition:{@link Expr}</span> <span class="component">{@link Stmt}</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class WhileStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @aspect PrettyPrintUtil
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:265
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:265
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("while (");
@@ -257,10 +257,10 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50")
   public boolean canCompleteNormally() {
     ASTState state = state();
     if (canCompleteNormally_computed == ASTState.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
@@ -276,37 +276,13 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     }
     return canCompleteNormally_value;
   }
-  /**
-   * @return <code>true</code> if this statement is a potential
-   * branch target of the given branch statement.
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:215
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:215")
-  public boolean potentialTargetOf(Stmt branch) {
-    boolean potentialTargetOf_Stmt_value = branch.canBranchTo(this);
-    return potentialTargetOf_Stmt_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect NameCheck
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:567
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:567")
-  public boolean continueLabel() {
-    boolean continueLabel_value = true;
-    return continueLabel_value;
-  }
   /** @apilevel internal */
   private void assignedAfter_Variable_reset() {
     assignedAfter_Variable_values = null;
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -369,7 +345,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -435,7 +411,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
   }
   protected java.util.Map unassignedBeforeCondition_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1417")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1417")
   public boolean unassignedBeforeCondition(Variable v) {
     Object _parameters = v;
     if (unassignedBeforeCondition_Variable_values == null) unassignedBeforeCondition_Variable_values = new java.util.HashMap(4);
@@ -498,22 +474,46 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     }
   /**
    * @attribute syn
-   * @aspect PreciseRethrow
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
+   * @aspect NameCheck
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:567
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:567")
+  public boolean continueLabel() {
+    boolean continueLabel_value = true;
+    return continueLabel_value;
+  }
+  /**
+   * @return <code>true</code> if this statement is a potential
+   * branch target of the given branch statement.
+   * @attribute syn
+   * @aspect BranchTarget
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:215
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:215")
+  public boolean potentialTargetOf(Stmt branch) {
+    boolean potentialTargetOf_Stmt_value = branch.canBranchTo(this);
+    return potentialTargetOf_Stmt_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect PreciseRethrow
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = getStmt().modifiedInScope(var);
     return modifiedInScope_Variable_value;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
    * @apilevel internal
    */
   public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
     if (getStmtNoTransform() != null && _callerNode == getStmt()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:133
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:133
       return reachable() && !getCondition().isFalse();
     }
     else {
@@ -521,7 +521,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:49
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute reachable
    */
@@ -529,12 +529,12 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
    * @apilevel internal
    */
   public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
     if (getStmtNoTransform() != null && _callerNode == getStmt()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:213
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:213
       return reachable();
     }
     else {
@@ -542,7 +542,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:280
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute reportUnreachable
    */
@@ -550,53 +550,16 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:230
-   * @apilevel internal
-   */
-  public Stmt Define_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return branch.canBranchTo(this) ? this : branchTarget(branch);
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/BranchTarget.jrag:230
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute branchTarget
-   */
-  protected boolean canDefine_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
-    return true;
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:523
-   * @apilevel internal
-   */
-  public boolean Define_insideLoop(ASTNode _callerNode, ASTNode _childNode) {
-    if (getStmtNoTransform() != null && _callerNode == getStmt()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:528
-      return true;
-    }
-    else {
-      return getParent().Define_insideLoop(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:523
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute insideLoop
-   */
-  protected boolean canDefine_insideLoop(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getStmtNoTransform() != null && _callerNode == getStmt()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:752
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:752
       return getCondition().assignedAfterTrue(v);
     }
     else if (getConditionNoTransform() != null && _callerNode == getCondition()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:750
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:750
       return assignedBefore(v);
     }
     else {
@@ -604,7 +567,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
    */
@@ -612,16 +575,16 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getStmtNoTransform() != null && _callerNode == getStmt()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1434
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1434
       return getCondition().unassignedAfterTrue(v);
     }
     else if (getConditionNoTransform() != null && _callerNode == getCondition()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1414
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1414
       return unassignedBeforeCondition(v);
     }
     else {
@@ -629,7 +592,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
    */
@@ -637,12 +600,49 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:30
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:523
+   * @apilevel internal
+   */
+  public boolean Define_insideLoop(ASTNode _callerNode, ASTNode _childNode) {
+    if (getStmtNoTransform() != null && _callerNode == getStmt()) {
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:528
+      return true;
+    }
+    else {
+      return getParent().Define_insideLoop(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:523
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute insideLoop
+   */
+  protected boolean canDefine_insideLoop(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:230
+   * @apilevel internal
+   */
+  public Stmt Define_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return branch.canBranchTo(this) ? this : branchTarget(branch);
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/BranchTarget.jrag:230
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute branchTarget
+   */
+  protected boolean canDefine_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:30
    * @apilevel internal
    */
   public boolean Define_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
     if (getStmtNoTransform() != null && _callerNode == getStmt()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:53
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:53
       return false;
     }
     else {
@@ -650,7 +650,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:30
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/EffectivelyFinal.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inhModifiedInScope
    */
@@ -667,7 +667,7 @@ public class WhileStmt extends BranchTargetStmt implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:439
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:439
     if (!getCondition().type().isBoolean()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

@@ -1,16 +1,14 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
-import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,15 +19,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import org.jastadd.util.PrettyPrintable;
-import org.jastadd.util.PrettyPrinter;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
+import org.jastadd.util.PrettyPrintable;
+import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /home/hadjer/git/puck2/extendj/java8/grammar/MethodReference.ast:1
+ * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/grammar/MethodReference.ast:1
  * @astdecl MethodReference : Expr ::= TypeArgument:Access* <ID:String>;
  * @production MethodReference : {@link Expr} ::= <span class="component">TypeArgument:{@link Access}*</span> <span class="component">&lt;ID:String&gt;</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public abstract class MethodReference extends Expr implements Cloneable {
   /**
    * @aspect PrettyPrintUtil8
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PrettyPrintUtil.jadd:98
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PrettyPrintUtil.jadd:98
    */
   @Override public String toString() {
     StringBuilder params = new StringBuilder();
@@ -110,12 +110,12 @@ public abstract class MethodReference extends Expr implements Cloneable {
     isPolyExpression_reset();
     assignConversionTo_TypeDecl_reset();
     isExact_reset();
-    type_reset();
     compatibleStrictContext_TypeDecl_reset();
     compatibleLooseContext_TypeDecl_reset();
     pertinentToApplicability_Expr_BodyDecl_int_reset();
     moreSpecificThan_TypeDecl_TypeDecl_reset();
     potentiallyCompatible_TypeDecl_BodyDecl_reset();
+    type_reset();
     targetInterface_reset();
   }
   /** @apilevel internal 
@@ -309,26 +309,26 @@ public abstract class MethodReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:239
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:239
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:239")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:239")
   public abstract boolean congruentTo(FunctionDescriptor fd);
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:292
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:292
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:292")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:292")
   public abstract java.util.List<MethodDecl> potentiallyApplicableMethods(FunctionDescriptor fd);
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:360
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:360
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:360")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:360")
   public abstract MethodDecl exactCompileTimeDeclaration();
   /** @apilevel internal */
   private void isPolyExpression_reset() {
@@ -343,10 +343,10 @@ public abstract class MethodReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:86
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:86
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:86")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:86")
   public boolean isPolyExpression() {
     ASTState state = state();
     if (isPolyExpression_computed == ASTState.NON_CYCLE || isPolyExpression_computed == state().cycle()) {
@@ -374,10 +374,10 @@ public abstract class MethodReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:149
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:149
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:149")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:149")
   public boolean assignConversionTo(TypeDecl type) {
     Object _parameters = type;
     if (assignConversionTo_TypeDecl_computed == null) assignConversionTo_TypeDecl_computed = new java.util.HashMap(4);
@@ -421,10 +421,10 @@ public abstract class MethodReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:359
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:359
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:359")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:359")
   public boolean isExact() {
     ASTState state = state();
     if (isExact_computed == ASTState.NON_CYCLE || isExact_computed == state().cycle()) {
@@ -440,24 +440,330 @@ public abstract class MethodReference extends Expr implements Cloneable {
     }
     return isExact_value;
   }
-  /**
+  /** @apilevel internal */
+  private void compatibleStrictContext_TypeDecl_reset() {
+    compatibleStrictContext_TypeDecl_computed = null;
+    compatibleStrictContext_TypeDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map compatibleStrictContext_TypeDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map compatibleStrictContext_TypeDecl_computed;
+  /** Used to compute compatibility during phase 1 of overload resolution. 
    * @attribute syn
-   * @aspect Java8NameCheck
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/NameCheck.jrag:505
+   * @aspect MethodSignature18
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:58
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/NameCheck.jrag:505")
-  public Collection<Problem> nameProblems() {
-    {
-        for (int i = 0; i < getNumTypeArgument(); i++) {
-          if (getTypeArgument(i) instanceof AbstractWildcard) {
-            return Collections.singletonList(
-                error("Wildcard not allowed in method reference type argument lists"));
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:58")
+  public boolean compatibleStrictContext(TypeDecl type) {
+    Object _parameters = type;
+    if (compatibleStrictContext_TypeDecl_computed == null) compatibleStrictContext_TypeDecl_computed = new java.util.HashMap(4);
+    if (compatibleStrictContext_TypeDecl_values == null) compatibleStrictContext_TypeDecl_values = new java.util.HashMap(4);
+    ASTState state = state();
+    if (compatibleStrictContext_TypeDecl_values.containsKey(_parameters)
+        && compatibleStrictContext_TypeDecl_computed.containsKey(_parameters)
+        && (compatibleStrictContext_TypeDecl_computed.get(_parameters) == ASTState.NON_CYCLE || compatibleStrictContext_TypeDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) compatibleStrictContext_TypeDecl_values.get(_parameters);
+    }
+    boolean compatibleStrictContext_TypeDecl_value = compatibleStrictContext_compute(type);
+    if (state().inCircle()) {
+      compatibleStrictContext_TypeDecl_values.put(_parameters, compatibleStrictContext_TypeDecl_value);
+      compatibleStrictContext_TypeDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      compatibleStrictContext_TypeDecl_values.put(_parameters, compatibleStrictContext_TypeDecl_value);
+      compatibleStrictContext_TypeDecl_computed.put(_parameters, ASTState.NON_CYCLE);
+    
+    }
+    return compatibleStrictContext_TypeDecl_value;
+  }
+  /** @apilevel internal */
+  private boolean compatibleStrictContext_compute(TypeDecl type) {
+      if (!type.isFunctionalInterface()) {
+        return false;
+      }
+      InterfaceDecl iDecl = (InterfaceDecl) type;
+      return congruentTo(iDecl.functionDescriptor());
+    }
+  /** @apilevel internal */
+  private void compatibleLooseContext_TypeDecl_reset() {
+    compatibleLooseContext_TypeDecl_computed = null;
+    compatibleLooseContext_TypeDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map compatibleLooseContext_TypeDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map compatibleLooseContext_TypeDecl_computed;
+  /**
+   * @attribute syn
+   * @aspect MethodSignature18
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:102
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:102")
+  public boolean compatibleLooseContext(TypeDecl type) {
+    Object _parameters = type;
+    if (compatibleLooseContext_TypeDecl_computed == null) compatibleLooseContext_TypeDecl_computed = new java.util.HashMap(4);
+    if (compatibleLooseContext_TypeDecl_values == null) compatibleLooseContext_TypeDecl_values = new java.util.HashMap(4);
+    ASTState state = state();
+    if (compatibleLooseContext_TypeDecl_values.containsKey(_parameters)
+        && compatibleLooseContext_TypeDecl_computed.containsKey(_parameters)
+        && (compatibleLooseContext_TypeDecl_computed.get(_parameters) == ASTState.NON_CYCLE || compatibleLooseContext_TypeDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) compatibleLooseContext_TypeDecl_values.get(_parameters);
+    }
+    boolean compatibleLooseContext_TypeDecl_value = compatibleStrictContext(type);
+    if (state().inCircle()) {
+      compatibleLooseContext_TypeDecl_values.put(_parameters, compatibleLooseContext_TypeDecl_value);
+      compatibleLooseContext_TypeDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      compatibleLooseContext_TypeDecl_values.put(_parameters, compatibleLooseContext_TypeDecl_value);
+      compatibleLooseContext_TypeDecl_computed.put(_parameters, ASTState.NON_CYCLE);
+    
+    }
+    return compatibleLooseContext_TypeDecl_value;
+  }
+  /** @apilevel internal */
+  private void pertinentToApplicability_Expr_BodyDecl_int_reset() {
+    pertinentToApplicability_Expr_BodyDecl_int_computed = null;
+    pertinentToApplicability_Expr_BodyDecl_int_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map pertinentToApplicability_Expr_BodyDecl_int_values;
+  /** @apilevel internal */
+  protected java.util.Map pertinentToApplicability_Expr_BodyDecl_int_computed;
+  /**
+   * @attribute syn
+   * @aspect MethodSignature18
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:130
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:130")
+  public boolean pertinentToApplicability(Expr access, BodyDecl decl, int argIndex) {
+    java.util.List _parameters = new java.util.ArrayList(3);
+    _parameters.add(access);
+    _parameters.add(decl);
+    _parameters.add(argIndex);
+    if (pertinentToApplicability_Expr_BodyDecl_int_computed == null) pertinentToApplicability_Expr_BodyDecl_int_computed = new java.util.HashMap(4);
+    if (pertinentToApplicability_Expr_BodyDecl_int_values == null) pertinentToApplicability_Expr_BodyDecl_int_values = new java.util.HashMap(4);
+    ASTState state = state();
+    if (pertinentToApplicability_Expr_BodyDecl_int_values.containsKey(_parameters)
+        && pertinentToApplicability_Expr_BodyDecl_int_computed.containsKey(_parameters)
+        && (pertinentToApplicability_Expr_BodyDecl_int_computed.get(_parameters) == ASTState.NON_CYCLE || pertinentToApplicability_Expr_BodyDecl_int_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) pertinentToApplicability_Expr_BodyDecl_int_values.get(_parameters);
+    }
+    boolean pertinentToApplicability_Expr_BodyDecl_int_value = pertinentToApplicability_compute(access, decl, argIndex);
+    if (state().inCircle()) {
+      pertinentToApplicability_Expr_BodyDecl_int_values.put(_parameters, pertinentToApplicability_Expr_BodyDecl_int_value);
+      pertinentToApplicability_Expr_BodyDecl_int_computed.put(_parameters, state().cycle());
+    
+    } else {
+      pertinentToApplicability_Expr_BodyDecl_int_values.put(_parameters, pertinentToApplicability_Expr_BodyDecl_int_value);
+      pertinentToApplicability_Expr_BodyDecl_int_computed.put(_parameters, ASTState.NON_CYCLE);
+    
+    }
+    return pertinentToApplicability_Expr_BodyDecl_int_value;
+  }
+  /** @apilevel internal */
+  private boolean pertinentToApplicability_compute(Expr access, BodyDecl decl, int argIndex) {
+      if (!isExact()) {
+        return false;
+      }
+      if (decl instanceof MethodDecl
+          && decl.isGeneric()
+          && !(access instanceof ParMethodAccess)
+          && ((MethodDecl) decl).genericDecl().getParameter(argIndex).type().isTypeVariable()) {
+        GenericMethodDecl genericDecl = ((MethodDecl) decl).genericDecl();
+        TypeVariable typeVar = (TypeVariable) genericDecl.getParameter(argIndex).type();
+        for (int i = 0; i < genericDecl.getNumTypeParameter(); i++) {
+          if (typeVar == genericDecl.getTypeParameter(i)) {
+            return false;
           }
         }
-        return Collections.emptyList();
+      } else if (decl instanceof ConstructorDecl
+          && decl.isGeneric()
+          && !(access instanceof ParConstructorAccess)
+          && !(access instanceof ParSuperConstructorAccess)
+          && !(access instanceof ParClassInstanceExpr)
+          && ((ConstructorDecl) decl).genericDecl().getParameter(argIndex).type().isTypeVariable()) {
+        GenericConstructorDecl genericDecl = ((ConstructorDecl) decl).genericDecl();
+        TypeVariable typeVar = (TypeVariable) genericDecl.getParameter(argIndex).type();
+        for (int i = 0; i < genericDecl.getNumTypeParameter(); i++) {
+          if (typeVar == genericDecl.getTypeParameter(i)) {
+            return false;
+          }
+        }
       }
+      return true;
+    }
+  /** @apilevel internal */
+  private void moreSpecificThan_TypeDecl_TypeDecl_reset() {
+    moreSpecificThan_TypeDecl_TypeDecl_computed = null;
+    moreSpecificThan_TypeDecl_TypeDecl_values = null;
   }
+  /** @apilevel internal */
+  protected java.util.Map moreSpecificThan_TypeDecl_TypeDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map moreSpecificThan_TypeDecl_TypeDecl_computed;
+  /**
+   * Computes which type is more specific for a specific argument, as defined in 15.12.2.5
+   * @param type1
+   * @param type2
+   * @return {@code true} if type1 is more specific than type2, {@code false} otherwise
+   * @attribute syn
+   * @aspect MethodSignature18
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:256
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:256")
+  public boolean moreSpecificThan(TypeDecl type1, TypeDecl type2) {
+    java.util.List _parameters = new java.util.ArrayList(2);
+    _parameters.add(type1);
+    _parameters.add(type2);
+    if (moreSpecificThan_TypeDecl_TypeDecl_computed == null) moreSpecificThan_TypeDecl_TypeDecl_computed = new java.util.HashMap(4);
+    if (moreSpecificThan_TypeDecl_TypeDecl_values == null) moreSpecificThan_TypeDecl_TypeDecl_values = new java.util.HashMap(4);
+    ASTState state = state();
+    if (moreSpecificThan_TypeDecl_TypeDecl_values.containsKey(_parameters)
+        && moreSpecificThan_TypeDecl_TypeDecl_computed.containsKey(_parameters)
+        && (moreSpecificThan_TypeDecl_TypeDecl_computed.get(_parameters) == ASTState.NON_CYCLE || moreSpecificThan_TypeDecl_TypeDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) moreSpecificThan_TypeDecl_TypeDecl_values.get(_parameters);
+    }
+    boolean moreSpecificThan_TypeDecl_TypeDecl_value = moreSpecificThan_compute(type1, type2);
+    if (state().inCircle()) {
+      moreSpecificThan_TypeDecl_TypeDecl_values.put(_parameters, moreSpecificThan_TypeDecl_TypeDecl_value);
+      moreSpecificThan_TypeDecl_TypeDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      moreSpecificThan_TypeDecl_TypeDecl_values.put(_parameters, moreSpecificThan_TypeDecl_TypeDecl_value);
+      moreSpecificThan_TypeDecl_TypeDecl_computed.put(_parameters, ASTState.NON_CYCLE);
+    
+    }
+    return moreSpecificThan_TypeDecl_TypeDecl_value;
+  }
+  /** @apilevel internal */
+  private boolean moreSpecificThan_compute(TypeDecl type1, TypeDecl type2) {
+      if (super.moreSpecificThan(type1, type2)) {
+        return true;
+      }
+      if (!type1.isFunctionalInterface() || !type2.isFunctionalInterface()) {
+        return false;
+      }
+      if (type2.instanceOf(type1)) {
+        return false;
+      }
+      InterfaceDecl iDecl1 = (InterfaceDecl) type1;
+      InterfaceDecl iDecl2 = (InterfaceDecl) type2;
+  
+      if (!isExact()) {
+        return false;
+      }
+  
+      FunctionDescriptor fd1 = iDecl1.functionDescriptor();
+      FunctionDescriptor fd2 = iDecl2.functionDescriptor();
+      if (fd1.method.hasValue() && fd2.method.hasValue()) {
+        // Can only compare method types if both function descriptors have target methods.
+        MethodDecl method1 = fd1.method.get();
+        MethodDecl method2 = fd2.method.get();
+        TypeDecl methodType1 = method1.type();
+        TypeDecl methodType2 = method2.type();
+  
+        if (method1.arity() != method2.arity()) {
+          return false;
+        }
+  
+        for (int i = 0; i < method1.getNumParameter(); i++) {
+          if (method1.getParameter(i).type() != method2.getParameter(i).type()) {
+            return false;
+          }
+        }
+  
+        // First bullet
+        if (methodType2.isVoid()) {
+          return true;
+        }
+  
+        // Second bullet
+        if (methodType1.instanceOf(methodType2)) {
+          return true;
+        }
+  
+        // Third bullet
+        if (methodType1.isPrimitiveType() && methodType2.isReferenceType()) {
+          return exactCompileTimeDeclaration().type().isPrimitiveType();
+        }
+  
+        // Fourth bullet
+        if (methodType1.isReferenceType() && methodType2.isPrimitiveType()) {
+          return exactCompileTimeDeclaration().type().isReferenceType();
+        }
+      }
+  
+      return false;
+    }
+  /** @apilevel internal */
+  private void potentiallyCompatible_TypeDecl_BodyDecl_reset() {
+    potentiallyCompatible_TypeDecl_BodyDecl_computed = null;
+    potentiallyCompatible_TypeDecl_BodyDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map potentiallyCompatible_TypeDecl_BodyDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map potentiallyCompatible_TypeDecl_BodyDecl_computed;
+  /**
+   * @attribute syn
+   * @aspect MethodSignature18
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:511
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:511")
+  public boolean potentiallyCompatible(TypeDecl type, BodyDecl candidateDecl) {
+    java.util.List _parameters = new java.util.ArrayList(2);
+    _parameters.add(type);
+    _parameters.add(candidateDecl);
+    if (potentiallyCompatible_TypeDecl_BodyDecl_computed == null) potentiallyCompatible_TypeDecl_BodyDecl_computed = new java.util.HashMap(4);
+    if (potentiallyCompatible_TypeDecl_BodyDecl_values == null) potentiallyCompatible_TypeDecl_BodyDecl_values = new java.util.HashMap(4);
+    ASTState state = state();
+    if (potentiallyCompatible_TypeDecl_BodyDecl_values.containsKey(_parameters)
+        && potentiallyCompatible_TypeDecl_BodyDecl_computed.containsKey(_parameters)
+        && (potentiallyCompatible_TypeDecl_BodyDecl_computed.get(_parameters) == ASTState.NON_CYCLE || potentiallyCompatible_TypeDecl_BodyDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) potentiallyCompatible_TypeDecl_BodyDecl_values.get(_parameters);
+    }
+    boolean potentiallyCompatible_TypeDecl_BodyDecl_value = potentiallyCompatible_compute(type, candidateDecl);
+    if (state().inCircle()) {
+      potentiallyCompatible_TypeDecl_BodyDecl_values.put(_parameters, potentiallyCompatible_TypeDecl_BodyDecl_value);
+      potentiallyCompatible_TypeDecl_BodyDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      potentiallyCompatible_TypeDecl_BodyDecl_values.put(_parameters, potentiallyCompatible_TypeDecl_BodyDecl_value);
+      potentiallyCompatible_TypeDecl_BodyDecl_computed.put(_parameters, ASTState.NON_CYCLE);
+    
+    }
+    return potentiallyCompatible_TypeDecl_BodyDecl_value;
+  }
+  /** @apilevel internal */
+  private boolean potentiallyCompatible_compute(TypeDecl type, BodyDecl candidateDecl) {
+      if (type.isTypeVariable()) {
+        if (candidateDecl.isGeneric()) {
+          boolean foundTypeVariable = false;
+          List<TypeVariable> typeParams = candidateDecl.typeParameters();
+          for (int i = 0; i < typeParams.getNumChild(); i++) {
+            if (type == typeParams.getChild(i)) {
+              foundTypeVariable = true;
+              break;
+            }
+          }
+          return foundTypeVariable;
+        } else {
+          return false;
+        }
+      }
+  
+      if (!type.isFunctionalInterface()) {
+        return false;
+      }
+      return true;
+    }
 /** @apilevel internal */
 protected ASTState.Cycle type_cycle = null;
   /** @apilevel internal */
@@ -475,7 +781,7 @@ protected ASTState.Cycle type_cycle = null;
   /** @apilevel internal */
   protected boolean type_initialized = false;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/TypeCheck.jrag:81")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:81")
   public TypeDecl type() {
     if (type_computed) {
       return type_value;
@@ -533,10 +839,10 @@ protected ASTState.Cycle type_cycle = null;
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TypeCheck.jrag:246
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:246
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/TypeCheck.jrag:246")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:246")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -678,340 +984,23 @@ protected ASTState.Cycle type_cycle = null;
         return problems;
       }
   }
-  /** @apilevel internal */
-  private void compatibleStrictContext_TypeDecl_reset() {
-    compatibleStrictContext_TypeDecl_computed = null;
-    compatibleStrictContext_TypeDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map compatibleStrictContext_TypeDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map compatibleStrictContext_TypeDecl_computed;
-  /** Used to compute compatibility during phase 1 of overload resolution. 
-   * @attribute syn
-   * @aspect MethodSignature18
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:58
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:58")
-  public boolean compatibleStrictContext(TypeDecl type) {
-    Object _parameters = type;
-    if (compatibleStrictContext_TypeDecl_computed == null) compatibleStrictContext_TypeDecl_computed = new java.util.HashMap(4);
-    if (compatibleStrictContext_TypeDecl_values == null) compatibleStrictContext_TypeDecl_values = new java.util.HashMap(4);
-    ASTState state = state();
-    if (compatibleStrictContext_TypeDecl_values.containsKey(_parameters)
-        && compatibleStrictContext_TypeDecl_computed.containsKey(_parameters)
-        && (compatibleStrictContext_TypeDecl_computed.get(_parameters) == ASTState.NON_CYCLE || compatibleStrictContext_TypeDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) compatibleStrictContext_TypeDecl_values.get(_parameters);
-    }
-    boolean compatibleStrictContext_TypeDecl_value = compatibleStrictContext_compute(type);
-    if (state().inCircle()) {
-      compatibleStrictContext_TypeDecl_values.put(_parameters, compatibleStrictContext_TypeDecl_value);
-      compatibleStrictContext_TypeDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      compatibleStrictContext_TypeDecl_values.put(_parameters, compatibleStrictContext_TypeDecl_value);
-      compatibleStrictContext_TypeDecl_computed.put(_parameters, ASTState.NON_CYCLE);
-    
-    }
-    return compatibleStrictContext_TypeDecl_value;
-  }
-  /** @apilevel internal */
-  private boolean compatibleStrictContext_compute(TypeDecl type) {
-      if (!type.isFunctionalInterface()) {
-        return false;
-      }
-      InterfaceDecl iDecl = (InterfaceDecl) type;
-      return congruentTo(iDecl.functionDescriptor());
-    }
-  /** @apilevel internal */
-  private void compatibleLooseContext_TypeDecl_reset() {
-    compatibleLooseContext_TypeDecl_computed = null;
-    compatibleLooseContext_TypeDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map compatibleLooseContext_TypeDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map compatibleLooseContext_TypeDecl_computed;
   /**
    * @attribute syn
-   * @aspect MethodSignature18
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:102
+   * @aspect Java8NameCheck
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:505
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:102")
-  public boolean compatibleLooseContext(TypeDecl type) {
-    Object _parameters = type;
-    if (compatibleLooseContext_TypeDecl_computed == null) compatibleLooseContext_TypeDecl_computed = new java.util.HashMap(4);
-    if (compatibleLooseContext_TypeDecl_values == null) compatibleLooseContext_TypeDecl_values = new java.util.HashMap(4);
-    ASTState state = state();
-    if (compatibleLooseContext_TypeDecl_values.containsKey(_parameters)
-        && compatibleLooseContext_TypeDecl_computed.containsKey(_parameters)
-        && (compatibleLooseContext_TypeDecl_computed.get(_parameters) == ASTState.NON_CYCLE || compatibleLooseContext_TypeDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) compatibleLooseContext_TypeDecl_values.get(_parameters);
-    }
-    boolean compatibleLooseContext_TypeDecl_value = compatibleStrictContext(type);
-    if (state().inCircle()) {
-      compatibleLooseContext_TypeDecl_values.put(_parameters, compatibleLooseContext_TypeDecl_value);
-      compatibleLooseContext_TypeDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      compatibleLooseContext_TypeDecl_values.put(_parameters, compatibleLooseContext_TypeDecl_value);
-      compatibleLooseContext_TypeDecl_computed.put(_parameters, ASTState.NON_CYCLE);
-    
-    }
-    return compatibleLooseContext_TypeDecl_value;
-  }
-  /** @apilevel internal */
-  private void pertinentToApplicability_Expr_BodyDecl_int_reset() {
-    pertinentToApplicability_Expr_BodyDecl_int_computed = null;
-    pertinentToApplicability_Expr_BodyDecl_int_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map pertinentToApplicability_Expr_BodyDecl_int_values;
-  /** @apilevel internal */
-  protected java.util.Map pertinentToApplicability_Expr_BodyDecl_int_computed;
-  /**
-   * @attribute syn
-   * @aspect MethodSignature18
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:130
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:130")
-  public boolean pertinentToApplicability(Expr access, BodyDecl decl, int argIndex) {
-    java.util.List _parameters = new java.util.ArrayList(3);
-    _parameters.add(access);
-    _parameters.add(decl);
-    _parameters.add(argIndex);
-    if (pertinentToApplicability_Expr_BodyDecl_int_computed == null) pertinentToApplicability_Expr_BodyDecl_int_computed = new java.util.HashMap(4);
-    if (pertinentToApplicability_Expr_BodyDecl_int_values == null) pertinentToApplicability_Expr_BodyDecl_int_values = new java.util.HashMap(4);
-    ASTState state = state();
-    if (pertinentToApplicability_Expr_BodyDecl_int_values.containsKey(_parameters)
-        && pertinentToApplicability_Expr_BodyDecl_int_computed.containsKey(_parameters)
-        && (pertinentToApplicability_Expr_BodyDecl_int_computed.get(_parameters) == ASTState.NON_CYCLE || pertinentToApplicability_Expr_BodyDecl_int_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) pertinentToApplicability_Expr_BodyDecl_int_values.get(_parameters);
-    }
-    boolean pertinentToApplicability_Expr_BodyDecl_int_value = pertinentToApplicability_compute(access, decl, argIndex);
-    if (state().inCircle()) {
-      pertinentToApplicability_Expr_BodyDecl_int_values.put(_parameters, pertinentToApplicability_Expr_BodyDecl_int_value);
-      pertinentToApplicability_Expr_BodyDecl_int_computed.put(_parameters, state().cycle());
-    
-    } else {
-      pertinentToApplicability_Expr_BodyDecl_int_values.put(_parameters, pertinentToApplicability_Expr_BodyDecl_int_value);
-      pertinentToApplicability_Expr_BodyDecl_int_computed.put(_parameters, ASTState.NON_CYCLE);
-    
-    }
-    return pertinentToApplicability_Expr_BodyDecl_int_value;
-  }
-  /** @apilevel internal */
-  private boolean pertinentToApplicability_compute(Expr access, BodyDecl decl, int argIndex) {
-      if (!isExact()) {
-        return false;
-      }
-      if (decl instanceof MethodDecl
-          && decl.isGeneric()
-          && !(access instanceof ParMethodAccess)
-          && ((MethodDecl) decl).genericDecl().getParameter(argIndex).type().isTypeVariable()) {
-        GenericMethodDecl genericDecl = ((MethodDecl) decl).genericDecl();
-        TypeVariable typeVar = (TypeVariable) genericDecl.getParameter(argIndex).type();
-        for (int i = 0; i < genericDecl.getNumTypeParameter(); i++) {
-          if (typeVar == genericDecl.getTypeParameter(i)) {
-            return false;
+  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:505")
+  public Collection<Problem> nameProblems() {
+    {
+        for (int i = 0; i < getNumTypeArgument(); i++) {
+          if (getTypeArgument(i) instanceof AbstractWildcard) {
+            return Collections.singletonList(
+                error("Wildcard not allowed in method reference type argument lists"));
           }
         }
-      } else if (decl instanceof ConstructorDecl
-          && decl.isGeneric()
-          && !(access instanceof ParConstructorAccess)
-          && !(access instanceof ParSuperConstructorAccess)
-          && !(access instanceof ParClassInstanceExpr)
-          && ((ConstructorDecl) decl).genericDecl().getParameter(argIndex).type().isTypeVariable()) {
-        GenericConstructorDecl genericDecl = ((ConstructorDecl) decl).genericDecl();
-        TypeVariable typeVar = (TypeVariable) genericDecl.getParameter(argIndex).type();
-        for (int i = 0; i < genericDecl.getNumTypeParameter(); i++) {
-          if (typeVar == genericDecl.getTypeParameter(i)) {
-            return false;
-          }
-        }
+        return Collections.emptyList();
       }
-      return true;
-    }
-  /** @apilevel internal */
-  private void moreSpecificThan_TypeDecl_TypeDecl_reset() {
-    moreSpecificThan_TypeDecl_TypeDecl_computed = null;
-    moreSpecificThan_TypeDecl_TypeDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map moreSpecificThan_TypeDecl_TypeDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map moreSpecificThan_TypeDecl_TypeDecl_computed;
-  /**
-   * Computes which type is more specific for a specific argument, as defined in 15.12.2.5
-   * @param type1
-   * @param type2
-   * @return {@code true} if type1 is more specific than type2, {@code false} otherwise
-   * @attribute syn
-   * @aspect MethodSignature18
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:256
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:256")
-  public boolean moreSpecificThan(TypeDecl type1, TypeDecl type2) {
-    java.util.List _parameters = new java.util.ArrayList(2);
-    _parameters.add(type1);
-    _parameters.add(type2);
-    if (moreSpecificThan_TypeDecl_TypeDecl_computed == null) moreSpecificThan_TypeDecl_TypeDecl_computed = new java.util.HashMap(4);
-    if (moreSpecificThan_TypeDecl_TypeDecl_values == null) moreSpecificThan_TypeDecl_TypeDecl_values = new java.util.HashMap(4);
-    ASTState state = state();
-    if (moreSpecificThan_TypeDecl_TypeDecl_values.containsKey(_parameters)
-        && moreSpecificThan_TypeDecl_TypeDecl_computed.containsKey(_parameters)
-        && (moreSpecificThan_TypeDecl_TypeDecl_computed.get(_parameters) == ASTState.NON_CYCLE || moreSpecificThan_TypeDecl_TypeDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) moreSpecificThan_TypeDecl_TypeDecl_values.get(_parameters);
-    }
-    boolean moreSpecificThan_TypeDecl_TypeDecl_value = moreSpecificThan_compute(type1, type2);
-    if (state().inCircle()) {
-      moreSpecificThan_TypeDecl_TypeDecl_values.put(_parameters, moreSpecificThan_TypeDecl_TypeDecl_value);
-      moreSpecificThan_TypeDecl_TypeDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      moreSpecificThan_TypeDecl_TypeDecl_values.put(_parameters, moreSpecificThan_TypeDecl_TypeDecl_value);
-      moreSpecificThan_TypeDecl_TypeDecl_computed.put(_parameters, ASTState.NON_CYCLE);
-    
-    }
-    return moreSpecificThan_TypeDecl_TypeDecl_value;
-  }
-  /** @apilevel internal */
-  private boolean moreSpecificThan_compute(TypeDecl type1, TypeDecl type2) {
-      if (super.moreSpecificThan(type1, type2)) {
-        return true;
-      }
-      if (!type1.isFunctionalInterface() || !type2.isFunctionalInterface()) {
-        return false;
-      }
-      if (type2.instanceOf(type1)) {
-        return false;
-      }
-      InterfaceDecl iDecl1 = (InterfaceDecl) type1;
-      InterfaceDecl iDecl2 = (InterfaceDecl) type2;
-  
-      if (!isExact()) {
-        return false;
-      }
-  
-      FunctionDescriptor fd1 = iDecl1.functionDescriptor();
-      FunctionDescriptor fd2 = iDecl2.functionDescriptor();
-      if (fd1.method.hasValue() && fd2.method.hasValue()) {
-        // Can only compare method types if both function descriptors have target methods.
-        MethodDecl method1 = fd1.method.get();
-        MethodDecl method2 = fd2.method.get();
-        TypeDecl methodType1 = method1.type();
-        TypeDecl methodType2 = method2.type();
-  
-        if (method1.arity() != method2.arity()) {
-          return false;
-        }
-  
-        for (int i = 0; i < method1.getNumParameter(); i++) {
-          if (method1.getParameter(i).type() != method2.getParameter(i).type()) {
-            return false;
-          }
-        }
-  
-        // First bullet
-        if (methodType2.isVoid()) {
-          return true;
-        }
-  
-        // Second bullet
-        if (methodType1.instanceOf(methodType2)) {
-          return true;
-        }
-  
-        // Third bullet
-        if (methodType1.isPrimitiveType() && methodType2.isReferenceType()) {
-          return exactCompileTimeDeclaration().type().isPrimitiveType();
-        }
-  
-        // Fourth bullet
-        if (methodType1.isReferenceType() && methodType2.isPrimitiveType()) {
-          return exactCompileTimeDeclaration().type().isReferenceType();
-        }
-      }
-  
-      return false;
-    }
-  /** @apilevel internal */
-  private void potentiallyCompatible_TypeDecl_BodyDecl_reset() {
-    potentiallyCompatible_TypeDecl_BodyDecl_computed = null;
-    potentiallyCompatible_TypeDecl_BodyDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map potentiallyCompatible_TypeDecl_BodyDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map potentiallyCompatible_TypeDecl_BodyDecl_computed;
-  /**
-   * @attribute syn
-   * @aspect MethodSignature18
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:511
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:511")
-  public boolean potentiallyCompatible(TypeDecl type, BodyDecl candidateDecl) {
-    java.util.List _parameters = new java.util.ArrayList(2);
-    _parameters.add(type);
-    _parameters.add(candidateDecl);
-    if (potentiallyCompatible_TypeDecl_BodyDecl_computed == null) potentiallyCompatible_TypeDecl_BodyDecl_computed = new java.util.HashMap(4);
-    if (potentiallyCompatible_TypeDecl_BodyDecl_values == null) potentiallyCompatible_TypeDecl_BodyDecl_values = new java.util.HashMap(4);
-    ASTState state = state();
-    if (potentiallyCompatible_TypeDecl_BodyDecl_values.containsKey(_parameters)
-        && potentiallyCompatible_TypeDecl_BodyDecl_computed.containsKey(_parameters)
-        && (potentiallyCompatible_TypeDecl_BodyDecl_computed.get(_parameters) == ASTState.NON_CYCLE || potentiallyCompatible_TypeDecl_BodyDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) potentiallyCompatible_TypeDecl_BodyDecl_values.get(_parameters);
-    }
-    boolean potentiallyCompatible_TypeDecl_BodyDecl_value = potentiallyCompatible_compute(type, candidateDecl);
-    if (state().inCircle()) {
-      potentiallyCompatible_TypeDecl_BodyDecl_values.put(_parameters, potentiallyCompatible_TypeDecl_BodyDecl_value);
-      potentiallyCompatible_TypeDecl_BodyDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      potentiallyCompatible_TypeDecl_BodyDecl_values.put(_parameters, potentiallyCompatible_TypeDecl_BodyDecl_value);
-      potentiallyCompatible_TypeDecl_BodyDecl_computed.put(_parameters, ASTState.NON_CYCLE);
-    
-    }
-    return potentiallyCompatible_TypeDecl_BodyDecl_value;
-  }
-  /** @apilevel internal */
-  private boolean potentiallyCompatible_compute(TypeDecl type, BodyDecl candidateDecl) {
-      if (type.isTypeVariable()) {
-        if (candidateDecl.isGeneric()) {
-          boolean foundTypeVariable = false;
-          List<TypeVariable> typeParams = candidateDecl.typeParameters();
-          for (int i = 0; i < typeParams.getNumChild(); i++) {
-            if (type == typeParams.getChild(i)) {
-              foundTypeVariable = true;
-              break;
-            }
-          }
-          return foundTypeVariable;
-        } else {
-          return false;
-        }
-      }
-  
-      if (!type.isFunctionalInterface()) {
-        return false;
-      }
-      return true;
-    }
-  /**
-   * @attribute syn
-   * @aspect Names
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/QualifiedNames.jrag:30
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/QualifiedNames.jrag:30")
-  public String name() {
-    String name_value = getID();
-    return name_value;
   }
   /** @apilevel internal */
   private void targetInterface_reset() {
@@ -1027,10 +1016,10 @@ protected ASTState.Cycle type_cycle = null;
   /**
    * @attribute syn
    * @aspect TargetType
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:158
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:158
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:158")
+  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:158")
   public InterfaceDecl targetInterface() {
     ASTState state = state();
     if (targetInterface_computed == ASTState.NON_CYCLE || targetInterface_computed == state().cycle()) {
@@ -1057,23 +1046,34 @@ protected ASTState.Cycle type_cycle = null;
       }
     }
   /**
+   * @attribute syn
+   * @aspect Names
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/QualifiedNames.jrag:30
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/QualifiedNames.jrag:30")
+  public String name() {
+    String name_value = getID();
+    return name_value;
+  }
+  /**
    * @attribute inh
    * @aspect MethodReference
-   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:31
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:31
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:31")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:31")
   public MethodDecl unknownMethod() {
     MethodDecl unknownMethod_value = getParent().Define_unknownMethod(this, null);
     return unknownMethod_value;
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodReference.jrag:215
+      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodReference.jrag:215
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
@@ -1082,7 +1082,7 @@ protected ASTState.Cycle type_cycle = null;
     }
   }
   /**
-   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -1099,7 +1099,7 @@ protected ASTState.Cycle type_cycle = null;
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/NameCheck.jrag:503
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TypeCheck.jrag:244
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -1108,7 +1108,7 @@ protected ASTState.Cycle type_cycle = null;
       }
       contributors.add(this);
     }
-    // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TypeCheck.jrag:244
+    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/NameCheck.jrag:503
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -1122,10 +1122,10 @@ protected ASTState.Cycle type_cycle = null;
   /** @apilevel internal */
   protected void contributeTo_CompilationUnit_problems(LinkedList<Problem> collection) {
     super.contributeTo_CompilationUnit_problems(collection);
-    for (Problem value : nameProblems()) {
+    for (Problem value : typeProblems()) {
       collection.add(value);
     }
-    for (Problem value : typeProblems()) {
+    for (Problem value : nameProblems()) {
       collection.add(value);
     }
   }
