@@ -1,0 +1,1 @@
+<Edge from="UsingClass.method(ArgumentClass)" to="ReturnClass" type="uses"/>

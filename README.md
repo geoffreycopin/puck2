@@ -68,6 +68,24 @@ second cas, tous les fichier .java contenus dans le dossier et ses sous-dossiers
 serton ajoutés au projet.
 
 
+Tests
+-----
+Le dossier testdir contient les fichiers nécessaires aux tests des Readers.
+Chaque dossier correspond à un test.
+Chaque test contient:
+- un projet Java (tous les fichiers .java contenus dans le dossier de test et ses sous-dossiers)
+- des cibles de test au format xml
+
+Les cibles de tests doivent respecter la convention de nomage suivante: 
+\<nom de la cible\>_\<quantificateur\>.result
+
+Il existe 2 quantificateurs possibles: all et some.
+
+all =\> Le graphe de dépendances du projet doit correspondre **exactement** au graphe défini dans 
+la cible de test.
+
+some =\> Le graphe de dépendances doit contenir tous les éléments définis dans la cible de test.
+
 
 
 

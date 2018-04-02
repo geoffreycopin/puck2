@@ -1,0 +1,2 @@
+<Edge from="TC.member" to="C1" type="uses"/>
+<Edge from="TC.member" to="C2" type="uses"/>

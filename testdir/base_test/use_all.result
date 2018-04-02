@@ -1,0 +1,48 @@
+<Node name="test" type="package"/>
+
+<Node name="test.Test" type="class"/>
+<Node name="test.Test.m(test.Foo)" type="method"/>
+<Node name="test.Test.m(test.Foo).body" type="methodbody"/>
+<Node name="test.Test.m(double)" type="method"/>
+<Node name="test.Test.m(double).body" type="methodbody"/>
+<Node name="test.Test.m(int)" type="method"/>
+<Node name="test.Test.m(int).body" type="methodbody"/>
+<Node name="test.Test.f()" type="method"/>
+<Node name="test.Test.f().body" type="methodbody"/>
+<Node name="test.Test.r" type="attribute"/>
+<Node name="test.Test.f" type="attribute"/>
+
+<Node name="test.SuperTest" type="class"/>
+<Node name="test.SuperTest.r" type="attribute"/>
+<Node name="test.SuperTest.superMethod(test.Test, test.Foo).body" type="methodbody"/>
+<Node name="test.SuperTest.superMethod(test.Test, test.Foo)" type="method"/>
+
+<Node name="test.Foo" type="interface"/>
+<Node name="test.Foo.t()" type="method"/>
+<Node name="test.Foo.t(test.Test)" type="method"/>
+
+<Edge from="test" to="test.SuperTest" type="contains"/>
+<Edge from="test.Foo" to="test.Foo.t()" type="contains"/>
+<Edge from="test.Test.m(int)" to="test.Test.m(int).body" type="contains"/>
+<Edge from="test.Test.f" to="test.SuperTest" type="uses"/>
+<Edge from="test.SuperTest" to="test.SuperTest.superMethod(test.Test, test.Foo)" type="contains"/>
+<Edge from="test.Test.f()" to="test.Test.f().body" type="contains"/>
+<Edge from="test" to="test.Foo" type="contains"/>
+<Edge from="test.SuperTest.superMethod(test.Test, test.Foo)" to="test.Test" type="uses"/>
+<Edge from="test.SuperTest.superMethod(test.Test, test.Foo)" to="test.SuperTest.superMethod(test.Test, test.Foo).body" type="contains"/>
+<Edge from="test.Test" to="test.Test.m(test.Foo)" type="contains"/>
+<Edge from="test.SuperTest" to="test.SuperTest.r" type="contains"/>
+<Edge from="test.Test.m(test.Foo)" to="test.Foo" type="uses"/>
+<Edge from="test.Test.m(test.Foo)" to="test.Test.m(test.Foo).body" type="contains"/>
+<Edge from="test.Test.m(double)" to="test.Test.m(double).body" type="contains"/>
+<Edge from="test" to="test.Test" type="contains"/>
+<Edge from="test.Test" to="test.Test.m(double)" type="contains"/>
+<Edge from="test.SuperTest" to="test.Test" type="isa"/>
+<Edge from="test.SuperTest.superMethod(test.Test, test.Foo)" to="test.Foo" type="uses"/>
+<Edge from="test.Foo" to="test.Foo.t(test.Test)" type="contains"/>
+<Edge from="test.Foo.t(test.Test)" to="test.Test" type="uses"/>
+<Edge from="test.Test" to="test.Test.f" type="contains"/>
+<Edge from="test.Test" to="test.Test.m(int)" type="contains"/>
+<Edge from="test.Test" to="test.Test.f()" type="contains"/>
+<Edge from="test.Test" to="test.Test.r" type="contains"/>
+<Edge from="test.Test" to="test.Foo" type="isa"/>

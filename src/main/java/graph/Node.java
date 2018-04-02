@@ -8,7 +8,7 @@ public class Node {
     private Type type;
     private Access extendjNode;
 
-    public enum Type { Package, Class, Interface, Attribute, Method, MethodBody }
+    public enum Type {Package, Class, Interface, Attribute, Method, MethodBody}
 
     public Node(Integer id, String fullName, Type type, Access extendjNode) {
         this.id = id;
@@ -34,7 +34,7 @@ public class Node {
     }
 
     public String toString() {
-        String formatStr = "<Node id=%d name=%s type=%s/>";
-        return String.format(formatStr, id, fullName, type.toString().toLowerCase());
+        String formatStr = "<Node name=\"%s\" type=\"%s\"/>";
+        return String.format(formatStr, fullName, type.toString().toLowerCase());
     }
 }

@@ -48,14 +48,14 @@ public class ClassReader extends TypeDeclReader {
                 TypeDecl memberType = ((MemberClassDecl) decl).typeDecl();
                 ClassReader reader = new ClassReader((ClassDecl) memberType, idGenerator);
                 reader.readInto(nodes, edges);
+                addTypeDependency(edges, memberType, Edge.Type.Contains, nodes);
             } else if (decl instanceof MemberInterfaceDecl) {
                 TypeDecl memberType = ((MemberInterfaceDecl) decl).typeDecl();
                 InterfaceReader reader = new InterfaceReader((InterfaceDecl) memberType, idGenerator);
                 reader.readInto(nodes, edges);
+                addTypeDependency(edges, memberType, Edge.Type.Contains, nodes);
             } else if (decl instanceof GenericMethodDecl) {
             	GenericMethodDecl genMethod = (GenericMethodDecl)decl;
-            }else if (decl instanceof ConstructorDecl) {
-            	// TODO: implement
             }
         }
     }

@@ -20,7 +20,7 @@ public class Edge {
 	}
 
 	public String toString() {
-		return String.format("<Edge from=%s to=%s type=%s/>",
+		return String.format("<Edge from=\"%s\" to=\"%s\" type=\"%s\"/>",
 				sourceName, targetName, type.toString().toLowerCase());
 	}
 

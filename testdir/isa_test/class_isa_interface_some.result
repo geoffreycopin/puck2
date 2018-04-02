@@ -1,0 +1,2 @@
+<Edge from="SubClassImplements" to="BaseInterface1" type="isa"/>
+<Edge from="SubClassImplements" to="BaseInterface2" type="isa"/>

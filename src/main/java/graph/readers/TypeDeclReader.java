@@ -30,10 +30,6 @@ public abstract class TypeDeclReader extends AbstractReader{
         edges.add(new Edge(packageName, typeDecl.fullName(), Edge.Type.Contains));
     }
 
-    public static String getGenericTypeName(TypeDecl type) {
-        return type.fullName().split("<")[0];
-    }
-
     public static List<TypeDecl> getTypeParameters(TypeDecl type) {
         List<TypeDecl> result = new ArrayList<>();
 

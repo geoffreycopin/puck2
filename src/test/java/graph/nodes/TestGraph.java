@@ -8,11 +8,8 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import javax.xml.bind.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -28,9 +25,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestGraph {
     private static final File testDir = new File("testdir");
-    private static final Pattern resultFilePattern = Pattern.compile(".*_(all|contains)\\.result");
-    private static final Pattern graphStringPAttern =
-            Pattern.compile("<(Node|Edge)[\\h]*([\\w]*[\\h]*=[\\h]*[\\w]*[\\h]*)+.*>");
+    private static final Pattern resultFilePattern = Pattern.compile(".*_(all|some)\\.result");
     private int failed = 0;
     private int passed = 0;
     private int nbTests = 0;
@@ -38,8 +33,6 @@ public class TestGraph {
     @Test
     public void run() {
         ArrayList<TestCase> testCases = extractTestCases();
-
-        System.out.println("FOUND " + testCases.size() + " TESTS");
 
         for (TestCase t: testCases) {
             runTest(t);
@@ -150,8 +143,34 @@ public class TestGraph {
     }
 
     private String getExpectedValues(String resultFile) throws IOException {
-        return Files.lines(Paths.get(resultFile))
-                    .collect(Collectors.joining());
+        String data =  Files.lines(Paths.get(resultFile))
+                    .map(this::XMLEncode)
+                    .collect(Collectors.joining("\n"));
+        return "<DG>\n" + data + "\n</DG>";
+    }
+
+    private String XMLEncode(String text) {
+        if (text.length() <= 1) {
+            return text;
+        }
+
+        String encoded =  text.substring(1, text.length() - 1)
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;");
+
+        return "<" + encoded + ">";
+    }
+
+    private String XMLDecode(String text) {
+        if (text.length() <= 1) {
+            return text;
+        }
+
+        String decoded =  text.substring(1, text.length() - 1)
+                .replaceAll("&lt;", "<")
+                .replaceAll("&gt;", ">");
+
+        return "<" + decoded + ">";
     }
 
     private ArrayList<String> readXml(String text) throws Exception {
@@ -259,11 +278,11 @@ public class TestGraph {
             }
 
             for (String a: getAdditionnalLines()) {
-                System.out.println("\t\tAdditionnal: " + a);
+                System.out.println("\t\tAdditionnal: " + XMLDecode(a));
             }
 
             for (String m: getMissingLines()) {
-                System.out.println("\t\tMissing: " + m);
+                System.out.println("\t\tMissing: " + XMLDecode(m));
             }
         }
     }
