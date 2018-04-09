@@ -1,6 +1,7 @@
 package app;
 
 import graph.Edge;
+import graph.Graph;
 import graph.Node;
 import graph.XMLExporter;
 import graph.readers.ProgramReader;
@@ -50,6 +51,11 @@ public class Puck2Runner {
 
     public Program getProgram() {
         return program;
+    }
+
+    // TODO: update project to use the Graph class everywhere
+    public Graph getGraph() {
+        return new Graph(nodes, edges, program);
     }
 
     public void run() throws IOException {

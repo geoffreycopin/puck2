@@ -27,7 +27,7 @@ public class FieldReader extends BodyDeclReader {
 	public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
 		for (FieldDeclarator v : fieldDecl.getDeclaratorList()) {
 		    String fullName = getHostTypeName() + "." + v.name();
-			fieldNode = new Node(idGenerator.generate(), fullName, Node.Type.Attribute, v.getTypeAccess());
+			fieldNode = new Node(idGenerator.generate(), fullName, Node.Type.Attribute, v);
 			nodes.put(fullName, fieldNode);
 		}
 

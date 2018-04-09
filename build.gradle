@@ -69,7 +69,6 @@ task run(type: JavaExec) {
 }
 
 dependencies {
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
     testCompile 'junit:junit:4.12'
 }
 

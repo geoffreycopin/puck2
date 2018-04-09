@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestGraph {
+public class ReadersTest {
     private static final File testDir = new File("testdir");
     private static final Pattern resultFilePattern = Pattern.compile(".*_(all|some)\\.result");
     private int failed = 0;
