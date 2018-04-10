@@ -27,7 +27,7 @@ public class InterfaceReader extends TypeDeclReader {
     @Override
     public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
         Node interfaceNode = new Node(idGenerator.generate(), interfaceDecl.fullName(),
-                Node.Type.Interface, interfaceDecl.createQualifiedAccess());
+                Node.Type.Interface, interfaceDecl);
         nodes.put(interfaceNode.getFullName(), interfaceNode);
 
         readBodyDeclarations(nodes, edges);

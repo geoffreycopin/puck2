@@ -50,7 +50,7 @@ public class MethodBodyReader extends BodyDeclReader {
 	public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
 		String name = this.MethodNode.getFullName()+".body";
 		BodyNode = new Node(idGenerator.generate(), name, Node.Type.MethodBody,
-				null);
+				method);
 
 		nodes.put(name, BodyNode);
 

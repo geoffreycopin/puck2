@@ -31,9 +31,9 @@ public class MethodReader extends BodyDeclReader {
     public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
         String fullName = getHostClassName() + "." + methodDecl.fullSignature();
        
-
+       
         methodNode = new Node(idGenerator.generate(), fullName, Node.Type.Method,
-                methodDecl.getTypeAccess());
+                methodDecl);
 
         nodes.put(fullName, methodNode);
   

@@ -26,6 +26,7 @@ public class Graph {
             Set<Edge> fromList = fromIndex.getOrDefault(e.getSourceName(), new HashSet<>());
             fromList.add(e);
             fromIndex.put(e.getSourceName(), fromList);
+          
 
             Set<Edge> toList = toIndex.getOrDefault(e.getTargetName(), new HashSet<>());
             toList.add(e);
