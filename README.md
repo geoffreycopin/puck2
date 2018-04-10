@@ -33,9 +33,7 @@ Configuration avec Eclipse
 
 2. Importer le projet:  
   1.Selectionner dans le menu File ▸ Import… ▸ Gradle ▸ Existing Gradle Project.     
-  2.Sur la fenêtre qui s'ouvre, spécifier l'emplacement du projet puis cliqué sur le bouton Finish. 
-
-(Une fois le projet importé, accéder a ses propriétés (clic-droit sur le projet, sélectionner Properties) puis dans Java build path ▸ source dans la zone "Default output folder", s'assurer que le répertoire de compilation soit celui par défaut). 
+  2.Sur la fenêtre qui s'ouvre, spécifier l'emplacement du projet puis cliqué sur le bouton Finish.   
 
 3. Utilisation des Gradle tasks: Dans Window ▸ Show view ▸ Gradle tasks  
    Pour générer une archive JAR exécutable : Sélectionner "Build" puis clic-droit sur "build" et choisir "Run gradle task".  
