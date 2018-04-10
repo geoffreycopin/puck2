@@ -1,20 +1,16 @@
 package test;
 
-class SuperTest extends Test implements Foo {
+class Class extends ParentClass {
   int r;
 
-  void superMethod(Test t, Foo f) {
+  void superMethod(ParentClass t, Foo f) {
   }
-
-  void t();
-
-  void t(Test t);
 }
 
-public class Test implements Foo {
+public class ParentClass implements Foo {
   int r;
 
-  SuperTest f;
+  Class f;
 
   void f() {
   }
@@ -34,5 +30,5 @@ public class Test implements Foo {
 interface Foo {
   void t();
 
-  void t(Test t);
+  void t(ParentClass t);
 }

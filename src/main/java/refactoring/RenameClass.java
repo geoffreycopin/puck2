@@ -68,7 +68,6 @@ public class RenameClass extends RefactoringBase {
 	}
 
 	public void updateMethodParam(Access newAccess) {
-
 		for (Node n: getGraph().queryTo(oldName, Edge.Type.Uses)) {
 			if (n.getExtendjNode() instanceof MethodDecl) {
 
@@ -81,18 +80,4 @@ public class RenameClass extends RefactoringBase {
 			}
 		}
 	}
-//	public void updateMethodBody(Access newAccess) {
-//
-//		for (Node n: getGraph().queryTo(oldName, Edge.Type.Uses)) {
-//			if (n.getExtendjNode() instanceof MethodDecl) {
-//
-//				MethodDecl f = (MethodDecl) n.getExtendjNode();
-//				for ( ParameterDeclaration p : f.getParameterList()) {
-//					if(p.getTypeAccess().type().fullName().equals(oldName)) {
-//						p.setTypeAccess(newAccess);
-//					}
-//				}
-//			}
-//		}
-//	}
 }
