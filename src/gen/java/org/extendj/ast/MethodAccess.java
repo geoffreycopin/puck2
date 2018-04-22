@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /** A method invocation. 
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:84
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:84
  * @astdecl MethodAccess : Access ::= <ID:String> Arg:Expr*;
  * @production MethodAccess : {@link Access} ::= <span class="component">&lt;ID:String&gt;</span> <span class="component">Arg:{@link Expr}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class MethodAccess extends Access implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:460
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:460
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getID());
@@ -51,20 +51,8 @@ public class MethodAccess extends Access implements Cloneable {
     out.print(")");
   }
   /**
-   * @aspect ExceptionHandling
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:335
-   */
-  protected boolean reachedException(TypeDecl catchType) {
-    for (TypeDecl exceptionType : exceptionCollection()) {
-      if (catchType.mayCatch(exceptionType)) {
-        return true;
-      }
-    }
-    return super.reachedException(catchType);
-  }
-  /**
    * @aspect NodeConstructors
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NodeConstructors.jrag:70
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NodeConstructors.jrag:70
    */
   public MethodAccess(String name, List args, int start, int end) {
     this(name, args);
@@ -72,10 +60,20 @@ public class MethodAccess extends Access implements Cloneable {
     setEnd(end);
   }
   /**
+   * @aspect AnonymousClasses
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/AnonymousClasses.jrag:142
+   */
+  protected void collectExceptions(Collection<TypeDecl> exceptions) {
+    super.collectExceptions(exceptions);
+    for (int i = 0; i < decl().getNumException(); i++) {
+      exceptions.add(decl().getException(i).type());
+    }
+  }
+  /**
    * Filter a set of methods, keeping only the static methods
    * from the input set.
    * @aspect LookupMethod
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:285
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:285
    */
   protected static SimpleSet<MethodDecl> keepStaticMethods(
       SimpleSet<MethodDecl> methods) {
@@ -91,7 +89,7 @@ public class MethodAccess extends Access implements Cloneable {
    * Determine if a candidate method declaration is applicable
    * for this invocation.
    * @aspect MethodDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:391
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:391
    */
   public boolean applicable(MethodDecl decl) {
     if (getNumArg() != decl.getNumParameter()) {
@@ -108,25 +106,27 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @aspect AnonymousClasses
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AnonymousClasses.jrag:142
+   * @aspect ExceptionHandling
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:335
    */
-  protected void collectExceptions(Collection<TypeDecl> exceptions) {
-    super.collectExceptions(exceptions);
-    for (int i = 0; i < decl().getNumException(); i++) {
-      exceptions.add(decl().getException(i).type());
+  protected boolean reachedException(TypeDecl catchType) {
+    for (TypeDecl exceptionType : exceptionCollection()) {
+      if (catchType.mayCatch(exceptionType)) {
+        return true;
+      }
     }
+    return super.reachedException(catchType);
   }
   /**
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:105
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:105
    */
   @Override public String toString() {
     return name() + "()";
   }
   /**
    * @aspect MethodSignature18
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:797
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:797
    */
   protected boolean moreSpecificThan(MethodDecl m1, MethodDecl m2) {
     if (m1 instanceof ParMethodDecl) {
@@ -230,14 +230,14 @@ public class MethodAccess extends Access implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    decls_reset();
+    decl_reset();
     exceptionCollection_reset();
     computeDAbefore_int_Variable_reset();
     computeDUbefore_int_Variable_reset();
     unassignedAfter_Variable_reset();
     unassignedAfterTrue_Variable_reset();
     unassignedAfterFalse_Variable_reset();
-    decls_reset();
-    decl_reset();
     type_reset();
     isBooleanExpression_reset();
     isNumericExpression_reset();
@@ -482,7 +482,7 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /**
    * @aspect MethodSignature18
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:870
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:870
    */
    
   protected SimpleSet<MethodDecl> potentiallyApplicable(
@@ -513,7 +513,7 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /**
    * @aspect MethodSignature18
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:846
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:846
    */
    
   private SimpleSet<MethodDecl> mostSpecific(SimpleSet<MethodDecl> maxSpecific,
@@ -540,7 +540,7 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /**
    * @aspect MethodSignature15
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:33
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:33
    */
    
   protected SimpleSet<MethodDecl> refined_MethodSignature15_MethodAccess_maxSpecific(Iterable<MethodDecl> candidates) {
@@ -575,7 +575,7 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /**
    * @aspect MethodSignature18
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:714
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:714
    */
    
   protected SimpleSet<MethodDecl> maxSpecific(Iterable<MethodDecl> candidates) {
@@ -610,17 +610,193 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /**
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:306
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:306
    */
   private TypeDecl refined_TypeAnalysis_MethodAccess_type()
 { return decl().type(); }
   /**
+   * Returns one of the candidate declarations of this method access,
+   * or {@code null} if there exist no possible candidate declarations.
+   * 
+   * <p>This attribute is only used in error reporting, to give a hint about
+   * a candidate declaration that was not applicable for method invocation
+   * for some reason.
    * @attribute syn
-   * @aspect ExceptionHandling
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:100
+   * @aspect LookupMethod
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:204
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:100")
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:204")
+  public MethodDecl singleCandidateDecl() {
+    {
+        String signature = "";
+        MethodDecl result = null;
+        for (MethodDecl m : lookupMethod(name())) {
+          String otherSignature = m.fullSignature();
+          // Choose the candidate matching arity or the lexicographically first signature.
+          if (result == null
+              || (m.getNumParameter() == getNumArg() && result.getNumParameter() != getNumArg())
+              || (m.getNumParameter() == getNumArg() && otherSignature.compareTo(signature) < 0)) {
+            signature = otherSignature;
+            result = m;
+          }
+        }
+        return result;
+      }
+  }
+  /** @apilevel internal */
+  private void decls_reset() {
+    decls_computed = null;
+    decls_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle decls_computed = null;
+
+  /** @apilevel internal */
+  protected SimpleSet<MethodDecl> decls_value;
+
+  /**
+   * Find all most specific applicable method declarations for this invocation.
+   * @attribute syn
+   * @aspect LookupMethod
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:246
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:246")
+  public SimpleSet<MethodDecl> decls() {
+    ASTState state = state();
+    if (decls_computed == ASTState.NON_CYCLE || decls_computed == state().cycle()) {
+      return decls_value;
+    }
+    decls_value = decls_compute();
+    if (state().inCircle()) {
+      decls_computed = state().cycle();
+    
+    } else {
+      decls_computed = ASTState.NON_CYCLE;
+    
+    }
+    return decls_value;
+  }
+  /** @apilevel internal */
+  private SimpleSet<MethodDecl> decls_compute() {
+      SimpleSet<MethodDecl> maxSpecific = maxSpecific(lookupMethod(name()));
+      if (isQualified() ? qualifier().staticContextQualifier() : inStaticContext()) {
+        maxSpecific = keepStaticMethods(maxSpecific);
+      }
+      return maxSpecific;
+    }
+  /** @apilevel internal */
+  private void decl_reset() {
+    decl_computed = null;
+    decl_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle decl_computed = null;
+
+  /** @apilevel internal */
+  protected MethodDecl decl_value;
+
+  /**
+   * Find the single method declaration matching this invocation.
+   * 
+   * <p>If no such declaration exists, the unknown method declaration is returned
+   * instead.
+   * @attribute syn
+   * @aspect LookupMethod
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:260
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:260")
+  public MethodDecl decl() {
+    ASTState state = state();
+    if (decl_computed == ASTState.NON_CYCLE || decl_computed == state().cycle()) {
+      return decl_value;
+    }
+    decl_value = decl_compute();
+    if (state().inCircle()) {
+      decl_computed = state().cycle();
+    
+    } else {
+      decl_computed = ASTState.NON_CYCLE;
+    
+    }
+    return decl_value;
+  }
+  /** @apilevel internal */
+  private MethodDecl decl_compute() {
+      SimpleSet<MethodDecl> decls = decls();
+      if (decls.isSingleton()) {
+        return decls.singletonValue();
+      }
+  
+      // Only return the first method in case of multiply inherited abstract methods.
+      // See JLS6 section 8.4.6.4.
+      boolean allAbstract = true;
+      for (MethodDecl m : decls) {
+        if (!m.isAbstract() && !m.hostType().isObject()) {
+          allAbstract = false;
+          break;
+        }
+      }
+      if (decls.size() > 1 && allAbstract) {
+        return decls.iterator().next();
+      }
+      return unknownMethod();
+    }
+  /**
+   * Determine if a candidate method declaration is accessible
+   * from this invocation.
+   * @attribute syn
+   * @aspect MethodDecl
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:410
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:410")
+  public boolean accessible(MethodDecl m) {
+    {
+        if (!isQualified()) {
+          return true;
+        }
+        if (!m.accessibleFrom(hostType())) {
+          return false;
+        }
+        // The method is not accessible if the type is not accessible.
+        if (!qualifier().type().accessibleFrom(hostType())) {
+          return false;
+        }
+        // 6.6.2.1 -  include qualifier type for protected access
+        if (m.isProtected() && !m.hostPackage().equals(hostPackage())
+            && !m.isStatic() && !qualifier().isSuperAccess()) {
+          return hostType().mayAccess(this, m);
+        }
+        return true;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect NameCheck
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:95
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:95")
+  public boolean validArgs() {
+    {
+        for (int i = 0; i < getNumArg(); i++) {
+          if (!getArg(i).isPolyExpression() && getArg(i).type().isUnknown()) {
+            return false;
+          }
+        }
+        return true;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect ExceptionHandling
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:100
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:100")
   public Collection<Problem> exceptionHandlingProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -648,10 +824,10 @@ public class MethodAccess extends Access implements Cloneable {
   /** @return the exception types possibly thrown by this method access 
    * @attribute syn
    * @aspect ExceptionHandling
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:113
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:113
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:113")
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:113")
   public Collection<TypeDecl> exceptionCollection() {
     ASTState state = state();
     if (exceptionCollection_computed == ASTState.NON_CYCLE || exceptionCollection_computed == state().cycle()) {
@@ -706,14 +882,36 @@ public class MethodAccess extends Access implements Cloneable {
     }
   /**
    * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:47
+   * @aspect TypeCheck
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:149
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:47")
-  public boolean isMethodAccess() {
-    boolean isMethodAccess_value = true;
-    return isMethodAccess_value;
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:149")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        for (int i = 0; i < getNumArg(); ++i) {
+          if (getArg(i).type().isVoid()) {
+            problems.add(errorf("expression '%s' has type void and is not a valid method argument",
+                getArg(i).prettyPrint()));
+          }
+        }
+        if (isQualified() && decl().isAbstract() && qualifier().isSuperAccess()) {
+          problems.add(error("may not access abstract methods in superclass"));
+        }
+        if (!decl().isVariableArity() || invokesVariableArityAsArray()) {
+          for (int i = 0; i < decl().getNumParameter(); i++) {
+            TypeDecl exprType = getArg(i).type();
+            TypeDecl parmType = decl().getParameter(i).type();
+            if (!exprType.methodInvocationConversionTo(parmType) &&
+                !exprType.isUnknown() && !parmType.isUnknown()) {
+              problems.add(errorf("argument '%s' of type %s is not compatible with the method parameter type %s",
+                  getArg(i).prettyPrint(), exprType.typeName(), parmType.typeName()));
+            }
+          }
+        }
+        return problems;
+      }
   }
   /** @apilevel internal */
   private void computeDAbefore_int_Variable_reset() {
@@ -721,7 +919,7 @@ public class MethodAccess extends Access implements Cloneable {
   }
   protected java.util.Map computeDAbefore_int_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:502")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:502")
   public boolean computeDAbefore(int i, Variable v) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(i);
@@ -771,10 +969,10 @@ public class MethodAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268")
   public boolean assignedAfter(Variable v) {
     boolean assignedAfter_Variable_value = getNumArg() == 0
           ? assignedBefore(v)
@@ -784,10 +982,10 @@ public class MethodAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:375
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:375
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:375")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:375")
   public boolean assignedAfterTrue(Variable v) {
     boolean assignedAfterTrue_Variable_value = isFalse() || (getNumArg() == 0 ? assignedBefore(v) : getArg(getNumArg()-1).assignedAfter(v));
     return assignedAfterTrue_Variable_value;
@@ -795,10 +993,10 @@ public class MethodAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:377
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:377
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:377")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:377")
   public boolean assignedAfterFalse(Variable v) {
     boolean assignedAfterFalse_Variable_value = isTrue() || (getNumArg() == 0 ? assignedBefore(v) : getArg(getNumArg()-1).assignedAfter(v));
     return assignedAfterFalse_Variable_value;
@@ -809,7 +1007,7 @@ public class MethodAccess extends Access implements Cloneable {
   }
   protected java.util.Map computeDUbefore_int_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1118")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1118")
   public boolean computeDUbefore(int i, Variable v) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(i);
@@ -862,7 +1060,7 @@ public class MethodAccess extends Access implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:899")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:899")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -913,7 +1111,7 @@ public class MethodAccess extends Access implements Cloneable {
   }
   protected java.util.Map unassignedAfterTrue_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:905")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:905")
   public boolean unassignedAfterTrue(Variable v) {
     Object _parameters = v;
     if (unassignedAfterTrue_Variable_values == null) unassignedAfterTrue_Variable_values = new java.util.HashMap(4);
@@ -966,7 +1164,7 @@ public class MethodAccess extends Access implements Cloneable {
   }
   protected java.util.Map unassignedAfterFalse_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:907")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:907")
   public boolean unassignedAfterFalse(Variable v) {
     Object _parameters = v;
     if (unassignedAfterFalse_Variable_values == null) unassignedAfterFalse_Variable_values = new java.util.HashMap(4);
@@ -1015,11 +1213,22 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect TypeHierarchyCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:53
+   * @aspect AccessTypes
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:47
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:53")
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:47")
+  public boolean isMethodAccess() {
+    boolean isMethodAccess_value = true;
+    return isMethodAccess_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeHierarchyCheck
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:53
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:53")
   public Collection<Problem> typeHierarchyProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -1072,239 +1281,6 @@ public class MethodAccess extends Access implements Cloneable {
         return problems;
       }
   }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:149
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:149")
-  public Collection<Problem> typeProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        for (int i = 0; i < getNumArg(); ++i) {
-          if (getArg(i).type().isVoid()) {
-            problems.add(errorf("expression '%s' has type void and is not a valid method argument",
-                getArg(i).prettyPrint()));
-          }
-        }
-        if (isQualified() && decl().isAbstract() && qualifier().isSuperAccess()) {
-          problems.add(error("may not access abstract methods in superclass"));
-        }
-        if (!decl().isVariableArity() || invokesVariableArityAsArray()) {
-          for (int i = 0; i < decl().getNumParameter(); i++) {
-            TypeDecl exprType = getArg(i).type();
-            TypeDecl parmType = decl().getParameter(i).type();
-            if (!exprType.methodInvocationConversionTo(parmType) &&
-                !exprType.isUnknown() && !parmType.isUnknown()) {
-              problems.add(errorf("argument '%s' of type %s is not compatible with the method parameter type %s",
-                  getArg(i).prettyPrint(), exprType.typeName(), parmType.typeName()));
-            }
-          }
-        }
-        return problems;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect NameCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:95
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:95")
-  public boolean validArgs() {
-    {
-        for (int i = 0; i < getNumArg(); i++) {
-          if (!getArg(i).isPolyExpression() && getArg(i).type().isUnknown()) {
-            return false;
-          }
-        }
-        return true;
-      }
-  }
-  /**
-   * Defines the expected kind of name for the left hand side in a qualified
-   * expression.
-   * @attribute syn
-   * @aspect SyntacticClassification
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:60
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SyntacticClassification", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:60")
-  public NameType predNameType() {
-    NameType predNameType_value = NameType.AMBIGUOUS_NAME;
-    return predNameType_value;
-  }
-  /**
-   * Returns one of the candidate declarations of this method access,
-   * or {@code null} if there exist no possible candidate declarations.
-   * 
-   * <p>This attribute is only used in error reporting, to give a hint about
-   * a candidate declaration that was not applicable for method invocation
-   * for some reason.
-   * @attribute syn
-   * @aspect LookupMethod
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:204
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:204")
-  public MethodDecl singleCandidateDecl() {
-    {
-        String signature = "";
-        MethodDecl result = null;
-        for (MethodDecl m : lookupMethod(name())) {
-          String otherSignature = m.fullSignature();
-          // Choose the candidate matching arity or the lexicographically first signature.
-          if (result == null
-              || (m.getNumParameter() == getNumArg() && result.getNumParameter() != getNumArg())
-              || (m.getNumParameter() == getNumArg() && otherSignature.compareTo(signature) < 0)) {
-            signature = otherSignature;
-            result = m;
-          }
-        }
-        return result;
-      }
-  }
-  /** @apilevel internal */
-  private void decls_reset() {
-    decls_computed = null;
-    decls_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle decls_computed = null;
-
-  /** @apilevel internal */
-  protected SimpleSet<MethodDecl> decls_value;
-
-  /**
-   * Find all most specific applicable method declarations for this invocation.
-   * @attribute syn
-   * @aspect LookupMethod
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:246
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:246")
-  public SimpleSet<MethodDecl> decls() {
-    ASTState state = state();
-    if (decls_computed == ASTState.NON_CYCLE || decls_computed == state().cycle()) {
-      return decls_value;
-    }
-    decls_value = decls_compute();
-    if (state().inCircle()) {
-      decls_computed = state().cycle();
-    
-    } else {
-      decls_computed = ASTState.NON_CYCLE;
-    
-    }
-    return decls_value;
-  }
-  /** @apilevel internal */
-  private SimpleSet<MethodDecl> decls_compute() {
-      SimpleSet<MethodDecl> maxSpecific = maxSpecific(lookupMethod(name()));
-      if (isQualified() ? qualifier().staticContextQualifier() : inStaticContext()) {
-        maxSpecific = keepStaticMethods(maxSpecific);
-      }
-      return maxSpecific;
-    }
-  /** @apilevel internal */
-  private void decl_reset() {
-    decl_computed = null;
-    decl_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle decl_computed = null;
-
-  /** @apilevel internal */
-  protected MethodDecl decl_value;
-
-  /**
-   * Find the single method declaration matching this invocation.
-   * 
-   * <p>If no such declaration exists, the unknown method declaration is returned
-   * instead.
-   * @attribute syn
-   * @aspect LookupMethod
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:260
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:260")
-  public MethodDecl decl() {
-    ASTState state = state();
-    if (decl_computed == ASTState.NON_CYCLE || decl_computed == state().cycle()) {
-      return decl_value;
-    }
-    decl_value = decl_compute();
-    if (state().inCircle()) {
-      decl_computed = state().cycle();
-    
-    } else {
-      decl_computed = ASTState.NON_CYCLE;
-    
-    }
-    return decl_value;
-  }
-  /** @apilevel internal */
-  private MethodDecl decl_compute() {
-      SimpleSet<MethodDecl> decls = decls();
-      if (decls.isSingleton()) {
-        return decls.singletonValue();
-      }
-  
-      // Only return the first method in case of multiply inherited abstract methods.
-      // See JLS6 section 8.4.6.4.
-      boolean allAbstract = true;
-      for (MethodDecl m : decls) {
-        if (!m.isAbstract() && !m.hostType().isObject()) {
-          allAbstract = false;
-          break;
-        }
-      }
-      if (decls.size() > 1 && allAbstract) {
-        return decls.iterator().next();
-      }
-      return unknownMethod();
-    }
-  /**
-   * Determine if a candidate method declaration is accessible
-   * from this invocation.
-   * @attribute syn
-   * @aspect MethodDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:410
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:410")
-  public boolean accessible(MethodDecl m) {
-    {
-        if (!isQualified()) {
-          return true;
-        }
-        if (!m.accessibleFrom(hostType())) {
-          return false;
-        }
-        // The method is not accessible if the type is not accessible.
-        if (!qualifier().type().accessibleFrom(hostType())) {
-          return false;
-        }
-        // 6.6.2.1 -  include qualifier type for protected access
-        if (m.isProtected() && !m.hostPackage().equals(hostPackage())
-            && !m.isStatic() && !qualifier().isSuperAccess()) {
-          return hostType().mayAccess(this, m);
-        }
-        return true;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect Names
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:36
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:36")
-  public String name() {
-    String name_value = getID();
-    return name_value;
-  }
   /** @apilevel internal */
   private void type_reset() {
     type_computed = null;
@@ -1319,10 +1295,10 @@ public class MethodAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -1353,30 +1329,36 @@ public class MethodAccess extends Access implements Cloneable {
       return refined_TypeAnalysis_MethodAccess_type();
     }
   /**
+   * Defines the expected kind of name for the left hand side in a qualified
+   * expression.
    * @attribute syn
-   * @aspect VariableArityParameters
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/VariableArityParameters.jrag:65
+   * @aspect SyntacticClassification
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:60
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/VariableArityParameters.jrag:65")
-  public boolean invokesVariableArityAsArray() {
-    {
-        if (!decl().isVariableArity()) {
-          return false;
-        }
-        if (arity() != decl().arity()) {
-          return false;
-        }
-        return getArg(getNumArg()-1).type().methodInvocationConversionTo(decl().lastParameter().type());
-      }
+  @ASTNodeAnnotation.Source(aspect="SyntacticClassification", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:60")
+  public NameType predNameType() {
+    NameType predNameType_value = NameType.AMBIGUOUS_NAME;
+    return predNameType_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Names
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/QualifiedNames.jrag:36
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/QualifiedNames.jrag:36")
+  public String name() {
+    String name_value = getID();
+    return name_value;
   }
   /**
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:325
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:325
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:325")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:325")
   public boolean applicableBySubtyping(MethodDecl m) {
     {
         if (m.getNumParameter() != getNumArg()) {
@@ -1395,10 +1377,10 @@ public class MethodAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:353
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:353
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:353")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:353")
   public boolean applicableByMethodInvocationConversion(MethodDecl m) {
     {
         if (m.getNumParameter() != getNumArg()) {
@@ -1417,10 +1399,10 @@ public class MethodAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:378
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:378
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:378")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:378")
   public boolean applicableVariableArity(MethodDecl m) {
     {
         for (int i = 0; i < m.getNumParameter() - 1; i++) {
@@ -1462,10 +1444,10 @@ public class MethodAccess extends Access implements Cloneable {
    * </ul>
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:478
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:478
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:478")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:478")
   public boolean potentiallyApplicable(MethodDecl m) {
     {
         if (!m.name().equals(name())) {
@@ -1541,38 +1523,39 @@ public class MethodAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:514
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:514
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/MethodSignature.jrag:514")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/MethodSignature.jrag:514")
   public int arity() {
     int arity_value = getNumArg();
     return arity_value;
   }
   /**
    * @attribute syn
-   * @aspect PreciseRethrow
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:145
+   * @aspect VariableArityParameters
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/VariableArityParameters.jrag:65
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:145")
-  public boolean modifiedInScope(Variable var) {
+  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/VariableArityParameters.jrag:65")
+  public boolean invokesVariableArityAsArray() {
     {
-        for (int i = 0; i < getNumArg(); ++i) {
-          if (getArg(i).modifiedInScope(var)) {
-            return true;
-          }
+        if (!decl().isVariableArity()) {
+          return false;
         }
-        return false;
+        if (arity() != decl().arity()) {
+          return false;
+        }
+        return getArg(getNumArg()-1).type().methodInvocationConversionTo(decl().lastParameter().type());
       }
   }
   /**
    * @attribute syn
    * @aspect SafeVarargs
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SafeVarargs.jrag:70
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/SafeVarargs.jrag:70
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SafeVarargs", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SafeVarargs.jrag:70")
+  @ASTNodeAnnotation.Source(aspect="SafeVarargs", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/SafeVarargs.jrag:70")
   public Collection<Problem> uncheckedWarnings() {
     {
         MethodDecl decl = decl();
@@ -1591,6 +1574,23 @@ public class MethodAccess extends Access implements Cloneable {
         return Collections.emptyList();
       }
   }
+  /**
+   * @attribute syn
+   * @aspect PreciseRethrow
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:145
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:145")
+  public boolean modifiedInScope(Variable var) {
+    {
+        for (int i = 0; i < getNumArg(); ++i) {
+          if (getArg(i).modifiedInScope(var)) {
+            return true;
+          }
+        }
+        return false;
+      }
+  }
   /** @apilevel internal */
   private void isBooleanExpression_reset() {
     isBooleanExpression_computed = null;
@@ -1604,10 +1604,10 @@ public class MethodAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:29
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:29
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:29")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:29")
   public boolean isBooleanExpression() {
     ASTState state = state();
     if (isBooleanExpression_computed == ASTState.NON_CYCLE || isBooleanExpression_computed == state().cycle()) {
@@ -1645,10 +1645,10 @@ public class MethodAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:60
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:60
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:60")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:60")
   public boolean isNumericExpression() {
     ASTState state = state();
     if (isNumericExpression_computed == ASTState.NON_CYCLE || isNumericExpression_computed == state().cycle()) {
@@ -1686,10 +1686,10 @@ public class MethodAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:86
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:86
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/PolyExpressions.jrag:86")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/PolyExpressions.jrag:86")
   public boolean isPolyExpression() {
     ASTState state = state();
     if (isPolyExpression_computed == ASTState.NON_CYCLE || isPolyExpression_computed == state().cycle()) {
@@ -1729,10 +1729,10 @@ public class MethodAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect StmtCompatible
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaExpr.jrag:153
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LambdaExpr.jrag:153
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StmtCompatible", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LambdaExpr.jrag:153")
+  @ASTNodeAnnotation.Source(aspect="StmtCompatible", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/LambdaExpr.jrag:153")
   public boolean stmtCompatible() {
     ASTState state = state();
     if (stmtCompatible_computed == ASTState.NON_CYCLE || stmtCompatible_computed == state().cycle()) {
@@ -1777,10 +1777,10 @@ public class MethodAccess extends Access implements Cloneable {
    * declaration.
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:49
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:49
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:49")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:49")
   public MethodAccess boundAccess(MethodDecl decl) {
     Object _parameters = decl;
     if (boundAccess_MethodDecl_values == null) boundAccess_MethodDecl_values = new java.util.HashMap(4);
@@ -1810,12 +1810,25 @@ public class MethodAccess extends Access implements Cloneable {
       return new BoundMethodAccess(name(), getArgList().treeCopyNoTransform(), decl);
     }
   /**
+   * Returns a method declaration representing unknown methods.
+   * Used in method lookup when no matching method was found.
    * @attribute inh
-   * @aspect ExceptionHandling
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:88
+   * @aspect LookupMethod
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:49
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:88")
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:49")
+  public MethodDecl unknownMethod() {
+    MethodDecl unknownMethod_value = getParent().Define_unknownMethod(this, null);
+    return unknownMethod_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect ExceptionHandling
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:88
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:88")
   public boolean handlesException(TypeDecl exceptionType) {
     boolean handlesException_TypeDecl_value = getParent().Define_handlesException(this, null, exceptionType);
     return handlesException_TypeDecl_value;
@@ -1823,45 +1836,163 @@ public class MethodAccess extends Access implements Cloneable {
   /**
    * @attribute inh
    * @aspect TypeHierarchyCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:184
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:184
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:184")
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:184")
   public boolean inExplicitConstructorInvocation() {
     boolean inExplicitConstructorInvocation_value = getParent().Define_inExplicitConstructorInvocation(this, null);
     return inExplicitConstructorInvocation_value;
   }
   /**
-   * Returns a method declaration representing unknown methods.
-   * Used in method lookup when no matching method was found.
-   * @attribute inh
-   * @aspect LookupMethod
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:49
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:49")
-  public MethodDecl unknownMethod() {
-    MethodDecl unknownMethod_value = getParent().Define_unknownMethod(this, null);
-    return unknownMethod_value;
-  }
-  /**
    * @attribute inh
    * @aspect SuppressWarnings
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SuppressWarnings.jrag:39
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/SuppressWarnings.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="SuppressWarnings", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SuppressWarnings.jrag:39")
+  @ASTNodeAnnotation.Source(aspect="SuppressWarnings", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/SuppressWarnings.jrag:39")
   public boolean withinSuppressWarnings(String annot) {
     boolean withinSuppressWarnings_String_value = getParent().Define_withinSuppressWarnings(this, null, annot);
     return withinSuppressWarnings_String_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:30
+   * @apilevel internal
+   */
+  public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return unqualifiedScope().lookupVariable(name);
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/LookupVariable.jrag:30
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
+   */
+  protected boolean canDefine_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:116
+   * @apilevel internal
+   */
+  public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+    if (_callerNode == getArgListNoTransform()) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:128
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return unqualifiedScope().lookupMethod(name);
+    }
+    else {
+      return getParent().Define_lookupMethod(this, _callerNode, name);
+    }
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:116
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupMethod
+   */
+  protected boolean canDefine_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:113
+   * @apilevel internal
+   */
+  public boolean Define_hasPackage(ASTNode _callerNode, ASTNode _childNode, String packageName) {
+    if (_callerNode == getArgListNoTransform()) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:114
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return unqualifiedScope().hasPackage(packageName);
+    }
+    else {
+      return getParent().Define_hasPackage(this, _callerNode, packageName);
+    }
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:113
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute hasPackage
+   */
+  protected boolean canDefine_hasPackage(ASTNode _callerNode, ASTNode _childNode, String packageName) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @apilevel internal
+   */
+  public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
+    if (_callerNode == boundAccess_MethodDecl_proxy) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/MethodSignature.jrag:54
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return unqualifiedScope().lookupType(name);
+    }
+    else if (_callerNode == getArgListNoTransform()) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:385
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return unqualifiedScope().lookupType(name);
+    }
+    else {
+      return getParent().Define_lookupType(this, _callerNode, name);
+    }
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupType
+   */
+  protected boolean canDefine_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @apilevel internal
+   */
+  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    if (_callerNode == getArgListNoTransform()) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:500
+      int i = _callerNode.getIndexOfChild(_childNode);
+      return computeDAbefore(i, v);
+    }
+    else {
+      return getParent().Define_assignedBefore(this, _callerNode, v);
+    }
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
+   */
+  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @apilevel internal
+   */
+  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    if (_callerNode == getArgListNoTransform()) {
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1116
+      int i = _callerNode.getIndexOfChild(_childNode);
+      return computeDUbefore(i, v);
+    }
+    else {
+      return getParent().Define_unassignedBefore(this, _callerNode, v);
+    }
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
+   */
+  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
    * @apilevel internal
    */
   public boolean Define_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:107
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:107
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -1871,7 +2002,7 @@ public class MethodAccess extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isRightChildOfDot
    */
@@ -1879,12 +2010,12 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
    * @apilevel internal
    */
   public Expr Define_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:123
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:123
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return prevExprError();
     }
@@ -1894,7 +2025,7 @@ public class MethodAccess extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute prevExpr
    */
@@ -1902,51 +2033,7 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
-   * @apilevel internal
-   */
-  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:500
-      int i = _callerNode.getIndexOfChild(_childNode);
-      return computeDAbefore(i, v);
-    }
-    else {
-      return getParent().Define_assignedBefore(this, _callerNode, v);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
-   */
-  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
-   * @apilevel internal
-   */
-  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1116
-      int i = _callerNode.getIndexOfChild(_childNode);
-      return computeDUbefore(i, v);
-    }
-    else {
-      return getParent().Define_unassignedBefore(this, _callerNode, v);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
-   */
-  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:33
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:33
    * @apilevel internal
    */
   public String Define_methodHost(ASTNode _callerNode, ASTNode _childNode) {
@@ -1954,7 +2041,7 @@ public class MethodAccess extends Access implements Cloneable {
     return unqualifiedScope().methodHost();
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:33
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:33
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute methodHost
    */
@@ -1962,77 +2049,12 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:113
-   * @apilevel internal
-   */
-  public boolean Define_hasPackage(ASTNode _callerNode, ASTNode _childNode, String packageName) {
-    if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:114
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return unqualifiedScope().hasPackage(packageName);
-    }
-    else {
-      return getParent().Define_hasPackage(this, _callerNode, packageName);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:113
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute hasPackage
-   */
-  protected boolean canDefine_hasPackage(ASTNode _callerNode, ASTNode _childNode, String packageName) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
-   * @apilevel internal
-   */
-  public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
-    if (_callerNode == boundAccess_MethodDecl_proxy) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/MethodSignature.jrag:54
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return unqualifiedScope().lookupType(name);
-    }
-    else if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:385
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return unqualifiedScope().lookupType(name);
-    }
-    else {
-      return getParent().Define_lookupType(this, _callerNode, name);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupType
-   */
-  protected boolean canDefine_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LookupVariable.jrag:30
-   * @apilevel internal
-   */
-  public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return unqualifiedScope().lookupVariable(name);
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/LookupVariable.jrag:30
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
-   */
-  protected boolean canDefine_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:139
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:139
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.EXPRESSION_NAME;
     }
@@ -2041,7 +2063,7 @@ public class MethodAccess extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -2049,39 +2071,17 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:116
-   * @apilevel internal
-   */
-  public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
-    if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:128
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return unqualifiedScope().lookupMethod(name);
-    }
-    else {
-      return getParent().Define_lookupMethod(this, _callerNode, name);
-    }
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:116
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupMethod
-   */
-  protected boolean canDefine_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:69
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:69
    * @apilevel internal
    */
   public TypeDecl Define_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == boundAccess_MethodDecl_proxy) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:181
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:181
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return assignConvertedType();
     }
     else if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:184
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:184
       int index = _callerNode.getIndexOfChild(_childNode);
       return decl().paramType(index);
     }
@@ -2090,7 +2090,7 @@ public class MethodAccess extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:69
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:69
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignConvertedType
    */
@@ -2098,12 +2098,12 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:31
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    */
   public TypeDecl Define_targetType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:88
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:88
       int i = _callerNode.getIndexOfChild(_childNode);
       {
           MethodDecl decl = decl();
@@ -2123,7 +2123,7 @@ public class MethodAccess extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:31
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute targetType
    */
@@ -2131,12 +2131,12 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:350
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:350
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -2145,7 +2145,7 @@ public class MethodAccess extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
    */
@@ -2153,12 +2153,12 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:351
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:351
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return true;
     }
@@ -2167,7 +2167,7 @@ public class MethodAccess extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute invocationContext
    */
@@ -2175,12 +2175,12 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:352
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:352
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -2189,7 +2189,7 @@ public class MethodAccess extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute castContext
    */
@@ -2197,12 +2197,12 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:353
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:353
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -2211,7 +2211,7 @@ public class MethodAccess extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute stringContext
    */
@@ -2219,12 +2219,12 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:354
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:354
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -2233,7 +2233,7 @@ public class MethodAccess extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute numericContext
    */
@@ -2250,7 +2250,7 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ExceptionHandling.jrag:98
+    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ExceptionHandling.jrag:98
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -2259,7 +2259,7 @@ public class MethodAccess extends Access implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:51
+    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:147
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -2268,7 +2268,7 @@ public class MethodAccess extends Access implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:147
+    // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeHierarchyCheck.jrag:51
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -2277,7 +2277,7 @@ public class MethodAccess extends Access implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:496
+    // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:496
     if (decl().isDeprecated()
               && !withinDeprecatedAnnotation()
               && hostType().topLevelType() != decl().hostType().topLevelType()
@@ -2291,7 +2291,7 @@ public class MethodAccess extends Access implements Cloneable {
         contributors.add(this);
       }
     }
-    // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/SafeVarargs.jrag:68
+    // @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/SafeVarargs.jrag:68
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -2308,10 +2308,10 @@ public class MethodAccess extends Access implements Cloneable {
     for (Problem value : exceptionHandlingProblems()) {
       collection.add(value);
     }
-    for (Problem value : typeHierarchyProblems()) {
+    for (Problem value : typeProblems()) {
       collection.add(value);
     }
-    for (Problem value : typeProblems()) {
+    for (Problem value : typeHierarchyProblems()) {
       collection.add(value);
     }
     if (decl().isDeprecated()

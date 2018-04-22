@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:297
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:297
  * @astdecl Case : Stmt;
  * @production Case : {@link Stmt};
 
@@ -118,18 +118,18 @@ public abstract class Case extends Stmt implements Cloneable {
    * the argument case label.
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:665
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:665
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:665")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:665")
   public abstract boolean constValue(Case c);
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:127
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:127
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:127")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:127")
   public boolean reachable() {
     boolean reachable_value = getParent().getParent() instanceof Block && ((Block) getParent().getParent()).reachable();
     return reachable_value;
@@ -140,7 +140,7 @@ public abstract class Case extends Stmt implements Cloneable {
   }
   protected java.util.Map assignedBefore_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:731")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:731")
   public boolean assignedBefore(Variable v) {
     Object _parameters = v;
     if (assignedBefore_Variable_values == null) assignedBefore_Variable_values = new java.util.HashMap(4);
@@ -195,7 +195,7 @@ public abstract class Case extends Stmt implements Cloneable {
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -243,10 +243,10 @@ public abstract class Case extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteUnassignment
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1390
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1390
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1390")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1390")
   public boolean unassignedBefore(Variable v) {
     boolean unassignedBefore_Variable_value = getParent().getParent() instanceof Block
           && ((Block) getParent().getParent()).unassignedBefore(v)
@@ -259,7 +259,7 @@ public abstract class Case extends Stmt implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -307,10 +307,10 @@ public abstract class Case extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect StringsInSwitch
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/StringsInSwitch.jrag:61
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/StringsInSwitch.jrag:61
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/StringsInSwitch.jrag:61")
+  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/StringsInSwitch.jrag:61")
   public boolean isDefaultCase() {
     boolean isDefaultCase_value = false;
     return isDefaultCase_value;
@@ -318,34 +318,23 @@ public abstract class Case extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = false;
     return modifiedInScope_Variable_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect TypeCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:482
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:482")
-  public TypeDecl switchType() {
-    TypeDecl switchType_value = getParent().Define_switchType(this, null);
-    return switchType_value;
   }
   /**
    * Finds the first case label that has the same constant expression as
    * this case label in the immediately enclosing switch statement.
    * @attribute inh
    * @aspect NameCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:592
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:592
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:592")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:592")
   public Case previousCase(Case c) {
     Object _parameters = c;
     if (previousCase_Case_computed == null) previousCase_Case_computed = new java.util.HashMap(4);
@@ -377,6 +366,17 @@ public abstract class Case extends Stmt implements Cloneable {
   protected java.util.Map previousCase_Case_values;
   /** @apilevel internal */
   protected java.util.Map previousCase_Case_computed;
+  /**
+   * @attribute inh
+   * @aspect TypeCheck
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:482
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:482")
+  public TypeDecl switchType() {
+    TypeDecl switchType_value = getParent().Define_switchType(this, null);
+    return switchType_value;
+  }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
     return super.rewriteTo();

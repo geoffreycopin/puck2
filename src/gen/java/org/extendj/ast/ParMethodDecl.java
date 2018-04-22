@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/grammar/GenericMethods.ast:4
+ * @declaredat /home/hadjer/git/puck2/extendj/java5/grammar/GenericMethods.ast:4
  * @astdecl ParMethodDecl : MethodDecl ::= TypeArgument:Access* <GenericMethodDecl:GenericMethodDecl> TypeParameter:TypeVariable* <Parameterization:Parameterization>;
  * @production ParMethodDecl : {@link MethodDecl} ::= <span class="component">TypeArgument:{@link Access}*</span> <span class="component">&lt;GenericMethodDecl:GenericMethodDecl&gt;</span> <span class="component">TypeParameter:{@link TypeVariable}*</span> <span class="component">&lt;Parameterization:Parameterization&gt;</span>;
 
@@ -37,21 +37,21 @@ import java.io.DataInputStream;
 public class ParMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1274
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1274
    */
   public int numTypeParameter() {
     return genericMethodDecl().original().getNumTypeParameter();
   }
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1282
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1282
    */
   public TypeVariable typeParameter(int index) {
     return genericMethodDecl().original().getTypeParameter(index);
   }
   /**
    * @aspect PrettyPrintUtil5
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/PrettyPrintUtil.jrag:46
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/PrettyPrintUtil.jrag:46
    */
   @Override public String toString() {
     StringBuilder params = new StringBuilder();
@@ -854,10 +854,10 @@ public class ParMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericMethods
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:52
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:52
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:52")
+  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:52")
   public GenericMethodDecl genericMethodDecl() {
     ASTState state = state();
     if (genericMethodDecl_computed == ASTState.NON_CYCLE || genericMethodDecl_computed == state().cycle()) {
@@ -876,10 +876,10 @@ public class ParMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1658
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1658
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1658")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1658")
   public MethodDecl erasedMethod() {
     MethodDecl erasedMethod_value = genericMethodDecl().erasedMethod();
     return erasedMethod_value;
@@ -898,10 +898,10 @@ public class ParMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect SourceDeclarations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1886
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1886
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1886")
+  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1886")
   public MethodDecl sourceMethodDecl() {
     ASTState state = state();
     if (sourceMethodDecl_computed == ASTState.NON_CYCLE || sourceMethodDecl_computed == state().cycle()) {
@@ -939,10 +939,10 @@ public class ParMethodDecl extends MethodDecl implements Cloneable {
    * method.
    * @attribute syn
    * @aspect MethodDecl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:375
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:375
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupMethod.jrag:375")
+  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupMethod.jrag:375")
   public boolean lessSpecificThan(MethodDecl m) {
     Object _parameters = m;
     if (lessSpecificThan_MethodDecl_computed == null) lessSpecificThan_MethodDecl_computed = new java.util.HashMap(4);
@@ -967,7 +967,7 @@ public class ParMethodDecl extends MethodDecl implements Cloneable {
     return lessSpecificThan_MethodDecl_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
@@ -981,7 +981,7 @@ public class ParMethodDecl extends MethodDecl implements Cloneable {
       }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupType
    */

@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:156
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:156
  * @astdecl ArrayDecl : ClassDecl;
  * @production ArrayDecl : {@link ClassDecl};
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @aspect Arrays
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Arrays.jrag:99
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Arrays.jrag:99
    */
   public Access createQualifiedAccess() {
     return new ArrayTypeAccess(componentType().createQualifiedAccess());
@@ -109,13 +109,13 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     dimension_reset();
     elementType_reset();
     fullName_reset();
-    typeName_reset();
     castingConversionTo_TypeDecl_reset();
     instanceOf_TypeDecl_reset();
-    involvesTypeParameters_reset();
+    typeName_reset();
     erasure_reset();
     usesTypeVariable_reset();
     subtype_TypeDecl_reset();
+    involvesTypeParameters_reset();
     strictSubtype_TypeDecl_reset();
   }
   /** @apilevel internal 
@@ -584,7 +584,7 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   }
   /**
    * @aspect TypeConversion
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:132
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:132
    */
   private boolean refined_TypeConversion_ArrayDecl_castingConversionTo_TypeDecl(TypeDecl type)
 {
@@ -616,10 +616,10 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessControl
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AccessControl.jrag:37
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/AccessControl.jrag:37
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/AccessControl.jrag:37")
+  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/AccessControl.jrag:37")
   public boolean accessibleFrom(TypeDecl type) {
     Object _parameters = type;
     if (accessibleFrom_TypeDecl_computed == null) accessibleFrom_TypeDecl_computed = new java.util.HashMap(4);
@@ -657,10 +657,10 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
    * @return 0 for non-array types, and the array dimension for an array type.
    * @attribute syn
    * @aspect Arrays
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Arrays.jrag:36
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Arrays.jrag:36
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Arrays", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Arrays.jrag:36")
+  @ASTNodeAnnotation.Source(aspect="Arrays", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/Arrays.jrag:36")
   public int dimension() {
     ASTState state = state();
     if (dimension_computed == ASTState.NON_CYCLE || dimension_computed == state().cycle()) {
@@ -692,10 +692,10 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
    * for an int[][] array type.
    * @attribute syn
    * @aspect Arrays
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Arrays.jrag:44
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/Arrays.jrag:44
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Arrays", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/Arrays.jrag:44")
+  @ASTNodeAnnotation.Source(aspect="Arrays", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/Arrays.jrag:44")
   public TypeDecl elementType() {
     ASTState state = state();
     if (elementType_computed == ASTState.NON_CYCLE || elementType_computed == state().cycle()) {
@@ -714,10 +714,10 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeName
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:82
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/QualifiedNames.jrag:82
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:82")
+  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/QualifiedNames.jrag:82")
   public String name() {
     String name_value = fullName();
     return name_value;
@@ -736,10 +736,10 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeName
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:84
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/QualifiedNames.jrag:84
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:84")
+  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/QualifiedNames.jrag:84")
   public String fullName() {
     ASTState state = state();
     if (fullName_computed == ASTState.NON_CYCLE || fullName_computed == state().cycle()) {
@@ -756,42 +756,6 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     return fullName_value;
   }
   /** @apilevel internal */
-  private void typeName_reset() {
-    typeName_computed = null;
-    typeName_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTState.Cycle typeName_computed = null;
-
-  /** @apilevel internal */
-  protected String typeName_value;
-
-  /**
-   * The qualified typename of this type.
-   * 
-   * <p>Includes array suffix and type arguments.
-   * @attribute syn
-   * @aspect TypeName
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:100
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:100")
-  public String typeName() {
-    ASTState state = state();
-    if (typeName_computed == ASTState.NON_CYCLE || typeName_computed == state().cycle()) {
-      return typeName_value;
-    }
-    typeName_value = componentType().typeName() + "[]";
-    if (state().inCircle()) {
-      typeName_computed = state().cycle();
-    
-    } else {
-      typeName_computed = ASTState.NON_CYCLE;
-    
-    }
-    return typeName_value;
-  }
-  /** @apilevel internal */
   private void castingConversionTo_TypeDecl_reset() {
     castingConversionTo_TypeDecl_computed = null;
     castingConversionTo_TypeDecl_values = null;
@@ -803,10 +767,10 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeConversion
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:100
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:100
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:100")
+  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:100")
   public boolean castingConversionTo(TypeDecl type) {
     Object _parameters = type;
     if (castingConversionTo_TypeDecl_computed == null) castingConversionTo_TypeDecl_computed = new java.util.HashMap(4);
@@ -861,10 +825,10 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:222
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:222
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:222")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:222")
   public boolean isClassDecl() {
     boolean isClassDecl_value = false;
     return isClassDecl_value;
@@ -872,10 +836,10 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:228
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:228
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:228")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:228")
   public boolean isArrayDecl() {
     boolean isArrayDecl_value = true;
     return isArrayDecl_value;
@@ -892,10 +856,10 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:442
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:442
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:442")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:442")
   public boolean instanceOf(TypeDecl type) {
     Object _parameters = type;
     if (instanceOf_TypeDecl_computed == null) instanceOf_TypeDecl_computed = new java.util.HashMap(4);
@@ -925,10 +889,10 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:491
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:491
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:491")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:491")
   public boolean isSupertypeOfArrayDecl(ArrayDecl type) {
     {
         if (type.elementType().isPrimitive() && elementType().isPrimitive()) {
@@ -936,6 +900,42 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
         }
         return type.componentType().instanceOf(componentType());
       }
+  }
+  /** @apilevel internal */
+  private void typeName_reset() {
+    typeName_computed = null;
+    typeName_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTState.Cycle typeName_computed = null;
+
+  /** @apilevel internal */
+  protected String typeName_value;
+
+  /**
+   * The qualified typename of this type.
+   * 
+   * <p>Includes array suffix and type arguments.
+   * @attribute syn
+   * @aspect TypeName
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/QualifiedNames.jrag:100
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/QualifiedNames.jrag:100")
+  public String typeName() {
+    ASTState state = state();
+    if (typeName_computed == ASTState.NON_CYCLE || typeName_computed == state().cycle()) {
+      return typeName_value;
+    }
+    typeName_value = componentType().typeName() + "[]";
+    if (state().inCircle()) {
+      typeName_computed = state().cycle();
+    
+    } else {
+      typeName_computed = ASTState.NON_CYCLE;
+    
+    }
+    return typeName_value;
   }
   /**
    * A type is reifiable if it either refers to a non-parameterized type,
@@ -945,102 +945,13 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
    * @see "JLS SE7 &sect;4.7"
    * @attribute syn
    * @aspect ReifiableTypes
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/ReifiableTypes.jrag:39
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/ReifiableTypes.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/ReifiableTypes.jrag:39")
+  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/ReifiableTypes.jrag:39")
   public boolean isReifiable() {
     boolean isReifiable_value = componentType().isReifiable();
     return isReifiable_value;
-  }
-/** @apilevel internal */
-protected ASTState.Cycle involvesTypeParameters_cycle = null;
-  /** @apilevel internal */
-  private void involvesTypeParameters_reset() {
-    involvesTypeParameters_computed = false;
-    involvesTypeParameters_initialized = false;
-    involvesTypeParameters_cycle = null;
-  }
-  /** @apilevel internal */
-  protected boolean involvesTypeParameters_computed = false;
-
-  /** @apilevel internal */
-  protected boolean involvesTypeParameters_value;
-  /** @apilevel internal */
-  protected boolean involvesTypeParameters_initialized = false;
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="GenericMethodsInference", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:37")
-  public boolean involvesTypeParameters() {
-    if (involvesTypeParameters_computed) {
-      return involvesTypeParameters_value;
-    }
-    ASTState state = state();
-    if (!involvesTypeParameters_initialized) {
-      involvesTypeParameters_initialized = true;
-      involvesTypeParameters_value = false;
-    }
-    if (!state.inCircle() || state.calledByLazyAttribute()) {
-      state.enterCircle();
-      do {
-        involvesTypeParameters_cycle = state.nextCycle();
-        boolean new_involvesTypeParameters_value = componentType().involvesTypeParameters();
-        if (involvesTypeParameters_value != new_involvesTypeParameters_value) {
-          state.setChangeInCycle();
-        }
-        involvesTypeParameters_value = new_involvesTypeParameters_value;
-      } while (state.testAndClearChangeInCycle());
-      involvesTypeParameters_computed = true;
-
-      state.leaveCircle();
-    } else if (involvesTypeParameters_cycle != state.cycle()) {
-      involvesTypeParameters_cycle = state.cycle();
-      boolean new_involvesTypeParameters_value = componentType().involvesTypeParameters();
-      if (involvesTypeParameters_value != new_involvesTypeParameters_value) {
-        state.setChangeInCycle();
-      }
-      involvesTypeParameters_value = new_involvesTypeParameters_value;
-    } else {
-    }
-    return involvesTypeParameters_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:199
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:199")
-  public boolean isValidAnnotationMethodReturnType() {
-    boolean isValidAnnotationMethodReturnType_value = !componentType().isArrayDecl() && componentType().isValidAnnotationMethodReturnType();
-    return isValidAnnotationMethodReturnType_value;
-  }
-  /**
-   * An element type T is commensurate with an element value V if and only if one of the following conditions is true:
-   * <ul>
-   * <li> T is an array type E[] and either:
-   * <ul>
-   * <li> V is an ElementValueArrayInitializer and each ElementValueInitializer
-   * (analogous to a variable initializer in an array initializer) in V is
-   * commensurate with E, or,
-   * <li> V is an ElementValue that is commensurate with T.
-   * </ul>
-   * <li> The type of V is assignment compatible (\ufffd5.2) with T and, furthermore:
-   * <ul>
-   * <li> If T is a primitive type or String, V is a constant expression (\ufffd15.28).
-   * <li> V is not null.
-   * <li> if T is Class, or an invocation of Class, and V is a class literal (\ufffd15.8.2).
-   * <li> If T is an enum type, and V is an enum constant.
-   * </ul>
-   * </ul>
-   * @attribute syn
-   * @aspect Annotations
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:673
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Annotations.jrag:673")
-  public boolean commensurateWith(ElementValue value) {
-    boolean commensurateWith_ElementValue_value = value.commensurateWithArrayDecl(this);
-    return commensurateWith_ElementValue_value;
   }
   /** @apilevel internal */
   private void erasure_reset() {
@@ -1056,10 +967,10 @@ protected ASTState.Cycle involvesTypeParameters_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsErasure
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:460
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:460
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsErasure", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:460")
+  @ASTNodeAnnotation.Source(aspect="GenericsErasure", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:460")
   public TypeDecl erasure() {
     ASTState state = state();
     if (erasure_computed == ASTState.NON_CYCLE || erasure_computed == state().cycle()) {
@@ -1091,7 +1002,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /** @apilevel internal */
   protected boolean usesTypeVariable_initialized = false;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/Generics.jrag:1321")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Generics.jrag:1321")
   public boolean usesTypeVariable() {
     if (usesTypeVariable_computed) {
       return usesTypeVariable_value;
@@ -1131,7 +1042,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   }
   protected java.util.Map subtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:492")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:492")
   public boolean subtype(TypeDecl type) {
     Object _parameters = type;
     if (subtype_TypeDecl_values == null) subtype_TypeDecl_values = new java.util.HashMap(4);
@@ -1179,10 +1090,10 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:539
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:539
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericsSubtype.jrag:539")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericsSubtype.jrag:539")
   public boolean supertypeArrayDecl(ArrayDecl type) {
     {
         if (type.elementType().isPrimitive() && elementType().isPrimitive()) {
@@ -1191,15 +1102,104 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
         return type.componentType().subtype(componentType());
       }
   }
+/** @apilevel internal */
+protected ASTState.Cycle involvesTypeParameters_cycle = null;
+  /** @apilevel internal */
+  private void involvesTypeParameters_reset() {
+    involvesTypeParameters_computed = false;
+    involvesTypeParameters_initialized = false;
+    involvesTypeParameters_cycle = null;
+  }
+  /** @apilevel internal */
+  protected boolean involvesTypeParameters_computed = false;
+
+  /** @apilevel internal */
+  protected boolean involvesTypeParameters_value;
+  /** @apilevel internal */
+  protected boolean involvesTypeParameters_initialized = false;
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
+  @ASTNodeAnnotation.Source(aspect="GenericMethodsInference", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:37")
+  public boolean involvesTypeParameters() {
+    if (involvesTypeParameters_computed) {
+      return involvesTypeParameters_value;
+    }
+    ASTState state = state();
+    if (!involvesTypeParameters_initialized) {
+      involvesTypeParameters_initialized = true;
+      involvesTypeParameters_value = false;
+    }
+    if (!state.inCircle() || state.calledByLazyAttribute()) {
+      state.enterCircle();
+      do {
+        involvesTypeParameters_cycle = state.nextCycle();
+        boolean new_involvesTypeParameters_value = componentType().involvesTypeParameters();
+        if (involvesTypeParameters_value != new_involvesTypeParameters_value) {
+          state.setChangeInCycle();
+        }
+        involvesTypeParameters_value = new_involvesTypeParameters_value;
+      } while (state.testAndClearChangeInCycle());
+      involvesTypeParameters_computed = true;
+
+      state.leaveCircle();
+    } else if (involvesTypeParameters_cycle != state.cycle()) {
+      involvesTypeParameters_cycle = state.cycle();
+      boolean new_involvesTypeParameters_value = componentType().involvesTypeParameters();
+      if (involvesTypeParameters_value != new_involvesTypeParameters_value) {
+        state.setChangeInCycle();
+      }
+      involvesTypeParameters_value = new_involvesTypeParameters_value;
+    } else {
+    }
+    return involvesTypeParameters_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Annotations
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:199
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:199")
+  public boolean isValidAnnotationMethodReturnType() {
+    boolean isValidAnnotationMethodReturnType_value = !componentType().isArrayDecl() && componentType().isValidAnnotationMethodReturnType();
+    return isValidAnnotationMethodReturnType_value;
+  }
+  /**
+   * An element type T is commensurate with an element value V if and only if one of the following conditions is true:
+   * <ul>
+   * <li> T is an array type E[] and either:
+   * <ul>
+   * <li> V is an ElementValueArrayInitializer and each ElementValueInitializer
+   * (analogous to a variable initializer in an array initializer) in V is
+   * commensurate with E, or,
+   * <li> V is an ElementValue that is commensurate with T.
+   * </ul>
+   * <li> The type of V is assignment compatible (\ufffd5.2) with T and, furthermore:
+   * <ul>
+   * <li> If T is a primitive type or String, V is a constant expression (\ufffd15.28).
+   * <li> V is not null.
+   * <li> if T is Class, or an invocation of Class, and V is a class literal (\ufffd15.8.2).
+   * <li> If T is an enum type, and V is an enum constant.
+   * </ul>
+   * </ul>
+   * @attribute syn
+   * @aspect Annotations
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:673
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/Annotations.jrag:673")
+  public boolean commensurateWith(ElementValue value) {
+    boolean commensurateWith_ElementValue_value = value.commensurateWithArrayDecl(this);
+    return commensurateWith_ElementValue_value;
+  }
   /**
    * @param bound the bounded type variable
    * @return {@code true} if this type is within the bounds of the parameter type
    * @attribute syn
    * @aspect GenericBoundCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericBoundCheck.jrag:40
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericBoundCheck.jrag:40
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericBoundCheck.jrag:40")
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericBoundCheck.jrag:40")
   public boolean withinBounds(TypeDecl bound) {
     boolean withinBounds_TypeDecl_value = bound.boundOfArray(this);
     return withinBounds_TypeDecl_value;
@@ -1207,10 +1207,10 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericBoundCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericBoundCheck.jrag:87
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericBoundCheck.jrag:87
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericBoundCheck.jrag:87")
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/GenericBoundCheck.jrag:87")
   public boolean boundOfArray(ArrayDecl type) {
     boolean boundOfArray_ArrayDecl_value = type.componentType().withinBounds(componentType());
     return boundOfArray_ArrayDecl_value;
@@ -1221,7 +1221,7 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   }
   protected java.util.Map strictSubtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:363")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:363")
   public boolean strictSubtype(TypeDecl type) {
     Object _parameters = type;
     if (strictSubtype_TypeDecl_values == null) strictSubtype_TypeDecl_values = new java.util.HashMap(4);
@@ -1269,10 +1269,10 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:413
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:413
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/GenericsSubtype.jrag:413")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/home/hadjer/git/puck2/extendj/java8/frontend/GenericsSubtype.jrag:413")
   public boolean strictSupertypeArrayDecl(ArrayDecl type) {
     {
         if (type.elementType().isPrimitive() && elementType().isPrimitive()) {
@@ -1284,10 +1284,10 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute inh
    * @aspect TypeConversion
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:150
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:150
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:150")
+  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:150")
   public TypeDecl typeSerializable() {
     TypeDecl typeSerializable_value = getParent().Define_typeSerializable(this, null);
     return typeSerializable_value;
@@ -1295,10 +1295,10 @@ protected ASTState.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute inh
    * @aspect TypeConversion
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:151
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:151
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:151")
+  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:151")
   public TypeDecl typeCloneable() {
     TypeDecl typeCloneable_value = getParent().Define_typeCloneable(this, null);
     return typeCloneable_value;

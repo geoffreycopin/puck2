@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:151
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:151
  * @astdecl DoubleType : FloatingPointType;
  * @production DoubleType : {@link FloatingPointType};
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class DoubleType extends FloatingPointType implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:350
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:350
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("double");
@@ -409,10 +409,10 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:95
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:95
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:95")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:95")
   public Constant cast(Constant c) {
     Constant cast_Constant_value = Constant.create(c.doubleValue());
     return cast_Constant_value;
@@ -420,10 +420,10 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:118
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:118
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:118")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:118")
   public Constant plus(Constant c) {
     Constant plus_Constant_value = c;
     return plus_Constant_value;
@@ -431,10 +431,10 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:131
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:131
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:131")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:131")
   public Constant minus(Constant c) {
     Constant minus_Constant_value = Constant.create(-c.doubleValue());
     return minus_Constant_value;
@@ -442,10 +442,10 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:153
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:153
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:153")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:153")
   public Constant mul(Constant c1, Constant c2) {
     Constant mul_Constant_Constant_value = Constant.create(c1.doubleValue() * c2.doubleValue());
     return mul_Constant_Constant_value;
@@ -453,10 +453,10 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:167
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:167
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:167")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:167")
   public Constant div(Constant c1, Constant c2) {
     Constant div_Constant_Constant_value = Constant.create(c1.doubleValue() / c2.doubleValue());
     return div_Constant_Constant_value;
@@ -464,10 +464,10 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:181
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:181
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:181")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:181")
   public Constant mod(Constant c1, Constant c2) {
     Constant mod_Constant_Constant_value = Constant.create(c1.doubleValue() % c2.doubleValue());
     return mod_Constant_Constant_value;
@@ -475,10 +475,10 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:195
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:195
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:195")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:195")
   public Constant add(Constant c1, Constant c2) {
     Constant add_Constant_Constant_value = Constant.create(c1.doubleValue() + c2.doubleValue());
     return add_Constant_Constant_value;
@@ -486,10 +486,10 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:212
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:212
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:212")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:212")
   public Constant sub(Constant c1, Constant c2) {
     Constant sub_Constant_Constant_value = Constant.create(c1.doubleValue() - c2.doubleValue());
     return sub_Constant_Constant_value;
@@ -497,10 +497,10 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:299
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:299
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:299")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:299")
   public Constant questionColon(Constant cond, Constant c1, Constant c2) {
     Constant questionColon_Constant_Constant_Constant_value = Constant.create(cond.booleanValue() ? c1.doubleValue() : c2.doubleValue());
     return questionColon_Constant_Constant_Constant_value;
@@ -508,10 +508,10 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:499
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:499
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:499")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:499")
   public boolean eqIsTrue(Expr left, Expr right) {
     boolean eqIsTrue_Expr_Expr_value = left.constant().doubleValue() == right.constant().doubleValue();
     return eqIsTrue_Expr_Expr_value;
@@ -519,10 +519,10 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:522
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:522
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:522")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:522")
   public boolean ltIsTrue(Expr left, Expr right) {
     boolean ltIsTrue_Expr_Expr_value = left.constant().doubleValue() < right.constant().doubleValue();
     return ltIsTrue_Expr_Expr_value;
@@ -530,10 +530,10 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:536
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:536
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:536")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:536")
   public boolean leIsTrue(Expr left, Expr right) {
     boolean leIsTrue_Expr_Expr_value = left.constant().doubleValue() <= right.constant().doubleValue();
     return leIsTrue_Expr_Expr_value;
@@ -541,10 +541,10 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:212
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:212
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:212")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:212")
   public boolean isDouble() {
     boolean isDouble_value = true;
     return isDouble_value;
@@ -563,10 +563,10 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   /** Mapping between Primitive type and corresponding boxed Reference type. 
    * @attribute syn
    * @aspect AutoBoxing
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/AutoBoxing.jrag:53
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/AutoBoxing.jrag:53
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/AutoBoxing.jrag:53")
+  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/AutoBoxing.jrag:53")
   public TypeDecl boxed() {
     ASTState state = state();
     if (boxed_computed == ASTState.NON_CYCLE || boxed_computed == state().cycle()) {

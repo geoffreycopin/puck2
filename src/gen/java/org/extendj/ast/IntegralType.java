@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:143
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:143
  * @astdecl IntegralType : NumericType;
  * @production IntegralType : {@link NumericType};
 
@@ -353,11 +353,22 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:95
+   * @aspect NameCheck
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:657
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:95")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:657")
+  public boolean assignableToInt() {
+    boolean assignableToInt_value = true;
+    return assignableToInt_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:95
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:95")
   public Constant cast(Constant c) {
     Constant cast_Constant_value = Constant.create(c.intValue());
     return cast_Constant_value;
@@ -365,10 +376,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:118
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:118
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:118")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:118")
   public Constant plus(Constant c) {
     Constant plus_Constant_value = c;
     return plus_Constant_value;
@@ -376,10 +387,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:131
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:131
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:131")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:131")
   public Constant minus(Constant c) {
     Constant minus_Constant_value = Constant.create(-c.intValue());
     return minus_Constant_value;
@@ -387,10 +398,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:144
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:144
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:144")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:144")
   public Constant bitNot(Constant c) {
     Constant bitNot_Constant_value = Constant.create(~c.intValue());
     return bitNot_Constant_value;
@@ -398,10 +409,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:153
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:153
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:153")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:153")
   public Constant mul(Constant c1, Constant c2) {
     Constant mul_Constant_Constant_value = Constant.create(c1.intValue() * c2.intValue());
     return mul_Constant_Constant_value;
@@ -409,10 +420,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:167
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:167
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:167")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:167")
   public Constant div(Constant c1, Constant c2) {
     Constant div_Constant_Constant_value = Constant.create(c1.intValue() / c2.intValue());
     return div_Constant_Constant_value;
@@ -420,10 +431,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:181
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:181
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:181")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:181")
   public Constant mod(Constant c1, Constant c2) {
     Constant mod_Constant_Constant_value = Constant.create(c1.intValue() % c2.intValue());
     return mod_Constant_Constant_value;
@@ -431,10 +442,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:195
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:195
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:195")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:195")
   public Constant add(Constant c1, Constant c2) {
     Constant add_Constant_Constant_value = Constant.create(c1.intValue() + c2.intValue());
     return add_Constant_Constant_value;
@@ -442,10 +453,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:212
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:212
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:212")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:212")
   public Constant sub(Constant c1, Constant c2) {
     Constant sub_Constant_Constant_value = Constant.create(c1.intValue() - c2.intValue());
     return sub_Constant_Constant_value;
@@ -453,10 +464,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:226
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:226
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:226")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:226")
   public Constant lshift(Constant c1, Constant c2) {
     Constant lshift_Constant_Constant_value = Constant.create(c1.intValue() << c2.intValue());
     return lshift_Constant_Constant_value;
@@ -464,10 +475,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:236
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:236
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:236")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:236")
   public Constant rshift(Constant c1, Constant c2) {
     Constant rshift_Constant_Constant_value = Constant.create(c1.intValue() >> c2.intValue());
     return rshift_Constant_Constant_value;
@@ -475,10 +486,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:246
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:246
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:246")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:246")
   public Constant urshift(Constant c1, Constant c2) {
     Constant urshift_Constant_Constant_value = Constant.create(c1.intValue() >>> c2.intValue());
     return urshift_Constant_Constant_value;
@@ -486,10 +497,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:257
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:257
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:257")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:257")
   public Constant andBitwise(Constant c1, Constant c2) {
     Constant andBitwise_Constant_Constant_value = Constant.create(c1.intValue() & c2.intValue());
     return andBitwise_Constant_Constant_value;
@@ -497,10 +508,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:271
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:271
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:271")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:271")
   public Constant xorBitwise(Constant c1, Constant c2) {
     Constant xorBitwise_Constant_Constant_value = Constant.create(c1.intValue() ^ c2.intValue());
     return xorBitwise_Constant_Constant_value;
@@ -508,10 +519,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:285
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:285
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:285")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:285")
   public Constant orBitwise(Constant c1, Constant c2) {
     Constant orBitwise_Constant_Constant_value = Constant.create(c1.intValue() | c2.intValue());
     return orBitwise_Constant_Constant_value;
@@ -519,10 +530,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:299
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:299
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:299")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:299")
   public Constant questionColon(Constant cond, Constant c1, Constant c2) {
     Constant questionColon_Constant_Constant_Constant_value = Constant.create(cond.booleanValue() ? c1.intValue() : c2.intValue());
     return questionColon_Constant_Constant_Constant_value;
@@ -530,10 +541,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:499
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:499
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:499")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:499")
   public boolean eqIsTrue(Expr left, Expr right) {
     boolean eqIsTrue_Expr_Expr_value = left.constant().intValue() == right.constant().intValue();
     return eqIsTrue_Expr_Expr_value;
@@ -541,10 +552,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:522
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:522
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:522")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:522")
   public boolean ltIsTrue(Expr left, Expr right) {
     boolean ltIsTrue_Expr_Expr_value = left.constant().intValue() < right.constant().intValue();
     return ltIsTrue_Expr_Expr_value;
@@ -552,32 +563,21 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:536
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:536
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:536")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:536")
   public boolean leIsTrue(Expr left, Expr right) {
     boolean leIsTrue_Expr_Expr_value = left.constant().intValue() <= right.constant().intValue();
     return leIsTrue_Expr_Expr_value;
   }
   /**
    * @attribute syn
-   * @aspect NameCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:657
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:657")
-  public boolean assignableToInt() {
-    boolean assignableToInt_value = true;
-    return assignableToInt_value;
-  }
-  /**
-   * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:190
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:190
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:190")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:190")
   public boolean isIntegralType() {
     boolean isIntegralType_value = true;
     return isIntegralType_value;

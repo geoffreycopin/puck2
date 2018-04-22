@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:248
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:248
  * @astdecl AddExpr : AdditiveExpr;
  * @production AddExpr : {@link AdditiveExpr};
 
@@ -224,22 +224,11 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:32
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:32")
-  public Constant constant() {
-    Constant constant_value = type().add(getLeftOperand().constant(), getRightOperand().constant());
-    return constant_value;
-  }
-  /**
-   * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:221
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:221
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeCheck.jrag:221")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeCheck.jrag:221")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -255,13 +244,24 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
         return problems;
       }
   }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:32
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:32")
+  public Constant constant() {
+    Constant constant_value = type().add(getLeftOperand().constant(), getRightOperand().constant());
+    return constant_value;
+  }
   /** The operator string used for pretty printing this expression. 
    * @attribute syn
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:345
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:345
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:345")
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:345")
   public String printOp() {
     String printOp_value = "+";
     return printOp_value;
@@ -280,10 +280,10 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -314,16 +314,16 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
       }
     }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:69
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:69
    * @apilevel internal
    */
   public TypeDecl Define_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
     if (getRightOperandNoTransform() != null && _callerNode == getRightOperand()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:92
+      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:92
       return getLeftOperand().type().isString() ? typeObject() : typeNull();
     }
     else if (getLeftOperandNoTransform() != null && _callerNode == getLeftOperand()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:88
+      // @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:88
       return getRightOperand().type().isString() ? typeObject() : typeNull();
     }
     else {
@@ -331,7 +331,7 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:69
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/GenericMethodsInference.jrag:69
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignConvertedType
    */
@@ -339,12 +339,12 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:31
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    */
   public TypeDecl Define_targetType(ASTNode _callerNode, ASTNode _childNode) {
     if (getRightOperandNoTransform() != null && _callerNode == getRightOperand()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:54
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:54
       {
           if (getRightOperand().stringContext()) {
             return getLeftOperand().type();
@@ -356,7 +356,7 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
         }
     }
     else if (getLeftOperandNoTransform() != null && _callerNode == getLeftOperand()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:45
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:45
       {
           if (getLeftOperand().stringContext()) {
             return getRightOperand().type();
@@ -372,7 +372,7 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:31
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute targetType
    */
@@ -380,12 +380,12 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getRightOperandNoTransform() != null && _callerNode == getRightOperand()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:273
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:273
       {
           if (!getRightOperand().isPolyExpression() && !getLeftOperand().isPolyExpression()) {
             if (getLeftOperand().type().isString() && !getRightOperand().type().isString()) {
@@ -396,7 +396,7 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
         }
     }
     else if (getLeftOperandNoTransform() != null && _callerNode == getLeftOperand()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:265
+      // @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:265
       {
           if (!getRightOperand().isPolyExpression() && !getLeftOperand().isPolyExpression()) {
             if (getRightOperand().type().isString() && !getLeftOperand().type().isString()) {
@@ -411,7 +411,7 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat /home/hadjer/git/puck2/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute stringContext
    */

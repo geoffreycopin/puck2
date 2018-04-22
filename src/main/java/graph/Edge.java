@@ -45,8 +45,7 @@ public class Edge {
 
 		if  ( ! (e instanceof Edge) ) return false;
 		Edge r= (Edge) e;
-
-		return (r.sourceName).equals(this.sourceName) && r.targetName==this.targetName && r.type==this.type;	    	
+		return (r.sourceName).equals(this.sourceName) && (r.targetName).equals(this.targetName) && r.type==this.type;	    	
 	}
 
 	@Override

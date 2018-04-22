@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,12 +21,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
@@ -34,7 +34,7 @@ import java.io.DataInputStream;
  * for a diamond type access. The ordinary method type inference is used on the
  * stand-in method to find the diamond type arguments.
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/grammar/Diamond.ast:13
+ * @declaredat /home/hadjer/git/puck2/extendj/java7/grammar/Diamond.ast:13
  * @astdecl StandInMethodDecl : GenericMethodDecl;
  * @production StandInMethodDecl : {@link GenericMethodDecl};
 
@@ -42,38 +42,38 @@ import java.io.DataInputStream;
 public class StandInMethodDecl extends GenericMethodDecl implements Cloneable {
   /**
    * @aspect Java7PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PrettyPrint.jadd:66
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PrettyPrint.jadd:66
    */
   public void prettyPrint(PrettyPrinter out) {
   }
   /**
    * @aspect Diamond
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:45
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Diamond.jrag:45
    */
   public void nameCheck() { }
   /**
    * @aspect Diamond
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:46
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Diamond.jrag:46
    */
   public void typeCheck() { }
   /**
    * @aspect Diamond
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:47
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Diamond.jrag:47
    */
   public void exceptionHandling() { }
   /**
    * @aspect Diamond
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:48
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Diamond.jrag:48
    */
   public void checkUnreachableStmt() { }
   /**
    * @aspect Diamond
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:49
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Diamond.jrag:49
    */
   public void definiteAssignment() { }
   /**
    * @aspect Diamond
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/Diamond.jrag:50
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/Diamond.jrag:50
    */
   public void checkModifiers() { }
   /**

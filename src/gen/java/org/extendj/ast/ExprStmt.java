@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:294
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:294
  * @astdecl ExprStmt : Stmt ::= Expr;
  * @production ExprStmt : {@link Stmt} ::= <span class="component">{@link Expr}</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ExprStmt extends Stmt implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrint.jadd:359
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrint.jadd:359
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getExpr());
@@ -218,10 +218,10 @@ public class ExprStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/UnreachableStatements.jrag:50")
   public boolean canCompleteNormally() {
     ASTState state = state();
     if (canCompleteNormally_computed == ASTState.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
@@ -243,7 +243,7 @@ public class ExprStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:264")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -294,7 +294,7 @@ public class ExprStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:895")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -342,21 +342,21 @@ public class ExprStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
+   * @declaredat /home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/home/hadjer/git/puck2/extendj/java7/frontend/PreciseRethrow.jrag:78")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = getExpr().modifiedInScope(var);
     return modifiedInScope_Variable_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:676
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:676
       return assignedBefore(v);
     }
     else {
@@ -364,7 +364,7 @@ public class ExprStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
    */
@@ -372,12 +372,12 @@ public class ExprStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1346
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1346
       return unassignedBefore(v);
     }
     else {
@@ -385,7 +385,7 @@ public class ExprStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
    */

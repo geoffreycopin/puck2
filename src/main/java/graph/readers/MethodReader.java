@@ -48,6 +48,7 @@ public class MethodReader extends BodyDeclReader {
         addReturnTypeDependency(edges,nodes);
         addParametersTypeDependency(edges,nodes);
     }
+    
 
     private String getHostClassName() {
         return methodDecl.hostType().fullName();

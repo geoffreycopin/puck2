@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,17 +21,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:263
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:263
  * @astdecl OrLogicalExpr : LogicalExpr;
  * @production OrLogicalExpr : {@link LogicalExpr};
 
@@ -226,13 +226,35 @@ public class OrLogicalExpr extends LogicalExpr implements Cloneable {
   public Expr getRightOperandNoTransform() {
     return (Expr) getChildNoTransform(1);
   }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:32
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/ConstantExpression.jrag:32")
+  public Constant constant() {
+    Constant constant_value = Constant.create(left().constant().booleanValue() || right().constant().booleanValue());
+    return constant_value;
+  }
+  /** The operator string used for pretty printing this expression. 
+   * @attribute syn
+   * @aspect PrettyPrintUtil
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:345
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:345")
+  public String printOp() {
+    String printOp_value = "||";
+    return printOp_value;
+  }
   /** @apilevel internal */
   private void assignedAfterTrue_Variable_reset() {
     assignedAfterTrue_Variable_values = null;
   }
   protected java.util.Map assignedAfterTrue_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:488")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:488")
   public boolean assignedAfterTrue(Variable v) {
     Object _parameters = v;
     if (assignedAfterTrue_Variable_values == null) assignedAfterTrue_Variable_values = new java.util.HashMap(4);
@@ -285,7 +307,7 @@ public class OrLogicalExpr extends LogicalExpr implements Cloneable {
   }
   protected java.util.Map assignedAfterFalse_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:491")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:491")
   public boolean assignedAfterFalse(Variable v) {
     Object _parameters = v;
     if (assignedAfterFalse_Variable_values == null) assignedAfterFalse_Variable_values = new java.util.HashMap(4);
@@ -333,10 +355,10 @@ public class OrLogicalExpr extends LogicalExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:268")
   public boolean assignedAfter(Variable v) {
     boolean assignedAfter_Variable_value = assignedAfterTrue(v) && assignedAfterFalse(v);
     return assignedAfter_Variable_value;
@@ -347,7 +369,7 @@ public class OrLogicalExpr extends LogicalExpr implements Cloneable {
   }
   protected java.util.Map unassignedAfterTrue_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:905")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:905")
   public boolean unassignedAfterTrue(Variable v) {
     Object _parameters = v;
     if (unassignedAfterTrue_Variable_values == null) unassignedAfterTrue_Variable_values = new java.util.HashMap(4);
@@ -398,7 +420,7 @@ public class OrLogicalExpr extends LogicalExpr implements Cloneable {
   }
   protected java.util.Map unassignedAfterFalse_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:907")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:907")
   public boolean unassignedAfterFalse(Variable v) {
     Object _parameters = v;
     if (unassignedAfterFalse_Variable_values == null) unassignedAfterFalse_Variable_values = new java.util.HashMap(4);
@@ -449,7 +471,7 @@ public class OrLogicalExpr extends LogicalExpr implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:899")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:899")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -495,38 +517,16 @@ public class OrLogicalExpr extends LogicalExpr implements Cloneable {
     }
   }
   /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:32
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ConstantExpression.jrag:32")
-  public Constant constant() {
-    Constant constant_value = Constant.create(left().constant().booleanValue() || right().constant().booleanValue());
-    return constant_value;
-  }
-  /** The operator string used for pretty printing this expression. 
-   * @attribute syn
-   * @aspect PrettyPrintUtil
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:345
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/PrettyPrintUtil.jrag:345")
-  public String printOp() {
-    String printOp_value = "||";
-    return printOp_value;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getRightOperandNoTransform() != null && _callerNode == getRightOperand()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:440
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:440
       return getLeftOperand().assignedAfterFalse(v);
     }
     else if (getLeftOperandNoTransform() != null && _callerNode == getLeftOperand()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:438
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:438
       return assignedBefore(v);
     }
     else {
@@ -534,7 +534,7 @@ public class OrLogicalExpr extends LogicalExpr implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
    */
@@ -542,16 +542,16 @@ public class OrLogicalExpr extends LogicalExpr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getRightOperandNoTransform() != null && _callerNode == getRightOperand()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1035
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1035
       return getLeftOperand().unassignedAfterFalse(v);
     }
     else if (getLeftOperandNoTransform() != null && _callerNode == getLeftOperand()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1033
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:1033
       return unassignedBefore(v);
     }
     else {
@@ -559,7 +559,7 @@ public class OrLogicalExpr extends LogicalExpr implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
    */

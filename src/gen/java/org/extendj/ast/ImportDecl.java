@@ -1,14 +1,16 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.0 */
 package org.extendj.ast;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import org.jastadd.util.*;
+import java.util.LinkedHashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -19,12 +21,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.zip.*;
-import java.io.*;
-import org.jastadd.util.*;
-import java.util.LinkedHashSet;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
+import java.util.zip.*;
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
@@ -35,7 +35,7 @@ import java.io.DataInputStream;
  * 
  * See JLS 6 &sect;7.5.
  * @ast node
- * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/grammar/Java.ast:61
+ * @declaredat /home/hadjer/git/puck2/extendj/java4/grammar/Java.ast:61
  * @astdecl ImportDecl : ASTNode ::= Access;
  * @production ImportDecl : {@link ASTNode} ::= <span class="component">{@link Access}</span>;
 
@@ -169,10 +169,10 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:483
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:483
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:483")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:483")
   public SimpleSet<TypeDecl> importedTypes(String name) {
     Object _parameters = name;
     if (importedTypes_String_computed == null) importedTypes_String_computed = new java.util.HashMap(4);
@@ -213,10 +213,10 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
    * @return TypeDecl of imported type wrapped in SimpleSet
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:500
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:500
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:500")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:500")
   public SimpleSet<TypeDecl> importedTypes() {
     ASTState state = state();
     if (importedTypes_computed == ASTState.NON_CYCLE || importedTypes_computed == state().cycle()) {
@@ -235,10 +235,10 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:531
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:531
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:531")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:531")
   public boolean isOnDemand() {
     boolean isOnDemand_value = false;
     return isOnDemand_value;
@@ -246,10 +246,10 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect Names
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:60
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/QualifiedNames.jrag:60
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/QualifiedNames.jrag:60")
+  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/QualifiedNames.jrag:60")
   public String typeName() {
     {
         Access a = getAccess().lastAccess();
@@ -270,7 +270,7 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
   }
   protected java.util.Map importedFields_String_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/StaticImports.jrag:63")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/StaticImports.jrag:63")
   public SimpleSet<Variable> importedFields(String name) {
     Object _parameters = name;
     if (importedFields_String_values == null) importedFields_String_values = new java.util.HashMap(4);
@@ -327,10 +327,10 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect StaticImports
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/StaticImports.jrag:84
+   * @declaredat /home/hadjer/git/puck2/extendj/java5/frontend/StaticImports.jrag:84
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java5/frontend/StaticImports.jrag:84")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/home/hadjer/git/puck2/extendj/java5/frontend/StaticImports.jrag:84")
   public Collection<MethodDecl> importedMethods(String name) {
     Object _parameters = name;
     if (importedMethods_String_computed == null) importedMethods_String_computed = new java.util.HashMap(4);
@@ -355,97 +355,33 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @attribute inh
-   * @aspect TypeScopePropagation
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:529
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/LookupType.jrag:529")
-  public String packageName() {
-    String packageName_value = getParent().Define_packageName(this, null);
-    return packageName_value;
-  }
-  /**
-   * @attribute inh
    * @aspect NameCheck
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:50
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/NameCheck.jrag:50")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/NameCheck.jrag:50")
   public SimpleSet<TypeDecl> allImportedTypes(String name) {
     SimpleSet<TypeDecl> allImportedTypes_String_value = getParent().Define_allImportedTypes(this, null, name);
     return allImportedTypes_String_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:86
-   * @apilevel internal
+   * @attribute inh
+   * @aspect TypeScopePropagation
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:529
    */
-  public boolean Define_isLeftChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/home/hadjer/git/puck2/extendj/java4/frontend/LookupType.jrag:529")
+  public String packageName() {
+    String packageName_value = getParent().Define_packageName(this, null);
+    return packageName_value;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:86
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isLeftChildOfDot
-   */
-  protected boolean canDefine_isLeftChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
-   * @apilevel internal
-   */
-  public boolean Define_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isRightChildOfDot
-   */
-  protected boolean canDefine_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
-   * @apilevel internal
-   */
-  public Expr Define_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return prevExprError();
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute prevExpr
-   */
-  protected boolean canDefine_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:142
-   * @apilevel internal
-   */
-  public Access Define_nextAccess(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return nextAccessError();
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:142
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute nextAccess
-   */
-  protected boolean canDefine_nextAccess(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:34
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:34
    * @apilevel internal
    */
   public boolean Define_isDest(ASTNode _callerNode, ASTNode _childNode) {
     if (getAccessNoTransform() != null && _callerNode == getAccess()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:42
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:42
       return false;
     }
     else {
@@ -453,7 +389,7 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:34
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:34
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isDest
    */
@@ -461,12 +397,12 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:44
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:44
    * @apilevel internal
    */
   public boolean Define_isSource(ASTNode _callerNode, ASTNode _childNode) {
     if (getAccessNoTransform() != null && _callerNode == getAccess()) {
-      // @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:51
+      // @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:51
       return true;
     }
     else {
@@ -474,11 +410,75 @@ public abstract class ImportDecl extends ASTNode<ASTNode> implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/geoffrey/IdeaProjects/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:44
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/DefiniteAssignment.jrag:44
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isSource
    */
   protected boolean canDefine_isSource(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:86
+   * @apilevel internal
+   */
+  public boolean Define_isLeftChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:86
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute isLeftChildOfDot
+   */
+  protected boolean canDefine_isLeftChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
+   * @apilevel internal
+   */
+  public boolean Define_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute isRightChildOfDot
+   */
+  protected boolean canDefine_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
+   * @apilevel internal
+   */
+  public Expr Define_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return prevExprError();
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute prevExpr
+   */
+  protected boolean canDefine_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:142
+   * @apilevel internal
+   */
+  public Access Define_nextAccess(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return nextAccessError();
+  }
+  /**
+   * @declaredat /home/hadjer/git/puck2/extendj/java4/frontend/ResolveAmbiguousNames.jrag:142
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute nextAccess
+   */
+  protected boolean canDefine_nextAccess(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /** @apilevel internal */
