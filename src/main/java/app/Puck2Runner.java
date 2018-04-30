@@ -29,7 +29,7 @@ import javax.xml.validation.Validator;
 
 public class Puck2Runner {
     String projectPath;
-    HashMap<String, Node> nodes;
+    HashMap<Integer, Node> nodes;
     Set<Edge> edges;
     Program program;
 
@@ -41,7 +41,7 @@ public class Puck2Runner {
     }
     
 
-    public HashMap<String, Node> getNodes() {
+    public HashMap<Integer, Node> getNodes() {
         return nodes;
     }
 
@@ -65,11 +65,9 @@ public class Puck2Runner {
     }
 
     public void outputToFile(String outputFile) throws Exception {
-    	
     	XMLExporter exporter = new XMLExporter();
         exporter.add(nodes, edges);      
         exporter.writeTo(outputFile);
-              
     }
     
     public void XMLValidation()throws Exception{

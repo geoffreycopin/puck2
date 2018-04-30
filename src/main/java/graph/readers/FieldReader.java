@@ -1,6 +1,5 @@
 package graph.readers;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,22 +23,23 @@ public class FieldReader extends BodyDeclReader {
 	    return fieldNode.getFullName();
     }
 
-	public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
+	public void readInto(Map<Integer, Node> nodes, Set<Edge> edges) {
 		for (FieldDeclarator v : fieldDecl.getDeclaratorList()) {
 		    String fullName = getHostTypeName() + "." + v.name();
-			fieldNode = new Node(idGenerator.generate(), fullName, Node.Type.Attribute, v);
-			nodes.put(fullName, fieldNode);
+			fieldNode = new Node(idGenerator.idFor(fullName), fullName, Node.Type.Attribute, v);
+			nodes.put(idGenerator.idFor(fullName), fieldNode);
 		}
 
 		addHostClassDependency(edges);
-		addFieldTypeDependency(edges,nodes);
+		addFieldTypeDependency(edges, nodes);
 	}
 
 	private void addHostClassDependency(Set<Edge> edges) {
-	    edges.add(new Edge(getHostTypeName(), fieldNode.getFullName(), Edge.Type.Contains));
+		Edge e = createEdge(getHostTypeName(), fieldNode.getFullName(), Edge.Type.Contains);
+	    edges.add(e);
     }
 
-    private void addFieldTypeDependency(Set<Edge> edges,Map<String, Node> nodes) {
+    private void addFieldTypeDependency(Set<Edge> edges, Map<Integer, Node> nodes) {
 	    addTypeDependency(edges, fieldDecl.getTypeAccess().type(), Edge.Type.Uses,nodes);
     }
 }

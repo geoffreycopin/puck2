@@ -8,8 +8,6 @@ import org.extendj.ast.CompilationUnit;
 import org.extendj.ast.InterfaceDecl;
 import org.extendj.ast.TypeDecl;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,7 +19,7 @@ public class CompilationUnitReader extends AbstractReader{
         this.compilationUnit = unit;
     }
 
-    public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
+    public void readInto(Map<Integer, Node> nodes, Set<Edge> edges) {
         readCurrentPackage(nodes);
         readTypeDecalarations(nodes, edges);
     }
@@ -32,19 +30,19 @@ public class CompilationUnitReader extends AbstractReader{
         return compilationUnit.pathName();
     }
 
-    private void readCurrentPackage(Map<String, Node> nodes) {
+    private void readCurrentPackage(Map<Integer, Node> nodes) {
         String currentPackage = compilationUnit.getPackageDecl();
 
         if (currentPackage.isEmpty()) {
             return;
         }
 
-        Node packageNode = new Node(idGenerator.generate(), currentPackage,
+        Node packageNode = new Node(idGenerator.idFor(currentPackage), currentPackage,
                 Node.Type.Package, null);
-        nodes.put(currentPackage, packageNode);
+        nodes.put(idGenerator.idFor(currentPackage), packageNode);
     }
 
-    private void readTypeDecalarations(Map<String, Node> nodes, Set<Edge> edges) {
+    private void readTypeDecalarations(Map<Integer, Node> nodes, Set<Edge> edges) {
     	for (TypeDecl t: compilationUnit.getTypeDeclList()) {
             if (t instanceof ClassDecl) {
                 readClassDeclaration((ClassDecl) t, nodes, edges);              
@@ -54,12 +52,12 @@ public class CompilationUnitReader extends AbstractReader{
         }
     }
 
-    private void readClassDeclaration(ClassDecl decl, Map<String, Node> nodes, Set<Edge> edges) {
+    private void readClassDeclaration(ClassDecl decl, Map<Integer, Node> nodes, Set<Edge> edges) {
         ClassReader reader = new ClassReader(decl, idGenerator);
         reader.readInto(nodes, edges);
     }
 
-    private void readInterfaceDeclaration(InterfaceDecl decl, Map<String, Node> nodes, Set<Edge> edges) {
+    private void readInterfaceDeclaration(InterfaceDecl decl, Map<Integer, Node> nodes, Set<Edge> edges) {
         InterfaceReader reader = new InterfaceReader(decl, idGenerator);
         reader.readInto(nodes, edges);
     }

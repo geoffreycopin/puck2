@@ -27,7 +27,7 @@ public abstract class TypeDeclReader extends AbstractReader{
             return;
         }
 
-        edges.add(new Edge(packageName, typeDecl.fullName(), Edge.Type.Contains));
+        edges.add(createEdge(packageName, typeDecl.fullName(), Edge.Type.Contains));
     }
 
     public static List<TypeDecl> getTypeParameters(TypeDecl type) {

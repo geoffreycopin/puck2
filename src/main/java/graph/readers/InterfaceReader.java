@@ -5,13 +5,9 @@ import graph.Node;
 import graph.UniqueIdGenerator;
 import org.extendj.ast.Access;
 import org.extendj.ast.BodyDecl;
-import org.extendj.ast.FieldDecl;
-import org.extendj.ast.FieldDeclarator;
 import org.extendj.ast.InterfaceDecl;
 import org.extendj.ast.MethodDecl;
-import org.extendj.ast.ParameterDeclaration;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,10 +21,10 @@ public class InterfaceReader extends TypeDeclReader {
 
 
     @Override
-    public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
-        Node interfaceNode = new Node(idGenerator.generate(), interfaceDecl.fullName(),
+    public void readInto(Map<Integer, Node> nodes, Set<Edge> edges) {
+        Node interfaceNode = new Node(idGenerator.idFor(getFullName()), getFullName(),
                 Node.Type.Interface, interfaceDecl);
-        nodes.put(interfaceNode.getFullName(), interfaceNode);
+        nodes.put(idGenerator.idFor(interfaceNode.getFullName()), interfaceNode);
 
         readBodyDeclarations(nodes, edges);
 
@@ -41,7 +37,7 @@ public class InterfaceReader extends TypeDeclReader {
         return interfaceDecl.fullName();
     }
 
-    private void readBodyDeclarations(Map<String, Node> nodes, Set<Edge> edges) {
+    private void readBodyDeclarations(Map<Integer, Node> nodes, Set<Edge> edges) {
         for (BodyDecl decl : interfaceDecl.getBodyDeclList()) {
             if (decl instanceof MethodDecl) {
                 MethodDecl m = (MethodDecl) decl;
@@ -51,8 +47,7 @@ public class InterfaceReader extends TypeDeclReader {
         }
     }
     
-    private void addSuperInterfacesDependency(Map<String, Node> nodes, Set<Edge> edges) {
-    	
+    private void addSuperInterfacesDependency(Map<Integer, Node> nodes, Set<Edge> edges) {
         for (Access sup: interfaceDecl.getSuperInterfaceList()) {
         	addTypeDependency(edges, sup.type(), Edge.Type.IsA,nodes);
         }

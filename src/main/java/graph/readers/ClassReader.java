@@ -6,7 +6,6 @@ import graph.UniqueIdGenerator;
 
 import org.extendj.ast.*;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,12 +22,12 @@ public class ClassReader extends TypeDeclReader {
         return classDeclaration.fullName();
     }
 
-    public void readInto(Map<String, Node> nodes, Set<Edge> edges) {
+    public void readInto(Map<Integer, Node> nodes, Set<Edge> edges) {
         String className = classDeclaration.fullName();
 
-        Node classNode = new Node(idGenerator.generate(), className,
+        Node classNode = new Node(idGenerator.idFor(className), className,
                             Node.Type.Class, classDeclaration);
-        nodes.put(className, classNode);
+        nodes.put(idGenerator.idFor(className), classNode);
         readBodyDeclarations(nodes, edges);
         addPackageDependency(edges);
         addSuperClassdependency(edges,nodes);
@@ -36,7 +35,7 @@ public class ClassReader extends TypeDeclReader {
         
     }
 
-    private void readBodyDeclarations(Map<String, Node> nodes, Set<Edge> edges) {
+    private void readBodyDeclarations(Map<Integer, Node> nodes, Set<Edge> edges) {
         for (BodyDecl decl : classDeclaration.getBodyDeclList()) {
             if (decl instanceof FieldDecl) {
                 FieldReader fieldreader = new FieldReader(idGenerator, (FieldDecl) decl);
@@ -54,13 +53,11 @@ public class ClassReader extends TypeDeclReader {
                 InterfaceReader reader = new InterfaceReader((InterfaceDecl) memberType, idGenerator);
                 reader.readInto(nodes, edges);
                 addTypeDependency(edges, memberType, Edge.Type.Contains, nodes);
-            } else if (decl instanceof GenericMethodDecl) {
-            	GenericMethodDecl genMethod = (GenericMethodDecl)decl;
             }
         }
     }
 
-    private void addSuperClassdependency(Set<Edge> edges,Map<String, Node> nodes) {
+    private void addSuperClassdependency(Set<Edge> edges, Map<Integer, Node> nodes) {
         Access superClass = classDeclaration.getSuperClass();
   
         if (superClass == null || Util.isPrimitive(superClass.type())) {
@@ -70,7 +67,7 @@ public class ClassReader extends TypeDeclReader {
         addTypeDependency(edges, superClass.type(), Edge.Type.IsA,nodes);
     }
 
-    private void addInterfacesDependency(Set<Edge> edges,Map<String, Node> nodes) {
+    private void addInterfacesDependency(Set<Edge> edges,Map<Integer, Node> nodes) {
         for (Access imp: classDeclaration.getImplementsList()) {
             if (! (imp.type() instanceof InterfaceDecl)) {
                 continue;

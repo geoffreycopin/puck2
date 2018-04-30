@@ -127,7 +127,7 @@ public class ReadersTest {
     }
 
     private String getProgramOutput(Program p) {
-        HashMap<String, Node> nodes = new HashMap<>();
+        HashMap<Integer, Node> nodes = new HashMap<>();
         Set<Edge> edges = new HashSet<>();
         ProgramReader reader = new ProgramReader(p);
         reader.readInto(nodes, edges);
@@ -136,7 +136,7 @@ public class ReadersTest {
         result.append("<DG>\n");
 
         nodes.values().forEach((n) -> result.append(n.toString()));
-        edges.forEach((e) -> result.append(e.toString()));
+        edges.forEach((e) -> result.append(e.getStringRepr(nodes)));
 
         result.append("\n</DG>");
         return result.toString();

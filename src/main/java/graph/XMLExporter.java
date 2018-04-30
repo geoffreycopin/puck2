@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class XMLExporter {
-    Map<String, Node> nodes;
+    Map<Integer, Node> nodes;
     Set<Edge> edges;
 
     public XMLExporter() {
@@ -20,7 +20,7 @@ public class XMLExporter {
         writer.close();
     }
 
-    public void add(Map<String, Node> nodes, Set<Edge> edges) {
+    public void add(Map<Integer, Node> nodes, Set<Edge> edges) {
          this.nodes.putAll(nodes);
         this.edges.addAll(edges);
     }
@@ -60,11 +60,10 @@ public class XMLExporter {
     }
 
     private String edgeToString(Edge edge, int id) {
-        String formatString = "\t<edge type=\"%s\" src=\"%d\" dest=\"%s\" id=\"%d\"/>\n";
+        String formatString = "\t<edge type=\"%s\" src=\"%d\" dest=\"%d\" id=\"%d\"/>\n";
         String type = edge.getType().toString().toLowerCase();
-        Integer src = nodes.get(edge.getSourceName()).getId();
-        String tname = edge.getTargetName();
-        Node tnode = nodes.get(tname);
+        Integer src = nodes.get(edge.getSource()).getId();
+        Node tnode = nodes.get(edge.getTarget());
 
         if (tnode != null) {
             System.out.println(edge);

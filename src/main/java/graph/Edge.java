@@ -1,55 +1,75 @@
 package graph;
 
 import java.lang.annotation.Target;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class Edge {
-	private String sourceName;
-	private String targetName;
+	private int sourceId;
+	private int targetId;
 	private Type type;
 
 	public enum Type { IsA, Contains, Uses }
 
-	public Edge(String source, String target, Type t) {
-		this.sourceName = source;
-		this.targetName = target;
+	public Edge(int source, int target, Type t) {
+		this.sourceId = source;
+		this.targetId = target;
 		this.type = t;
 	}
 
 	public String toString() {
-		return String.format("<Edge from=\"%s\" to=\"%s\" type=\"%s\"/>",
-				sourceName, targetName, type.toString().toLowerCase());
+		return String.format("<Edge from=\"%d\" to=\"%d\" type=\"%s\"/>",
+				sourceId, targetId, type.toString().toLowerCase());
 	}
+
+	public String getStringRepr(HashMap<Integer, Node> nodes) {
+	    Node source = nodes.get(getSource());
+	    Node target = nodes.get(getTarget());
+	    if (source == null || target == null) {
+	        return null;
+        }
+        return String.format("<Edge from=\"%s\" to=\"%s\" type=\"%s\"/>",
+                source.getFullName(), target.getFullName(), getType().toString().toLowerCase());
+    }
 
 	public Type getType() {
 		return type;
 	}
 
-	public String getSourceName() {
-		return sourceName;
+	public int getSource() {
+		return sourceId;
 	}
 
-	public String getTargetName() {
-		return targetName;
+	public String getSourceName(Map<Integer, Node> nodes) {
+	    Node n = nodes.get(sourceId);
+	    if (n == null) {
+	        return null;
+        }
+        return n.getFullName();
+    }
+
+	public int getTarget() {
+		return targetId;
 	}
 
-
+	public String getTargetName(Map<Integer, Node> nodes) {
+	    Node n = nodes.get(targetId);
+	    if (n == null) {
+	        return null;
+        }
+        return n.getFullName();
+    }
 
 	@Override
 	public boolean equals (Object e) {
-		if (e ==null )return false;
-		if (e ==this) return true;
-
-		if  ( ! (e instanceof Edge) ) return false;
-		Edge r= (Edge) e;
-		return (r.sourceName).equals(this.sourceName) && (r.targetName).equals(this.targetName) && r.type==this.type;	    	
+		if (! (e instanceof Edge)) {
+			return false;
+		}
+		Edge other = (Edge) e;
+		return sourceId == other.sourceId && targetId == other.targetId && type == other.type;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(sourceName,targetName,type);
+		return Objects.hash(sourceId, targetId);
 	}
 }

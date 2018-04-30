@@ -1,36 +1,35 @@
 package graph;
 
+import org.extendj.ast.ASTNode;
 import org.extendj.ast.Program;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Graph {
-    Map<String, Node> nodes;
-    Map<String, Set<Edge>> fromIndex = new HashMap<>();
-    Map<String, Set<Edge>> toIndex = new HashMap<>();
-    Map<String, String> newNodeName = new HashMap<>();
-    Map<String, List<String>> previousNodeNames = new HashMap<>();
-    Set<Edge> edges;
-    Program program;
+    private Map<Integer, Node> nodes;
+    private Map<Integer, Set<Edge>> fromIndex = new HashMap<>();
+    private Map<Integer, Set<Edge>> toIndex = new HashMap<>();
+    private Set<Edge> edges;
+    private Program program;
 
-    public Graph(Map<String, Node> nodes, Set<Edge> edges, Program program) {
+    public Graph(Map<Integer, Node> nodes, Set<Edge> edges, Program program) {
         this.nodes = nodes;
         this.edges = edges;
         this.program = program;
         initIndexes();
     }
 
-    public void initIndexes() {
+    private void initIndexes() {
         for (Edge e: edges) {
-            Set<Edge> fromList = fromIndex.getOrDefault(e.getSourceName(), new HashSet<>());
+            Set<Edge> fromList = fromIndex.getOrDefault(e.getSource(), new HashSet<>());
             fromList.add(e);
-            fromIndex.put(e.getSourceName(), fromList);
+            fromIndex.put(e.getSource(), fromList);
           
 
-            Set<Edge> toList = toIndex.getOrDefault(e.getTargetName(), new HashSet<>());
+            Set<Edge> toList = toIndex.getOrDefault(e.getTarget(), new HashSet<>());
             toList.add(e);
-            toIndex.put(e.getTargetName(), toList);
+            toIndex.put(e.getTarget(), toList);
         }
     }
 
@@ -38,55 +37,21 @@ public class Graph {
         return program;
     }
 
-    public Node getNode(String id) {
-        return nodes.get(getNodeName(id));
+    public Node getNode(Integer id) {
+        return nodes.get(id);
     }
 
-    public List<Node> queryFrom(String id, Edge.Type type) {
-        id = getNodeName(id);
-        return queryIndex(fromIndex, id, type).stream()
-                .map((e) -> nodes.get(e.getTargetName()))
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    public List<Node> queryTo(String id, Edge.Type type) {
-        id = getNodeName(id);
-        return queryIndex(toIndex, id, type).stream()
-                .map((e) -> nodes.get(e.getSourceName()))
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    private List<Edge> queryIndex(Map<String, Set<Edge>> index, String id, Edge.Type type) {
-        if (index.get(id) == null) {
-            return new ArrayList<>();
-        }
-        return index.get(id).stream()
+    public List<Node> queryFrom(Integer id, Edge.Type type) {
+        return fromIndex.getOrDefault(id, new HashSet<>()).stream()
                 .filter((e) -> e.getType() == type)
+                .map((e) -> nodes.get(e.getTarget()))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private String getNodeName(String id) {
-        return newNodeName.getOrDefault(id, id);
-    }
-
-    public void renameNode(String oldName, String newName) {
-        if (nodes.get(oldName) == null || newName.isEmpty()) {
-            return;
-        }
-
-        Node n = nodes.remove(oldName);
-        nodes.put(newName, n);
-
-        updatePreviousNames(oldName, newName);
-    }
-
-    private void updatePreviousNames(String oldName, String newName) {
-        List<String> previousNames = previousNodeNames.getOrDefault(oldName, new ArrayList<>());
-        for (String name: previousNodeNames.getOrDefault(oldName, new ArrayList<>())) {
-            newNodeName.put(name, newName);
-        }
-        previousNames.add(oldName);
-        previousNodeNames.remove(oldName);
-        previousNodeNames.put(newName, previousNames);
+    public List<Node> queryTo(Integer id, Edge.Type type) {
+        return toIndex.getOrDefault(id, new HashSet<>()).stream()
+                .filter((e) -> e.getType() == type)
+                .map((e) -> nodes.get(e.getTarget()))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
