@@ -16,3 +16,10 @@ out/
 puck2\.jar
 
 todo\.txt
+
+bin/app/
+
+extendj/
+
+src/gen/
+src/gen-res/
