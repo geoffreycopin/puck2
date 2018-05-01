@@ -13,7 +13,7 @@ public class Test {
     public void foo() {
     	
         Point p = new Point(1, 1);
-        int x =p.x;
+        int x = p.x;
         p.setX(2);
     }
 }

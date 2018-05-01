@@ -1,5 +1,7 @@
 package graph;
 
+import org.extendj.ast.ASTNode;
+
 import java.lang.annotation.Target;
 import java.util.*;
 
@@ -7,6 +9,7 @@ public class Edge {
 	private int sourceId;
 	private int targetId;
 	private Type type;
+	private ASTNode<ASTNode> dependencyPointAccess;
 
 	public enum Type { IsA, Contains, Uses }
 
@@ -14,6 +17,11 @@ public class Edge {
 		this.sourceId = source;
 		this.targetId = target;
 		this.type = t;
+	}
+
+	public Edge(int source, int target, Type t, ASTNode<ASTNode> dependencyPoint) {
+		this(source, target, t);
+		this.dependencyPointAccess = dependencyPoint;
 	}
 
 	public String toString() {
@@ -37,6 +45,10 @@ public class Edge {
 
 	public int getSource() {
 		return sourceId;
+	}
+
+	public ASTNode<ASTNode> getDependencyPointAccess() {
+		return dependencyPointAccess;
 	}
 
 	public String getSourceName(Map<Integer, Node> nodes) {

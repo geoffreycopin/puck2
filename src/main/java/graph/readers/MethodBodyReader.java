@@ -3,17 +3,7 @@ package graph.readers;
 import java.util.Map;
 import java.util.Set;
 
-import org.extendj.ast.AssignSimpleExpr;
-import org.extendj.ast.Block;
-import org.extendj.ast.Dot;
-import org.extendj.ast.Expr;
-import org.extendj.ast.ExprStmt;
-import org.extendj.ast.MethodAccess;
-import org.extendj.ast.MethodDecl;
-import org.extendj.ast.Stmt;
-import org.extendj.ast.TypeDecl;
-import org.extendj.ast.VarDeclStmt;
-import org.extendj.ast.VariableDeclarator;
+import org.extendj.ast.*;
 
 import graph.Edge;
 import graph.Node;
@@ -60,7 +50,7 @@ public class MethodBodyReader extends BodyDeclReader {
 
         for (Stmt s : block.getStmtList()) {
             /*************** Var  Decl*****************/
-            if (s.value instanceof VarDeclStmt) {
+            if (s instanceof VarDeclStmt) {
                 VarDeclStmt varStmt = (VarDeclStmt) s;
 
                 /*Dep methodBody - Var type*/
@@ -80,7 +70,7 @@ public class MethodBodyReader extends BodyDeclReader {
 
             }
             /****EXPR *****/
-            if (s.value instanceof ExprStmt) {
+            if (s instanceof ExprStmt) {
                 Expr e = ((ExprStmt) s).getExpr();
                 DepExpr(e, edges, nodes);
             }
@@ -103,13 +93,22 @@ public class MethodBodyReader extends BodyDeclReader {
         if (e instanceof AssignSimpleExpr) {
             AssignSimpleExpr ase = (AssignSimpleExpr) e;
             DepExpr(ase.getSource(), edges, nodes);
+            DepExpr(ase.getDest(), edges, nodes);
         }
 
         if (e instanceof Dot) {
             Dot d = (Dot) e;
             if (d.isFieldAccess() && !d.getLeft().isThisAccess()) {
                 String fullName = d.getLeft().type() + "." + d.getRight();
-                edges.add(new Edge(idGenerator.idFor(bodyNode.getFullName()), idGenerator.idFor(fullName), Edge.Type.Uses));
+                edges.add(createEdge(bodyNode.getFullName(), fullName, Edge.Type.Uses, e));
+            }
+        }
+
+        if (e instanceof VarAccess) {
+            if (e.isFieldAccess()) {
+                String hostTypeName = ((VarAccess) e).decl().fieldDecl().hostType().fullName();
+                String name = hostTypeName + "." + ((VarAccess) e).name();
+                edges.add(createEdge(bodyNode.getFullName(), name, Edge.Type.Uses, e))  ;
             }
         }
     }
@@ -117,7 +116,7 @@ public class MethodBodyReader extends BodyDeclReader {
     public void BodyotherMethodDep(MethodAccess ma, Set<Edge> edges) {
         MethodDecl m =  ma.decl();
         String fullName = ma.methodHost() + "." + m.fullSignature();
-        edges.add(new Edge(idGenerator.idFor(bodyNode.getFullName()), idGenerator.idFor(fullName), Edge.Type.Uses));
+        edges.add(createEdge(bodyNode.getFullName(), fullName, Edge.Type.Uses, ma));
     }
 
     @Override

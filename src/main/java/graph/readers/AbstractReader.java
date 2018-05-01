@@ -3,6 +3,8 @@ package graph.readers;
 import graph.Edge;
 import graph.Node;
 import graph.UniqueIdGenerator;
+import org.extendj.ast.ASTNode;
+import org.extendj.ast.AssertStmt;
 import org.extendj.ast.TypeDecl;
 import org.extendj.ast.WildcardExtendsType;
 
@@ -68,5 +70,9 @@ public abstract class AbstractReader {
 
     protected Edge createEdge(String source, String target, Edge.Type type) {
 		return new Edge(idGenerator.idFor(source), idGenerator.idFor(target), type);
+	}
+
+	protected Edge createEdge(String source, String target, Edge.Type type, ASTNode<ASTNode> dependencyPoint) {
+		return new Edge(idGenerator.idFor(source), idGenerator.idFor(target), type, dependencyPoint);
 	}
 }

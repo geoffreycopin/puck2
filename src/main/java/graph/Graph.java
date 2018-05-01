@@ -10,6 +10,7 @@ public class Graph {
     private Map<Integer, Node> nodes;
     private Map<Integer, Set<Edge>> fromIndex = new HashMap<>();
     private Map<Integer, Set<Edge>> toIndex = new HashMap<>();
+    private Map<String, Integer> nameIndex = new HashMap<>();
     private Set<Edge> edges;
     private Program program;
 
@@ -31,6 +32,10 @@ public class Graph {
             toList.add(e);
             toIndex.put(e.getTarget(), toList);
         }
+
+        for (Node n: nodes.values()) {
+            nameIndex.put(n.getFullName(), n.getId());
+        }
     }
 
     public Program getProgram() {
@@ -41,17 +46,31 @@ public class Graph {
         return nodes.get(id);
     }
 
-    public List<Node> queryFrom(Integer id, Edge.Type type) {
+    public Node getNode(String name) {
+        Integer id = nameIndex.get(name);
+        if (id == null) {
+            return null;
+        }
+        return nodes.get(id);
+    }
+
+    public List<Node> queryNodesFrom(Integer id, Edge.Type type) {
         return fromIndex.getOrDefault(id, new HashSet<>()).stream()
                 .filter((e) -> e.getType() == type)
                 .map((e) -> nodes.get(e.getTarget()))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public List<Node> queryTo(Integer id, Edge.Type type) {
+    public List<Node> queryNodesTo(Integer id, Edge.Type type) {
         return toIndex.getOrDefault(id, new HashSet<>()).stream()
                 .filter((e) -> e.getType() == type)
                 .map((e) -> nodes.get(e.getTarget()))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public List<Edge> queryEdgesTo(Integer id, Edge.Type type) {
+        return toIndex.getOrDefault(id, new HashSet<>()).stream()
+                .filter((e) -> e.getType() == type)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 }
