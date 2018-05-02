@@ -64,7 +64,7 @@ public class Graph {
     public List<Node> queryNodesTo(Integer id, Edge.Type type) {
         return toIndex.getOrDefault(id, new HashSet<>()).stream()
                 .filter((e) -> e.getType() == type)
-                .map((e) -> nodes.get(e.getTarget()))
+                .map((e) -> nodes.get(e.getSource()))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
