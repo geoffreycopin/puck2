@@ -7,7 +7,7 @@ import org.extendj.ast.FieldDecl;
 import org.extendj.ast.MethodDecl;
 
 public class Rename {
-    public RenameBase newRenameStrategy(Integer id, String newName, Graph graph) {
+    public static RenameBase newRenameStrategy(Integer id, String newName, Graph graph) {
         ASTNode<ASTNode> node = graph.getNode(id).getExtendjNode();
         if (node instanceof ClassDecl) {
             return new RenameClass(id, newName, graph);

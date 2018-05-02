@@ -174,7 +174,7 @@ public class ReadersTest {
     }
 
     private ArrayList<String> readXml(String text) throws Exception {
-        ArrayList<String> result = new ArrayList();
+        ArrayList<String> result = new ArrayList<>();
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

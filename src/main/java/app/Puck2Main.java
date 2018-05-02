@@ -1,6 +1,7 @@
 package app;
 
 import com.sun.javafx.application.LauncherImpl;
+import graph.CodeGenerator;
 import graph.Edge;
 import graph.Node;
 import graph.XMLExporter;
@@ -9,6 +10,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import org.extendj.ast.Program;
 import org.xml.sax.SAXException;
+import refactoring.RefactoringExecutor;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,10 +29,25 @@ public class Puck2Main {
                 run(args[0]).outputToFile(args[1]);
                 break;
             }
+            case 4:
+                refactor(args[1], args[2], args[3]); break;
             default: System.out.println("Usage: java -jar puck2 programDir ?outputFile");
         }
     }
-    
+
+    private static void refactor(String commandsPath, String projectPath, String outputPath) {
+        RefactoringExecutor executor;
+        Puck2Runner runner = new Puck2Runner(projectPath);
+        try {
+            runner.run();
+            executor = new RefactoringExecutor(runner.getGraph(), commandsPath);
+            executor.execute();
+            System.out.println(executor.getGraph().getProgram().prettyPrint());
+            new CodeGenerator(executor.getGraph().getProgram()).generateCode(outputPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private static Puck2Runner run(String projectPath) {
         Puck2Runner runner = new Puck2Runner(projectPath);
