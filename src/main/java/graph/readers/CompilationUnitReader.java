@@ -1,6 +1,7 @@
 package graph.readers;
 
 import graph.Edge;
+import graph.Graph;
 import graph.Node;
 import graph.UniqueIdGenerator;
 import org.extendj.ast.ClassDecl;
@@ -14,51 +15,47 @@ import java.util.Set;
 public class CompilationUnitReader extends AbstractReader{
     private CompilationUnit compilationUnit;
 
-    public CompilationUnitReader(CompilationUnit unit, UniqueIdGenerator generator) {
-        super(generator);
+    public CompilationUnitReader(CompilationUnit unit, Graph graph) {
+        super(graph);
         this.compilationUnit = unit;
     }
 
-    public void readInto(Map<Integer, Node> nodes, Set<Edge> edges) {
-        readCurrentPackage(nodes);
-        readTypeDecalarations(nodes, edges);
+    public Graph read() {
+        readCurrentPackage();
+        readTypeDecalarations();
+        return getGraph();
     }
 
-    
     @Override
     String getFullName() {
         return compilationUnit.pathName();
     }
 
-    private void readCurrentPackage(Map<Integer, Node> nodes) {
+    private void readCurrentPackage() {
         String currentPackage = compilationUnit.getPackageDecl();
-
         if (currentPackage.isEmpty()) {
             return;
         }
-
-        Node packageNode = new Node(idGenerator.idFor(currentPackage), currentPackage,
-                Node.Type.Package, null);
-        nodes.put(idGenerator.idFor(currentPackage), packageNode);
+        addNode(currentPackage, Node.Type.Package, null);
     }
 
-    private void readTypeDecalarations(Map<Integer, Node> nodes, Set<Edge> edges) {
+    private void readTypeDecalarations() {
     	for (TypeDecl t: compilationUnit.getTypeDeclList()) {
             if (t instanceof ClassDecl) {
-                readClassDeclaration((ClassDecl) t, nodes, edges);              
+                readClassDeclaration((ClassDecl) t);
             } else if (t instanceof InterfaceDecl) {
-                readInterfaceDeclaration((InterfaceDecl) t, nodes, edges);                
+                readInterfaceDeclaration((InterfaceDecl) t);
             }
         }
     }
 
-    private void readClassDeclaration(ClassDecl decl, Map<Integer, Node> nodes, Set<Edge> edges) {
-        ClassReader reader = new ClassReader(decl, idGenerator);
-        reader.readInto(nodes, edges);
+    private void readClassDeclaration(ClassDecl decl) {
+        ClassReader reader = new ClassReader(decl, graph);
+        reader.read();
     }
 
-    private void readInterfaceDeclaration(InterfaceDecl decl, Map<Integer, Node> nodes, Set<Edge> edges) {
-        InterfaceReader reader = new InterfaceReader(decl, idGenerator);
-        reader.readInto(nodes, edges);
+    private void readInterfaceDeclaration(InterfaceDecl decl) {
+        InterfaceReader reader = new InterfaceReader(decl, graph);
+        reader.read();
     }
 }

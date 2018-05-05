@@ -7,12 +7,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Graph {
-    private Map<Integer, Node> nodes;
+    private Map<Integer, Node> nodes = new HashMap<>();
     private Map<Integer, Set<Edge>> fromIndex = new HashMap<>();
     private Map<Integer, Set<Edge>> toIndex = new HashMap<>();
     private Map<String, Integer> nameIndex = new HashMap<>();
-    private Set<Edge> edges;
+    private Set<Edge> edges = new HashSet<>();
     private Program program;
+    private UniqueIdGenerator generator = new UniqueIdGenerator();
 
     public Graph(Map<Integer, Node> nodes, Set<Edge> edges, Program program) {
         this.nodes = nodes;
@@ -21,16 +22,14 @@ public class Graph {
         initIndexes();
     }
 
+    public Graph(Program program) {
+        this.program = program;
+    }
+
     private void initIndexes() {
         for (Edge e: edges) {
-            Set<Edge> fromList = fromIndex.getOrDefault(e.getSource(), new HashSet<>());
-            fromList.add(e);
-            fromIndex.put(e.getSource(), fromList);
-          
-
-            Set<Edge> toList = toIndex.getOrDefault(e.getTarget(), new HashSet<>());
-            toList.add(e);
-            toIndex.put(e.getTarget(), toList);
+            addToIndex(fromIndex, e.getSource(), e);
+            addToIndex(toIndex, e.getTarget(), e);
         }
 
         for (Node n: nodes.values()) {
@@ -38,8 +37,51 @@ public class Graph {
         }
     }
 
+    private void addToIndex(Map<Integer, Set<Edge>> index, Integer id,Edge newEdge) {
+        index.putIfAbsent(id, new HashSet<>());
+        Set<Edge> s = index.get(id);
+        s.add(newEdge);
+    }
+
+    public Node addNode(String name, Node.Type type, ASTNode<ASTNode> extendjNode) {
+        Integer id = generator.idFor(name);
+        Node newNode = new Node(id, name, type, extendjNode);
+        this.nodes.put(id, newNode);
+        this.nameIndex.put(name, id);
+        return newNode;
+    }
+
+    public boolean addEdge(Integer source, Integer target, Edge.Type type, ASTNode<ASTNode> dependencyPoint) {
+        Edge newEdge = new Edge(source, target, type, dependencyPoint);
+        this.edges.add(newEdge);
+        addToIndex(fromIndex, source, newEdge);
+        addToIndex(toIndex, target, newEdge);
+
+        return true;
+    }
+
+    public boolean addEdge(Integer source, Integer target, Edge.Type type) {
+        return addEdge(source, target, type, null);
+    }
+
+    public boolean addEdge(String source, String target, Edge.Type type, ASTNode<ASTNode> dependencyPoint) {
+        return addEdge(generator.idFor(source), generator.idFor(target), type, dependencyPoint);
+    }
+
+    public boolean addEdge(String source, String target, Edge.Type type) {
+        return addEdge(generator.idFor(source), generator.idFor(target), type, null);
+    }
+
     public Program getProgram() {
         return program;
+    }
+
+    public Set<Edge> getEdges() {
+        return edges;
+    }
+
+    public Map<Integer, Node> getNodes() {
+        return nodes;
     }
 
     public Node getNode(Integer id) {

@@ -29,9 +29,9 @@ public class Edge {
 				sourceId, targetId, type.toString().toLowerCase());
 	}
 
-	public String getStringRepr(HashMap<Integer, Node> nodes) {
-	    Node source = nodes.get(getSource());
-	    Node target = nodes.get(getTarget());
+	public String getStringRepr(Graph graph) {
+	    Node source = graph.getNode(getSource());
+	    Node target = graph.getNode(getTarget());
 	    if (source == null || target == null) {
 	        return null;
         }

@@ -38,4 +38,13 @@ public class Node {
         String formatStr = "<Node name=\"%s\" type=\"%s\"/>";
         return String.format(formatStr, fullName, type.toString().toLowerCase(), id);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (! (o instanceof Node)) {
+            return false;
+        }
+        Node other = (Node) o;
+        return id.equals(other.id) && fullName.equals(other.fullName) && type == other.type;
+    }
 }

@@ -1,11 +1,11 @@
 package graph.readers;
 
 import graph.Edge;
+import graph.Graph;
 import graph.Node;
 import graph.UniqueIdGenerator;
 import org.extendj.ast.*;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,17 +13,14 @@ public class ProgramReader extends AbstractReader {
     private Program program;
 
     public ProgramReader(Program p) {
-        this(p, new UniqueIdGenerator());
-    }
-
-    public ProgramReader(Program p, UniqueIdGenerator idGenerator) {
-        super(idGenerator);
+        super(new Graph(p));
         this.program = p;
     }
 
     @Override
-    public void readInto(Map<Integer, Node> nodes, Set<Edge> edges) {
-        readCompilationUnits(nodes, edges);
+    public Graph read() {
+        readCompilationUnits();
+        return getGraph();
     }
 
     @Override
@@ -31,10 +28,10 @@ public class ProgramReader extends AbstractReader {
         return "PROGRAM";
     }
 
-    private void readCompilationUnits(Map<Integer, Node> nodes, Set<Edge> edges) {
+    private void readCompilationUnits() {
         for (CompilationUnit cu: program.getCompilationUnitList()) {
-            CompilationUnitReader reader = new CompilationUnitReader(cu, idGenerator);
-            reader.readInto(nodes, edges);
+            CompilationUnitReader reader = new CompilationUnitReader(cu, graph);
+            reader.read();
         }
     }
 }

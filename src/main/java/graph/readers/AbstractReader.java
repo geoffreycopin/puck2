@@ -1,6 +1,7 @@
 package graph.readers;
 
 import graph.Edge;
+import graph.Graph;
 import graph.Node;
 import graph.UniqueIdGenerator;
 import org.extendj.ast.ASTNode;
@@ -12,43 +13,58 @@ import java.util.Map;
 import java.util.Set;
 
 public abstract class AbstractReader {
-	protected UniqueIdGenerator idGenerator;
+    protected Graph graph;
 
-	public AbstractReader(UniqueIdGenerator generator) {
-		this.idGenerator = generator;
-	}
+    public AbstractReader(Graph graph) {
+        this.graph = graph;
+    }
 
-	public abstract void readInto(Map<Integer, Node> nodes, Set<Edge> edges);
+    public Graph getGraph() {
+        return graph;
+    }
+
+	public abstract Graph read();
 
 	abstract String getFullName();
 
-	protected void addTypeDependency(Set<Edge> edges, TypeDecl type, Edge.Type edgeType, Map<Integer, Node> nodes) {
+	protected Node addNode(String name, Node.Type type, ASTNode<ASTNode> extendJNode) {
+	    return graph.addNode(name, type, extendJNode);
+    }
+
+    protected void addEdge(String source, String target, Edge.Type type, ASTNode<ASTNode> dependencyPoint) {
+	    graph.addEdge(source, target, type, dependencyPoint);
+    }
+
+    protected void addEdge(String source, String target, Edge.Type type) {
+	    addEdge(source, target, type, null);
+    }
+
+	protected void addTypeDependency(TypeDecl type, Edge.Type edgeType) {
 	    String typeName = "";
 	    if (type.isParameterizedType()) {
-			addGenericTypeDependency(edges, type, edgeType,nodes);
+			addGenericTypeDependency(type, edgeType);
 			typeName = getGenericTypeName(type);
 		} else if (type.isWildcard()) {
-			addTypeDependency(edges, ((WildcardExtendsType) type).extendsType(), Edge.Type.Uses,nodes);
+			addTypeDependency(((WildcardExtendsType) type).extendsType(), edgeType);
 		} else if (type.isArrayDecl()) {
-			addTypeDependency(edges, type.elementType(), edgeType,nodes);
+			addTypeDependency(type.elementType(), edgeType);
 			typeName = type.elementType().fullName();
 		} else if (! Util.isPrimitive(type) && ! type.isTypeVariable()) {
-			Edge e = new Edge(idGenerator.idFor(getFullName()), idGenerator.idFor(type.fullName()), edgeType);
-			edges.add(e);
+	        addEdge(getFullName(), type.fullName(), edgeType);
 			typeName = type.fullName();
 		}
 
-		if (!typeName.isEmpty() && ! nodes.keySet().contains(type.packageName())) {
-	        addContainingPackage(typeName, type.packageName(), nodes, edges);
+		if (!typeName.isEmpty() && graph.getNode(type.packageName()) == null) {
+	        addContainingPackage(typeName, type.packageName());
         }
 	}
 
-	protected void addGenericTypeDependency(Set<Edge> edges, TypeDecl type, Edge.Type edgeType, Map<Integer, Node> nodes) {
+	protected void addGenericTypeDependency(TypeDecl type, Edge.Type edgeType) {
 	    String genericTypeName = getGenericTypeName(type);
-	    edges.add(new Edge(idGenerator.idFor(getFullName()), idGenerator.idFor(genericTypeName), edgeType));
+	    addEdge(getFullName(), genericTypeName, edgeType);
 
 		for (TypeDecl typeParameter : TypeDeclReader.getTypeParameters(type)) {
-			addTypeDependency(edges, typeParameter, Edge.Type.Uses,nodes);
+			addTypeDependency(typeParameter, Edge.Type.Uses);
 		}
 	}
 
@@ -56,23 +72,11 @@ public abstract class AbstractReader {
 	    return t.packageName() + "." + t.topLevelType().name();
     }
 
-    public void addContainingPackage(String typeName, String packageName, Map<Integer, Node> nodes, Set<Edge> edges) {
+    public void addContainingPackage(String typeName, String packageName) {
 	    if (packageName.isEmpty()) {
 	        return;
         }
-
-	    Node newNode = new Node(idGenerator.idFor(packageName), packageName, Node.Type.Package, null);
-	    nodes.put(idGenerator.idFor(packageName), newNode);
-
-	    Edge newEdge = new Edge(idGenerator.idFor(packageName), idGenerator.idFor(typeName), Edge.Type.Contains);
-	    edges.add(newEdge);
+        addNode(packageName, Node.Type.Package, null);
+        addEdge(packageName, typeName, Edge.Type.Contains);
     }
-
-    protected Edge createEdge(String source, String target, Edge.Type type) {
-		return new Edge(idGenerator.idFor(source), idGenerator.idFor(target), type);
-	}
-
-	protected Edge createEdge(String source, String target, Edge.Type type, ASTNode<ASTNode> dependencyPoint) {
-		return new Edge(idGenerator.idFor(source), idGenerator.idFor(target), type, dependencyPoint);
-	}
 }

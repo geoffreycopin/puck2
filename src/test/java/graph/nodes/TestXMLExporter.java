@@ -1,16 +1,15 @@
 package graph.nodes;
 
 import graph.Edge;
+import graph.Graph;
 import graph.Node;
 import graph.XMLExporter;
 import graph.readers.ProgramReader;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,14 +22,11 @@ public class TestXMLExporter {
     public static void init() {
         ProgramLoader loader = new ProgramLoader();
         loader.addFile("testfiles/ExporterTest.java");
-
-        Map<Integer, Node> nodes = new HashMap<>();
-        Set<Edge> edges = new HashSet<>();
         ProgramReader r = new ProgramReader(loader.getProgram());
-        r.readInto(nodes, edges);
+        Graph graph = r.read();
 
         exporter = new XMLExporter();
-        exporter.add(nodes, edges);
+        exporter.add(graph.getNodes(), graph.getEdges());
     }
 
     @Test

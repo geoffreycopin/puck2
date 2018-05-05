@@ -1,6 +1,7 @@
 package graph.readers;
 
 import graph.Edge;
+import graph.Graph;
 import graph.Node;
 import graph.UniqueIdGenerator;
 import org.extendj.ast.ParClassDecl;
@@ -15,19 +16,17 @@ import java.util.Set;
 public abstract class TypeDeclReader extends AbstractReader{
     private TypeDecl typeDecl;
 
-    public TypeDeclReader(TypeDecl typeDecl, UniqueIdGenerator generator) {
-        super(generator);
+    public TypeDeclReader(TypeDecl typeDecl, Graph graph) {
+        super(graph);
         this.typeDecl = typeDecl;
     }
 
-    protected void addPackageDependency(Set<Edge> edges) {
+    protected void addPackageDependency() {
         String packageName = typeDecl.packageName();
-
         if (packageName.isEmpty()) {
             return;
         }
-
-        edges.add(createEdge(packageName, typeDecl.fullName(), Edge.Type.Contains));
+        addEdge(packageName, typeDecl.fullName(), Edge.Type.Contains);
     }
 
     public static List<TypeDecl> getTypeParameters(TypeDecl type) {

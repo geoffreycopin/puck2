@@ -1,6 +1,7 @@
 package graph.nodes;
 
 import graph.Edge;
+import graph.Graph;
 import graph.Node;
 import graph.readers.ProgramReader;
 import org.extendj.ast.Program;
@@ -127,16 +128,14 @@ public class ReadersTest {
     }
 
     private String getProgramOutput(Program p) {
-        HashMap<Integer, Node> nodes = new HashMap<>();
-        Set<Edge> edges = new HashSet<>();
         ProgramReader reader = new ProgramReader(p);
-        reader.readInto(nodes, edges);
+        Graph graph = reader.read();
 
         StringBuilder result = new StringBuilder();
         result.append("<DG>\n");
 
-        nodes.values().forEach((n) -> result.append(n.toString()));
-        edges.forEach((e) -> result.append(e.getStringRepr(nodes)));
+        graph.getNodes().values().forEach((n) -> result.append(n.toString()));
+        graph.getEdges().forEach((e) -> result.append(e.getStringRepr(graph)));
 
         result.append("\n</DG>");
         return result.toString();

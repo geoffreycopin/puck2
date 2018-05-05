@@ -1,6 +1,7 @@
 package graph.readers;
 
 import graph.Edge;
+import graph.Graph;
 import graph.Node;
 import graph.UniqueIdGenerator;
 import org.extendj.ast.Access;
@@ -14,22 +15,22 @@ import java.util.Set;
 public class InterfaceReader extends TypeDeclReader {
     private InterfaceDecl interfaceDecl;
 
-    public InterfaceReader(InterfaceDecl interfaceDecl, UniqueIdGenerator idGenerator) {
-        super(interfaceDecl, idGenerator);
+    public InterfaceReader(InterfaceDecl interfaceDecl, Graph graph) {
+        super(interfaceDecl, graph);
         this.interfaceDecl = interfaceDecl;
     }
 
 
     @Override
-    public void readInto(Map<Integer, Node> nodes, Set<Edge> edges) {
-        Node interfaceNode = new Node(idGenerator.idFor(getFullName()), getFullName(),
-                Node.Type.Interface, interfaceDecl);
-        nodes.put(idGenerator.idFor(interfaceNode.getFullName()), interfaceNode);
+    public Graph read() {
+        addNode(getFullName(), Node.Type.Interface, interfaceDecl);
 
-        readBodyDeclarations(nodes, edges);
+        readBodyDeclarations();
 
-        addPackageDependency(edges);
-        addSuperInterfacesDependency(nodes, edges);
+        addPackageDependency();
+        addSuperInterfacesDependency();
+
+        return getGraph();
     }
 
     @Override
@@ -37,19 +38,19 @@ public class InterfaceReader extends TypeDeclReader {
         return interfaceDecl.fullName();
     }
 
-    private void readBodyDeclarations(Map<Integer, Node> nodes, Set<Edge> edges) {
+    private void readBodyDeclarations() {
         for (BodyDecl decl : interfaceDecl.getBodyDeclList()) {
             if (decl instanceof MethodDecl) {
                 MethodDecl m = (MethodDecl) decl;
-                MethodReader methodreader = new MethodReader(idGenerator, m);
-                methodreader.readInto(nodes, edges);
+                MethodReader methodreader = new MethodReader(m, graph);
+                methodreader.read();
             }
         }
     }
     
-    private void addSuperInterfacesDependency(Map<Integer, Node> nodes, Set<Edge> edges) {
+    private void addSuperInterfacesDependency() {
         for (Access sup: interfaceDecl.getSuperInterfaceList()) {
-        	addTypeDependency(edges, sup.type(), Edge.Type.IsA,nodes);
+        	addTypeDependency(sup.type(), Edge.Type.IsA);
         }
     }
 }

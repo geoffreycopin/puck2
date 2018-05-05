@@ -3,6 +3,7 @@ package graph.readers;
 import java.util.Map;
 import java.util.Set;
 
+import graph.Graph;
 import org.extendj.ast.*;
 
 import graph.Edge;
@@ -13,39 +14,34 @@ public class MethodReader extends BodyDeclReader {
     private MethodDecl methodDecl;
     private Node methodNode;
 
-    public MethodReader(UniqueIdGenerator idGenerator, MethodDecl methodDecl) {
-        super(methodDecl, idGenerator);
+    public MethodReader(MethodDecl methodDecl, Graph graph) {
+        super(methodDecl, graph);
         this.methodDecl = methodDecl;
     }
 
-    
     @Override
     protected String getFullName() {
         return methodNode.getFullName();
     }
-    
 
     @Override
-    public void readInto(Map<Integer, Node> nodes, Set<Edge> edges) {
+    public Graph read() {
         String fullName = getHostClassName() + "." + methodDecl.fullSignature();
-       
-       
-        methodNode = new Node(idGenerator.idFor(fullName), fullName, Node.Type.Method,
-                methodDecl);
 
-        nodes.put(idGenerator.idFor(fullName), methodNode);
-  
-        
+        methodNode = addNode(fullName, Node.Type.Method, methodDecl);
+
         if (methodDecl.hasBlock()) {
             Block b = methodDecl.getBlock();
-            MethodBodyReader mbreader = new MethodBodyReader(idGenerator, b, methodNode, methodDecl);
-            mbreader.readInto(nodes, edges);
+            MethodBodyReader mbreader = new MethodBodyReader(b, methodNode, methodDecl, graph);
+            mbreader.read();
         }
 
-        addHostClassDependency(edges);
-        addReturnTypeDependency(edges,nodes);
-        addParametersTypeDependency(edges,nodes);
-        addExceptionsTypesDependencies(edges, nodes);
+        addHostClassDependency();
+        addReturnTypeDependency();
+        addParametersTypeDependency();
+        addExceptionsTypesDependencies();
+
+        return getGraph();
     }
     
 
@@ -53,25 +49,24 @@ public class MethodReader extends BodyDeclReader {
         return methodDecl.hostType().fullName();
     }
 
-    private void addHostClassDependency(Set<Edge> edges) {
-        edges.add(new Edge(idGenerator.idFor(getHostTypeName()), idGenerator.idFor(methodNode.getFullName()),
-                Edge.Type.Contains));
+    private void addHostClassDependency() {
+        addEdge(getHostTypeName(), methodNode.getFullName(), Edge.Type.Contains);
     }
 
-    private void addReturnTypeDependency(Set<Edge> edges,Map<Integer, Node> nodes) {
-        addTypeDependency(edges, methodDecl.type(), Edge.Type.Uses, nodes);
+    private void addReturnTypeDependency() {
+        addTypeDependency(methodDecl.type(), Edge.Type.Uses);
     }
 
-    private void addParametersTypeDependency(Set<Edge> edges,Map<Integer, Node> nodes) {
+    private void addParametersTypeDependency() {
         for (ParameterDeclaration p: methodDecl.getParameterList()) {
             TypeDecl parameterType = p.getTypeAccess().type();
-            addTypeDependency(edges, parameterType, Edge.Type.Uses,nodes);
+            addTypeDependency(parameterType, Edge.Type.Uses);
         }
     }
 
-    private void addExceptionsTypesDependencies(Set<Edge> edges, Map<Integer, Node> nodes) {
+    private void addExceptionsTypesDependencies() {
         for (Access a: methodDecl.getExceptionList()) {
-            addTypeDependency(edges, a.type(), Edge.Type.Uses, nodes);
+            addTypeDependency(a.type(), Edge.Type.Uses);
         }
     }
 }

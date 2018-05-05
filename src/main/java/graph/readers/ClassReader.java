@@ -1,6 +1,7 @@
 package graph.readers;
 
 import graph.Edge;
+import graph.Graph;
 import graph.Node;
 import graph.UniqueIdGenerator;
 
@@ -12,8 +13,8 @@ import java.util.Set;
 public class ClassReader extends TypeDeclReader {
     private ClassDecl classDeclaration;
 
-    public ClassReader(ClassDecl classDeclaration, UniqueIdGenerator idGenerator) {
-        super(classDeclaration, idGenerator);
+    public ClassReader(ClassDecl classDeclaration, Graph graph) {
+        super(classDeclaration, graph);
         this.classDeclaration = classDeclaration;
     }
 
@@ -22,57 +23,56 @@ public class ClassReader extends TypeDeclReader {
         return classDeclaration.fullName();
     }
 
-    public void readInto(Map<Integer, Node> nodes, Set<Edge> edges) {
+    @Override
+    public Graph read() {
         String className = classDeclaration.fullName();
 
-        Node classNode = new Node(idGenerator.idFor(className), className,
-                            Node.Type.Class, classDeclaration);
-        nodes.put(idGenerator.idFor(className), classNode);
-        readBodyDeclarations(nodes, edges);
-        addPackageDependency(edges);
-        addSuperClassdependency(edges,nodes);
-        addInterfacesDependency(edges,nodes);
-        
+        addNode(className, Node.Type.Class, classDeclaration);
+
+        readBodyDeclarations();
+        addPackageDependency();
+        addSuperClassdependency();
+        addInterfacesDependency();
+
+        return getGraph();
     }
 
-    private void readBodyDeclarations(Map<Integer, Node> nodes, Set<Edge> edges) {
+    private void readBodyDeclarations() {
         for (BodyDecl decl : classDeclaration.getBodyDeclList()) {
             if (decl instanceof FieldDecl) {
-                FieldReader fieldreader = new FieldReader(idGenerator, (FieldDecl) decl);
-                fieldreader.readInto(nodes, edges);
+                FieldReader fieldreader = new FieldReader((FieldDecl) decl, graph);
+                fieldreader.read();
             } else if (decl instanceof MethodDecl) {
-                MethodReader methodreader = new MethodReader(idGenerator, (MethodDecl) decl);
-                methodreader.readInto(nodes, edges);
+                MethodReader methodreader = new MethodReader((MethodDecl) decl, graph);
+                methodreader.read();
             } else if (decl instanceof MemberClassDecl) {
                 TypeDecl memberType = ((MemberClassDecl) decl).typeDecl();
-                ClassReader reader = new ClassReader((ClassDecl) memberType, idGenerator);
-                reader.readInto(nodes, edges);
-                addTypeDependency(edges, memberType, Edge.Type.Contains, nodes);
+                ClassReader reader = new ClassReader((ClassDecl) memberType, graph);
+                reader.read();
+                addTypeDependency(memberType, Edge.Type.Contains);
             } else if (decl instanceof MemberInterfaceDecl) {
                 TypeDecl memberType = ((MemberInterfaceDecl) decl).typeDecl();
-                InterfaceReader reader = new InterfaceReader((InterfaceDecl) memberType, idGenerator);
-                reader.readInto(nodes, edges);
-                addTypeDependency(edges, memberType, Edge.Type.Contains, nodes);
+                InterfaceReader reader = new InterfaceReader((InterfaceDecl) memberType, graph);
+                reader.read();
+                addTypeDependency(memberType, Edge.Type.Contains);
             }
         }
     }
 
-    private void addSuperClassdependency(Set<Edge> edges, Map<Integer, Node> nodes) {
+    private void addSuperClassdependency() {
         Access superClass = classDeclaration.getSuperClass();
-  
         if (superClass == null || Util.isPrimitive(superClass.type())) {
             return;
         }
-
-        addTypeDependency(edges, superClass.type(), Edge.Type.IsA,nodes);
+        addTypeDependency(superClass.type(), Edge.Type.IsA);
     }
 
-    private void addInterfacesDependency(Set<Edge> edges,Map<Integer, Node> nodes) {
+    private void addInterfacesDependency() {
         for (Access imp: classDeclaration.getImplementsList()) {
             if (! (imp.type() instanceof InterfaceDecl)) {
                 continue;
             }
-            addTypeDependency(edges, imp.type(), Edge.Type.IsA,nodes);
+            addTypeDependency(imp.type(), Edge.Type.IsA);
         }
     }
 }

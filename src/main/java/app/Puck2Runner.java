@@ -13,13 +13,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.*;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
@@ -29,50 +27,46 @@ import javax.xml.validation.Validator;
 
 public class Puck2Runner {
     String projectPath;
-    HashMap<Integer, Node> nodes;
-    Set<Edge> edges;
+    Graph graph;
     Program program;
 
     public Puck2Runner(String path) {
-        nodes = new HashMap<>();
-        edges = new HashSet();
         projectPath = path;
         program = new Program();
+        graph = new Graph(program);
     }
-    
 
-    public HashMap<Integer, Node> getNodes() {
-        return nodes;
+    public Map<Integer, Node> getNodes() {
+        return graph.getNodes();
     }
 
     public Set<Edge> getEdges() {
-        return edges;
+        return graph.getEdges();
     }
 
     public Program getProgram() {
         return program;
     }
 
-    // TODO: update project to use the Graph class everywhere
     public Graph getGraph() {
-        return new Graph(nodes, edges, program);
+        return graph;
     }
 
     public void run() throws IOException {
         loadProgram(projectPath);
         ProgramReader reader = new ProgramReader(program);
-        reader.readInto(nodes, edges);
+        reader.read();
     }
 
     public void outputToFile(String outputFile) throws Exception {
     	XMLExporter exporter = new XMLExporter();
-        exporter.add(nodes, edges);      
+        exporter.add(graph.getNodes(), graph.getEdges());
         exporter.writeTo(outputFile);
     }
     
     public void XMLValidation()throws Exception{
     	 XMLExporter exporter = new XMLExporter();
-    	 exporter.add(nodes, edges);    
+    	 exporter.add(graph.getNodes(), graph.getEdges());
     	  File temp = File.createTempFile("file", ".tmp");
           BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
           writer.write(exporter.generateXml());
@@ -127,11 +121,11 @@ public class Puck2Runner {
     }
 
     public void displayGraph() {
-        for (Node node: nodes.values()) {
+        for (Node node: graph.getNodes().values()) {
             System.out.println(node);
         }
 
-        for (Edge edge: edges) {
+        for (Edge edge: graph.getEdges()) {
             System.out.println(edge);
         }
     }
