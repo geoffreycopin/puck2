@@ -21,7 +21,7 @@ public class MethodReader extends BodyDeclReader {
 
     @Override
     protected String getFullName() {
-        return methodNode.getFullName();
+        return methodNode != null ? methodNode.getFullName() : "";
     }
 
     @Override
@@ -59,8 +59,8 @@ public class MethodReader extends BodyDeclReader {
 
     private void addParametersTypeDependency() {
         for (ParameterDeclaration p: methodDecl.getParameterList()) {
-            TypeDecl parameterType = p.getTypeAccess().type();
-            addTypeDependency(parameterType, Edge.Type.Uses);
+            ParametersReader r = new ParametersReader(p, methodNode, getGraph());
+            r.read();
         }
     }
 
