@@ -35,8 +35,6 @@ public class ConfigurationUI extends Application {
         initUi(primaryStage);
         primaryStage.show();
     }
-    
-    
 
     private void initUi(Stage primaryStage) {
             

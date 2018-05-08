@@ -9,7 +9,7 @@ public class Node {
     private Type type;
     private ASTNode<ASTNode> extendjNode;
 
-    public enum Type {Package, Class, Interface, Attribute, Method, MethodBody}
+    public enum Type {Package, Class, Interface, Attribute, Method, MethodBody, Parameter}
 
     public Node(Integer id, String fullName, Type type, ASTNode<ASTNode> extendjNode) {
         this.id = id;
