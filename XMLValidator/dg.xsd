@@ -26,6 +26,7 @@
 			<xs:enumeration value="method"/>
 			<xs:enumeration value="methodbody"/>
 			<xs:enumeration value="attribute"/>
+			<xs:enumeration value="parameter"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="edgetype">
