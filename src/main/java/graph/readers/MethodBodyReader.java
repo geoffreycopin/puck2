@@ -32,7 +32,7 @@ public class MethodBodyReader extends BodyDeclReader {
 
 		return getGraph();
 	}
-	
+
 
 	private void addMSignatureDependency() {
 		addEdge(methodNode.getFullName(), bodyNode.getFullName(), Edge.Type.Contains);
@@ -129,7 +129,7 @@ public class MethodBodyReader extends BodyDeclReader {
 			}
 		}
 
-		
+
 
 		/************While **************/
 		if (s instanceof WhileStmt) {
@@ -170,25 +170,25 @@ public class MethodBodyReader extends BodyDeclReader {
 
 
 		}
-		
+
 		/****Local class ***/
 		if (s instanceof LocalClassDeclStmt) {
 			LocalClassDeclStmt lcds = (LocalClassDeclStmt)s;
 			TypeDecl localType = lcds.getClassDecl();
-             ClassReader reader = new ClassReader((ClassDecl) localType, graph);
-             reader.read();
-             addTypeDependency(localType, Edge.Type.Contains);
+			ClassReader reader = new ClassReader((ClassDecl) localType, graph);
+			reader.read();
+			addTypeDependency(localType, Edge.Type.Contains);
 		}
-		
+
 		/************SWITCH *******/
 		if (s instanceof SwitchStmt) {
 			SwitchStmt ss = (SwitchStmt)s;
 			DepStmt(ss.getBlock().getStmtList());
 			DepExpr(ss.getExpr());
 		}
-		
-		
-		
+
+
+
 
 
 	}
