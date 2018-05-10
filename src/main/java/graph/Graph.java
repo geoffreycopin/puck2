@@ -1,6 +1,7 @@
 package graph;
 
 import org.extendj.ast.ASTNode;
+import org.extendj.ast.ArrayAccess;
 import org.extendj.ast.Program;
 
 import java.util.*;
@@ -14,6 +15,7 @@ public class Graph {
     private Set<Edge> edges = new HashSet<>();
     private Program program;
     private UniqueIdGenerator generator = new UniqueIdGenerator();
+    private Map<Integer, List<ASTNode<ASTNode>>> references = new HashMap<>();
 
     public Graph(Map<Integer, Node> nodes, Set<Edge> edges, Program program) {
         this.nodes = nodes;
@@ -70,6 +72,21 @@ public class Graph {
 
     public boolean addEdge(String source, String target, Edge.Type type) {
         return addEdge(generator.idFor(source), generator.idFor(target), type, null);
+    }
+
+    public void addReference(String fullName, ASTNode<ASTNode> ref) {
+        Integer nodeId = generator.idFor(fullName);
+        references.putIfAbsent(nodeId, new ArrayList<>());
+        List<ASTNode<ASTNode>> r = references.get(generator.idFor(fullName));
+        r.add(ref);
+    }
+
+    public List<ASTNode<ASTNode>> getReferences(Integer id) {
+        return references.get(id);
+    }
+
+    public List<ASTNode<ASTNode>> getReferences(String name) {
+        return getReferences(generator.idFor(name));
     }
 
     public Program getProgram() {

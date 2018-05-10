@@ -30,14 +30,6 @@ public class RenameAttribute extends RenameBase {
     public void refactor() {
         FieldDeclarator field = (FieldDeclarator) getGraph().getNode(getId()).getExtendjNode();
         field.setID(getNewName());
-
-        for (Edge e: getGraph().queryEdgesTo(getId(), Edge.Type.Uses)) {
-            ASTNode<ASTNode> dp = e.getDependencyPointAccess();
-            if (dp instanceof VarAccess) {
-                ((VarAccess) dp).setID(getNewName());
-            } else if (dp instanceof Dot) {
-                ((Dot) dp).setRight(field.createBoundAccess().lastAccess());
-            }
-        }
+        renameReferences(field.createBoundAccess().lastAccess());
     }
 }

@@ -187,18 +187,13 @@ public class MethodBodyReader extends BodyDeclReader {
 			DepExpr(ss.getExpr());
 		}
 
-
-
-
-
 	}
 
 	public void DepExpr (Expr e) {
 		MethodAccess ma;
 
 		if (e.isMethodAccess()) {
-
-			if (e instanceof Dot) {
+		    if (e instanceof Dot) {
 				if (!((Dot) e).getLeft().isThisAccess()) {
 					ma = (MethodAccess) ((Dot) e).getRight();
 					BodyotherMethodDep(ma);
@@ -219,12 +214,14 @@ public class MethodBodyReader extends BodyDeclReader {
 			if (d.isFieldAccess() && !d.getLeft().isThisAccess()) {
 				String fullName = d.getLeft().type().fullName()+ "." + d.getRight();
 				addEdge(getFullName(), fullName, Edge.Type.Uses);
+				addReference(fullName, d);
 			}
 
 			/*dep static func call */
 			if(d.getLeft() instanceof TypeAccess) {
 				String fullName = d.getLeft().type().fullName() + "." + d.getRight();
 				addEdge(getFullName(), fullName, Edge.Type.Uses);
+				addReference(fullName, d);
 			}
 		}
 
@@ -233,7 +230,14 @@ public class MethodBodyReader extends BodyDeclReader {
 				String hostTypeName = ((VarAccess) e).decl().fieldDecl().hostType().fullName();
 				String name = hostTypeName + "." + ((VarAccess) e).name();
 				addEdge(bodyNode.getFullName(), name, Edge.Type.Uses);
-			}
+				addReference(name, e);
+			} else {
+			    String fullName = methodNode.getFullName() + "." + ((VarAccess) e).getID();
+			    System.out.println("PARAMETER: " + fullName);
+			    if (getGraph().getNode(fullName) != null) {
+			        addReference(fullName, e);
+                }
+            }
 		}
 
 		if(e instanceof RelationalExpr ) {
@@ -264,6 +268,7 @@ public class MethodBodyReader extends BodyDeclReader {
 		MethodDecl m =  ma.decl();
 		String fullName = ma.methodHost() + "." + m.fullSignature();
 		addEdge(bodyNode.getFullName(), fullName, Edge.Type.Uses);
+		addReference(fullName, ma);
 	}
 
 	@Override

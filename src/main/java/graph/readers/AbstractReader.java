@@ -35,6 +35,10 @@ public abstract class AbstractReader {
 	    graph.addEdge(source, target, type, dependencyPoint);
     }
 
+    protected void addReference(String source, ASTNode<ASTNode> ref) {
+	    graph.addReference(source, ref);
+    }
+
     protected void addEdge(String source, String target, Edge.Type type) {
 	    addEdge(source, target, type, null);
     }

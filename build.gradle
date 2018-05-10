@@ -53,6 +53,7 @@ jastadd {
     scanner.genDir = 'src/gen/java/org/extendj/scanner'
 }
 
+
 sourceSets.main {
     java {
         srcDir "extendj/src/frontend-main"

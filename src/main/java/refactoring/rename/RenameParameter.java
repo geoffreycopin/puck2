@@ -1,15 +1,12 @@
 package refactoring.rename;
 
 import app.Puck2Runner;
-import graph.Edge;
 import graph.Graph;
-import org.extendj.ast.ASTNode;
-import org.extendj.ast.MethodAccess;
-import org.extendj.ast.MethodDecl;
+import org.extendj.ast.ParameterDeclaration;
 
 import java.io.IOException;
 
-public class RenameMethod extends RenameBase {
+public class RenameParameter extends RenameBase {
     public static void main(String[] args) {
         Puck2Runner runner = new Puck2Runner("testfiles/TestAttribute.java");
         try {
@@ -18,20 +15,21 @@ public class RenameMethod extends RenameBase {
             e.printStackTrace();
         }
         Graph g = runner.getGraph();
-        RenameMethod r = new RenameMethod(g.getNode("Foo.setX(int)").getId(), "Renamed", g);
+        RenameParameter r = new RenameParameter(g.getNode("Foo.setX(int).val").getId(), "Renamed", g);
         r.refactor();
 
         System.out.println(g.getProgram().prettyPrint());
     }
 
-    RenameMethod(Integer id, String newName, Graph graph) {
+    RenameParameter(Integer id, String newName, Graph graph) {
         super(id, newName, graph);
     }
 
     @Override
     public void refactor() {
-        MethodDecl method = (MethodDecl) getGraph().getNode(getId()).getExtendjNode();
-        method.setID(getNewName());
-        renameReferences(method.getTypeAccess());
+        ParameterDeclaration p = (ParameterDeclaration) getGraph().getNode(getId())
+                .getExtendjNode();
+        p.setID(getNewName());
+        renameReferences(p.getTypeAccess());
     }
 }

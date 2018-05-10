@@ -1,6 +1,7 @@
 package refactoring.rename;
 
 import graph.Graph;
+import org.extendj.ast.*;
 import refactoring.RefactoringBase;
 
 public abstract class RenameBase extends RefactoringBase {
@@ -25,5 +26,17 @@ public abstract class RenameBase extends RefactoringBase {
 
     public String getOldName() {
         return oldName;
+    }
+
+    protected void renameReferences(Access a) {
+        for (ASTNode<ASTNode> ref: getGraph().getReferences(getId())) {
+            if (ref instanceof MethodAccess) {
+                ((MethodAccess) ref).setID(getNewName());
+            } else if (ref instanceof VarAccess) {
+                ((VarAccess) ref).setID(getNewName());
+            } else if (ref instanceof Dot) {
+                ((Dot) ref).setRight(a);
+            }
+        }
     }
 }
