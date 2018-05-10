@@ -1,10 +1,7 @@
 package refactoring.rename;
 
 import graph.Graph;
-import org.extendj.ast.ASTNode;
-import org.extendj.ast.ClassDecl;
-import org.extendj.ast.FieldDecl;
-import org.extendj.ast.MethodDecl;
+import org.extendj.ast.*;
 
 public class Rename {
     public static RenameBase newRenameStrategy(Integer id, String newName, Graph graph) {
@@ -13,7 +10,7 @@ public class Rename {
             return new RenameClass(id, newName, graph);
         } else if (node instanceof MethodDecl) {
             return new RenameMethod(id, newName, graph);
-        } else if (node instanceof FieldDecl) {
+        } else if (node instanceof FieldDeclarator) {
             return new RenameAttribute(id, newName, graph);
         }
         return null;

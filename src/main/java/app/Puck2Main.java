@@ -29,8 +29,8 @@ public class Puck2Main {
                 run(args[0]).outputToFile(args[1]);
                 break;
             }
-            case 4:
-                refactor(args[1], args[2], args[3]); break;
+            case 3:
+                refactor(args[0], args[1], args[2]); break;
             default: System.out.println("Usage: java -jar puck2 programDir ?outputFile");
         }
     }
@@ -43,7 +43,7 @@ public class Puck2Main {
             executor = new RefactoringExecutor(runner.getGraph(), commandsPath);
             executor.execute();
             System.out.println(executor.getGraph().getProgram().prettyPrint());
-            new CodeGenerator(executor.getGraph().getProgram()).generateCode(outputPath);
+            new CodeGenerator(executor.getGraph().getProgram(), projectPath).generateCode(outputPath);
         } catch (Exception e) {
             e.printStackTrace();
         }
