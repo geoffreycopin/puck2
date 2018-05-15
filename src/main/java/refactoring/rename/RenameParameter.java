@@ -16,7 +16,7 @@ public class RenameParameter extends RenameBase {
         }
         Graph g = runner.getGraph();
         RenameParameter r = new RenameParameter(g.getNode("Foo.setX(int).val").getId(), "Renamed", g);
-        r.refactor();
+        r.refactorCode();
 
         System.out.println(g.getProgram().prettyPrint());
     }
@@ -26,7 +26,7 @@ public class RenameParameter extends RenameBase {
     }
 
     @Override
-    public void refactor() {
+    protected void refactorCode() {
         ParameterDeclaration p = (ParameterDeclaration) getGraph().getNode(getId())
                 .getExtendjNode();
         p.setID(getNewName());

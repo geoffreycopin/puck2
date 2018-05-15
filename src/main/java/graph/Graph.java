@@ -132,4 +132,12 @@ public class Graph {
                 .filter((e) -> e.getType() == type)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
+
+    public void renameNode(Integer id, String newFullName) {
+        Node n = getNode(id);
+        String oldName = n.getFullName();
+        n.setFullName(newFullName);
+        nameIndex.remove(oldName);
+        nameIndex.put(newFullName, id);
+    }
 }

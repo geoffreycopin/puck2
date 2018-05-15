@@ -233,7 +233,6 @@ public class MethodBodyReader extends BodyDeclReader {
 				addReference(name, e);
 			} else {
 			    String fullName = methodNode.getFullName() + "." + ((VarAccess) e).getID();
-			    System.out.println("PARAMETER: " + fullName);
 			    if (getGraph().getNode(fullName) != null) {
 			        addReference(fullName, e);
                 }

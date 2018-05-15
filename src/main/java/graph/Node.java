@@ -34,8 +34,12 @@ public class Node {
         return type;
     }
 
+    public void setFullName(String newName) {
+        fullName = newName;
+    }
+
     public String toString() {
-        String formatStr = "<Node name=\"%s\" type=\"%s\"/>";
+        String formatStr = "<Node name=\"%s\" type=\"%s\" id=\"%d\"/>";
         return String.format(formatStr, fullName, type.toString().toLowerCase(), id);
     }
 

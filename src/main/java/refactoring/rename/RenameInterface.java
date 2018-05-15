@@ -15,7 +15,7 @@ public class RenameInterface extends RenameBase {
     }
 
     @Override
-    public void refactor() {
+    protected void refactorCode() {
         InterfaceDecl i = (InterfaceDecl) getGraph().getNode(getId()).getExtendjNode();
         i.setID(getNewName());
 

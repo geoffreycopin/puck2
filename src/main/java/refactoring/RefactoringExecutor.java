@@ -58,7 +58,7 @@ public class RefactoringExecutor {
 
     public void execute() {
         for (RefactoringBase rb: commands) {
-            rb.refactor();
+            rb.refactorCode();
         }
     }
 

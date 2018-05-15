@@ -5,7 +5,6 @@ import graph.Edge;
 import graph.Graph;
 import graph.Node;
 import org.extendj.ast.*;
-import refactoring.rename.RenameBase;
 
 import java.io.IOException;
 
@@ -26,7 +25,7 @@ public class RenameClass extends RenameBase {
 	}
 
 	@Override
-	public void refactor() {
+	protected void refactorCode() {
 		ClassDecl c = (ClassDecl) getGraph().getNode(getId()).getExtendjNode();
 		c.setID(getNewName());
 
@@ -53,12 +52,10 @@ public class RenameClass extends RenameBase {
 
 	private void updateMethodParam(Access newAccess) {
 		for (Node n: getGraph().queryNodesTo(getId(), Edge.Type.Uses)) {
-			if (n.getExtendjNode() instanceof MethodDecl) {
-				MethodDecl f = (MethodDecl) n.getExtendjNode();
-				for ( ParameterDeclaration p : f.getParameterList()) {
-					if(p.getTypeAccess().type().fullName().equals(getOldName())) {
-						p.setTypeAccess(newAccess);
-					}
+			if (n.getExtendjNode() instanceof ParameterDeclaration) {
+				ParameterDeclaration p = (ParameterDeclaration) n.getExtendjNode();
+				if(p.getTypeAccess().type().fullName().equals(getOldName())) {
+				    p.setTypeAccess(newAccess);
 				}
 			}
 		}

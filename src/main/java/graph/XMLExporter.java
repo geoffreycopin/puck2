@@ -53,8 +53,7 @@ public class XMLExporter {
     }
 
     private String extractNodeName(String nodeName) {
-        String beforeLeftParenthesis = (nodeName.split("\\("))[0];
-        String[] nameParts = beforeLeftParenthesis.split("\\.");
+        String[] nameParts = nodeName.split("\\.");
 
         return nameParts[nameParts.length - 1];
     }

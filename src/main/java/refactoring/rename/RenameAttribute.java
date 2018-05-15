@@ -1,7 +1,6 @@
 package refactoring.rename;
 
 import app.Puck2Runner;
-import graph.Edge;
 import graph.Graph;
 import org.extendj.ast.*;
 
@@ -17,7 +16,7 @@ public class RenameAttribute extends RenameBase {
         }
         Graph g = runner.getGraph();
         RenameAttribute r = new RenameAttribute(g.getNode("Foo.X").getId(), "Renamed", g);
-        r.refactor();
+        r.refactorCode();
 
         System.out.println(g.getProgram().prettyPrint());
     }
@@ -27,7 +26,7 @@ public class RenameAttribute extends RenameBase {
     }
 
     @Override
-    public void refactor() {
+    public void refactorCode() {
         FieldDeclarator field = (FieldDeclarator) getGraph().getNode(getId()).getExtendjNode();
         field.setID(getNewName());
         renameReferences(field.createBoundAccess().lastAccess());
