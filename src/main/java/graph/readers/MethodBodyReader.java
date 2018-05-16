@@ -187,6 +187,13 @@ public class MethodBodyReader extends BodyDeclReader {
 			DepExpr(ss.getExpr());
 		}
 
+		if (s instanceof ReturnStmt) {
+		    ReturnStmt rs = (ReturnStmt) s;
+		    if (rs.getResult() != null) {
+		        DepExpr(rs.getResult());
+            }
+        }
+
 	}
 
 	public void DepExpr (Expr e) {
@@ -260,6 +267,11 @@ public class MethodBodyReader extends BodyDeclReader {
 			DepExpr(ole.getLeftOperand());
 			DepExpr(ole.getRightOperand());
 		}
+		if (e instanceof MulExpr) {
+		    MulExpr m = (MulExpr) e;
+		    DepExpr(m.getLeftOperand());
+		    DepExpr(m.getRightOperand());
+        }
 
 	}
 

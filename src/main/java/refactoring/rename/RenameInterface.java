@@ -3,10 +3,7 @@ package refactoring.rename;
 import graph.Edge;
 import graph.Graph;
 import graph.Node;
-import org.extendj.ast.Access;
-import org.extendj.ast.ClassDecl;
-import org.extendj.ast.InterfaceDecl;
-import org.extendj.ast.List;
+import org.extendj.ast.*;
 
 public class RenameInterface extends RenameBase {
 
@@ -18,16 +15,17 @@ public class RenameInterface extends RenameBase {
     protected void refactorCode() {
         InterfaceDecl i = (InterfaceDecl) getGraph().getNode(getId()).getExtendjNode();
         i.setID(getNewName());
-
+        i.flushAttrAndCollectionCache();
+        i.createQualifiedAccess().treeCopy();
         updateSubInterfaces(i.createBoundAccess());
         updateImplementingClasses(i.createBoundAccess());
     }
 
     private void updateSubInterfaces(Access newAccess) {
         for (Node n: getGraph().queryNodesTo(getId(), Edge.Type.IsA)) {
-            InterfaceDecl sub = (InterfaceDecl) n.getExtendjNode();
-            int superInterfaceId = getInterfaceIndex(sub.getSuperInterfaceList());
-            if (superInterfaceId != -1) {
+            if (n.getExtendjNode() instanceof InterfaceDecl) {
+                InterfaceDecl sub = (InterfaceDecl) n.getExtendjNode();
+                int superInterfaceId = getInterfaceIndex(sub.getSuperInterfaceList());
                 sub.setSuperInterface(newAccess, superInterfaceId);
             }
         }

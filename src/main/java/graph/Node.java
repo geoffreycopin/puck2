@@ -39,8 +39,8 @@ public class Node {
     }
 
     public String toString() {
-        String formatStr = "<Node name=\"%s\" type=\"%s\" id=\"%d\"/>";
-        return String.format(formatStr, fullName, type.toString().toLowerCase(), id);
+        String formatStr = "<Node name=\"%s\" type=\"%s\"/>";
+        return String.format(formatStr, fullName, type.toString().toLowerCase());
     }
 
     @Override
@@ -50,5 +50,10 @@ public class Node {
         }
         Node other = (Node) o;
         return id.equals(other.id) && fullName.equals(other.fullName) && type == other.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return (fullName + type).hashCode();
     }
 }

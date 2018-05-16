@@ -82,7 +82,11 @@ public class Graph {
     }
 
     public List<ASTNode<ASTNode>> getReferences(Integer id) {
-        return references.get(id);
+        List<ASTNode<ASTNode>> refs = references.get(id);
+        if (refs == null) {
+            return new ArrayList<>();
+        }
+        return refs;
     }
 
     public List<ASTNode<ASTNode>> getReferences(String name) {
@@ -122,14 +126,18 @@ public class Graph {
 
     public List<Node> queryNodesTo(Integer id, Edge.Type type) {
         return toIndex.getOrDefault(id, new HashSet<>()).stream()
-                .filter((e) -> e.getType() == type)
+                .filter((e) -> type == null || e.getType() == type)
                 .map((e) -> nodes.get(e.getSource()))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    public List<Node> queryNodesTo(Integer id) {
+        return queryNodesTo(id, null);
+    }
+
     public List<Edge> queryEdgesTo(Integer id, Edge.Type type) {
         return toIndex.getOrDefault(id, new HashSet<>()).stream()
-                .filter((e) -> e.getType() == type)
+                .filter((e) -> type == null || e.getType() == type)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 

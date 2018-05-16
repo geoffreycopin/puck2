@@ -53,7 +53,7 @@ public abstract class AbstractReader {
 		} else if (type.isArrayDecl()) {
 			addTypeDependency(type.elementType(), edgeType);
 			typeName = type.elementType().fullName();
-		} else if (! Util.isPrimitive(type) && ! type.isTypeVariable()) {
+		} else if (! Util.isPrimitive(type) && ! type.isTypeVariable() && ! Util.isBuiltin(type)) {
 	        addEdge(getFullName(), type.fullName(), edgeType);
 			typeName = type.fullName();
 		}

@@ -66,7 +66,9 @@ public class Puck2Runner {
         }
 
         for (Edge edge: graph.getEdges()) {
-            System.out.println(edge);
+            if (graph.getNode(edge.getSource()) != null && graph.getNode(edge.getTarget()) != null) {
+                System.out.println(edge);
+            }
         }
     }
     
