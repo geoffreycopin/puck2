@@ -147,6 +147,31 @@ public class MethodBodyReader extends BodyDeclReader {
 
 
 		/************For ****************/
+		if (s instanceof EnhancedForStmt) {
+			EnhancedForStmt enforstmt = (EnhancedForStmt)s;
+
+			
+			Stmt sinit = enforstmt.getStmt();
+			/*Variable declaration */
+			if( sinit instanceof VarDeclStmt) {
+				DepSingStmt(sinit);
+			}
+			
+			/*block*/
+			if( sinit instanceof Block) {
+				Block bfor = (Block) sinit;
+				DepStmt(bfor.getStmtList());
+			}
+			
+			
+			/*Expr */
+			Expr exp = enforstmt.getExpr();
+			DepExpr(exp);
+
+
+
+		}
+		/************Enhanced For ****************/
 		if (s instanceof ForStmt) {
 			ForStmt forstmt = (ForStmt)s;
 
@@ -170,6 +195,7 @@ public class MethodBodyReader extends BodyDeclReader {
 
 
 		}
+
 
 		/****Local class ***/
 		if (s instanceof LocalClassDeclStmt) {
@@ -267,11 +293,17 @@ public class MethodBodyReader extends BodyDeclReader {
 			DepExpr(ole.getLeftOperand());
 			DepExpr(ole.getRightOperand());
 		}
-		if (e instanceof MulExpr) {
-		    MulExpr m = (MulExpr) e;
+		if (e instanceof MultiplicativeExpr) {
+			MultiplicativeExpr m = (MultiplicativeExpr) e;
 		    DepExpr(m.getLeftOperand());
 		    DepExpr(m.getRightOperand());
         }
+		if ( e instanceof ArithmeticExpr) {
+			Expr e1 = ((ArithmeticExpr) e).getLeftOperand();
+			Expr e2 = ((ArithmeticExpr) e).getRightOperand();
+			DepExpr(e1);
+			DepExpr(e2);
+		}
 
 	}
 
