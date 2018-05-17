@@ -15,26 +15,27 @@ public class RenameInterface extends RenameBase {
     protected void refactorCode() {
         InterfaceDecl i = (InterfaceDecl) getGraph().getNode(getId()).getExtendjNode();
         i.setID(getNewName());
-        i.flushAttrAndCollectionCache();
-        i.createQualifiedAccess().treeCopy();
         updateSubInterfaces(i.createBoundAccess());
         updateImplementingClasses(i.createBoundAccess());
+        updateFieldDeclarations(i.createBoundAccess());
+        updateMethodParam(i.createBoundAccess());
+        renameReferences(i.createBoundAccess());
     }
 
     private void updateSubInterfaces(Access newAccess) {
         for (Node n: getGraph().queryNodesTo(getId(), Edge.Type.IsA)) {
             if (n.getExtendjNode() instanceof InterfaceDecl) {
                 InterfaceDecl sub = (InterfaceDecl) n.getExtendjNode();
-                int superInterfaceId = getInterfaceIndex(sub.getSuperInterfaceList());
+                int superInterfaceId = getInterfaceIndex(sub.getSuperInterfaceList(), newAccess.type().fullName());
                 sub.setSuperInterface(newAccess, superInterfaceId);
             }
         }
     }
 
-    private int getInterfaceIndex(List<Access> superInterfaces) {
+    private int getInterfaceIndex(List<Access> superInterfaces, String name) {
         int index = 0;
         for (Access a: superInterfaces) {
-            if ((a.type().fullName().equals(getOldName()))) {
+            if ((a.type().fullName().equals(name))) {
                 return index;
             }
             index ++;
@@ -45,7 +46,7 @@ public class RenameInterface extends RenameBase {
     private void updateImplementingClasses(Access newAccess) {
         for (Node n: getGraph().queryNodesTo(getId(), Edge.Type.IsA)) {
             ClassDecl implementingClass = (ClassDecl) n.getExtendjNode();
-            int idx = getInterfaceIndex(implementingClass.getImplementsList());
+            int idx = getInterfaceIndex(implementingClass.getImplementsList(), newAccess.type().fullName());
             if (idx != -1) {
                 implementingClass.setImplements(newAccess, idx);
             }

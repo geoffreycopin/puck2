@@ -18,6 +18,10 @@ public class Test implements Foo{
         return (int) x;
     }
     int m(Foo f) {}
+
+    void t() { }
+
+    void t(Test t) { t.f(); }
 }
 
 

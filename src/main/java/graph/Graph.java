@@ -147,5 +147,11 @@ public class Graph {
         n.setFullName(newFullName);
         nameIndex.remove(oldName);
         nameIndex.put(newFullName, id);
+
+        for (Node child: queryNodesFrom(id, Edge.Type.Contains)) {
+            if (child.getFullName().contains(oldName)) {
+                renameNode(child.getId(), child.getFullName().replace(oldName, newFullName));
+            }
+        }
     }
 }

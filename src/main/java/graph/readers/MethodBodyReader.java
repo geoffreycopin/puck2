@@ -66,7 +66,7 @@ public class MethodBodyReader extends BodyDeclReader {
 				for (VariableDeclarator d : varStmt.getDeclaratorList()) {
 					if (d.hasInit()) {
 						Expr init = d.getInit();
-						DepExpr(init);
+						readExpr(init);
 					}
 
 				}
@@ -76,7 +76,7 @@ public class MethodBodyReader extends BodyDeclReader {
 		/****EXPR *****/
 		if (s instanceof ExprStmt) {
 			Expr e = ((ExprStmt) s).getExpr();
-			DepExpr(e);
+			readExpr(e);
 		}
 
 
@@ -85,7 +85,7 @@ public class MethodBodyReader extends BodyDeclReader {
 			IfStmt ifstmt = (IfStmt)s;
 			/*Dep condition */
 			Expr condition = (Expr)ifstmt.getCondition();
-			DepExpr(condition);
+			readExpr(condition);
 
 			/*Dep then */
 			Stmt ifblock = ifstmt.getThen();
@@ -135,7 +135,7 @@ public class MethodBodyReader extends BodyDeclReader {
 		if (s instanceof WhileStmt) {
 			WhileStmt whilestmt = (WhileStmt)s;
 			Expr condition = (Expr)whilestmt.getCondition();
-			DepExpr(condition);
+			readExpr(condition);
 			Stmt swhile = (Stmt) whilestmt.getStmt();
 
 			if( swhile instanceof Block) {
@@ -156,7 +156,7 @@ public class MethodBodyReader extends BodyDeclReader {
 
 			/*Dep condition */
 			Expr condition = forstmt.getCondition();
-			DepExpr(condition);
+			readExpr(condition);
 
 			/*Dep update stmt */
 			Stmt upstmt = forstmt.getUpdateStmt(0);
@@ -184,96 +184,243 @@ public class MethodBodyReader extends BodyDeclReader {
 		if (s instanceof SwitchStmt) {
 			SwitchStmt ss = (SwitchStmt)s;
 			DepStmt(ss.getBlock().getStmtList());
-			DepExpr(ss.getExpr());
+			readExpr(ss.getExpr());
 		}
 
 		if (s instanceof ReturnStmt) {
 		    ReturnStmt rs = (ReturnStmt) s;
 		    if (rs.getResult() != null) {
-		        DepExpr(rs.getResult());
+		        readExpr(rs.getResult());
             }
         }
 
 	}
 
-	public void DepExpr (Expr e) {
-		MethodAccess ma;
+//	public void DepExpr (Expr e) {
+//		MethodAccess ma;
+//
+//		if (e.isMethodAccess()) {
+//		    if (e instanceof Dot) {
+//				if (!((Dot) e).getLeft().isThisAccess()) {
+//					ma = (MethodAccess) ((Dot) e).getRight();
+//					BodyotherMethodDep(ma);
+//					if (((Dot) e).getLeft() instanceof VarAccess) {
+//					    readVarAccess((VarAccess) ((Dot) e).getLeft());
+//                    }
+//				}
+//			}
+//		}
+//
+//		if (e instanceof AssignSimpleExpr) {
+//			AssignSimpleExpr ase = (AssignSimpleExpr) e;
+//			DepExpr(ase.getSource());
+//			DepExpr(ase.getDest());
+//		}
+//
+//		if (e instanceof Dot) {
+//			Dot d = (Dot) e;
+//
+//			/*Dep field access */
+//			if (d.isFieldAccess() && !d.getLeft().isThisAccess()) {
+//				String fullName = d.getLeft().type().fullName()+ "." + d.getRight();
+//				addEdge(getFullName(), fullName, Edge.Type.Uses);
+//				addReference(fullName, d);
+//			}
+//
+//			/*dep static func call */
+//			if(d.getLeft() instanceof TypeAccess) {
+//				String fullName = d.getLeft().type().fullName() + "." + d.getRight();
+//				addEdge(getFullName(), fullName, Edge.Type.Uses);
+//				addReference(fullName, d);
+//			}
+//		}
+//
+//		if (e instanceof VarAccess) {
+//			readVarAccess((VarAccess) e);
+//		}
+//
+//		if(e instanceof RelationalExpr ) {
+//			Expr e1 = ((RelationalExpr) e).getLeftOperand();
+//			Expr e2 = ((RelationalExpr) e).getRightOperand();
+//			DepExpr(e1);
+//			DepExpr(e2);
+//
+//		}
+//		if ( e instanceof LogNotExpr) {
+//			LogNotExpr lne = (LogNotExpr)e;
+//			DepExpr(lne.getOperand());
+//		}
+//		if ( e instanceof AndLogicalExpr) {
+//			AndLogicalExpr ale = (AndLogicalExpr)e;
+//			DepExpr(ale.getLeftOperand());
+//			DepExpr(ale.getRightOperand());
+//		}
+//		if ( e instanceof  OrLogicalExpr) {
+//			OrLogicalExpr ole = (OrLogicalExpr)e;
+//			DepExpr(ole.getLeftOperand());
+//			DepExpr(ole.getRightOperand());
+//		}
+//		if (e instanceof MulExpr) {
+//		    MulExpr m = (MulExpr) e;
+//		    DepExpr(m.getLeftOperand());
+//		    DepExpr(m.getRightOperand());
+//        }
+//
+//	}
 
-		if (e.isMethodAccess()) {
-		    if (e instanceof Dot) {
-				if (!((Dot) e).getLeft().isThisAccess()) {
-					ma = (MethodAccess) ((Dot) e).getRight();
-					BodyotherMethodDep(ma);
-				}
-			}
-		}
-
-		if (e instanceof AssignSimpleExpr) {
-			AssignSimpleExpr ase = (AssignSimpleExpr) e;
-			DepExpr(ase.getSource());
-			DepExpr(ase.getDest());
-		}
-
-		if (e instanceof Dot) {
-			Dot d = (Dot) e;
-
-			/*Dep field access */
-			if (d.isFieldAccess() && !d.getLeft().isThisAccess()) {
-				String fullName = d.getLeft().type().fullName()+ "." + d.getRight();
-				addEdge(getFullName(), fullName, Edge.Type.Uses);
-				addReference(fullName, d);
-			}
-
-			/*dep static func call */
-			if(d.getLeft() instanceof TypeAccess) {
-				String fullName = d.getLeft().type().fullName() + "." + d.getRight();
-				addEdge(getFullName(), fullName, Edge.Type.Uses);
-				addReference(fullName, d);
-			}
-		}
-
-		if (e instanceof VarAccess) {
-			if (e.isFieldAccess()) {
-				String hostTypeName = ((VarAccess) e).decl().fieldDecl().hostType().fullName();
-				String name = hostTypeName + "." + ((VarAccess) e).name();
-				addEdge(bodyNode.getFullName(), name, Edge.Type.Uses);
-				addReference(name, e);
-			} else {
-			    String fullName = methodNode.getFullName() + "." + ((VarAccess) e).getID();
-			    if (getGraph().getNode(fullName) != null) {
-			        addReference(fullName, e);
-                }
-            }
-		}
-
-		if(e instanceof RelationalExpr ) {
-			Expr e1 = ((RelationalExpr) e).getLeftOperand();
-			Expr e2 = ((RelationalExpr) e).getRightOperand();
-			DepExpr(e1);
-			DepExpr(e2);
-
-		}
-		if ( e instanceof LogNotExpr) {
-			LogNotExpr lne = (LogNotExpr)e;
-			DepExpr(lne.getOperand());
-		}
-		if ( e instanceof AndLogicalExpr) {
-			AndLogicalExpr ale = (AndLogicalExpr)e;
-			DepExpr(ale.getLeftOperand());
-			DepExpr(ale.getRightOperand());
-		}
-		if ( e instanceof  OrLogicalExpr) {
-			OrLogicalExpr ole = (OrLogicalExpr)e;
-			DepExpr(ole.getLeftOperand());
-			DepExpr(ole.getRightOperand());
-		}
-		if (e instanceof MulExpr) {
-		    MulExpr m = (MulExpr) e;
-		    DepExpr(m.getLeftOperand());
-		    DepExpr(m.getRightOperand());
+	private void readExpr(Expr e) {
+	    if (e instanceof Access) {
+	        readAccess((Access) e);
+        } else if (e instanceof ArrayInit) {
+	        readArrayInit((ArrayInit) e);
+        } else if (e instanceof AssignExpr) {
+	        readAssignExpr((AssignExpr) e);
+        } else if (e instanceof Binary) {
+	        readBinary((Binary) e);
+        } else if (e instanceof CastExpr) {
+	        readCastExpr((CastExpr) e);
+        } else if (e instanceof ConditionalExpr) {
+	        readConditionalExpr((ConditionalExpr) e);
+        } else if (e instanceof ConstructorReference) {
+	        readConstructorReference((ConstructorReference) e);
+        } else if (e instanceof InstanceOfExpr) {
+	        readInstanceOfExpr((InstanceOfExpr) e);
+        } else if (e instanceof IntersectionCastExpr) {
+	        readIntersectionCastExpr((IntersectionCastExpr) e);
+        } else if (e instanceof LambdaExpr) {
+	        readLambdaExpr((LambdaExpr) e);
+        } else if (e instanceof MethodReference) {
+	        readMethodReference((MethodReference) e);
+        } else if (e instanceof PrimaryExpr) {
+	        readPrimaryExpr((PrimaryExpr) e);
+        } else if (e instanceof Unary) {
+	        readUnary((Unary) e);
         }
+    }
 
+    private void readUnary(Unary u) {
+        readExpr(u.getOperand());
+    }
+
+    private void readPrimaryExpr(PrimaryExpr p) {
+        if (p instanceof ArrayCreationExpr) {
+            readAccess(((ArrayCreationExpr) p).getTypeAccess());
+        } else if (p instanceof ParExpr) {
+            readExpr(((ParExpr) p).getExpr());
+        }
+    }
+
+    private void readMethodReference(MethodReference e) {
+        if (e instanceof AmbiguousMethodReference) {
+            readAccess(((AmbiguousMethodReference) e).getAmbiguousName());
+        } else if (e instanceof ExprMethodReference) {
+            readExpr(((ExprMethodReference) e).getExpr());
+        } else if (e instanceof TypeMethodReference) {
+            readAccess(((TypeMethodReference) e).getTypeAccess());
+        }
+    }
+
+    private void readLambdaExpr(LambdaExpr l) {
+        readLambdaBody(l.getLambdaBody());
+    }
+
+    private void readLambdaBody(LambdaBody lambdaBody) {
+        if (lambdaBody instanceof BlockLambdaBody) {
+            DepStmt(((BlockLambdaBody) lambdaBody).getBlock().getStmtList());
+        } else if (lambdaBody instanceof ExprLambdaBody) {
+            readExpr(((ExprLambdaBody) lambdaBody).getExpr());
+        }
+    }
+
+    private void readIntersectionCastExpr(IntersectionCastExpr i) {
+        readExpr(i.getExpr());
+        readAccess(i.getTypeAccess());
+        for (Access a: i.getTypeLists()) {
+            readAccess(a);
+        }
+    }
+
+    private void readInstanceOfExpr(InstanceOfExpr i) {
+        readExpr(i.getExpr());
+        readAccess(i.getTypeAccess());
+    }
+
+    private void readConstructorReference(ConstructorReference c) {
+        readAccess(c.getTypeAccess());
 	}
+
+    private void readConditionalExpr(ConditionalExpr e) {
+        readExpr(e.getCondition());
+        readExpr(e.getTrueExpr());
+        readExpr(e.getFalseExpr());
+    }
+
+    private void readCastExpr(CastExpr c) {
+        readAccess(c.getTypeAccess());
+        readExpr(c.getExpr());
+    }
+
+    private void readBinary(Binary b) {
+        readExpr(b.getRightOperand());
+        readExpr(b.getLeftOperand());
+    }
+
+    private void readAssignExpr(AssignExpr a) {
+        readExpr(a.getDest());
+        readExpr(a.getSource());
+    }
+
+    private void readArrayInit(ArrayInit a) {
+        addTypeDependency(a.type(), Edge.Type.Uses);
+    }
+
+
+
+    private void readAccess(Access a) {
+	    if (a instanceof AbstractWildcard) {
+	        readAbstractWidlCard((AbstractWildcard) a);
+        } else if (a instanceof ArrayAccess) {
+	        readArrayAccess((ArrayAccess) a);
+        } else if (a instanceof ClassAccess) {
+	        readClassAccess((ClassAccess) a);
+        } else if (a instanceof ClassInstanceExpr) {
+	        readClassInstanceExpr((ClassInstanceExpr) a);
+        } else if (a instanceof ConstructorAccess) {
+	        readConstructorAccess((ConstructorAccess) a);
+        } else if (a instanceof DiamondAccess) {
+	        readDiamondAccess((DiamondAccess) a);
+        } else if (a instanceof Dot) {
+	        readDotAccess((Dot) a);
+        } else if (a instanceof MethodAccess) {
+	        readMethodAccess((MethodAccess) a);
+        } else if (a instanceof ParTypeAccess) {
+	        readparTypeAccess((ParTypeAccess) a);
+        } else if (a instanceof ParseName) {
+	        readParseName((ParseName) a);
+        } else if (a instanceof SuperAccess) {
+	        readSuperAccess((SuperAccess) a);
+        } else if (a instanceof SyntheticTypeAccess) {
+	        readSyntheticTypeAccess((SyntheticTypeAccess) a);
+        } else if (a instanceof TypeAccess) {
+	        readTypeAccess((TypeAccess) a);
+        } else if (a instanceof VarAccess) {
+	        readVarAccess((VarAccess) a);
+        }
+    }
+
+	private void readVarAccess(VarAccess v) {
+        if (v.isFieldAccess()) {
+            String hostTypeName = v.decl().fieldDecl().hostType().fullName();
+            String name = hostTypeName + "." + v.name();
+            addEdge(bodyNode.getFullName(), name, Edge.Type.Uses);
+            addReference(name, v);
+        } else {
+            String fullName = methodNode.getFullName() + "." + v.getID();
+            if (getGraph().getNode(fullName) != null) {
+                addReference(fullName, v);
+            }
+        }
+    }
 
 	public void BodyotherMethodDep(MethodAccess ma) {
 		MethodDecl m =  ma.decl();
