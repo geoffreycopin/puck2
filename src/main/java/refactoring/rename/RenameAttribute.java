@@ -2,7 +2,7 @@ package refactoring.rename;
 
 import app.Puck2Runner;
 import graph.Graph;
-import org.extendj.ast.*;
+import org.extendj.ast.FieldDeclarator;
 
 import java.io.IOException;
 

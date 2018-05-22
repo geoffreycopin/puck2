@@ -32,4 +32,18 @@ public class Rename {
         Integer id = graph.getNode(target).getId();
         return newRenameStrategy(id, newName, graph);
     }
+
+    public static boolean isValidJavaIdentifier(String id) {
+        if (id.length() == 0 || ! Character.isJavaIdentifierStart(id.charAt(0))) {
+            return false;
+        }
+
+        for (Character c: id.substring(1).toCharArray()) {
+            if (! Character.isJavaIdentifierPart(c)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

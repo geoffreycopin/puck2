@@ -134,6 +134,8 @@ public class Puck2Main {
             generator.generateCode(m.group(1));
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            System.out.println("DONE");
         }
     }
 

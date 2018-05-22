@@ -3,12 +3,8 @@ package graph.readers;
 import graph.Edge;
 import graph.Graph;
 import graph.Node;
-import graph.UniqueIdGenerator;
 
 import org.extendj.ast.*;
-
-import java.util.Map;
-import java.util.Set;
 
 public class ClassReader extends TypeDeclReader {
     private ClassDecl classDeclaration;
@@ -59,6 +55,8 @@ public class ClassReader extends TypeDeclReader {
                 InterfaceReader reader = new InterfaceReader((InterfaceDecl) memberType, graph);
                 reader.read();
                 addTypeDependency(memberType, Edge.Type.Contains);
+            } else if (decl instanceof StaticInitializer) {
+                System.out.println(((StaticInitializer) decl));
             }
         }
     }

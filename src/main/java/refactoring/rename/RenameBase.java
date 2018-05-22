@@ -43,6 +43,8 @@ public abstract class RenameBase extends RefactoringBase {
                 ((VarAccess) ref).setID(getNewName());
             } else if (ref instanceof Dot) {
                 ((Dot) ref).setRight(a);
+            } else if (ref instanceof TypeAccess) {
+                ((TypeAccess) ref).setID(getNewName());
             }
         }
     }

@@ -422,13 +422,11 @@ public class MethodBodyReader extends BodyDeclReader {
 
 	private void readParseName(ParseName a) {
 		addTypeDependency(a.type(), Edge.Type.Uses);
-
 	}
 
 
 	private void readSuperAccess(SuperAccess a) {
 		addTypeDependency(a.type(), Edge.Type.Uses);
-
 	}
 
 	private void readSyntheticTypeAccess(SyntheticTypeAccess a) {
@@ -443,7 +441,7 @@ public class MethodBodyReader extends BodyDeclReader {
 			
 		}
 		addTypeDependency(a.type(), Edge.Type.Uses);
-		
+		addReference(a.type().fullName(), a);
 	}
 
 	private void readDotAccess(Dot d) {

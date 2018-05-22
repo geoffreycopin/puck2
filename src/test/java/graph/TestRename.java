@@ -1,25 +1,79 @@
 package graph;
 
 import app.Puck2Runner;
+import org.extendj.ast.*;
 import org.junit.AfterClass;
 import org.junit.Test;
-import refactoring.rename.Rename;
-import refactoring.rename.RenameBase;
+import refactoring.rename.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class TestRename {
     private static final String ressourcesDir = "src/test/resources";
 
     @Test
+    public void isValidIdentifierOk() {
+        assertTrue(Rename.isValidJavaIdentifier("String"));
+        assertTrue(Rename.isValidJavaIdentifier("i3"));
+        assertTrue(Rename.isValidJavaIdentifier("αρετη"));
+        assertTrue(Rename.isValidJavaIdentifier("MAX_VALUE"));
+        assertTrue(Rename.isValidJavaIdentifier("isLetterOrDigit"));
+    }
+
+    @Test
+    public void invalidJavaIdentifier() {
+        assertFalse(Rename.isValidJavaIdentifier(""));
+        assertFalse(Rename.isValidJavaIdentifier("test@"));
+        assertFalse(Rename.isValidJavaIdentifier("3i"));
+    }
+
+    @Test
+    public void classToRename() throws IOException {
+        Puck2Runner runner = new Puck2Runner("testfiles/ClassCollectorTest.java");
+        runner.run();
+        RenameClass rc = (RenameClass) Rename.newRenameStartegy("BaseClass", "RENAMES", runner.getGraph());
+        Set<String> idSet = nodesToIDSet((List) rc.toRename());
+        assertEquals(3, idSet.size());
+        assertTrue(idSet.contains("C1"));
+        assertTrue(idSet.contains("C2"));
+        assertTrue(idSet.contains("C2.C4"));
+    }
+
+    @Test
     public void renameClass() throws Exception {
         String projectPath = "testfiles/distrib/bridge/hannemann/BridgeDemo.java";
         rename("bridge.candidate.Screen", projectPath);
+    }
+
+    private HashSet<String> nodesToIDSet(List<ASTNode<ASTNode>> nodes) {
+       return nodes.stream()
+               .map(this::nodeId)
+               .collect(Collectors.toCollection(HashSet::new));
+    }
+
+    private String nodeId(ASTNode<ASTNode> node) {
+        if (node instanceof VarAccess) {
+            VarAccess v = (VarAccess) node;
+            return nodeId(v.getParent());
+        } else if (node instanceof MethodAccess) {
+            MethodAccess m = (MethodAccess) node;
+            return m.toString();
+        } else if (node instanceof Dot) {
+            Dot d = (Dot) node;
+            return d.toString();
+        } else if (node instanceof ClassDecl) {
+            return ((ClassDecl) node).fullName();
+        }
+        return null;
     }
 
     private void rename(String name, String projectPath) throws Exception {
