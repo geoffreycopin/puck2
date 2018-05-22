@@ -38,6 +38,7 @@ public class ClassReader extends TypeDeclReader {
     }
 
     private void readBodyDeclarations() {
+    	
         for (BodyDecl decl : classDeclaration.getBodyDeclList()) {
             if (decl instanceof FieldDecl) {
                 FieldReader fieldreader = new FieldReader((FieldDecl) decl, graph);
@@ -45,6 +46,9 @@ public class ClassReader extends TypeDeclReader {
             } else if (decl instanceof MethodDecl) {
                 MethodReader methodreader = new MethodReader((MethodDecl) decl, graph);
                 methodreader.read();
+            } else if (decl instanceof ConstructorDecl) {
+            	ConstructorReader construcreader = new ConstructorReader((ConstructorDecl) decl, graph);
+            	construcreader.read();
             } else if (decl instanceof MemberClassDecl) {
                 TypeDecl memberType = ((MemberClassDecl) decl).typeDecl();
                 ClassReader reader = new ClassReader((ClassDecl) memberType, graph);
