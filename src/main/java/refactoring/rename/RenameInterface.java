@@ -3,12 +3,21 @@ package refactoring.rename;
 import graph.Edge;
 import graph.Graph;
 import graph.Node;
+import graph.Queries;
 import org.extendj.ast.*;
+
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class RenameInterface extends RenameBase {
 
     RenameInterface(Integer id, String newName, Graph graph) {
         super(id, newName, graph);
+    }
+
+    @Override
+    protected void check() {
+        checkTypeNameAvailability();
     }
 
     @Override

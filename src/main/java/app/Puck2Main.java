@@ -5,12 +5,14 @@ import graph.CodeGenerator;
 import graph.Graph;
 import org.extendj.ast.CompilationUnit;
 import org.xml.sax.SAXException;
+import refactoring.RefactoringError;
 import refactoring.RefactoringExecutor;
 import refactoring.rename.Rename;
 import refactoring.rename.RenameBase;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,7 +48,9 @@ public class Puck2Main {
             } else if (command.startsWith("saveGraph")) {
                 execSaveGraph(runner, saveGraph.matcher(command));
             } else if (command.startsWith("rename")) {
-                execRenameId(runner, rename.matcher(command));
+                try {
+                    execRenameId(runner, rename.matcher(command));
+                } catch (RefactoringError e) { System.err.println(e.getMessage()); }
             } else if (command.startsWith("execPlan")) {
                 execPlan(runner, execPlan.matcher(command));
             } else if (command.startsWith("saveCode")) {
@@ -87,17 +91,14 @@ public class Puck2Main {
             return;
         }
 
-        RenameBase rb = getRenameStrategy(m.group(1), m.group(2), runner.getGraph());
-        if (rb == null) {
-            System.err.println("ERROR: node <" + m.group(1) + "> doesn't exist.");
-            return;
+        List<RenameBase> rb = getRenameStrategy(m.group(1), m.group(2), runner.getGraph());
+        for (RenameBase r: rb) {
+            r.refactor();
         }
-
-        rb.refactor();
     }
 
-    private static RenameBase getRenameStrategy(String target, String newName, Graph graph) {
-        RenameBase rb;
+    private static List<RenameBase> getRenameStrategy(String target, String newName, Graph graph) {
+        List<RenameBase> rb;
         try {
             Integer id = Integer.valueOf(target);
             rb = Rename.newRenameStrategy(id, newName, graph);
@@ -115,11 +116,7 @@ public class Puck2Main {
         try {
             RefactoringExecutor executor = new RefactoringExecutor(runner.getGraph(), m.group(1));
             executor.execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
+        } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
     }

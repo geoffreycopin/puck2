@@ -37,18 +37,6 @@ public class TestRename {
     }
 
     @Test
-    public void classToRename() throws IOException {
-        Puck2Runner runner = new Puck2Runner("testfiles/ClassCollectorTest.java");
-        runner.run();
-        RenameClass rc = (RenameClass) Rename.newRenameStartegy("BaseClass", "RENAMES", runner.getGraph());
-        Set<String> idSet = nodesToIDSet((List) rc.toRename());
-        assertEquals(3, idSet.size());
-        assertTrue(idSet.contains("C1"));
-        assertTrue(idSet.contains("C2"));
-        assertTrue(idSet.contains("C2.C4"));
-    }
-
-    @Test
     public void renameClass() throws Exception {
         String projectPath = "testfiles/distrib/bridge/hannemann/BridgeDemo.java";
         rename("bridge.candidate.Screen", projectPath);
@@ -80,7 +68,7 @@ public class TestRename {
         Puck2Runner runner = new Puck2Runner(projectPath);
         runner.run();
         Integer id = runner.getGraph().getNode(name).getId();
-        RenameBase r = Rename.newRenameStartegy(name, "RENAMED", runner.getGraph());
+        RenameBase r = Rename.newRenameStartegy(name, "RENAMED", runner.getGraph()).get(0);
         r.refactor();
         Set<Node> depsPre = new HashSet<>(runner.getGraph().queryNodesTo(id));
         CodeGenerator codeGen = new CodeGenerator(runner.getProgram(), projectPath);

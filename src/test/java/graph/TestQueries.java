@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class TestQueries {
@@ -145,7 +146,7 @@ public class TestQueries {
     }
 
     @Test
-    private void hostType() {
+    public void hostType() {
         Graph g = new Graph(null);
         g.addNode("C", Node.Type.Class, null);
         g.addNode("C.m()", Node.Type.Method, null);
@@ -154,6 +155,47 @@ public class TestQueries {
         Integer hostType = Queries.hostType(g.getNode("C.m()").getId(), g);
 
         assertEquals("C", g.getNode(hostType).getFullName());
+    }
+
+    @Test
+    public void typePackage() {
+        Graph g = new Graph(null);
+        g.addNode("P", Node.Type.Package, null);
+        g.addNode("P.C", Node.Type.Class, null);
+        g.addNode("P.I", Node.Type.Interface, null);
+        g.addNode("P.C.C1", Node.Type.Class, null);
+        g.addEdge("P", "P.C", Edge.Type.Contains);
+        g.addEdge("P", "P.I", Edge.Type.Contains);
+        g.addEdge("P.C", "P.C.C1", Edge.Type.Contains);
+
+        Integer C1Package = Queries.typePackage(g.getNode("P.C.C1").getId(), g);
+        assertEquals("P", g.getNode(C1Package).getFullName());
+
+        Integer CPackage = Queries.typePackage(g.getNode("P.C").getId(), g);
+        assertEquals("P", g.getNode(CPackage).getFullName());
+
+        Integer IPackage = Queries.typePackage(g.getNode("P.I").getId(), g);
+        assertEquals("P", g.getNode(IPackage).getFullName());
+
+        assertNull(Queries.typePackage(g.getNode("P").getId(), g));
+    }
+
+    @Test
+    public void typesInPackage() {
+        Graph g = new Graph(null);
+        g.addNode("P", Node.Type.Package, null);
+        g.addNode("P.C", Node.Type.Class, null);
+        g.addNode("P.I", Node.Type.Interface, null);
+        g.addNode("P.C.C1", Node.Type.Class, null);
+        g.addEdge("P", "P.C", Edge.Type.Contains);
+        g.addEdge("P", "P.I", Edge.Type.Contains);
+        g.addEdge("P.C", "P.C.C1", Edge.Type.Contains);
+
+        Set<String> tNames = idsToNodesNames(Queries.typesInPackage(g.getNode("P").getId(), g), g);
+
+        assertEquals(2, tNames.size());
+        assertTrue(tNames.contains("P.C"));
+        assertTrue(tNames.contains("P.I"));
     }
 
     private Set<String> idsToNodesNames(List<Integer> ids, Graph graph) {

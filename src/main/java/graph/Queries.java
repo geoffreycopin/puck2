@@ -60,6 +60,28 @@ public class Queries {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    public static List<Integer> typesInPackage(Integer packageId, Graph graph) {
+        return  graph.queryNodesFrom(packageId, Edge.Type.Contains).stream()
+                    .filter((n) -> n.getType() == Node.Type.Class || n.getType() == Node.Type.Interface)
+                    .map(Node::getId)
+                    .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public static Integer typePackage(Integer typeId, Graph graph) {
+        List<Node> containing = graph.queryNodesTo(typeId, Edge.Type.Contains);
+        if (containing.size() == 0) {
+            return null;
+        }
+
+        Integer c = containing.get(0).getId();
+
+        if (graph.getNode(c).getType() == Node.Type.Package) {
+            return c;
+        } else {
+            return typePackage(c, graph);
+        }
+    }
+
     public static Integer hostType(Integer bodyDecl, Graph graph) {
         return graph.queryNodesTo(bodyDecl, Edge.Type.Contains).get(0).getId();
     }

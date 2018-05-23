@@ -14,6 +14,7 @@ public abstract class RefactoringBase {
     }
 
     public void refactor() {
+        check();
         refactorCode();
         refactorGraph();
     }
@@ -21,4 +22,6 @@ public abstract class RefactoringBase {
     protected abstract void refactorCode();
 
     protected abstract void refactorGraph();
+
+    protected abstract void check();
 }

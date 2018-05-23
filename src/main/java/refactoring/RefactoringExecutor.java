@@ -17,20 +17,21 @@ import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RefactoringExecutor {
-    Graph graph;
     ArrayList<RefactoringBase> commands = new ArrayList<>();
+
+    public RefactoringExecutor() { }
 
     public RefactoringExecutor(Graph graph, String commandsFile) throws
             IOException, ParserConfigurationException, SAXException
     {
-        this.graph = graph;
         String xml = new String(Files.readAllBytes(Paths.get(commandsFile)));
-        initCommands(xml);
+        initCommands(xml, graph);
     }
 
-    private void initCommands(String xml) throws
+    private void initCommands(String xml, Graph g) throws
             ParserConfigurationException, IOException, SAXException
     {
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -39,10 +40,10 @@ public class RefactoringExecutor {
         Document doc = dBuilder.parse(source);
         doc.getDocumentElement().normalize();
 
-        commands.addAll(readRenames(doc));
+        commands.addAll(readRenames(doc, g));
     }
 
-    private ArrayList<RenameBase> readRenames(Document doc) {
+    private ArrayList<RenameBase> readRenames(Document doc, Graph graph) {
         ArrayList<RenameBase> result = new ArrayList<>();
         NodeList renames = doc.getElementsByTagName("Rename");
 
@@ -50,19 +51,23 @@ public class RefactoringExecutor {
             Element elem = (Element) renames.item(i);
             Integer id = Integer.valueOf(elem.getAttribute("id"));
             String newName = elem.getAttribute("newName");
-            result.add(Rename.newRenameStrategy(id, newName, graph));
+            result.addAll(Rename.newRenameStrategy(id, newName, graph));
         }
 
         return result;
     }
 
-    public void execute() {
-        for (RefactoringBase rb: commands) {
-            rb.refactorCode();
-        }
+    public void addRefactoring(RefactoringBase r) {
+        commands.add(r);
     }
 
-    public Graph getGraph() {
-        return graph;
+    public void addRefactorings(List<RefactoringBase> r) {
+        commands.addAll(r);
+    }
+
+    public void execute() {
+        for (RefactoringBase rb: commands) {
+            rb.refactor();
+        }
     }
 }

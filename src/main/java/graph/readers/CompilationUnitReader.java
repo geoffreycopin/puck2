@@ -37,6 +37,20 @@ public class CompilationUnitReader extends AbstractReader{
             return;
         }
         addNode(currentPackage, Node.Type.Package, null);
+        String parentPackage = parentPackage(currentPackage);
+        if (! parentPackage.isEmpty()) {
+            addEdge(parentPackage, currentPackage, Edge.Type.Contains);
+        }
+    }
+
+    private String parentPackage(String packageName) {
+        String[] components = packageName.split("\\.");
+        if (components.length <= 1) {
+            return "";
+        } else {
+            components[components.length - 1] = "";
+            return String.join(".", components);
+        }
     }
 
     private void readTypeDecalarations() {

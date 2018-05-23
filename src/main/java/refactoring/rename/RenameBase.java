@@ -3,8 +3,13 @@ package refactoring.rename;
 import graph.Edge;
 import graph.Graph;
 import graph.Node;
+import graph.Queries;
 import org.extendj.ast.*;
 import refactoring.RefactoringBase;
+import refactoring.RefactoringError;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class RenameBase extends RefactoringBase {
     private Integer id;
@@ -77,5 +82,23 @@ public abstract class RenameBase extends RefactoringBase {
         String lastComponent = components[components.length - 1].split("\\(")[0];
         components[components.length - 1] = components[components.length - 1].replace(lastComponent, newName);
         return String.join(".", components);
+    }
+
+    protected List<Integer> otherTypesInPackage() {
+        Integer p = Queries.typePackage(getId(), getGraph());
+        if (p == null) {
+            return new ArrayList<>();
+        } else {
+            return Queries.typesInPackage(p, getGraph());
+        }
+    }
+
+    protected void checkTypeNameAvailability() {
+        for (Integer id: otherTypesInPackage()) {
+            String typeName = getGraph().getNode(id).getFullName();
+            if (Queries.lastComponent(typeName).equals(getNewName())) {
+                throw new RefactoringError("Type " + getNewFullName() + " already exists !");
+            }
+        }
     }
 }

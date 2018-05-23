@@ -17,6 +17,11 @@ public class RenameParameter extends RenameBase {
     }
 
     @Override
+    protected void check() {
+        return;
+    }
+
+    @Override
     protected void refactorCode() {
         ParameterDeclaration p = (ParameterDeclaration) getGraph().getNode(getId())
                 .getExtendjNode();

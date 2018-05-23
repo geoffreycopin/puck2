@@ -6,6 +6,7 @@ import graph.Graph;
 import graph.Node;
 import graph.Queries;
 import org.extendj.ast.*;
+import refactoring.RefactoringError;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -18,7 +19,12 @@ public class RenameClass extends RenameBase {
 		super(id, name, graph);
 	}
 
-	@Override
+    @Override
+    protected void check() {
+        checkTypeNameAvailability();
+    }
+
+    @Override
 	protected void refactorCode() {
 		ClassDecl c = (ClassDecl) getGraph().getNode(getId()).getExtendjNode();
 		c.setID(getNewName());
@@ -36,12 +42,6 @@ public class RenameClass extends RenameBase {
 			subClass.setSuperClass(newAccess);
 		}
 	}
-
-	public ArrayList<ClassDecl> toRename() {
-        return Queries.subClasses(getId(), getGraph()).stream()
-                .map((n) -> (ClassDecl) getGraph().getNode(n).getExtendjNode() )
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
 
     public void renameFileIfSameName(CompilationUnit cu) {
 	    String lastComponent = Queries.lastComponent(getOldName());
