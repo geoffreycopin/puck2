@@ -94,6 +94,20 @@ public class Queries {
         return components[components.length - 1];
     }
 
+    public static List<Integer> superTypes(Integer typeId, Graph graph) {
+        List<Integer> parents = graph.queryNodesTo(typeId, Edge.Type.Contains).stream()
+                .map(Node::getId)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        List<Integer> parentsParents = parents.stream()
+                .flatMap((n) -> superTypes(n, graph).stream())
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        parents.addAll(parentsParents);
+
+        return parents;
+    }
+
     public static String methodName(String fullName) {
         return lastComponent(fullName.split("\\(")[0]);
     }
