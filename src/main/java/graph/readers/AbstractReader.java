@@ -31,16 +31,12 @@ public abstract class AbstractReader {
 	    return graph.addNode(name, type, extendJNode);
     }
 
-    protected void addEdge(String source, String target, Edge.Type type, ASTNode<ASTNode> dependencyPoint) {
-	    graph.addEdge(source, target, type, dependencyPoint);
-    }
-
     protected void addReference(String source, ASTNode<ASTNode> ref) {
 	    graph.addReference(source, ref);
     }
 
     protected void addEdge(String source, String target, Edge.Type type) {
-	    addEdge(source, target, type, null);
+	    graph.addEdge(source, target, type);
     }
 
 	protected void addTypeDependency(TypeDecl type, Edge.Type edgeType) {

@@ -59,15 +59,15 @@ public class XMLExporter {
     }
 
     private String edgeToString(Edge edge, int id) {
-        String formatString = "\t<edge type=\"%s\" src=\"%d\" dest=\"%d\" id=\"%d\"/>\n";
+        String formatString = "\t<edge type=\"%s\" src=\"%d\" dest=\"%d\" id=\"%d\" violation=\"%d\"/>\n";
         String type = edge.getType().toString().toLowerCase();
-        Integer src = nodes.get(edge.getSource()).getId();
+        Integer src = edge.getSource();
         Node tnode = nodes.get(edge.getTarget());
 
         if (tnode != null) {
             System.out.println(edge);
             Integer dest = tnode.getId();
-            return String.format(formatString, type, src, dest, id);
+            return String.format(formatString, type, src, dest, id, edge.getViolation());
         }
 
         return "";

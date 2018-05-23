@@ -53,8 +53,8 @@ public class Graph {
         return newNode;
     }
 
-    public boolean addEdge(Integer source, Integer target, Edge.Type type, ASTNode<ASTNode> dependencyPoint) {
-        Edge newEdge = new Edge(source, target, type, dependencyPoint);
+    public boolean addEdge(Integer source, Integer target, Edge.Type type) {
+        Edge newEdge = new Edge(source, target, type);
         this.edges.add(newEdge);
         addToIndex(fromIndex, source, newEdge);
         addToIndex(toIndex, target, newEdge);
@@ -62,16 +62,8 @@ public class Graph {
         return true;
     }
 
-    public boolean addEdge(Integer source, Integer target, Edge.Type type) {
-        return addEdge(source, target, type, null);
-    }
-
-    public boolean addEdge(String source, String target, Edge.Type type, ASTNode<ASTNode> dependencyPoint) {
-        return addEdge(generator.idFor(source), generator.idFor(target), type, dependencyPoint);
-    }
-
     public boolean addEdge(String source, String target, Edge.Type type) {
-        return addEdge(generator.idFor(source), generator.idFor(target), type, null);
+        return addEdge(generator.idFor(source), generator.idFor(target), type);
     }
 
     public void addReference(String fullName, ASTNode<ASTNode> ref) {

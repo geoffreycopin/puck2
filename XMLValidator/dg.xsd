@@ -34,6 +34,7 @@
 			<xs:attribute name="src" type="xs:integer"/>
 			<xs:attribute name="dest" type="xs:integer"/>
 			<xs:attribute name="type" type="edgesort"/>
+            <xs:attribute name="violation" type="violationType"/>
 	</xs:complexType>
 	<xs:simpleType name="edgesort">
 		<xs:restriction base="xs:string">
@@ -42,4 +43,10 @@
 			<xs:enumeration value="isa"/>
 		</xs:restriction>
 	</xs:simpleType>
+    <xs:simpleType name="violationType">
+        <xs:restriction base="xs:integer">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>

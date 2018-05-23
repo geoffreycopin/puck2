@@ -55,6 +55,8 @@ public class Puck2Main {
                 execPlan(runner, execPlan.matcher(command));
             } else if (command.startsWith("saveCode")) {
                 execSaveCode(runner, saveCode.matcher(command));
+            } else {
+                System.err.println("Invalid command");
             }
         }
 
@@ -82,6 +84,8 @@ public class Puck2Main {
             runner.outputToFile(path);
         } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
+        } finally {
+            System.out.println("DONE");
         }
     }
 
