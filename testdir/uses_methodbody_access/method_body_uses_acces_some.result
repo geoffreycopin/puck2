@@ -1,4 +1,0 @@
-<Edge from="Test.listPoint().body" to="Point" type="uses"/>
-<Edge from="Test.listPoint().body" to="Carre" type="uses"/>
-<Edge from="Test.listPoint().body" to="Point.SetX(int)" type="uses"/>
-<Edge from="Test.listPoint().body" to="Cercle.getA()" type="uses"/>
