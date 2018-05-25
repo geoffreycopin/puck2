@@ -1,0 +1,1 @@
+<Edge from="Test.foo().body" to="Triangle.getG()" type="uses"/>

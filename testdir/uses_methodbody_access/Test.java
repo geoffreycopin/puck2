@@ -20,7 +20,15 @@ public static void addPoint() {
 }
 }
 
-
+class Cercle {
+	int a,b,c;
+	Cercle(int a, int b , int c ){
+		this.a=a;
+		this.b=b;
+		this.c=c;
+	}
+	int getA() {return a;};
+}
 
 
 public class Test {
@@ -34,6 +42,9 @@ public class Test {
 	//Dot : static method call 
 	Carre.addPoint();
 	
+	
+	//ArrayAccess
+	Point p1 = p.get(new Cercle(0,1,2).getA()));
 	
 	
 	}

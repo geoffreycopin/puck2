@@ -1,0 +1,2 @@
+<Edge from="Test.foo().body" to="Triangle.getF()" type="uses"/>
+<Edge from="Test.foo().body" to="Triangle.SetF(int)" type="uses"/>
