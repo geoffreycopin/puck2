@@ -16,12 +16,12 @@ Usage
 `java -jar puck2.jar programDir ?outputFile`  
 Le lancement du programme sans arguments provoque l'ouverture de l'interface graphique.  
 
-Si l'agument outputFile n'est pas fourni, le graphe sera affiché sur la sortie
+Si l'argument outputFile n'est pas fourni, le graphe sera affiché sur la sortie
 standard au lieu d'être sauvegardé dans un fichier.  
 
 L'argument programDir peut être un nom de fichier ou un nom de dossier. Dans le 
 second cas, tous les fichier .java contenus dans le dossier et ses sous-dossiers
-serton ajoutés au projet.
+seront ajoutés au projet.
 
 
 
@@ -59,11 +59,11 @@ Le lancement du programme avec les deux arguments suivants : programDir outputFi
 3. Dans Arguments : indiquer la valeur des deux arguments.  
 4. Sélectionner ensuite "Apply" puis "Run".  
 
-Si l'agument outputFile n'est pas fourni, le graphe sera affiché sur la console au lieu d'être sauvegardé dans un fichier.  
+Si l'argument outputFile n'est pas fourni, le graphe sera affiché sur la console au lieu d'être sauvegardé dans un fichier.  
 
 L'argument programDir peut être un nom de fichier ou un nom de dossier. Dans le 
 second cas, tous les fichier .java contenus dans le dossier et ses sous-dossiers
-serton ajoutés au projet.
+seront ajoutés au projet.
 
 
 Tests
