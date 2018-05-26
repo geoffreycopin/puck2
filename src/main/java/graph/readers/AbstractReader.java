@@ -73,7 +73,7 @@ public abstract class AbstractReader {
     }
 
     public void addContainingPackage(String typeName, String packageName) {
-	    if (packageName.isEmpty()) {
+	    if (packageName.isEmpty() && getGraph().getNode(packageName) == null) {
 	        return;
         }
         addNode(packageName, Node.Type.Package, null);

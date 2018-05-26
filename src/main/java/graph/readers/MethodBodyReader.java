@@ -485,7 +485,7 @@ public class MethodBodyReader extends BodyDeclReader {
 	}
 
 	private void readVarAccess(VarAccess v) {
-		if (v.isFieldAccess()) {
+		if (v.isFieldAccess() && v.decl().fieldDecl() != null) {
 			String hostTypeName = v.decl().fieldDecl().hostType().fullName();
 			String name = hostTypeName + "." + v.name();
 			addEdge(bodyNode.getFullName(), name, Edge.Type.Uses);

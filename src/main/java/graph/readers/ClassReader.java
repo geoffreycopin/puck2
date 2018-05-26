@@ -26,7 +26,6 @@ public class ClassReader extends TypeDeclReader {
         addNode(className, Node.Type.Class, classDeclaration);
 
         readBodyDeclarations();
-        addPackageDependency();
         addSuperClassdependency();
         addInterfacesDependency();
 

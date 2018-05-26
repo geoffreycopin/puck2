@@ -43,7 +43,7 @@ public class ReadersTest {
         System.out.println("Failed: " + failed);
         System.out.println("Passed: " + passed);
 
-        assertEquals(failed, 0);
+        assertEquals(0, failed);
     }
 
     private ArrayList<TestCase> extractTestCases() {

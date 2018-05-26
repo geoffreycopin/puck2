@@ -9,6 +9,7 @@ import org.extendj.ast.CompilationUnit;
 import org.extendj.ast.InterfaceDecl;
 import org.extendj.ast.TypeDecl;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
@@ -48,8 +49,7 @@ public class CompilationUnitReader extends AbstractReader{
         if (components.length <= 1) {
             return "";
         } else {
-            components[components.length - 1] = "";
-            return String.join(".", components);
+            return String.join(".", Arrays.copyOfRange(components, 0, components.length - 1));
         }
     }
 
@@ -65,11 +65,17 @@ public class CompilationUnitReader extends AbstractReader{
 
     private void readClassDeclaration(ClassDecl decl) {
         ClassReader reader = new ClassReader(decl, graph);
+        if (! compilationUnit.getPackageDecl().isEmpty()) {
+            addEdge(compilationUnit.getPackageDecl(), reader.getFullName(), Edge.Type.Contains);
+        }
         reader.read();
     }
 
     private void readInterfaceDeclaration(InterfaceDecl decl) {
         InterfaceReader reader = new InterfaceReader(decl, graph);
+        if (! compilationUnit.getPackageDecl().isEmpty()) {
+            addEdge(compilationUnit.getPackageDecl(), reader.getFullName(), Edge.Type.Contains);
+        }
         reader.read();
     }
 }

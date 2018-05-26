@@ -13,6 +13,7 @@ import refactoring.rename.RenameBase;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -129,7 +130,7 @@ public class Puck2Main {
         } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         } catch (RefactoringError e) {
-            System.out.println("error: ");
+            System.out.print("error: ");
             for (RefactoringBase r: executor.getCommands()) {
                 try {
                     r.check();
@@ -137,6 +138,7 @@ public class Puck2Main {
                     System.out.print(((RenameBase) r).getId() + " ");
                 }
             }
+            System.out.print("\n");
         } finally {
             System.out.print("DONE: ");
             for (RefactoringBase r: executor.getCommands()) {
