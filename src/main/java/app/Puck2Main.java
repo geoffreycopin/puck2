@@ -5,6 +5,7 @@ import graph.CodeGenerator;
 import graph.Graph;
 import org.extendj.ast.CompilationUnit;
 import org.xml.sax.SAXException;
+import refactoring.RefactoringBase;
 import refactoring.RefactoringError;
 import refactoring.RefactoringExecutor;
 import refactoring.rename.Rename;
@@ -31,7 +32,7 @@ public class Puck2Main {
                 run(args[0]).outputToFile(args[1]);
                 break;
             }
-            default: System.out.println("Usage: java -jar puck2 programDir ?outputFile");
+            default: System.out.println("Usage: java -jar puck2 projectPath");
         }
     }
 
@@ -97,7 +98,11 @@ public class Puck2Main {
 
         List<RenameBase> rb = getRenameStrategy(m.group(1), m.group(2), runner.getGraph());
         for (RenameBase r: rb) {
-            r.refactor();
+            try {
+                r.refactor();
+            } catch (RefactoringError e) {
+                System.out.println("ERROR: " + e.getMessage());
+            }
         }
     }
 
@@ -117,11 +122,27 @@ public class Puck2Main {
             System.err.println("ERROR: invalid command");
             return;
         }
+        RefactoringExecutor executor = null;
         try {
-            RefactoringExecutor executor = new RefactoringExecutor(runner.getGraph(), m.group(1));
+            executor = new RefactoringExecutor(runner.getGraph(), m.group(1));
             executor.execute();
         } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
+        } catch (RefactoringError e) {
+            System.out.println("error: ");
+            for (RefactoringBase r: executor.getCommands()) {
+                try {
+                    r.check();
+                } catch (Exception ex) {
+                    System.out.print(((RenameBase) r).getId() + " ");
+                }
+            }
+        } finally {
+            System.out.print("DONE: ");
+            for (RefactoringBase r: executor.getCommands()) {
+                System.out.print(((RenameBase) r).getId() + " ");
+            }
+            System.out.print("\n");
         }
     }
 

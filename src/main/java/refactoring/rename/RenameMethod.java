@@ -19,7 +19,8 @@ public class RenameMethod extends RenameBase {
     }
 
     @Override
-    protected void check() {
+    public void check() {
+        checkName(getNewName());
         Integer hostType = Queries.hostType(getId(), getGraph());
         for (Integer id: Queries.methodsInType(hostType, getGraph())) {
             String methodName = getGraph().getNode(id).getFullName();

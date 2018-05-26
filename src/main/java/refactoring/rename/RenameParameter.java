@@ -17,8 +17,8 @@ public class RenameParameter extends RenameBase {
     }
 
     @Override
-    protected void check() {
-        return;
+    public void check() {
+        checkName(getNewName());
     }
 
     @Override

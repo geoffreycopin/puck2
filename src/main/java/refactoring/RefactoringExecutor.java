@@ -70,4 +70,8 @@ public class RefactoringExecutor {
             rb.refactor();
         }
     }
+
+    public List<RefactoringBase> getCommands() {
+        return commands;
+    }
 }

@@ -3,23 +3,31 @@ package refactoring.rename;
 import graph.Graph;
 import graph.Node;
 import graph.Queries;
-import org.extendj.ast.*;
-import refactoring.RefactoringBase;
 import refactoring.RefactoringError;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Rename {
+
+    private static HashSet<String> reservedKeywords = new HashSet<>(Arrays.asList(
+            "abstract", "assert", "boolean", "break", "byte", "case",
+            "catch", "char", "class", "const", "continue",
+            "default", "do", "double", "else", "extends",
+            "false", "final", "finally", "float", "for",
+            "goto", "if", "implements", "import", "instanceof",
+            "int", "interface", "long", "native", "new",
+            "null", "package", "private", "protected", "public",
+            "return", "short", "static", "strictfp", "super",
+            "switch", "synchronized", "this", "throw", "throws",
+            "transient", "true", "try", "void", "volatile",
+            "while")
+    );
+
     public static List<RenameBase> newRenameStrategy(Integer id, String newName, Graph graph) {
         if (graph.getNode(id) == null) {
             throw new RefactoringError("Node " + id + " doesn't exists !");
-        }
-
-        if (! isValidJavaIdentifier(newName)) {
-            throw new RefactoringError(newName + " is not a valid Java identifier !");
         }
 
         ArrayList<RenameBase> renames = new ArrayList<>();
@@ -44,7 +52,7 @@ public class Rename {
 
     public static List<RenameBase> newRenameStartegy(String target, String newName, Graph graph) {
         if (graph.getNode(target) == null) {
-            return null;
+            throw new RefactoringError("Node" + target + " doesn't exists !");
         }
         Integer id = graph.getNode(target).getId();
         return newRenameStrategy(id, newName, graph);
@@ -67,7 +75,8 @@ public class Rename {
     }
 
     public static boolean isValidJavaIdentifier(String id) {
-        if (id.length() == 0 || ! Character.isJavaIdentifierStart(id.charAt(0))) {
+        if (id.equals("_") || reservedKeywords.contains(id) || id.length() == 0 || ! Character.isJavaIdentifierStart(id
+                .charAt(0))) {
             return false;
         }
 

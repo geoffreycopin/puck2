@@ -20,7 +20,8 @@ public class RenameClass extends RenameBase {
 	}
 
     @Override
-    protected void check() {
+    public void check() {
+        checkName(getNewName());
         checkTypeNameAvailability();
     }
 
