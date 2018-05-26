@@ -101,4 +101,10 @@ public abstract class RenameBase extends RefactoringBase {
             }
         }
     }
+
+    protected void checkName(String name) {
+        if (! Rename.isValidJavaIdentifier(name)) {
+            throw new RefactoringError("Invalid name: " + name);
+        }
+    }
 }

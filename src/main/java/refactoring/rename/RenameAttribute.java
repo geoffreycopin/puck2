@@ -1,10 +1,7 @@
 package refactoring.rename;
 
-import com.sun.tools.javac.comp.Check;
 import graph.Graph;
 import graph.Queries;
-import org.extendj.ast.ASTNode;
-import org.extendj.ast.Access;
 import org.extendj.ast.FieldDecl;
 import org.extendj.ast.FieldDeclarator;
 import refactoring.RefactoringError;
@@ -26,7 +23,8 @@ public class RenameAttribute extends RenameBase {
     }
 
     @Override
-    protected void check() {
+    public void check() {
+        checkName(getNewName());
         Integer hostType = Queries.hostType(getId(), getGraph());
         checkExistingFieldsNames(Queries.classAttributes(hostType, getGraph()));
         checkExistingFieldsNames(visibleSuperClassAttributes());
@@ -42,10 +40,10 @@ public class RenameAttribute extends RenameBase {
     }
 
     private List<Integer> visibleSuperClassAttributes() {
-        Queries.superTypes(getId(), getGraph()).stream()
+        return Queries.superTypes(getId(), getGraph()).stream()
                 .flatMap((n) -> Queries.classAttributes(n, getGraph()).stream())
                 .filter((n) -> {
-                    FieldDecl f = (FieldDecl) getGraph().getNode(n).getExtendjNode();
+                    FieldDeclarator f = (FieldDeclarator) getGraph().getNode(n).getExtendjNode();
                     return f.isProtected() || f.isPublic();
                 })
                 .collect(Collectors.toCollection(ArrayList::new));
