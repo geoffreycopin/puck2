@@ -98,7 +98,11 @@ public class Puck2Main {
 
         List<RenameBase> rb = getRenameStrategy(m.group(1), m.group(2), runner.getGraph());
         for (RenameBase r: rb) {
-            r.refactor();
+            try {
+                r.refactor();
+            } catch (RefactoringError e) {
+                System.out.println("ERROR: " + e.getMessage());
+            }
         }
     }
 
@@ -130,14 +134,15 @@ public class Puck2Main {
                 try {
                     r.check();
                 } catch (Exception ex) {
-                    System.out.print(((RenameBase) r).getId());
+                    System.out.print(((RenameBase) r).getId() + " ");
                 }
             }
         } finally {
-            System.out.println("done: ");
+            System.out.print("DONE: ");
             for (RefactoringBase r: executor.getCommands()) {
-                System.out.print(((RenameBase) r).getId());
+                System.out.print(((RenameBase) r).getId() + " ");
             }
+            System.out.print("\n");
         }
     }
 
