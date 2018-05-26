@@ -113,6 +113,7 @@ public class Graph {
         return fromIndex.getOrDefault(id, new HashSet<>()).stream()
                 .filter((e) -> e.getType() == type)
                 .map((e) -> nodes.get(e.getTarget()))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
@@ -120,6 +121,7 @@ public class Graph {
         return toIndex.getOrDefault(id, new HashSet<>()).stream()
                 .filter((e) -> type == null || e.getType() == type)
                 .map((e) -> nodes.get(e.getSource()))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 

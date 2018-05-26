@@ -26,8 +26,10 @@ public class ClassReader extends TypeDeclReader {
         addNode(className, Node.Type.Class, classDeclaration);
 
         readBodyDeclarations();
-        addSuperClassdependency();
-        addInterfacesDependency();
+        if (! classDeclaration.isEnumDecl()) {
+            addSuperClassdependency();
+            addInterfacesDependency();
+        }
 
         return getGraph();
     }
@@ -54,8 +56,6 @@ public class ClassReader extends TypeDeclReader {
                 InterfaceReader reader = new InterfaceReader((InterfaceDecl) memberType, graph);
                 reader.read();
                 addTypeDependency(memberType, Edge.Type.Contains);
-            } else if (decl instanceof StaticInitializer) {
-                System.out.println(((StaticInitializer) decl));
             }
         }
     }

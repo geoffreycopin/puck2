@@ -4,10 +4,7 @@ import graph.Edge;
 import graph.Graph;
 import graph.Node;
 import graph.UniqueIdGenerator;
-import org.extendj.ast.ASTNode;
-import org.extendj.ast.AssertStmt;
-import org.extendj.ast.TypeDecl;
-import org.extendj.ast.WildcardExtendsType;
+import org.extendj.ast.*;
 
 import java.util.Map;
 import java.util.Set;
@@ -45,7 +42,11 @@ public abstract class AbstractReader {
 			addGenericTypeDependency(type, edgeType);
 			typeName = getGenericTypeName(type);
 		} else if (type.isWildcard()) {
-			addTypeDependency(((WildcardExtendsType) type).extendsType(), edgeType);
+	        if (type instanceof WildcardExtendsType) {
+                addTypeDependency(((WildcardExtendsType) type).extendsType(), edgeType);
+            } else if (type instanceof WildcardType) {
+	            addTypeDependency(type.boundType(), edgeType);
+            }
 		} else if (type.isArrayDecl()) {
 			addTypeDependency(type.elementType(), edgeType);
 			typeName = type.elementType().fullName();

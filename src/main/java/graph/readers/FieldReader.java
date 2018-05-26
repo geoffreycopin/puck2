@@ -29,17 +29,13 @@ public class FieldReader extends BodyDeclReader {
 		for (FieldDeclarator v : fieldDecl.getDeclaratorList()) {
 		    String fullName = getHostTypeName() + "." + v.name();
 		    fieldNode = addNode(fullName, Node.Type.Attribute, v);
+		    addEdge(getHostTypeName(), fieldNode.getFullName(), Edge.Type.Contains);
 		}
 
-		addHostClassDependency();
 		addFieldTypeDependency();
 
 		return getGraph();
 	}
-
-	private void addHostClassDependency() {
-	    addEdge(getHostTypeName(), fieldNode.getFullName(), Edge.Type.Contains);
-    }
 
     private void addFieldTypeDependency() {
 	    addTypeDependency(fieldDecl.getTypeAccess().type(), Edge.Type.Uses);
