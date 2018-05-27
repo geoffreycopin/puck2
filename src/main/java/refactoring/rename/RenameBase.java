@@ -10,6 +10,7 @@ import refactoring.RefactoringError;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class RenameBase extends RefactoringBase {
     private Integer id;
@@ -94,7 +95,13 @@ public abstract class RenameBase extends RefactoringBase {
     }
 
     protected void checkTypeNameAvailability() {
-        for (Integer id: otherTypesInPackage()) {
+        Integer parent = Queries.parent(getId(), getGraph());
+        List<Integer> typeChilds = getGraph().queryNodesFrom(parent, Edge.Type.Contains).stream()
+                .filter((n) -> n.getType() == Node.Type.Class || n.getType() == Node.Type.Interface)
+                .map(Node::getId)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        for (Integer id: typeChilds) {
             String typeName = getGraph().getNode(id).getFullName();
             if (Queries.lastComponent(typeName).equals(getNewName())) {
                 throw new RefactoringError("Type " + getNewFullName() + " already exists !");

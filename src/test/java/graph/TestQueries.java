@@ -152,7 +152,7 @@ public class TestQueries {
         g.addNode("C.m()", Node.Type.Method, null);
         g.addEdge("C", "C.m()", Edge.Type.Contains);
 
-        Integer hostType = Queries.hostType(g.getNode("C.m()").getId(), g);
+        Integer hostType = Queries.parent(g.getNode("C.m()").getId(), g);
 
         assertEquals("C", g.getNode(hostType).getFullName());
     }
@@ -196,6 +196,23 @@ public class TestQueries {
         assertEquals(2, tNames.size());
         assertTrue(tNames.contains("P.C"));
         assertTrue(tNames.contains("P.I"));
+    }
+
+    @Test
+    public void allParents() {
+        Graph g = new Graph(null);
+        g.addNode("P", Node.Type.Package, null);
+        g.addNode("P.C", Node.Type.Class, null);
+        g.addNode("P.C1", Node.Type.Class, null);
+        g.addNode("P.C1.a", Node.Type.Attribute, null);
+        g.addEdge("P", "P.C", Edge.Type.Contains);
+        g.addEdge("P.C1", "P.C", Edge.Type.IsA);
+        g.addEdge("P.C1", "P.C1.a", Edge.Type.Contains);
+
+        Set<String> pNames = idsToNodesNames(Queries.hierarchicalParents(g.getNode("P.C1.a").getId(), g), g);
+
+        assertEquals(3, pNames.size());
+        assertTrue(pNames.contains("P.C1"));
     }
 
     private Set<String> idsToNodesNames(List<Integer> ids, Graph graph) {

@@ -1,8 +1,9 @@
 package refactoring.rename;
 
+import graph.Edge;
 import graph.Graph;
+import graph.Node;
 import graph.Queries;
-import org.extendj.ast.FieldDecl;
 import org.extendj.ast.FieldDeclarator;
 import refactoring.RefactoringError;
 
@@ -25,7 +26,7 @@ public class RenameAttribute extends RenameBase {
     @Override
     public void check() {
         checkName(getNewName());
-        Integer hostType = Queries.hostType(getId(), getGraph());
+        Integer hostType = Queries.parent(getId(), getGraph());
         checkExistingFieldsNames(Queries.classAttributes(hostType, getGraph()));
         checkExistingFieldsNames(visibleSuperClassAttributes());
     }
@@ -40,12 +41,19 @@ public class RenameAttribute extends RenameBase {
     }
 
     private List<Integer> visibleSuperClassAttributes() {
-        return Queries.superTypes(getId(), getGraph()).stream()
-                .flatMap((n) -> Queries.classAttributes(n, getGraph()).stream())
+        Integer currentPackage = Queries.typePackage(Queries.parent(getId(), getGraph()), getGraph());
+        Integer hostType = Queries.parent(getId(), getGraph());
+        return Queries.hierarchicalParents(hostType, getGraph()).stream()
+                .flatMap((n) -> getGraph().queryNodesFrom(n, Edge.Type.Contains).stream())
                 .filter((n) -> {
-                    FieldDeclarator f = (FieldDeclarator) getGraph().getNode(n).getExtendjNode();
-                    return f.isProtected() || f.isPublic();
+                    if (n.getType() != Node.Type.Attribute) {
+                        return false;
+                    }
+                    FieldDeclarator f = (FieldDeclarator) n.getExtendjNode();
+                    return f.isPublic() || (! f.hasModifiers()
+                            && Queries.typePackage(n.getId(), getGraph()).equals(currentPackage));
                 })
+                .map(Node::getId)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 }

@@ -1,17 +1,9 @@
 package refactoring.rename;
 
-import app.Puck2Runner;
 import graph.Graph;
 import graph.Queries;
-import org.extendj.ast.ASTNode;
-import org.extendj.ast.Access;
 import org.extendj.ast.MethodDecl;
 import refactoring.RefactoringError;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class RenameMethod extends RenameBase {
     RenameMethod(Integer id, String newName, Graph graph) {
@@ -21,7 +13,7 @@ public class RenameMethod extends RenameBase {
     @Override
     public void check() {
         checkName(getNewName());
-        Integer hostType = Queries.hostType(getId(), getGraph());
+        Integer hostType = Queries.parent(getId(), getGraph());
         for (Integer id: Queries.methodsInType(hostType, getGraph())) {
             String methodName = getGraph().getNode(id).getFullName();
             if (methodName.equals(getNewFullName())) {

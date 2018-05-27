@@ -14,6 +14,7 @@ public class Queries {
     }
 
     public static List<Integer> overridenMethods(Integer methodId, Graph graph) {
+        // TODO: finish implementation
         String methodName = methodName(graph.getNode(methodId).getFullName());
         Integer hostType = graph.queryNodesTo(methodId, Edge.Type.Contains).get(0).getId();
 
@@ -24,7 +25,7 @@ public class Queries {
     }
 
     public static List<Integer> interfaceMethodImplementation(Integer interfaceMethod, Graph graph) {
-        Integer hostInterface = hostType(interfaceMethod, graph);
+        Integer hostInterface = parent(interfaceMethod, graph);
         String singature = lastComponent(graph.getNode(interfaceMethod).getFullName());
 
         return methodsInInterfaceImp(hostInterface, graph).stream()
@@ -67,23 +68,65 @@ public class Queries {
                     .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public static Integer typePackage(Integer typeId, Graph graph) {
-        List<Node> containing = graph.queryNodesTo(typeId, Edge.Type.Contains);
-        if (containing.size() == 0) {
-            return null;
-        }
-
-        Integer c = containing.get(0).getId();
-
-        if (graph.getNode(c).getType() == Node.Type.Package) {
-            return c;
-        } else {
-            return typePackage(c, graph);
-        }
+    public static Integer parent(Integer node, Graph graph) {
+        List<Node> p = graph.queryNodesTo(node, Edge.Type.Contains);
+        if (p.size() > 0) {
+            return p.get(0).getId();
+        } else return null;
     }
 
-    public static Integer hostType(Integer bodyDecl, Graph graph) {
-        return graph.queryNodesTo(bodyDecl, Edge.Type.Contains).get(0).getId();
+    public static List<Integer> directHierarchicalParents(Integer nodeId, Graph graph) {
+        return graph.queryNodesFrom(nodeId, Edge.Type.IsA).stream()
+                .map(Node::getId)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public static List<Integer> hierarchicalParents(Integer nodeId, Graph graph) {
+        List<Integer> result = new ArrayList<>();
+        List<Integer> p = directHierarchicalParents(nodeId, graph);
+        result.addAll(p);
+        for (Integer n: p) {
+            result.addAll(hierarchicalParents(n, graph));
+        }
+
+        return result;
+    }
+
+    public static List<Integer> directHierarchicalChild(Integer typeId, Graph graph) {
+        return graph.queryNodesTo(typeId, Edge.Type.IsA).stream()
+                .map(Node::getId)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public static List<Integer> hirerchicalChilds(Integer typeId, Graph graph) {
+        List<Integer> result = new ArrayList<>();
+        List<Integer> c = directHierarchicalChild(typeId, graph);
+        result.addAll(c);
+        for (Integer child: c) {
+            result.addAll(hirerchicalChilds(child, graph));
+        }
+        return result;
+    }
+
+    public static List<Integer> allParents(Integer nodeId, Graph graph) {
+        List<Integer> result = new ArrayList<>();
+        Integer p = Queries.parent(nodeId, graph);
+
+        while (p != null) {
+            result.add(p);
+            p = Queries.parent(p, graph);
+        }
+
+        return result;
+    }
+
+    public static Integer typePackage(Integer typeId, Graph graph) {
+        for (Integer i: Queries.allParents(typeId, graph)) {
+            if (graph.getNode(i).getType() == Node.Type.Package) {
+                return i;
+            }
+        }
+        return null;
     }
 
     public static String lastComponent(String name) {

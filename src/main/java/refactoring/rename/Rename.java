@@ -1,5 +1,6 @@
 package refactoring.rename;
 
+import graph.Edge;
 import graph.Graph;
 import graph.Node;
 import graph.Queries;
@@ -60,7 +61,9 @@ public class Rename {
 
     public static List<RenameBase> newRenameMethod(Integer id, String newName, Graph graph) {
         List<Integer> methodsToRename = Queries.overridenMethods(id, graph);
-        Integer hostType = Queries.hostType(id, graph);
+        Integer hostType = Queries.parent(id, graph);
+
+        checkOlderImps(id, graph);
 
         if (graph.getNode(hostType).getType() == Node.Type.Interface) {
             List<Integer> implementations = methodsToRename.stream()
@@ -72,6 +75,18 @@ public class Rename {
         return methodsToRename.stream()
                 .map((n) -> new RenameMethod(n, newName, graph))
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public static void checkOlderImps(Integer methodId, Graph graph) {
+        String signature = Queries.lastComponent(graph.getNode(methodId).getFullName());
+        List<Integer> parents = Queries.hierarchicalParents(Queries.parent(methodId, graph), graph);
+        parents.stream()
+                .flatMap((p) -> graph.queryNodesFrom(p, Edge.Type.Contains).stream())
+                .forEach((c) -> {
+                    if (c.getType() == Node.Type.Method && Queries.lastComponent(c.getFullName()).equals(signature)) {
+                        throw new RefactoringError("Cannot rename method: " + graph.getNode(methodId).getFullName());
+                    }
+                });
     }
 
     public static boolean isValidJavaIdentifier(String id) {
