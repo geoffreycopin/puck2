@@ -42,7 +42,7 @@ public class TestQueries {
         g.addEdge("Class", "Class.method(int)", Edge.Type.Contains);
         g.addEdge("Class", "Class.method(double, double)", Edge.Type.Contains);
 
-        Set<String> overM = idsToNodesNames(Queries.overridenMethods(g.getNode("Class.method()").getId(), g), g);
+        Set<String> overM = idsToNodesNames(Queries.overloadedMethods(g.getNode("Class.method()").getId(), g), g);
 
         assertEquals(3, overM.size());
         assertTrue(overM.contains("Class.method()"));
@@ -199,7 +199,7 @@ public class TestQueries {
     }
 
     @Test
-    public void allParents() {
+    public void hierarchicalParents() {
         Graph g = new Graph(null);
         g.addNode("P", Node.Type.Package, null);
         g.addNode("P.C", Node.Type.Class, null);
@@ -209,10 +209,10 @@ public class TestQueries {
         g.addEdge("P.C1", "P.C", Edge.Type.IsA);
         g.addEdge("P.C1", "P.C1.a", Edge.Type.Contains);
 
-        Set<String> pNames = idsToNodesNames(Queries.hierarchicalParents(g.getNode("P.C1.a").getId(), g), g);
+        Set<String> pNames = idsToNodesNames(Queries.hierarchicalParents(g.getNode("P.C1").getId(), g), g);
 
-        assertEquals(3, pNames.size());
-        assertTrue(pNames.contains("P.C1"));
+        assertEquals(1, pNames.size());
+        assertTrue(pNames.contains("P.C"));
     }
 
     private Set<String> idsToNodesNames(List<Integer> ids, Graph graph) {

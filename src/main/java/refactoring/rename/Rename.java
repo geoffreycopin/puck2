@@ -60,16 +60,13 @@ public class Rename {
     }
 
     public static List<RenameBase> newRenameMethod(Integer id, String newName, Graph graph) {
-        List<Integer> methodsToRename = Queries.overridenMethods(id, graph);
-        Integer hostType = Queries.parent(id, graph);
-
         checkOlderImps(id, graph);
 
-        if (graph.getNode(hostType).getType() == Node.Type.Interface) {
-            List<Integer> implementations = methodsToRename.stream()
-                    .flatMap((n) -> Queries.interfaceMethodImplementation(n, graph).stream())
-                    .collect(Collectors.toCollection(ArrayList::new));
-            methodsToRename.addAll(implementations);
+        List<Integer> m = Queries.overloadedMethods(id, graph);
+        List<Integer> methodsToRename = new ArrayList<>(m);
+
+        for (Integer i: m) {
+            methodsToRename.addAll(Queries.overriddenMethods(i, graph));
         }
 
         return methodsToRename.stream()

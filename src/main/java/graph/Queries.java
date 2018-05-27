@@ -13,13 +13,23 @@ public class Queries {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public static List<Integer> overridenMethods(Integer methodId, Graph graph) {
-        // TODO: finish implementation
+    public static List<Integer> overloadedMethods(Integer methodId, Graph graph) {
         String methodName = methodName(graph.getNode(methodId).getFullName());
         Integer hostType = graph.queryNodesTo(methodId, Edge.Type.Contains).get(0).getId();
 
         return graph.queryNodesFrom(hostType, Edge.Type.Contains).stream()
                 .filter((n) -> n.getType() == Node.Type.Method && methodName(n.getFullName()).equals(methodName))
+                .map(Node::getId)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public static List<Integer> overriddenMethods(Integer methodId, Graph graph) {
+        String signature = Queries.lastComponent(graph.getNode(methodId).getFullName());
+        Integer hostType = Queries.parent(methodId, graph);
+        return Queries.hierarchicalChilds(hostType, graph).stream()
+                .flatMap((n) -> graph.queryNodesFrom(n, Edge.Type.Contains).stream())
+                .filter((n) -> n.getType() == Node.Type.Method
+                        && Queries.lastComponent(n.getFullName()).equals(signature))
                 .map(Node::getId)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
@@ -98,12 +108,11 @@ public class Queries {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public static List<Integer> hirerchicalChilds(Integer typeId, Graph graph) {
-        List<Integer> result = new ArrayList<>();
+    public static List<Integer> hierarchicalChilds(Integer typeId, Graph graph) {
         List<Integer> c = directHierarchicalChild(typeId, graph);
-        result.addAll(c);
+        List<Integer> result = new ArrayList<>(c);
         for (Integer child: c) {
-            result.addAll(hirerchicalChilds(child, graph));
+            result.addAll(hierarchicalChilds(child, graph));
         }
         return result;
     }

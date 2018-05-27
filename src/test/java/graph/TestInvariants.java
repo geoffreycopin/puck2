@@ -33,7 +33,7 @@ public class TestInvariants {
                             nodeTypeSet(Node.Type.Class, Node.Type.Interface, Node.Type.Package));
                     match0To(p, Edge.Type.IsA);
                     match0To(p, Edge.Type.Uses);
-                    matchNTo(p, Edge.Type.Contains, nodeTypeSet(Node.Type.Package));
+                    matchOptionnalTo(p, Edge.Type.Contains, nodeTypeSet(Node.Type.Package));
                 });
     }
 
