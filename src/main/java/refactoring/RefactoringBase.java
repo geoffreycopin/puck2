@@ -13,5 +13,15 @@ public abstract class RefactoringBase {
         return graph;
     }
 
-    public abstract void refactor();
+    public void refactor() {
+        check();
+        refactorCode();
+        refactorGraph();
+    }
+
+    protected abstract void refactorCode();
+
+    protected abstract void refactorGraph();
+
+    public abstract void check();
 }

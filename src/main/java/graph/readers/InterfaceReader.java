@@ -4,10 +4,7 @@ import graph.Edge;
 import graph.Graph;
 import graph.Node;
 import graph.UniqueIdGenerator;
-import org.extendj.ast.Access;
-import org.extendj.ast.BodyDecl;
-import org.extendj.ast.InterfaceDecl;
-import org.extendj.ast.MethodDecl;
+import org.extendj.ast.*;
 
 import java.util.Map;
 import java.util.Set;
@@ -27,7 +24,6 @@ public class InterfaceReader extends TypeDeclReader {
 
         readBodyDeclarations();
 
-        addPackageDependency();
         addSuperInterfacesDependency();
 
         return getGraph();
@@ -44,6 +40,14 @@ public class InterfaceReader extends TypeDeclReader {
                 MethodDecl m = (MethodDecl) decl;
                 MethodReader methodreader = new MethodReader(m, graph);
                 methodreader.read();
+            } else if (decl instanceof MemberInterfaceDecl) {
+                MemberInterfaceDecl mi = (MemberInterfaceDecl) decl;
+                InterfaceReader reader = new InterfaceReader((InterfaceDecl) mi.typeDecl(), graph);
+                reader.read();
+            } else if (decl instanceof MemberClassDecl) {
+                MemberClassDecl mc = (MemberClassDecl) decl;
+                ClassReader reader = new ClassReader((ClassDecl)  mc.typeDecl(), graph);
+                reader.read();
             }
         }
     }

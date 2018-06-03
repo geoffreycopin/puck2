@@ -3,12 +3,8 @@ package graph.readers;
 import graph.Edge;
 import graph.Graph;
 import graph.Node;
-import graph.UniqueIdGenerator;
 
 import org.extendj.ast.*;
-
-import java.util.Map;
-import java.util.Set;
 
 public class ClassReader extends TypeDeclReader {
     private ClassDecl classDeclaration;
@@ -30,14 +26,16 @@ public class ClassReader extends TypeDeclReader {
         addNode(className, Node.Type.Class, classDeclaration);
 
         readBodyDeclarations();
-        addPackageDependency();
-        addSuperClassdependency();
-        addInterfacesDependency();
+        if (! classDeclaration.isEnumDecl()) {
+            addSuperClassdependency();
+            addInterfacesDependency();
+        }
 
         return getGraph();
     }
 
     private void readBodyDeclarations() {
+    	
         for (BodyDecl decl : classDeclaration.getBodyDeclList()) {
             if (decl instanceof FieldDecl) {
                 FieldReader fieldreader = new FieldReader((FieldDecl) decl, graph);
@@ -45,6 +43,9 @@ public class ClassReader extends TypeDeclReader {
             } else if (decl instanceof MethodDecl) {
                 MethodReader methodreader = new MethodReader((MethodDecl) decl, graph);
                 methodreader.read();
+            } else if (decl instanceof ConstructorDecl) {
+            	ConstructorReader construcreader = new ConstructorReader((ConstructorDecl) decl, graph);
+            	construcreader.read();
             } else if (decl instanceof MemberClassDecl) {
                 TypeDecl memberType = ((MemberClassDecl) decl).typeDecl();
                 ClassReader reader = new ClassReader((ClassDecl) memberType, graph);

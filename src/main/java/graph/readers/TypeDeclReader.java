@@ -21,14 +21,6 @@ public abstract class TypeDeclReader extends AbstractReader{
         this.typeDecl = typeDecl;
     }
 
-    protected void addPackageDependency() {
-        String packageName = typeDecl.packageName();
-        if (packageName.isEmpty()) {
-            return;
-        }
-        addEdge(packageName, typeDecl.fullName(), Edge.Type.Contains);
-    }
-
     public static List<TypeDecl> getTypeParameters(TypeDecl type) {
         List<TypeDecl> result = new ArrayList<>();
 

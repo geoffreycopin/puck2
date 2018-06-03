@@ -36,20 +36,16 @@ public class Puck2Runner {
         graph = new Graph(program);
     }
 
-    public Map<Integer, Node> getNodes() {
-        return graph.getNodes();
-    }
-
-    public Set<Edge> getEdges() {
-        return graph.getEdges();
-    }
-
     public Program getProgram() {
         return program;
     }
 
     public Graph getGraph() {
         return graph;
+    }
+
+    public String getProjectPath() {
+        return projectPath;
     }
 
     public void run() throws IOException {
@@ -62,6 +58,18 @@ public class Puck2Runner {
     	XMLExporter exporter = new XMLExporter();
         exporter.add(graph.getNodes(), graph.getEdges());
         exporter.writeTo(outputFile);
+    }
+
+    public void displayGraph() {
+        for (Node node: graph.getNodes().values()) {
+            System.out.println(node);
+        }
+
+        for (Edge edge: graph.getEdges()) {
+            if (graph.getNode(edge.getSource()) != null && graph.getNode(edge.getTarget()) != null) {
+                System.out.println(edge);
+            }
+        }
     }
     
     public void XMLValidation()throws Exception{
@@ -118,15 +126,5 @@ public class Puck2Runner {
         }
 
         return fileName.substring(index + 1);
-    }
-
-    public void displayGraph() {
-        for (Node node: graph.getNodes().values()) {
-            System.out.println(node);
-        }
-
-        for (Edge edge: graph.getEdges()) {
-            System.out.println(edge);
-        }
     }
 }

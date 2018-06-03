@@ -8,8 +8,8 @@ import java.util.*;
 public class Edge {
 	private int sourceId;
 	private int targetId;
+	private int violation;
 	private Type type;
-	private ASTNode<ASTNode> dependencyPointAccess;
 
 	public enum Type { IsA, Contains, Uses }
 
@@ -17,11 +17,12 @@ public class Edge {
 		this.sourceId = source;
 		this.targetId = target;
 		this.type = t;
+		this.violation = 0;
 	}
 
-	public Edge(int source, int target, Type t, ASTNode<ASTNode> dependencyPoint) {
+	public Edge(int source, int target, Type t, int violation) {
 		this(source, target, t);
-		this.dependencyPointAccess = dependencyPoint;
+		this.violation = violation;
 	}
 
 	public String toString() {
@@ -47,10 +48,6 @@ public class Edge {
 		return sourceId;
 	}
 
-	public ASTNode<ASTNode> getDependencyPointAccess() {
-		return dependencyPointAccess;
-	}
-
 	public String getSourceName(Map<Integer, Node> nodes) {
 	    Node n = nodes.get(sourceId);
 	    if (n == null) {
@@ -69,6 +66,14 @@ public class Edge {
 	        return null;
         }
         return n.getFullName();
+    }
+
+    public int getViolation() {
+	    return violation;
+    }
+
+    public void setViolation(int violation) {
+	    this.violation = violation;
     }
 
 	@Override

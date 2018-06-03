@@ -1,0 +1,2 @@
+<Edge from="Test.foo().body" to="Point.getX()" type="uses"/>
+<Edge from="Test.foo().body" to="Point.setY(int)" type="uses"/>

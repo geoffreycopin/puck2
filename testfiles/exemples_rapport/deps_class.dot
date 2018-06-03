@@ -1,0 +1,7 @@
+digraph G {
+    pstl -> "pstl.Person" [label="contains"];
+    "pstl.Person" -> "pstl.PersonBase" [label="isA"];
+    "pstl.Person" -> "pstl.IPerson" [label="isA"];
+    "pstl.Person" -> "pstl.Person.birthDate" [label="contains"];
+    "pstl.Person" -> "pstl.Person.Address" [label="contains"]
+}

@@ -1,0 +1,1 @@
+<Edge from="Test.function(int).body" to="NumGen.var" type="uses"/>

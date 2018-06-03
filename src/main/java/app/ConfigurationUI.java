@@ -173,19 +173,11 @@ public class ConfigurationUI extends Application {
         runner.run();
         runner.XMLValidation();
         runner.outputToFile(getOutputFilePath());
-       
-       
-        
     }
-     
-  
     
-    private String getOutputFilePath() throws Exception {
+    private String getOutputFilePath() {
         String directory = outputDirField.getText();
         String file = outputFileField.getText();
-        
-        /* new File(directory+"/output").mkdir();
-        return Paths.get(directory+"/output", file).toString();*/
         return Paths.get(directory, file).toString();
     }
 

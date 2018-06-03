@@ -35,7 +35,7 @@ public class TestXMLExporter {
                 "<DG>\n" +
                 "\t<node type=\"package\" id=\"0\" name=\"exporter\"/>\n" +
                 "\t<node type=\"class\" id=\"1\" name=\"TestClass\"/>\n" +
-                "\t<edge type=\"contains\" src=\"0\" dest=\"1\" id=\"0\"/>\n" +
+                "\t<edge type=\"contains\" src=\"0\" dest=\"1\" id=\"0\" violation=\"0\"/>\n" +
                 "</DG>\n";
         assertEquals(expected, exporter.generateXml());
     }

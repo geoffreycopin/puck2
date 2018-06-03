@@ -1,6 +1,7 @@
 package graph;
 
 import org.extendj.ast.ASTNode;
+import org.extendj.ast.ArrayAccess;
 import org.extendj.ast.Program;
 
 import java.util.*;
@@ -14,6 +15,7 @@ public class Graph {
     private Set<Edge> edges = new HashSet<>();
     private Program program;
     private UniqueIdGenerator generator = new UniqueIdGenerator();
+    private Map<Integer, List<ASTNode<ASTNode>>> references = new HashMap<>();
 
     public Graph(Map<Integer, Node> nodes, Set<Edge> edges, Program program) {
         this.nodes = nodes;
@@ -51,8 +53,8 @@ public class Graph {
         return newNode;
     }
 
-    public boolean addEdge(Integer source, Integer target, Edge.Type type, ASTNode<ASTNode> dependencyPoint) {
-        Edge newEdge = new Edge(source, target, type, dependencyPoint);
+    public boolean addEdge(Integer source, Integer target, Edge.Type type) {
+        Edge newEdge = new Edge(source, target, type);
         this.edges.add(newEdge);
         addToIndex(fromIndex, source, newEdge);
         addToIndex(toIndex, target, newEdge);
@@ -60,16 +62,27 @@ public class Graph {
         return true;
     }
 
-    public boolean addEdge(Integer source, Integer target, Edge.Type type) {
-        return addEdge(source, target, type, null);
-    }
-
-    public boolean addEdge(String source, String target, Edge.Type type, ASTNode<ASTNode> dependencyPoint) {
-        return addEdge(generator.idFor(source), generator.idFor(target), type, dependencyPoint);
-    }
-
     public boolean addEdge(String source, String target, Edge.Type type) {
-        return addEdge(generator.idFor(source), generator.idFor(target), type, null);
+        return addEdge(generator.idFor(source), generator.idFor(target), type);
+    }
+
+    public void addReference(String fullName, ASTNode<ASTNode> ref) {
+        Integer nodeId = generator.idFor(fullName);
+        references.putIfAbsent(nodeId, new ArrayList<>());
+        List<ASTNode<ASTNode>> r = references.get(generator.idFor(fullName));
+        r.add(ref);
+    }
+
+    public List<ASTNode<ASTNode>> getReferences(Integer id) {
+        List<ASTNode<ASTNode>> refs = references.get(id);
+        if (refs == null) {
+            return new ArrayList<>();
+        }
+        return refs;
+    }
+
+    public List<ASTNode<ASTNode>> getReferences(String name) {
+        return getReferences(generator.idFor(name));
     }
 
     public Program getProgram() {
@@ -100,19 +113,39 @@ public class Graph {
         return fromIndex.getOrDefault(id, new HashSet<>()).stream()
                 .filter((e) -> e.getType() == type)
                 .map((e) -> nodes.get(e.getTarget()))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public List<Node> queryNodesTo(Integer id, Edge.Type type) {
         return toIndex.getOrDefault(id, new HashSet<>()).stream()
-                .filter((e) -> e.getType() == type)
+                .filter((e) -> type == null || e.getType() == type)
                 .map((e) -> nodes.get(e.getSource()))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public List<Node> queryNodesTo(Integer id) {
+        return queryNodesTo(id, null);
     }
 
     public List<Edge> queryEdgesTo(Integer id, Edge.Type type) {
         return toIndex.getOrDefault(id, new HashSet<>()).stream()
-                .filter((e) -> e.getType() == type)
+                .filter((e) -> type == null || e.getType() == type)
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public void renameNode(Integer id, String newFullName) {
+        Node n = getNode(id);
+        String oldName = n.getFullName();
+        n.setFullName(newFullName);
+        nameIndex.remove(oldName);
+        nameIndex.put(newFullName, id);
+
+        for (Node child: queryNodesFrom(id, Edge.Type.Contains)) {
+            if (child.getFullName().contains(oldName)) {
+                renameNode(child.getId(), child.getFullName().replace(oldName, newFullName));
+            }
+        }
     }
 }

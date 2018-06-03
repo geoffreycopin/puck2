@@ -30,16 +30,16 @@ public class MethodReader extends BodyDeclReader {
 
         methodNode = addNode(fullName, Node.Type.Method, methodDecl);
 
+        addHostClassDependency();
+        addReturnTypeDependency();
+        addParametersTypeDependency();
+        addExceptionsTypesDependencies();
+
         if (methodDecl.hasBlock()) {
             Block b = methodDecl.getBlock();
             MethodBodyReader mbreader = new MethodBodyReader(b, methodNode, methodDecl, graph);
             mbreader.read();
         }
-
-        addHostClassDependency();
-        addReturnTypeDependency();
-        addParametersTypeDependency();
-        addExceptionsTypesDependencies();
 
         return getGraph();
     }

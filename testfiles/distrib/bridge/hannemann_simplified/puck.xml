@@ -1,0 +1,7 @@
+<puck-config>
+	<out>out</out>
+	<log>puck-log.txt</log>
+	
+	<decouple>decouple.wld</decouple>
+	<src rec=".java">screen</src>
+</puck-config>

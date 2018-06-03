@@ -4,10 +4,7 @@ import graph.Edge;
 import graph.Graph;
 import graph.Node;
 import graph.UniqueIdGenerator;
-import org.extendj.ast.ASTNode;
-import org.extendj.ast.AssertStmt;
-import org.extendj.ast.TypeDecl;
-import org.extendj.ast.WildcardExtendsType;
+import org.extendj.ast.*;
 
 import java.util.Map;
 import java.util.Set;
@@ -31,12 +28,12 @@ public abstract class AbstractReader {
 	    return graph.addNode(name, type, extendJNode);
     }
 
-    protected void addEdge(String source, String target, Edge.Type type, ASTNode<ASTNode> dependencyPoint) {
-	    graph.addEdge(source, target, type, dependencyPoint);
+    protected void addReference(String source, ASTNode<ASTNode> ref) {
+	    graph.addReference(source, ref);
     }
 
     protected void addEdge(String source, String target, Edge.Type type) {
-	    addEdge(source, target, type, null);
+	    graph.addEdge(source, target, type);
     }
 
 	protected void addTypeDependency(TypeDecl type, Edge.Type edgeType) {
@@ -45,11 +42,15 @@ public abstract class AbstractReader {
 			addGenericTypeDependency(type, edgeType);
 			typeName = getGenericTypeName(type);
 		} else if (type.isWildcard()) {
-			addTypeDependency(((WildcardExtendsType) type).extendsType(), edgeType);
+	        if (type instanceof WildcardExtendsType) {
+                addTypeDependency(((WildcardExtendsType) type).extendsType(), edgeType);
+            } else if (type instanceof WildcardType) {
+	            addTypeDependency(type.boundType(), edgeType);
+            }
 		} else if (type.isArrayDecl()) {
 			addTypeDependency(type.elementType(), edgeType);
 			typeName = type.elementType().fullName();
-		} else if (! Util.isPrimitive(type) && ! type.isTypeVariable()) {
+		} else if (! Util.isPrimitive(type) && ! type.isTypeVariable() && ! Util.isBuiltin(type)) {
 	        addEdge(getFullName(), type.fullName(), edgeType);
 			typeName = type.fullName();
 		}
@@ -73,7 +74,7 @@ public abstract class AbstractReader {
     }
 
     public void addContainingPackage(String typeName, String packageName) {
-	    if (packageName.isEmpty()) {
+	    if (packageName.isEmpty() && getGraph().getNode(packageName) == null) {
 	        return;
         }
         addNode(packageName, Node.Type.Package, null);

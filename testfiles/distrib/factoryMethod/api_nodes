@@ -1,0 +1,4 @@
+type javax.swing.JLabel _
+type javax.swing.JButton _
+constructor javax.swing.JLabel java.lang.String
+constructor javax.swing.JButton java.lang.String

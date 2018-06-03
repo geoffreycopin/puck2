@@ -1,0 +1,5 @@
+<Edge from="Test.function(int).body" to="NumGen.getNum1()" type="uses"/>
+<Edge from="Test.function(int).body" to="NumGen.getNum2()" type="uses"/>
+<Edge from="Test.function(int).body" to="NumGen.getNum3()" type="uses"/>
+<Edge from="Test.function(int).body" to="Num" type="uses"/>
+<Edge from="Test.function(int).body" to="Num.getNum()" type="uses"/>

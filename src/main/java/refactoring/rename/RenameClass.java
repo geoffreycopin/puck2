@@ -4,35 +4,37 @@ import app.Puck2Runner;
 import graph.Edge;
 import graph.Graph;
 import graph.Node;
+import graph.Queries;
 import org.extendj.ast.*;
-import refactoring.rename.RenameBase;
+import refactoring.RefactoringError;
 
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class RenameClass extends RenameBase {
-
-	public static void main(String args[]) {
-		Puck2Runner runner = new Puck2Runner("testfiles/Test.java");
-		try {
-			runner.run();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		runner.displayGraph();
-	}
 
 	RenameClass(Integer id, String name, Graph graph) {
 		super(id, name, graph);
 	}
 
-	@Override
-	public void refactor() {
+    @Override
+    public void check() {
+        checkName(getNewName());
+        checkTypeNameAvailability();
+    }
+
+    @Override
+	protected void refactorCode() {
 		ClassDecl c = (ClassDecl) getGraph().getNode(getId()).getExtendjNode();
 		c.setID(getNewName());
 
 		updateSubClasses(c.createBoundAccess());
 		updateFieldDeclarations(c.createBoundAccess());
 		updateMethodParam(c.createBoundAccess());
+		renameReferences(c.createBoundAccess());
+		renameFileIfSameName(c.compilationUnit());
 	}
 
 	private void updateSubClasses(Access newAccess) {
@@ -42,25 +44,12 @@ public class RenameClass extends RenameBase {
 		}
 	}
 
-	private void updateFieldDeclarations(Access newAccess) {
-		for (Node n: getGraph().queryNodesTo(getId(), Edge.Type.Uses)) {
-			if (n.getExtendjNode() instanceof FieldDeclarator) {
-				FieldDeclarator f = (FieldDeclarator) n.getExtendjNode();
-				f.fieldDecl().setTypeAccess(newAccess);
-			}
-		}
-	}
-
-	private void updateMethodParam(Access newAccess) {
-		for (Node n: getGraph().queryNodesTo(getId(), Edge.Type.Uses)) {
-			if (n.getExtendjNode() instanceof MethodDecl) {
-				MethodDecl f = (MethodDecl) n.getExtendjNode();
-				for ( ParameterDeclaration p : f.getParameterList()) {
-					if(p.getTypeAccess().type().fullName().equals(getOldName())) {
-						p.setTypeAccess(newAccess);
-					}
-				}
-			}
-		}
-	}
+    public void renameFileIfSameName(CompilationUnit cu) {
+	    String lastComponent = Queries.lastComponent(getOldName());
+	    if (cu.getClassSource().pathName().endsWith(lastComponent + ".java")) {
+	        String dir = Paths.get(cu.getClassSource().pathName()).getParent().toString();
+	        String newPAth = Paths.get(dir, getNewName() + ".java").toString();
+	        cu.setClassSource(new FileClassSource(new SourceFilePath(newPAth), newPAth));
+        }
+    }
 }

@@ -13,7 +13,7 @@ public class TestGraph {
     @Before
     public void init() {
         ProgramLoader loader = new ProgramLoader();
-        loader.addFile("../../testfiles/Test.java");
+        loader.addFile("testfiles/Test.java");
         program = loader.getProgram();
     }
 
