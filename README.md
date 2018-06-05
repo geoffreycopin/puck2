@@ -39,6 +39,8 @@ Configuration avec Eclipse
    Pour générer une archive JAR exécutable : Sélectionner "Build" puis clic-droit sur "build" et choisir "Run gradle task".  
    Pour générer un projet eclipse: Sélectionner "Ide" puis clic-droit sur "eclipse" et choisir "Run gradle task"  .  
 
+Note: il est nécessaire de réimporter le projet dans Eclipse après un `git clone`.
+
 (Eclipse ne met pas à jour le classpath automatiquement, si le fichier build.gradle est mis à jour: clic-droit sur le projet,
 Gradle ▸ Refresh Gradle Project).  
 
