@@ -29,7 +29,7 @@ public class RenameClass extends RenameBase {
 	protected void refactorCode() {
 		ClassDecl c = (ClassDecl) getGraph().getNode(getId()).getExtendjNode();
 		c.setID(getNewName());
-
+		renameTypeImports(c.createQualifiedAccess());
 		updateSubClasses(c.createBoundAccess());
 		updateFieldDeclarations(c.createBoundAccess());
 		updateMethodParam(c.createBoundAccess());
@@ -41,6 +41,7 @@ public class RenameClass extends RenameBase {
 		for (Node n: getGraph().queryNodesTo(getId(), Edge.Type.IsA)) {
 			ClassDecl subClass = (ClassDecl) n.getExtendjNode();
 			subClass.setSuperClass(newAccess);
+			renameImports(subClass.compilationUnit(), newAccess);
 		}
 	}
 

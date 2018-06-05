@@ -50,7 +50,7 @@ public class RenameAttribute extends RenameBase {
                         return false;
                     }
                     FieldDeclarator f = (FieldDeclarator) n.getExtendjNode();
-                    return f.isPublic() || (! f.hasModifiers()
+                    return f.isPublic() || f.isProtected() || (! f.hasModifiers()
                             && Queries.typePackage(n.getId(), getGraph()).equals(currentPackage));
                 })
                 .map(Node::getId)

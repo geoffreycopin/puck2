@@ -55,6 +55,24 @@ public abstract class RenameBase extends RefactoringBase {
         }
     }
 
+    protected void renameTypeImports(Access newAccess) {
+        for (Node n: getGraph().queryNodesTo(getId(), Edge.Type.Uses)) {
+            renameImports(n.getExtendjNode().compilationUnit(), newAccess);
+        }
+
+        for (Node n: getGraph().queryNodesTo(getId(), Edge.Type.IsA)) {
+            renameImports(n.getExtendjNode().compilationUnit(), newAccess);
+        }
+    }
+
+    protected void renameImports(CompilationUnit cu, Access a) {
+        for (ImportDecl imp: cu.getImportDecls()) {
+            if (imp.typeName().equals(getOldName())) {
+                imp.setAccess(a);
+            }
+        }
+    }
+
     protected void updateMethodParam(Access newAccess) {
         for (Node n: getGraph().queryNodesTo(getId(), Edge.Type.Uses)) {
             if (n.getExtendjNode() instanceof ParameterDeclaration) {

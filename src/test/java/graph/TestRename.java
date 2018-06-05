@@ -2,6 +2,7 @@ package graph;
 
 import app.Puck2Runner;
 import org.extendj.ast.*;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Test;
 import refactoring.rename.*;
@@ -24,7 +25,6 @@ public class TestRename {
     public void isValidIdentifierOk() {
         assertTrue(Rename.isValidJavaIdentifier("String"));
         assertTrue(Rename.isValidJavaIdentifier("i3"));
-        assertTrue(Rename.isValidJavaIdentifier("αρετη"));
         assertTrue(Rename.isValidJavaIdentifier("MAX_VALUE"));
         assertTrue(Rename.isValidJavaIdentifier("isLetterOrDigit"));
     }
@@ -42,10 +42,28 @@ public class TestRename {
         rename("bridge.candidate.Screen", projectPath);
     }
 
-    private HashSet<String> nodesToIDSet(List<ASTNode<ASTNode>> nodes) {
-       return nodes.stream()
-               .map(this::nodeId)
-               .collect(Collectors.toCollection(HashSet::new));
+    @Test
+    public void renameMethod() throws Exception {
+        String projectPath = "testfiles/distrib/bridge/hannemann/BridgeDemo.java";
+        rename("bridge.candidate.Screen.printLine()", projectPath);
+    }
+
+    @Test
+    public void renameAttribute() throws Exception {
+        String projectPath = "testfiles/Test.java";
+        rename("test.SuperTest.r", projectPath);
+    }
+
+    @Test
+    public void renameInterface() throws Exception {
+        String projectPath = "testfiles/Test.java";
+        rename("test.Foo", projectPath);
+    }
+
+    @Test
+    public void renameParameter() throws Exception {
+        String projectPath = "testfiles/Test.java";
+        rename("test.Test.m(int).x", projectPath);
     }
 
     private String nodeId(ASTNode<ASTNode> node) {
@@ -70,26 +88,28 @@ public class TestRename {
         Integer id = runner.getGraph().getNode(name).getId();
         RenameBase r = Rename.newRenameStartegy(name, "RENAMED", runner.getGraph()).get(0);
         r.refactor();
-        Set<Node> depsPre = new HashSet<>(runner.getGraph().queryNodesTo(id));
+        Set<Integer> depsPre = new HashSet<>(runner.getGraph().queryNodesTo(id).stream()
+                .map(Node::getId).collect(Collectors.toCollection(HashSet::new)));
         CodeGenerator codeGen = new CodeGenerator(runner.getProgram(), projectPath);
         codeGen.generateCode(ressourcesDir);
 
         Puck2Runner runnerPost = new Puck2Runner(ressourcesDir);
         runnerPost.run();
-        Set<Node> depsPost = new HashSet<>(runnerPost.getGraph().queryNodesTo(id));
+        Set<Integer> depsPost = new HashSet<>(runnerPost.getGraph().queryNodesTo(id).stream()
+                .map(Node::getId).collect(Collectors.toCollection(HashSet::new)));
 
-        Set<Node> depsPreCopy = new HashSet<>(depsPre);
+        Set<Integer> depsPreCopy = new HashSet<>(depsPre);
         depsPre.removeAll(depsPost);
         depsPost.removeAll(depsPreCopy);
 
         assertEquals(depsPost, new HashSet<>());
         assertEquals(depsPre, new HashSet<>());
 
-        assertTrue(runnerPost.getGraph().getNode(id).getFullName().endsWith("RENAMED"));
+        assertTrue(runnerPost.getGraph().getNode(id).getFullName().matches(".*RENAMED(\\(\\))?$"));
     }
 
-    @AfterClass
-    public static void cleanup() {
+    @After
+    public void cleanup() {
         File root = new File(ressourcesDir);
         if (root.listFiles() == null) {
             return;

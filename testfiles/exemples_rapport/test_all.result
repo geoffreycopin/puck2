@@ -1,0 +1,3 @@
+<Node name="test" type="package"/>
+<Node name="test.A" type="class"/>
+<Edge from="test" to="test.A" type="contains"/>

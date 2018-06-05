@@ -25,6 +25,7 @@ public class RenameInterface extends RenameBase {
     protected void refactorCode() {
         InterfaceDecl i = (InterfaceDecl) getGraph().getNode(getId()).getExtendjNode();
         i.setID(getNewName());
+        renameTypeImports(i.createQualifiedAccess());
         updateSubInterfaces(i.createBoundAccess());
         updateImplementingClasses(i.createBoundAccess());
         updateFieldDeclarations(i.createBoundAccess());
